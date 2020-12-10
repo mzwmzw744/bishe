@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .clearfix:after{/*伪元素是行内元素 正常浏览器清除浮动方法*/
+        content: "";
+        display: block;
+        height: 0;
+        clear:both;
+        visibility: hidden;
+    }
+    .clearfix{
+        *zoom: 1;/*ie6清除浮动的方式 *号只有IE6-IE7执行，其他浏览器不执行*/
+    }
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    #all {
+        width: 1000px;
+        height: 200px;
+        background-color: pink;
+        margin: 0 auto;
+    }
+    #left{
+        width: 100px;
+        height: 200px;
+        background-color: #ff6700;
+    }
+    p {
+        line-height: 200px;
+        text-align: center;
+        font-weight: 500;
+    }
+</style>
+<!--<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>-->
+<!--<script>-->
+<!--    //一般情况下，这样就可以自动播放了，但是一些奇葩iPhone机不可以 -->
+<!--    document.getElementById('car_audio').play();-->
+<!--    //必须在微信Weixin JSAPI的WeixinJSBridgeReady才能生效 -->
+<!--    document.addEventListener("WeixinJSBridgeReady", function () {-->
+<!--        document.getElementById('car_audio').play();-->
+<!--        document.getElementById('video').play();-->
+<!--    }, false);-->
+<!--</script>-->
+<body>
+<div id="all">
+    <div id="left"><p>我是是</p></div>
+</div>
+<audio src="../media/m.mp3" controls="controls"></audio>
+<input type="search" placeholder="孟泽伟">
+</body>
+</html>
