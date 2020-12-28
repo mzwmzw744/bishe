@@ -18,7 +18,6 @@ const app = new Vue({
 })
 
 
-
 var app2 = new Vue({
     el: '#app-2',
     data: {

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页1</title>
+    <link rel="stylesheet" href="ui/layui/css/layui.css">
+</head>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    html{
+        height: 100%;
+    }
+    body {
+        background-image: url("pic/logn.jpg");
+        background-position: 0 70%;
+        background-size:cover;
+        height: 100%;
+        overflow: hidden;
+        /*background-size: auto 1080px;*/
+        /*margin: 0 auto;*/
+    }
+    .loginIframe {
+        width: 480px;
+        height: 370px;
+        margin: 180px 0 0 50%;
+        border-radius: 15px;
+        border: medium none;
+    }
+    /*#title {*/
+    /*    font-size: 27px;*/
+    /*    color: #333;*/
+    /*    margin-bottom: 16px;*/
+    /*    text-align: center;*/
+    /*}*/
+    /*#title2 {*/
+    /*    margin: 20px auto;*/
+    /*    text-align: center;*/
+    /*    font-size: 22px;*/
+    /*    font-weight: 300;*/
+    /*}*/
+    #title2 a{
+        color: #3481cf;
+    }
+    #account input{
+        width: 340px;
+        height: 45px;
+        margin: 50px auto 40px;
+        border-radius: 6px;
+        border-width: 2px;
+    }
+    #password input{
+        width: 340px;
+        height: 45px;
+        margin: 30px auto;
+        border-radius: 6px;
+        border-width: 2px;
+    }
+</style>
+<script src="ui/layui/layui.js"></script>
+<body>
+<iframe class="loginIframe" src="html/login.html"></iframe>
+<!--<div id="login">-->
+<!--    <div id="title"   v-on:click="fastLoginClick()">账号密码登陆</div>-->
+<!--    <div id="title2">推荐使用<a href="#" @:click="fastLoginClick()">快速安全登陆</a>防止盗号</div>-->
+<!--    <form>-->
+<!--        <div id="account">-->
+<!--            <label>-->
+<!--                <input type="text" name="title" required lay-verify="required" placeholder="请输入账号" autocomplete="off"-->
+<!--                       class="layui-input">-->
+<!--            </label>-->
+<!--        </div>-->
+<!--        <div id="password">-->
+<!--            <label>-->
+<!--                <input type="password" name="title" required lay-verify="required" placeholder="密码" autocomplete="off"-->
+<!--                        class="layui-input">-->
+<!--            </label>-->
+<!--        </div>-->
+<!--        账号密码登录{{message}}-->
+<!--    </form>-->
+<!--</div>-->
+<script src="js/my/vue.js"></script>
+<script src="js/my/index.js"></script>
+</body>
+</html>

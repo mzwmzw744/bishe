@@ -32,53 +32,39 @@
     #account input{
         width: 340px;
         height: 45px;
-        margin: 35px auto 35px;
+        margin: 50px auto 40px;
         border-radius: 6px;
         border-width: 2px;
     }
     #password input{
         width: 340px;
         height: 45px;
-        margin: 35px auto;
+        margin: 30px auto;
         border-radius: 6px;
         border-width: 2px;
-    }
-    #loginFoot{
-        margin: 20px 0px  0px 230px;
     }
 </style>
 <body>
 
 <div id="login">
     <div id="title"   @click="fastLoginClick()">账号密码登陆</div>
-    <div id="title2">推荐使用<a href="fastlogin.html">快速安全登陆</a>防止盗号</div>
+    <div id="title2">推荐使用<a href="login.html">快速安全登陆</a>防止盗号</div>
     <form>
         <div id="account">
             <label>
-                <input type="text" name="title" required lay-verify="required" placeholder="请输入账号" autocomplete="off"
+                <input type="text" name="title" required lay-verify="required" placeholder="请输入邮箱" autocomplete="off"
                        class="layui-input">
             </label>
         </div>
         <div id="password">
             <label>
-                <input type="password" name="title" required lay-verify="required" placeholder="密码" autocomplete="off"
+                <input type="password" name="title" required lay-verify="required" placeholder="验证码" autocomplete="off"
                        class="layui-input">
             </label>
         </div>
-
-        <div>
-            <input type="button"  value="登录" class="layui-btn layui-btn-lg" style="width: 340px;height: 40px;
-            border-radius: 5px;margin: 0 auto 0;display:block">
-        </div>
-
-        <div id="loginFoot">
-            <a href="#">忘记密码?</a>&nbsp;&nbsp;|
-            <a href="#">注册新账号</a>&nbsp;&nbsp;|
-            <a href="#">意见反馈</a>
-        </div>
     </form>
 </div>
-<script src="../js/my/vue.js" ></script>
+<script src="../js/my/vue.js"></script>
 <script src="../js/my/index.js"></script>
 </body>
 </html>

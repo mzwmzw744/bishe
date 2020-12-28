@@ -1,0 +1,30 @@
+server:
+  port: 80
+
+spring:
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://121.199.46.22:3306/mzw
+    username: mzw
+    password: 123456
+
+  mvc:
+    view:
+      prefix: /WEB-INF/
+      suffix: .jsp
+  thymeleaf:
+    check-template: false
+    check-template-location: false
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath:sqlmap/*.xml #�շ�����
+
+logging:
+  level:
+    root: info
+    cn.com: trace
+
+

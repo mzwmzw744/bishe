@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>carousel模块快速使用</title>
+    <link rel="stylesheet" href="../ui/layui/css/layui.css" media="all">
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    html{
+        height: 100%;
+    }
+    body{
+        height: 100%;
+    }
+
+
+    #right{
+        /*background-color: red;*/
+        height: 100%;
+        width: 70%;
+        position: absolute;
+        left: 30%;
+
+    }
+
+    #account input{
+        width: 470px;
+        height: 50px;
+        margin: 35px auto 35px;
+        border-radius: 6px;
+        border-width: 2px;
+    }
+    /*#account password{*/
+    /*    width: 470px;*/
+    /*    height: 50px;*/
+    /*    margin: 35px auto 35px;*/
+    /*    border-radius: 6px;*/
+    /*    border-width: 2px;*/
+    /*}*/
+
+    /*#account email{*/
+    /*    width: 470px;*/
+    /*    height: 50px;*/
+    /*    margin: 35px auto 35px;*/
+    /*    border-radius: 6px;*/
+    /*    border-width: 2px;*/
+    /*}*/
+
+    #account #Code{
+        width: 200px;
+        height: 50px;
+        margin: 35px auto 35px;
+        border-radius: 6px;
+        border-width: 2px;
+    }
+    #isShow {
+        width: 470px;
+        height: 50px;
+        margin: 35px auto 35px;
+        box-sizing:border-box
+    }
+
+</style>
+<body>
+
+
+<div class="layui-carousel" id="test1" style="float: left">
+    <div carousel-item>
+        <div><img src="../pic/1.png"></div>
+        <div><img src="../pic/logn.jpg"></div>
+        <div><img src="../pic/1.png"></div>
+        <div><img src="../pic/logn.jpg"></div>
+        <div><img src="../pic/1.png"></div>
+    </div>
+</div>
+
+<div id="right">
+    <div id="welcome" style="font-size: 44px; margin:120px auto 20px;text-align: center">
+        欢迎注册汉服圈~
+    </div>
+    <div  style="font-size: 30px;margin:0 auto;text-align: center">
+        每一天,乐在沟通
+    </div>
+    <div id="account">
+        <label>
+            <input type="text" name="title" required lay-verify="required" placeholder="昵称" autocomplete="off"
+                   class="layui-input">
+        </label>
+
+        <label>
+            <input type="password" name="title" required lay-verify="required" placeholder="密码" autocomplete="off"
+                   class="layui-input">
+        </label>
+
+        <div id="showControl">
+        <label>
+            <input @click="click()" id="email" type="email" name="title" required lay-verify="required" placeholder="邮箱" autocomplete="off"
+                   class="layui-input">
+        </label>
+        <div id="isShow" v-show="isShow" >
+            <label>
+                <input id="Code" type="email" name="title" required lay-verify="required" placeholder="验证码" autocomplete="off"
+                        class="layui-input" style="float: left;margin: 0 0px 0px 0;position: absolute;box-sizing:border-box" >
+            </label>
+            <label>
+                <input type="button"  value="发送邮箱验证码" class="layui-btn layui-btn-lg" style="width: 260px;height: 50px;
+            border-radius: 5px;margin: 0 auto 0;display:block;margin: 0 0px 35px 45%;box-sizing:border-box">
+            </label>
+        </div>
+        </div>
+    </div>
+
+<form>
+    <div>
+        <input type="button"  value="立即注册" class="layui-btn layui-btn-lg" style="width: 470px;height: 45px;
+            border-radius: 5px;margin: 0 auto 0;display:block">
+    </div>
+</form>
+
+</div>
+
+<!-- 条目中可以是任意内容，如：<img src=""> -->
+
+<script src="../js/my/vue.js" ></script>
+<script src="../ui/layui/layui.js" ></script>
+<script>
+    const email = new Vue({
+        el:'#showControl',
+        data:{
+          isShow:false
+        },
+        methods:{
+            click(){
+                this.isShow = !this.isShow;
+            }
+        }
+    })
+    layui.use('carousel', function(){
+        var carousel = layui.carousel;
+        //建造实例
+        carousel.render({
+            elem: '#test1'
+            ,width: '30%' //设置容器宽度
+             ,height:'100%'
+            ,anim:'fade'
+            ,arrow:'none'
+            ,indicator:'none'
+            ,interval:'3000'
+            //,anim: 'updown' //切换动画方式
+        });
+    });
+</script>
+</body>
+</html>
