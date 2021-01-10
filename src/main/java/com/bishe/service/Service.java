@@ -14,7 +14,7 @@ public class Service {
         System.out.println(123);
     }
 
-    public void emailSendService() throws MessagingException, GeneralSecurityException {
+    public void emailSendService(String  email) throws MessagingException, GeneralSecurityException {
         Properties prop = new Properties();
         prop.setProperty("mail.host", "smtp.qq.com");  //设置QQ邮件服务
         prop.setProperty("mail.transport.protocol", "smtp"); // 邮件发送协议
@@ -29,7 +29,7 @@ public class Service {
         Session session = Session.getDefaultInstance(prop, new Authenticator() {
             public PasswordAuthentication getPasswordAuthentication() {
                 //发件人邮件用户名、授权码
-                return new PasswordAuthentication("1163974499@qq.com", "tggbflpppzjzhfgj");
+                return new PasswordAuthentication("1163974499@qq.com", "vrfhgnctsrcebaah");
             }
         });
         //开启Session的debug模式，这样就可以查看到程序发送Email的运行状态
@@ -50,18 +50,17 @@ public class Service {
         message.setFrom(new InternetAddress("1163974499@qq.com"));
 
         //指明邮件的收件人，现在发件人和收件人是一样的，那就是自己给自己发
-        message.setRecipient(Message.RecipientType.TO, new InternetAddress("1163974499@qq.com"));
+        message.setRecipient(Message.RecipientType.TO, new InternetAddress(email));
 
         //邮件的标题
         message.setSubject("只包含文本的简单邮件");
 
         //邮件的文本内容
-        message.setContent("你好啊！", "text/html;charset=UTF-8");
+        message.setContent("你好啊！a1a1a1a1", "text/html;charset=UTF-8");
 
         //5、发送邮件
         ts.sendMessage(message, message.getAllRecipients());
 
         ts.close();
     }
-
 }

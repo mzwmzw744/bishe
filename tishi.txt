@@ -1,0 +1,50 @@
+box-sizing:border-box；盒子模型
+text-decoration: none 取消
+display设置模式
+.nav :hover{
+}
+
+border-radius: 15px; 设置圆滑度
+border:5px  厚度
+
+打包测试
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.4.2</version>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+
+            box-sizing:border-box盒子模型
+
+            最佳办法：4.给父元素添一个大儿子，这个大儿子必须table。
+
+
+
+
+
+
+
+            查看进程 ps -ef|grep redis
+                公网ip 121.199.46.22
+               cmd测试连接 telnet  121.199.46.22 6379
+               设置密码  requirepass
+               开启服务redis-server mconfig/redis.conf
+
+
+
+
+               回调函数
+               function callback() {
+                   alert("I am in the callback!");
+               }
+
+               function work(func) {
+                   alert("I am calling the callback!");
+                   func();
+               }
+
+               work(callback);
+

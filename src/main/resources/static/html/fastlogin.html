@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="../ui/layui/css/layui.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.js"></script>
+<!--    <script src="https://www.npmjs.com/package/qs"></script>-->
 </head>
 <style>
     #login {
@@ -32,27 +35,31 @@
     #account input{
         width: 340px;
         height: 45px;
-        margin: 50px auto 40px;
+        margin: 35px auto 35px;
         border-radius: 6px;
         border-width: 2px;
     }
     #password input{
         width: 340px;
         height: 45px;
-        margin: 30px auto;
+        margin: 35px auto;
         border-radius: 6px;
         border-width: 2px;
+    }
+    #loginFoot{
+        margin: 20px 0  0 230px;
     }
 </style>
 <body>
 
 <div id="login">
-    <div id="title"   @click="fastLoginClick()">账号密码登陆</div>
+    <div id="title">账号密码登陆</div>
+<!--    <div id="title"   @click="fastLoginClick()">账号密码登陆</div>-->
     <div id="title2">推荐使用<a href="login.html">快速安全登陆</a>防止盗号</div>
     <form>
         <div id="account">
             <label>
-                <input type="text" name="title" required lay-verify="required" placeholder="请输入邮箱" autocomplete="off"
+                <input type="text" v-model="myEmail" name="title" required lay-verify="required" placeholder="请输入邮箱" autocomplete="off"
                        class="layui-input">
             </label>
         </div>
@@ -62,9 +69,65 @@
                        class="layui-input">
             </label>
         </div>
+
+        <div style="width: 100%;overflow:hidden">
+            <button type="button" @click="getCode" :disabled ="disabled" class="layui-btn layui-btn-lg" style="width: 160px;height: 40px;
+            border-radius: 5px;margin: 0 0 0 15%;box-sizing:border-box;float: left;">{{times}}</button>
+
+            <input type="button"  value="登录" class="layui-btn layui-btn-lg" style="width: 160px;height: 40px;
+            border-radius: 5px;margin: 0 0 0 4%;display:block;box-sizing:border-box;float: left">
+        </div>
+
+        <div id="loginFoot">
+            <a href="#">忘记密码?</a>&nbsp;&nbsp;|
+            <a href="#">注册新账号</a>&nbsp;&nbsp;|
+            <a href="#">意见反馈</a>
+        </div>
     </form>
 </div>
-<script src="../js/my/vue.js"></script>
-<script src="../js/my/index.js"></script>
+<script >
+    const app = new Vue({
+        el:'#login',
+        data: {
+            myEmail:null,
+            disabled:false,
+            times: '获取验证码',
+        },
+        methods: {
+            getCode() {
+                var regEmail = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+                if (this.myEmail != '' && !regEmail.test(this.myEmail)) {
+                    alert('邮箱格式不正确');
+                    return ;
+                }
+                this.disabled = true;
+                this.times = 60;
+                // let param = new URLSearchParams()
+                // param.append('username', 'admin')
+                // param.append('pwd', 'admin')
+                // axios({
+                //     method: 'post',
+                //     url: 'http://localhost/emailRegister',
+                //     data: param
+                // })
+
+
+                axios
+                    .post('http://localhost/emailRegister',{
+                        email : this.myEmail
+                    }).then(response => (console.log(response)))
+                    // .then(response => (this.info = response.data.bpi))
+                    this.timer = setInterval(()=>{
+                    this.times--;
+                    if(this.times===0){
+                        this.times = '获取验证码';
+                        this.disabled = false;
+                        clearInterval(this.timer)
+                    }
+                },1000)
+            }
+        },
+    })
+</script>
 </body>
 </html>

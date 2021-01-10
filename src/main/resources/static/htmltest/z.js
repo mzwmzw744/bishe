@@ -1,5 +1,4 @@
 export default {
-    el:'#app',
     data() {
         return {
             times: 60,

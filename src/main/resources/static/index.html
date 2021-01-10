@@ -4,14 +4,18 @@
     <meta charset="UTF-8">
     <title>首页1</title>
     <link rel="stylesheet" href="ui/layui/css/layui.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.js"></script>
 </head>
 
 <style>
     * {
         margin: 0;
         padding: 0;
+        box-sizing:border-box;
     }
     html{
+        width: 100%;
         height: 100%;
     }
     body {
@@ -19,6 +23,7 @@
         background-position: 0 70%;
         background-size:cover;
         height: 100%;
+        width: 100%;
         overflow: hidden;
         /*background-size: auto 1080px;*/
         /*margin: 0 auto;*/
@@ -30,18 +35,6 @@
         border-radius: 15px;
         border: medium none;
     }
-    /*#title {*/
-    /*    font-size: 27px;*/
-    /*    color: #333;*/
-    /*    margin-bottom: 16px;*/
-    /*    text-align: center;*/
-    /*}*/
-    /*#title2 {*/
-    /*    margin: 20px auto;*/
-    /*    text-align: center;*/
-    /*    font-size: 22px;*/
-    /*    font-weight: 300;*/
-    /*}*/
     #title2 a{
         color: #3481cf;
     }
@@ -59,10 +52,110 @@
         border-radius: 6px;
         border-width: 2px;
     }
+
+    #login {
+        background-color: white;
+        width: 480px;
+        height: 370px;
+        /*margin: 180px 0 0 50%;*/
+        border-radius: 15px;
+        position: absolute;
+        left: 45%;
+        top: 20%;
+    }
+
+    #fastLogin {
+        background-color: white;
+        width: 480px;
+        height: 370px;
+        /*margin: 180px 0 0 50%;*/
+        border-radius: 15px;
+        position: absolute;
+        left: 45%;
+        top: 20%;
+    }
+
+
+    #title {
+        font-size: 27px;
+        color: #333;
+        margin-bottom: 16px;
+        text-align: center;
+    }
+
+    #fastTitle {
+        font-size: 27px;
+        color: #333;
+        margin-bottom: 16px;
+        text-align: center;
+    }
+
+    #title2 {
+        margin: 20px auto;
+        text-align: center;
+        font-size: 22px;
+        font-weight: 300;
+    }
+    #fastTitle2 {
+        margin: 20px auto;
+        text-align: center;
+        font-size: 22px;
+        font-weight: 300;
+    }
+
+
+    #title2 a{
+        color: #3481cf;
+    }
+    #fastTitle2 a {
+        color: #3481cf;
+    }
+
+    #account input{
+        width: 340px;
+        height: 45px;
+        margin: 35px auto 35px;
+        border-radius: 6px;
+        border-width: 2px;
+    }
+    #fastAccount input {
+        width: 340px;
+        height: 45px;
+        margin: 35px auto 35px;
+        border-radius: 6px;
+        border-width: 2px;
+    }
+
+
+    #password input{
+        width: 340px;
+        height: 45px;
+        margin: 35px auto;
+        border-radius: 6px;
+        border-width: 2px;
+    }
+    #fastPassword input{
+        width: 340px;
+        height: 45px;
+        margin: 35px auto;
+        border-radius: 6px;
+        border-width: 2px;
+    }
+
+
+    #loginFoot{
+        margin: 20px 0px  0px 230px;
+    }
+
+
+    #fastLoginFoot{
+        margin: 20px 0px  0px 230px;
+    }
+
 </style>
 <script src="ui/layui/layui.js"></script>
 <body>
-<iframe class="loginIframe" src="html/login.html"></iframe>
+<!--<iframe class="loginIframe" src="html/login.html"></iframe>-->
 <!--<div id="login">-->
 <!--    <div id="title"   v-on:click="fastLoginClick()">账号密码登陆</div>-->
 <!--    <div id="title2">推荐使用<a href="#" @:click="fastLoginClick()">快速安全登陆</a>防止盗号</div>-->
@@ -82,7 +175,175 @@
 <!--        账号密码登录{{message}}-->
 <!--    </form>-->
 <!--</div>-->
-<script src="js/my/vue.js"></script>
-<script src="js/my/index.js"></script>
+
+<div id="login" v-show="isShow">
+    <div id="title"  @click="fastLoginClick()">账号密码登陆</div>
+    <div id="title2">推荐使用<a  @click="fastLoginClick" href="#">快速安全登陆</a>防止盗号</div>
+    <form action="/login" method="post">
+        <div id="account">
+            <label>
+                <input v-model="account" type="text" name="account" required lay-verify="required" placeholder="请输入您的邮箱或手机号" autocomplete="off"
+                        class="layui-input">
+            </label>
+        </div>
+        <div id="password">
+            <label>
+                <input v-model="password" type="password" name="password" required lay-verify="required" placeholder="密码" autocomplete="off"
+                        class="layui-input">
+            </label>
+        </div>
+
+        <div>
+            <input id="submit" @click="submitClick" type="button"  value="登录" class="layui-btn layui-btn-lg" style="width: 340px;height: 40px;
+            border-radius: 5px;margin: 0 auto 0;display:block">
+        </div>
+        <div id="loginFoot">
+            <a href="#">忘记密码?</a>&nbsp;&nbsp;|
+            <a href="#">注册新账号</a>&nbsp;&nbsp;|
+            <a href="#">意见反馈</a>
+        </div>
+    </form>
+</div>
+
+
+
+<div id="fastLogin" v-show="isShow">
+    <div id="fastTitle">账号密码登陆</div>
+    <!--    <div id="title"   @click="fastLoginClick()">账号密码登陆</div>-->
+    <div id="fastTitle2">推荐使用<a   @click="fastLoginClick" href="#">快速安全登陆</a>防止盗号</div>
+    <form>
+        <div id="fastAccount">
+            <label>
+                <input type="text" v-model="myEmail" name="title" required lay-verify="required" placeholder="请输入邮箱" autocomplete="off"
+                       class="layui-input">
+            </label>
+        </div>
+        <div id="fastPassword">
+            <label>
+                <input type="password" name="title" required lay-verify="required" placeholder="验证码" autocomplete="off"
+                       class="layui-input">
+            </label>
+        </div>
+
+        <div style="width: 100%;overflow:hidden">
+            <button type="button" @click="getCode" :disabled ="disabled" class="layui-btn layui-btn-lg" style="width: 160px;height: 40px;
+            border-radius: 5px;margin: 0 0 0 15%;box-sizing:border-box;float: left;">{{times}}</button>
+
+            <input type="button"  value="登录" class="layui-btn layui-btn-lg" style="width: 160px;height: 40px;
+            border-radius: 5px;margin: 0 0 0 4%;display:block;box-sizing:border-box;float: left">
+        </div>
+
+        <div id="fastLoginFoot">
+            <a href="#">忘记密码?</a>&nbsp;&nbsp;|
+            <a href="#">注册新账号</a>&nbsp;&nbsp;|
+            <a href="#">意见反馈</a>
+        </div>
+    </form>
+</div>
+
+<script>
+    const fastLogin =  new Vue({
+        el:'#fastLogin',
+        data: {
+            myEmail:null,
+            disabled:false,
+            isShow:false,
+            times: '获取验证码',
+        },
+        methods: {
+            fastLoginClick() {
+                login.isShow = true;
+                this.isShow = false;
+                // alert(fastLogin.isShow);
+                // alert('123');
+            },
+
+            getCode() {
+                var regEmail = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+                if (this.myEmail != '' && !regEmail.test(this.myEmail)) {
+                    alert('邮箱格式不正确');
+                    return ;
+                }
+                this.disabled = true;
+                this.times = 60;
+                // let param = new URLSearchParams()
+                // param.append('username', 'admin')
+                // param.append('pwd', 'admin')
+                // axios({
+                //     method: 'post',
+                //     url: 'http://localhost/emailRegister',
+                //     data: param
+                // })
+                axios
+                    .post('http://localhost/emailRegister',{
+                        email : this.myEmail
+                    }).then(response => (console.log(response)))
+                // .then(response => (this.info = response.data.bpi))
+                this.timer = setInterval(()=>{
+                    this.times--;
+                    if(this.times===0){
+                        this.times = '获取验证码';
+                        this.disabled = false;
+                        clearInterval(this.timer)
+                    }
+                },1000)
+            }
+        },
+    })
+
+
+    const login = new Vue({
+        el:'#login',
+        data:{
+            isShow: true,
+            account:'',
+            password:'',
+            category:''
+        },
+        methods:{
+            fastLoginClick() {
+                fastLogin.isShow = true;
+                this.isShow = false;
+                // alert(fastLogin.isShow);
+                // alert('123');
+            },
+            submitClick() {
+                if(isNaN(this.account) == false) {
+                    let myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
+                    if (!myreg.test(this.account)){
+                        alert('请输入正确的手机号或邮箱1');
+                        return;
+                    }
+                    this.category = 'phone'
+                    // alert('是纯数字')
+                } else {
+                    let regEmail = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+                    if (this.account != '' && !regEmail.test(this.account)) {
+                        alert('请输入正确的手机号或邮箱2');
+                        return;
+                    }
+                    this.category = 'email'
+                }
+                axios({
+                    method:'post',
+                    url:'/login',
+                    params:{
+                        category:this.category,
+                        account:this.account,
+                        password:this.password
+                    }
+                }).then(res=> {
+                    if (res.data == null || res.data == '') {
+                        alert("登录失败,请输入正确的账号密码！")
+                    }else {
+                        sessionStorage.setItem("token", res.data);
+                        console.log(sessionStorage.getItem("token"))
+                        window.location=('html/hfq.html')
+                    }
+                })
+            }
+        }
+    })
+</script>
 </body>
 </html>

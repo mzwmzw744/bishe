@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>reactive timer</title>
+    <script src="../js/my/vue.js"></script>
+</head>
+<body>
+
+<div></div>
+    <div id="app">
+        {{times}}
+        <button v-if="show" @click="getCode">获取验证码</button>
+        <button v-if="!show">{{ times }}s</button>
+    </div>
+<script type="module">
+    const ss = new Vue({
+        el:'#app',
+        data: {
+             times: 60,
+            disable:true,
+             show:true
+        },
+        methods: {
+            getCode() {
+                this.show = false
+                this.timer = setInterval(()=>{
+                    this.times--;
+                    if(this.times===0){
+                        this.show = true
+                        clearInterval(this.timer)
+                    }
+                },1000)
+            }
+        },
+        // mounted: function () {
+        //     alert("123");
+        //     this.show = false
+        //     this.timer = setInterval(()=>{
+        //         this.times--
+        //         if(this.times===0){
+        //             this.show = true
+        //             clearInterval(this.timer)
+        //         }
+        //     },1000)
+        //     console.group('created 创建完毕状态===============》');
+        // },
+    })
+</script>
+</body>
+</html>

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="../ui/layui/css/layui.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <style>
     #login {
@@ -52,22 +53,22 @@
 <div id="login">
     <div id="title"   @click="fastLoginClick()">账号密码登陆</div>
     <div id="title2">推荐使用<a href="fastlogin.html">快速安全登陆</a>防止盗号</div>
-    <form>
+    <form action="/login" method="post">
         <div id="account">
             <label>
-                <input type="text" name="title" required lay-verify="required" placeholder="请输入账号" autocomplete="off"
+                <input  v-model="account"  type="text" name="title" required lay-verify="required" placeholder="请输入您的邮箱或手机号" autocomplete="off"
                        class="layui-input">
             </label>
         </div>
         <div id="password">
             <label>
-                <input type="password" name="title" required lay-verify="required" placeholder="密码" autocomplete="off"
+                <input  v-model="password" type="password" name="title" required lay-verify="required" placeholder="密码" autocomplete="off"
                        class="layui-input">
             </label>
         </div>
 
         <div>
-            <input type="button"  value="登录" class="layui-btn layui-btn-lg" style="width: 340px;height: 40px;
+            <input type="submit"  value="登录" class="layui-btn layui-btn-lg" style="width: 340px;height: 40px;
             border-radius: 5px;margin: 0 auto 0;display:block">
         </div>
 
@@ -78,7 +79,37 @@
         </div>
     </form>
 </div>
-<script src="../js/my/vue.js" ></script>
-<script src="../js/my/index.js"></script>
+
+
+<!--<script src="../js/my/vue.js" ></script>-->
+<script>
+    // const login = new Vue({
+    //     el:'#login',
+    //     data:{
+    //         account:'',
+    //         password:''
+    //     },
+    //     methods:{
+    //         sendUser(){
+    //             axios({
+    //                 method:'post',
+    //                 url:'http://localhost/login',
+    //                 params:{
+    //                     account:this.account,
+    //                     password:this.password
+    //                 }
+    //             })
+    //         }
+    //
+    //
+    //     }
+    //
+    //
+    //
+    // })
+
+</script>
+
+
 </body>
 </html>

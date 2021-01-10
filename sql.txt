@@ -1,0 +1,15 @@
+drop table if exists user;
+CREATE table user(
+    id int primary key,
+    account varchar(50),
+    emailaccount varchar(50),
+    password varchar(100),
+    username varchar(50)
+);
+
+
+drop table if exists Test;
+CREATE table test(
+    name varchar(50),
+    age int
+);
