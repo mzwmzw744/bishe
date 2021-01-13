@@ -10,12 +10,16 @@ import javax.mail.internet.*;
 
 @Component
 public class Service {
-    public void Test1(){
-        System.out.println(123);
-    }
-
-    public void emailSendService(String  email) throws MessagingException, GeneralSecurityException {
+    /**
+     * 邮箱发送服务，发送六位验证码
+     * @param email 要发送的邮箱地址
+     * @throws MessagingException
+     * @throws GeneralSecurityException
+     */
+    public static String  emailSendService(String  email) throws MessagingException, GeneralSecurityException {
         Properties prop = new Properties();
+
+        String code;
         prop.setProperty("mail.host", "smtp.qq.com");  //设置QQ邮件服务
         prop.setProperty("mail.transport.protocol", "smtp"); // 邮件发送协议
         prop.setProperty("mail.smtp.auth", "true"); // 需要验证用户名密码
@@ -53,14 +57,32 @@ public class Service {
         message.setRecipient(Message.RecipientType.TO, new InternetAddress(email));
 
         //邮件的标题
-        message.setSubject("只包含文本的简单邮件");
+        message.setSubject("汉服圈邮箱验证码");
 
-        //邮件的文本内容
-        message.setContent("你好啊！a1a1a1a1", "text/html;charset=UTF-8");
+
+        //邮件的文本内容,发送六位验证码
+
+        code = Service.smsCode();
+
+        String Tips = "您的验证码为    "+code+"    请妥善处理，不要交予他人";
+
+        message.setContent(Tips, "text/html;charset=UTF-8");
 
         //5、发送邮件
         ts.sendMessage(message, message.getAllRecipients());
 
         ts.close();
+
+        return code;
+    }
+
+    /**
+     * 随机生成一个六位数
+     * @return 随机六位数
+     */
+    public static String smsCode(){
+        String random=(int)((Math.random()*9+1)*100000)+"";
+        System.out.println("创建的验证码为："+random);
+        return random;
     }
 }

@@ -29,11 +29,11 @@ spring:
 #              max-idle: 10      # 连接池中的最大空闲连接
 #              min-idle: 0       # 连接池中的最小空闲连接
 
+#  mvc:
+#    view:
+#      prefix: /WEB-INF/
+#      suffix: .jsp
 
-  mvc:
-    view:
-      prefix: /WEB-INF/
-      suffix: .jsp
 
 mybatis:
   configuration:

@@ -1,17 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bishe.mapper.UserMapper">
-    <select id="Test" resultType="com.bishe.bean.Test">
-        select * from user where id = 1
+
+
+    <resultMap id="userResultMap" type="com.bishe.bean.User">
+        <result column="user_id" jdbcType="INTEGER" property="id" />
+        <result column="user_name" jdbcType="VARCHAR" property="userName" />
+        <result column="user_email" jdbcType="VARCHAR" property="email" />
+        <result column="user_password" jdbcType="VARCHAR" property="password" />
+    </resultMap>
+
+    <select id="getUserByEmail" resultMap="userResultMap">
+        select * from user where user_email = #{email}
     </select>
 
-    <select id="getUserByEmail" resultType="com.bishe.bean.User">
-        select * from user where email = #{email}
+    <select id="getUserByUserName" resultMap="userResultMap">
+        select * from user where user_name =  #{userName}
     </select>
 
-    <select id="getUserByPhone" resultType="com.bishe.bean.User">
-        select * from user where phone =  #{phone}
-    </select>
+    <insert id="addUser">
+        insert into user values(null,#{userName},#{email},#{password})
+    </insert>
 
+    <select id="getUserIsRepeat" resultType="int">
+      select count(*) from user where user_name =  #{userName}
+    </select>
 
 </mapper>

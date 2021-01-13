@@ -15,6 +15,11 @@ public interface UserMapper {
 
     User getUserByEmail(String email);
 
-    User getUserByPhone(String Phone);
+    User getUserByUserName(String Phone);
+
+    int addUser(User user);
+
+    int getUserIsRepeat(User user);
+    
 }
 

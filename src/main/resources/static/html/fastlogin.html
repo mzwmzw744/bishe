@@ -55,7 +55,7 @@
 <div id="login">
     <div id="title">账号密码登陆</div>
 <!--    <div id="title"   @click="fastLoginClick()">账号密码登陆</div>-->
-    <div id="title2">推荐使用<a href="login.html">快速安全登陆</a>防止盗号</div>
+    <div id="title2">推荐使用<a href="login.html">快速安全登陆123432</a>防止盗号</div>
     <form>
         <div id="account">
             <label>
@@ -95,7 +95,7 @@
         },
         methods: {
             getCode() {
-                var regEmail = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+                let regEmail = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
                 if (this.myEmail != '' && !regEmail.test(this.myEmail)) {
                     alert('邮箱格式不正确');
                     return ;
@@ -110,7 +110,6 @@
                 //     url: 'http://localhost/emailRegister',
                 //     data: param
                 // })
-
 
                 axios
                     .post('http://localhost/emailRegister',{

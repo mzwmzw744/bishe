@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>carousel模块快速使用</title>
+    <title>汉服圈注册~</title>
     <link rel="stylesheet" href="../ui/layui/css/layui.css" media="all">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.js"></script>
 </head>
 <style>
     * {
@@ -34,22 +36,6 @@
         border-radius: 6px;
         border-width: 2px;
     }
-    /*#account password{*/
-    /*    width: 470px;*/
-    /*    height: 50px;*/
-    /*    margin: 35px auto 35px;*/
-    /*    border-radius: 6px;*/
-    /*    border-width: 2px;*/
-    /*}*/
-
-    /*#account email{*/
-    /*    width: 470px;*/
-    /*    height: 50px;*/
-    /*    margin: 35px auto 35px;*/
-    /*    border-radius: 6px;*/
-    /*    border-width: 2px;*/
-    /*}*/
-
     #account #Code{
         width: 200px;
         height: 50px;
@@ -67,14 +53,13 @@
 </style>
 <body>
 
-
 <div class="layui-carousel" id="test1" style="float: left">
     <div carousel-item>
-        <div><img src="../pic/1.png"></div>
-        <div><img src="../pic/logn.jpg"></div>
-        <div><img src="../pic/1.png"></div>
-        <div><img src="../pic/logn.jpg"></div>
-        <div><img src="../pic/1.png"></div>
+        <div><img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2941640452,2230461681&fm=26&gp=0.jpg" alt="加载错误" height="100%"></div>
+        <div><img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=146893042,4244628931&fm=26&gp=0.jpg" alt="加载错误" height="100%"></div>
+        <div><img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2241532309,965180071&fm=26&gp=0.jpg" alt="加载错误" height="100%"></div>
+        <div><img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2863765042,781770501&fm=26&gp=0.jpg" alt="加载错误" height="100%"></div>
+        <div><img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=105606074,771602418&fm=26&gp=0.jpg" alt="加载错误" height="100%"> </div>
     </div>
 </div>
 
@@ -85,62 +70,105 @@
     <div  style="font-size: 30px;margin:0 auto;text-align: center">
         每一天,乐在沟通
     </div>
+
+
     <div id="account">
         <label>
-            <input type="text" name="title" required lay-verify="required" placeholder="昵称" autocomplete="off"
+            <input type="text" v-model="userName" required lay-verify="required" placeholder="昵称" autocomplete="off"
                    class="layui-input">
         </label>
 
         <label>
-            <input type="password" name="title" required lay-verify="required" placeholder="密码" autocomplete="off"
+            <input type="password" v-model="password" required lay-verify="required" placeholder="密码" autocomplete="off"
                    class="layui-input">
         </label>
 
         <div id="showControl">
         <label>
-            <input @click="click()" id="email" type="email" name="title" required lay-verify="required" placeholder="邮箱" autocomplete="off"
+            <input @click="showClick" id="email" type="text" v-model="email" required lay-verify="required" placeholder="邮箱" autocomplete="off"
                    class="layui-input">
         </label>
         <div id="isShow" v-show="isShow" >
             <label>
-                <input id="Code" type="email" name="title" required lay-verify="required" placeholder="验证码" autocomplete="off"
-                        class="layui-input" style="float: left;margin: 0 0px 0px 0;position: absolute;box-sizing:border-box" >
+                <input id="Code" type="text"  v-model="verificationCode"  name="title" required lay-verify="required" placeholder="验证码" autocomplete="off"
+                        class="layui-input" style="float: left;margin: 0 0 0 0;position: absolute;box-sizing:border-box" >
             </label>
             <label>
-                <input type="button"  value="发送邮箱验证码" class="layui-btn layui-btn-lg" style="width: 260px;height: 50px;
-            border-radius: 5px;margin: 0 auto 0;display:block;margin: 0 0px 35px 45%;box-sizing:border-box">
+                <input type="button" v-on:click="sendEmail" value="发送邮箱验证码" class="layui-btn layui-btn-lg" style="width: 260px;height: 50px;
+            border-radius: 5px;display:block;margin: 0 0 35px 45%;box-sizing:border-box">
             </label>
         </div>
         </div>
-    </div>
-
-<form>
-    <div>
-        <input type="button"  value="立即注册" class="layui-btn layui-btn-lg" style="width: 470px;height: 45px;
+        <input type="button" v-on:click="submitClick" value="立即注册" class="layui-btn layui-btn-lg" style="width: 470px;height: 45px;
             border-radius: 5px;margin: 0 auto 0;display:block">
     </div>
-</form>
+
 
 </div>
 
 <!-- 条目中可以是任意内容，如：<img src=""> -->
-
-<script src="../js/my/vue.js" ></script>
 <script src="../ui/layui/layui.js" ></script>
 <script>
     const email = new Vue({
-        el:'#showControl',
+        el:'#account',
         data:{
-          isShow:false
+            userName:'',
+            password:'',
+            verificationCode:'',
+            isShow:false,
+            email:'',
         },
         methods:{
-            click(){
+            showClick(){
                 this.isShow = !this.isShow;
+            },
+            sendEmail(){
+                let regEmail = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+                if (this.email === '' || !regEmail.test(this.email)) {
+                    alert('邮箱格式不正确');
+                    return ;
+                }
+                axios({
+                    method:'post',
+                    url:'/sendEmail',
+                    params:{
+                        email:this.email,
+                    }
+                }).then(res => {
+                    if (res.data == null) {
+                        alert("发送失败");
+                        return;
+                    }
+                    console.log(res.data);
+                    sessionStorage.setItem("registerCode", res.data);
+                })
+            },
+            submitClick() {
+                if(this.verificationCode != sessionStorage.getItem("registerCode")){
+                    alert("邮箱验证码错误！");
+                    return;
+                }
+                axios({
+                    method:'post',
+                    url:'/register',
+                    params:{
+                        userName:this.userName,
+                        password:this.password,
+                        verificationCode:this.verificationCode,
+                        email:this.email,
+                    }
+                }).then(res => {
+                    if(res.data == null) {
+
+                    }
+                    alert(res.data);
+                    console.log(res.data);
+                })
             }
         }
     })
     layui.use('carousel', function(){
-        var carousel = layui.carousel;
+        let carousel = layui.carousel;
         //建造实例
         carousel.render({
             elem: '#test1'
@@ -153,6 +181,8 @@
             //,anim: 'updown' //切换动画方式
         });
     });
+
+
 </script>
 </body>
 </html>
