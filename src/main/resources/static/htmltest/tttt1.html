@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <meta charset="utf-8" />
+    <title>无问题文档</title>
+    <style>
+        .abc{ height:300px; border:1px solid #000; margin:0 auto}
+        @media screen and (min-width: 1201px) {
+            .abc {width: 1200px}
+        }
+        /* 设置装备摆设了阅读器宽度不小于1201px时 abc 展现1200px宽度 */
+
+        @media screen and (max-width: 1200px) {
+            .abc {width: 800px}
+        }
+        /* 设置了涉猎器宽度不大于1200px时 abc 显示900px宽度 */
+
+        @media screen and (max-width: 900px) {
+            .abc {width: 600px;}
+        }
+        /* 设置装备摆设了阅读器宽度不大于900px时 abc 体现200px宽度 */
+
+        @media screen and (max-width: 500px) {
+            .abc {width: 200px;}
+        }
+        /* 设置装备摆设了阅读器宽度不大于500px时 abc 表示100px宽度 */
+
+    </style>
+</head>
+<body>
+<div class="abc">CSS5实例：我这个DIV宽度会随浏览器宽度变更哦，尝尝篡改阅读器宽度</div>
+</body>
+</html>

@@ -1,161 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>首页</title>
-    <link rel="stylesheet" href="ui/layui/css/layui.css">
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.js"></script>
-</head>
+    <head>
+        <meta name="viewport" content="width=device-width initial-scale=1.0 maximum-scale=1.0 minimum-scale=1.0 user-scalable=no" />
+        <meta charset="UTF-8">
+        <title>首页2</title>
+        <link rel="stylesheet" href="ui/layui/css/layui.css">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.js"></script>
+    </head>
 
-<style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing:border-box;
-    }
-    html{
-        width: 100%;
-        height: 100%;
-    }
-    body {
-        background-image: url("pic/logn.jpg");
-        background-position: 0 70%;
-        background-size:cover;
-        height: 100%;
-        width: 100%;
-        overflow: hidden;
-        /*background-size: auto 1080px;*/
-        /*margin: 0 auto;*/
-    }
-    .loginIframe {
-        width: 480px;
-        height: 370px;
-        margin: 180px 0 0 50%;
-        border-radius: 15px;
-        border: medium none;
-    }
-    #title2 a{
-        color: #3481cf;
-    }
-    #account input{
-        width: 340px;
-        height: 45px;
-        margin: 50px auto 40px;
-        border-radius: 6px;
-        border-width: 2px;
-    }
-    #password input{
-        width: 340px;
-        height: 45px;
-        margin: 30px auto;
-        border-radius: 6px;
-        border-width: 2px;
-    }
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing:border-box;
+        }
+        html{
+            width: 100%;
+            height: 100%;
+            min-width: 1000px;
+            min-height: 500px;
+        }
+        body {
+            background-image: url("pic/logn.jpg");
+            background-position: 0 70%;
+            /*background-size:cover;*/
+            height: 100%;
+            width: 100%;
+            /*overflow: hidden;*/
+            background-size: auto 1080px;
+            /*margin: 0 auto;*/
+        }
+        #title2 a{
+            color: #3481cf;
+        }
+        #account input{
+            width: 340px;
+            height: 45px;
+            margin: 50px auto 40px;
+            border-radius: 6px;
+            border-width: 2px;
+        }
+        #password input{
+            width: 340px;
+            height: 45px;
+            margin: 30px auto;
+            border-radius: 6px;
+            border-width: 2px;
+        }
+        #login {
+            background-color: white;
+            width: 480px;
+            height: 370px;
+            /*margin: 180px 0 0 50%;*/
+            border-radius: 15px;
+            position: absolute;
+            left: 45%;
+            top: 20%;
+        }
+        #fastLogin {
+            background-color: white;
+            width: 480px;
+            height: 370px;
+            /*margin: 180px 0 0 50%;*/
+            border-radius: 15px;
+            position: absolute;
+            left: 45%;
+            top: 20%;
+        }
+        #title {
+            font-size: 27px;
+            color: #333;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        #fastTitle {
+            font-size: 27px;
+            color: #333;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        #title2 {
+            margin: 20px auto;
+            text-align: center;
+            font-size: 22px;
+            font-weight: 300;
+        }
+        #fastTitle2 {
+            margin: 20px auto;
+            text-align: center;
+            font-size: 22px;
+            font-weight: 300;
+        }
 
-    #login {
-        background-color: white;
-        width: 480px;
-        height: 370px;
-        /*margin: 180px 0 0 50%;*/
-        border-radius: 15px;
-        position: absolute;
-        left: 45%;
-        top: 20%;
-    }
+        #title2 a{
+            color: #3481cf;
+        }
+        #fastTitle2 a {
+            color: #3481cf;
+        }
 
-    #fastLogin {
-        background-color: white;
-        width: 480px;
-        height: 370px;
-        /*margin: 180px 0 0 50%;*/
-        border-radius: 15px;
-        position: absolute;
-        left: 45%;
-        top: 20%;
-    }
-
-
-    #title {
-        font-size: 27px;
-        color: #333;
-        margin-bottom: 16px;
-        text-align: center;
-    }
-
-    #fastTitle {
-        font-size: 27px;
-        color: #333;
-        margin-bottom: 16px;
-        text-align: center;
-    }
-
-    #title2 {
-        margin: 20px auto;
-        text-align: center;
-        font-size: 22px;
-        font-weight: 300;
-    }
-    #fastTitle2 {
-        margin: 20px auto;
-        text-align: center;
-        font-size: 22px;
-        font-weight: 300;
-    }
-
-
-    #title2 a{
-        color: #3481cf;
-    }
-    #fastTitle2 a {
-        color: #3481cf;
-    }
-
-    #account input{
-        width: 340px;
-        height: 45px;
-        margin: 35px auto 35px;
-        border-radius: 6px;
-        border-width: 2px;
-    }
-    #fastAccount input {
-        width: 340px;
-        height: 45px;
-        margin: 35px auto 35px;
-        border-radius: 6px;
-        border-width: 2px;
-    }
-
-
-    #password input{
-        width: 340px;
-        height: 45px;
-        margin: 35px auto;
-        border-radius: 6px;
-        border-width: 2px;
-    }
-    #fastPassword input{
-        width: 340px;
-        height: 45px;
-        margin: 35px auto;
-        border-radius: 6px;
-        border-width: 2px;
-    }
+        #account input{
+            width: 340px;
+            height: 45px;
+            margin: 35px auto 35px;
+            border-radius: 6px;
+            border-width: 2px;
+        }
+        #fastAccount input {
+            width: 340px;
+            height: 45px;
+            margin: 35px auto 35px;
+            border-radius: 6px;
+            border-width: 2px;
+        }
+        #password input{
+            width: 340px;
+            height: 45px;
+            margin: 35px auto;
+            border-radius: 6px;
+            border-width: 2px;
+        }
+        #fastPassword input{
+            width: 340px;
+            height: 45px;
+            margin: 35px auto;
+            border-radius: 6px;
+            border-width: 2px;
+        }
 
 
-    #loginFoot{
-        margin: 20px 0  0 230px;
-    }
+        #loginFoot{
+            margin: 20px 0  0 230px;
+        }
+        #fastLoginFoot{
+            margin: 20px 0 0 230px;
+        }
 
-
-    #fastLoginFoot{
-        margin: 20px 0 0 230px;
-    }
-
-</style>
-<script src="ui/layui/layui.js"></script>
+    </style>
+    <script src="ui/layui/layui.js"></script>
 <body>
-
 <div id="login" v-show="isShow">
     <div id="title"  @click="fastLoginClick()">账号密码登陆</div>
     <div id="title2">推荐使用<a  @click="fastLoginClick" href="#" >快速安全登陆</a>防止盗号</div>
@@ -184,9 +169,6 @@
         </div>
     </form>
 </div>
-
-
-
 <div id="fastLogin" v-show="isShow">
     <div id="fastTitle">账号密码登陆</div>
     <!--    <div id="title"   @click="fastLoginClick()">账号密码登陆</div>-->
@@ -220,7 +202,6 @@
         </div>
     </form>
 </div>
-
 <script>
     const fastLogin =  new Vue({
         el:'#fastLogin',

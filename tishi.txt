@@ -48,3 +48,8 @@ border:5px  厚度
 
                work(callback);
 
+
+
+           宽高固定px
+           宽定位百分比
+           高定位px

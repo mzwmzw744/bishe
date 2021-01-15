@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width initial-scale=1.0 maximum-scale=1.0 minimum-scale=1.0 user-scalable=no" />
     <title>Title</title>
     <link rel="stylesheet" href="../ui/layui/css/layui.css" media="all">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.js"></script>
 </head>
 <style>
-    *{
+    * {
         margin: 0;
         padding: 0;
     }
-    html {
+    html{
         height: 100%;
     }
     body{
         height: 100%;
-        /*min-width: 1500px;*/
+        min-width: 1300px;
+        max-width: 1300px;
     }
     #account input{
-        width: 470px;
+        width: 100%;
         height: 50px;
         margin: 35px auto 35px;
         border-radius: 6px;
@@ -43,57 +43,47 @@
 
 </style>
 <body>
-<div style="width: 400px;height: 100%">
-    <div class="layui-carousel" id="test1" style="float: left;min-width: 400px;float: left;max-height: 1100px">
-        <div carousel-item>
-            <div><img src="https://cdn-go.cn/qq-web/zc.qq.com/latest/v3/img/01-4.jpg" alt="加载错误" height="100%"></div>
-            <div><img src="https://cdn-go.cn/qq-web/zc.qq.com/latest/v3/img/01-3.jpg" alt="加载错误" height="100%"></div>
-            <div><img src="https://cdn-go.cn/qq-web/zc.qq.com/latest/v3/img/01-1.jpg" alt="加载错误" height="100%"></div>
-            <!--        <div><img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2863765042,781770501&fm=26&gp=0.jpg" alt="加载错误" height="100%"></div>-->
-            <!--        <div><img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=105606074,771602418&fm=26&gp=0.jpg" alt="加载错误" height="100%"> </div>-->
-        </div>
-    </div>
+<div style="float: left;width: 25%;height: 100%;background-color: #8D8D8D;">
+    <div style="width: 100px;height: 100px;background-color: cornflowerblue;margin: 0 auto"></div>
 </div>
-<div style="height: 100px;position: absolute;top: 100px;width: 100%;min-width: 1500px">
-    <div style="width: 850px;height: 100px;margin: 0 auto">
-        <div style="float: right;height: 500px;width: 500px">
-            <div id="right">
-                <div id="welcome" style="font-size: 44px; margin:0px auto 20px;text-align: center">
-                    欢迎注册汉服圈~
-                </div>
-                <div  style="font-size: 30px;margin:0 auto;text-align: center">
-                    每一天,乐在沟通
-                </div>
-                <div id="account">
+<div style="float: left;width: 75%;background-color: #00FFFF;height: 100%;">
+    <div style="width: 40%;height: 450px;background-color: #ff6700;margin: 100px auto">
+        <div id="right">
+            <div id="welcome" style="font-size: 44px; margin:0px auto 20px;text-align: center">
+                欢迎注册汉服圈~
+            </div>
+            <div  style="font-size: 30px;margin:0 auto;text-align: center">
+                每一天,乐在沟通
+            </div>
+            <div id="account">
+                <label>
+                    <input type="text" v-model="userName" required lay-verify="required" placeholder="昵称" autocomplete="off"
+                           class="layui-input">
+                </label>
+
+                <label>
+                    <input type="password" v-model="password" required lay-verify="required" placeholder="密码" autocomplete="off"
+                           class="layui-input">
+                </label>
+
+                <div id="showControl">
                     <label>
-                        <input type="text" v-model="userName" required lay-verify="required" placeholder="昵称" autocomplete="off"
+                        <input @click="showClick" id="email" type="text" v-model="email" required lay-verify="required" placeholder="邮箱" autocomplete="off"
                                class="layui-input">
                     </label>
-
-                    <label>
-                        <input type="password" v-model="password" required lay-verify="required" placeholder="密码" autocomplete="off"
-                               class="layui-input">
-                    </label>
-
-                    <div id="showControl">
+                    <div id="isShow" v-show="isShow" >
                         <label>
-                            <input @click="showClick" id="email" type="text" v-model="email" required lay-verify="required" placeholder="邮箱" autocomplete="off"
-                                   class="layui-input">
+                            <input id="Code" type="text"  v-model="verificationCode"  name="title" required lay-verify="required" placeholder="验证码" autocomplete="off"
+                                   class="layui-input" style="float: left;margin: 0 0 0 0;position: absolute;box-sizing:border-box" >
                         </label>
-                        <div id="isShow" v-show="isShow" >
-                            <label>
-                                <input id="Code" type="text"  v-model="verificationCode"  name="title" required lay-verify="required" placeholder="验证码" autocomplete="off"
-                                       class="layui-input" style="float: left;margin: 0 0 0 0;position: absolute;box-sizing:border-box" >
-                            </label>
-                            <label>
-                                <input type="button" v-on:click="sendEmail" value="发送邮箱验证码" class="layui-btn layui-btn-lg" style="width: 260px;height: 50px;
+                        <label>
+                            <input type="button" v-on:click="sendEmail" value="发送邮箱验证码" class="layui-btn layui-btn-lg" style="width: 260px;height: 50px;
             border-radius: 5px;display:block;margin: 0 0 35px 45%;box-sizing:border-box">
-                            </label>
-                        </div>
+                        </label>
                     </div>
-                    <input type="button" v-on:click="submitClick" value="立即注册" class="layui-btn layui-btn-lg" style="width: 470px;height: 45px;
-            border-radius: 5px;margin: 0 auto 0;display:block">
                 </div>
+                <input type="button" v-on:click="submitClick" value="立即注册" class="layui-btn layui-btn-lg" style="width: 100%;height: 45px;
+            border-radius: 5px;margin: 0 auto 0;display:block">
             </div>
         </div>
     </div>
@@ -101,10 +91,6 @@
 <script src="../ui/layui/layui.js" ></script>
 <script>
     const right = new Vue({
-        el:'#test1',
-        data: {
-            maxHeight: '1000px'
-        }
 
     })
 
@@ -183,6 +169,8 @@
             //,anim: 'updown' //切换动画方式
         });
     });
+
+
 </script>
 </body>
 </html>

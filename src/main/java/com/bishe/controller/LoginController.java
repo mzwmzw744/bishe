@@ -1,12 +1,10 @@
 package com.bishe.controller;
-
 import com.bishe.bean.User;
 import com.bishe.service.Service;
 import com.bishe.util.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import java.security.GeneralSecurityException;
@@ -34,7 +32,8 @@ public class LoginController {
         System.out.println("用户登录账号"+account);
         System.out.println("用户登录密码"+password);
         User user;
-        if(category.equals("userName")) {
+        //if(category.equals("userName")) {
+        if("userName".equals(category)) {
             user = userMapper.getUserByUserName(account);
         }else {
             user = userMapper.getUserByEmail("account");
@@ -66,7 +65,6 @@ public class LoginController {
         System.out.println("发送成功");
         return 1;
     }
-
     @RequestMapping(value = "/sendEmail")
     @ResponseBody
     public String sendEmail(HttpServletRequest request) throws GeneralSecurityException, MessagingException {
@@ -101,7 +99,5 @@ public class LoginController {
             System.out.println("注册失败");
             return "注册失败";
         }
-
-
     }
 }
