@@ -18,6 +18,10 @@
         select * from user where user_name =  #{userName}
     </select>
 
+    <select id="getAllUser" resultMap="userResultMap">
+        select * from user
+    </select>
+
     <insert id="addUser">
         insert into user values(null,#{userName},#{email},#{password})
     </insert>

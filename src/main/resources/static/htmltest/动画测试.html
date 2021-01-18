@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>初始渲染的过渡</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
+</head>
+<style>
+
+    .custom-appear-active{
+        color: #2fe26d;
+        background: #b6b6b6;
+        transition: all 1s ease;
+    }
+
+    .custom-appear{
+        font-size: 40px;
+        color: #e069e2;
+        background: #7798e2;
+    }
+
+    .custom-appear-to{
+        color: #e29138;
+        background: #1c8942;
+    }
+
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity 3s;
+    }
+
+    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+        opacity: 0;
+    }
+
+    .v-leave-to{
+        opacity: 0;
+        transform: translateX(100px);
+    }
+
+    .component-fade-enter-active, .component-fade-leave-active {
+        transition: opacity .3s ease;
+    }
+    .component-fade-enter, .component-fade-leave-to
+        /* .component-fade-leave-active for below version 2.1.8 */ {
+        opacity: 0;
+    }
+
+</style>
+<body>
+<div id="app">
+<!--    appear-->
+<!--    appear-class="v-leave-to"-->
+<!--    appear-to-class="custom-appear-to"-->
+<!--    appear-active-class="custom-appear-active"-->
+    <transition name="component-fade" mode="out-in">
+        <component v-bind:is="view"></component>
+    </transition>
+    <button v-on:click="click">123</button>
+</div>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            view: 'v-a',
+            choose:1
+        },
+        components: {
+            'v-a': {
+                template: '<div>Component A</div>'
+            },
+            'v-b': {
+                template: '<div>Component B</div>'
+            }
+        },
+        methods: {
+            click(){
+
+                if(this.choose == 1) {
+                    this.view ='v-b';
+                    this.choose++;
+                    return
+                }
+
+                if(this.choose == 2) {
+                    this.view ='v-a';
+                    this.choose--;
+                    return
+                }
+
+            },
+        },
+
+        created : function () {
+            this.timer = setInterval(()=>{
+                if(this.choose == 1) {
+                    this.view ='v-b';
+                    this.choose++;
+                    return
+                }
+                if(this.choose == 2) {
+                    this.view ='v-a';
+                    this.choose--;
+                    return
+                }
+            },2000)
+        }
+    })
+</script>
+</body>
+</html>

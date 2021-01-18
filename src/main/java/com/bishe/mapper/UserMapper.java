@@ -11,15 +11,17 @@ import java.util.List;
 @Repository
 @Mapper
 public interface UserMapper {
-    Test Test();
 
     User getUserByEmail(String email);
 
     User getUserByUserName(String Phone);
 
+    List<User> getAllUser();
+
     int addUser(User user);
 
     int getUserIsRepeat(User user);
-    
+
+
 }
 

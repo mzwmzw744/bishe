@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.js"></script>
 </head>
 <style>
     *{
@@ -18,7 +20,15 @@
     }
 </style>
 <body>
-<div style="width: 200px;height: 200px;background-color: #FFB800;position: absolute;left: 30%;top: 300px">
+<div id="app" v-bind:style="{height : size}" style="background-color: #00FFFF">
 </div>
 </body>
+<script>
+    new Vue({
+        el:'#app',
+        data:{
+            size:'50px'
+        }
+    })
+</script>
 </html>

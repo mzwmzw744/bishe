@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../ui/layui/css/layui.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="../../ui/layui/layui.js"></script>
+
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing:border-box;
+    }
+    html{
+        width: 100%;
+        height: 100%;
+        min-width: 1000px;
+    }
+    body {
+        background-image: url("../../pic/logn.jpg");
+        background-position: 0 70%;
+        height: 100%;
+        width: 100%;
+        background-size: auto 1080px;
+    }
+    #title2 a{
+        color: #3481cf;
+    }
+    #account input{
+        width: 340px;
+        height: 45px;
+        margin: 50px auto 40px;
+        border-radius: 6px;
+        border-width: 2px;
+    }
+    #password input{
+        width: 340px;
+        height: 45px;
+        margin: 30px auto;
+        border-radius: 6px;
+        border-width: 2px;
+    }
+    #login {
+        background-color: white;
+        width: 480px;
+        height: 370px;
+        /*margin: 180px 0 0 50%;*/
+        border-radius: 15px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+    }
+    #title {
+        font-size: 27px;
+        color: #333;
+        margin-bottom: 16px;
+        text-align: center;
+    }
+    #title2 {
+        margin: 20px auto;
+        text-align: center;
+        font-size: 22px;
+        font-weight: 300;
+    }
+
+    #title2 a{
+        color: #3481cf;
+    }
+    #fastTitle2 a {
+        color: #3481cf;
+    }
+
+    #account input{
+        width: 340px;
+        height: 45px;
+        margin: 35px auto 35px;
+        border-radius: 6px;
+        border-width: 2px;
+    }
+    #fastAccount input {
+        width: 340px;
+        height: 45px;
+        margin: 35px auto 35px;
+        border-radius: 6px;
+        border-width: 2px;
+    }
+    #password input{
+        width: 340px;
+        height: 45px;
+        margin: 35px auto;
+        border-radius: 6px;
+        border-width: 2px;
+    }
+    #fastPassword input{
+        width: 340px;
+        height: 45px;
+        margin: 35px auto;
+        border-radius: 6px;
+        border-width: 2px;
+    }
+
+
+    #loginFoot{
+        margin: 20px 0  0 210px;
+    }
+    .component-fade-enter-active, .component-fade-leave-active {
+        /*transition: opacity .3s ease;*/
+        transition: opacity 3s ease;
+    }
+    .component-fade-enter, .component-fade-leave-to
+        /* .component-fade-leave-active for below version 2.1.8 */ {
+        opacity: 0;
+    }
+</style>
+<body>
+<div id="login" v-show="isShow">
+
+    <div id="title"  @click="fastLoginClick()">汉服圈后台登录</div>
+
+
+    <div id="title2" style="height: 30px">
+        <transition name="component-fade" mode="out-in">
+            <component v-bind:is="view"></component>
+        </transition>
+    </div>
+
+
+    <form action="/login" method="post">
+        <div id="account">
+            <label>
+                <input v-model="account" type="text" name="account" required lay-verify="required" placeholder="请输入您的账号" autocomplete="off"
+                       class="layui-input">
+            </label>
+        </div>
+        <div id="password">
+            <label>
+                <input v-model="password" type="password" name="password" required lay-verify="required" placeholder="密码" autocomplete="off"
+                       class="layui-input">
+            </label>
+        </div>
+
+        <div>
+            <input id="submit" @click="submitClick" type="button"  value="登录" class="layui-btn layui-btn-lg" style="width: 340px;height: 40px;
+            border-radius: 5px;margin: 0 auto 0;display:block">
+        </div>
+        <div id="loginFoot">
+            <a href="html/forgetPassword.html">忘记密码?</a>&nbsp;&nbsp;|
+            <a href="html/newAccount.html">申请管理员账号</a>&nbsp;&nbsp;|
+            <a href="#">意见反馈</a>
+        </div>
+    </form>
+</div>
+<script>
+    new Vue({
+        el: '#title2',
+        data: {
+            view: 'v-a',
+            choose:1
+        },
+        components: {
+            'v-a': {
+                template: '<div style="font-size: 25px;font-weight: 300;">&nbsp;&nbsp;&nbsp;加油吧！</div>'
+            },
+            'v-b': {
+                template: '<div style="font-size: 25px;font-weight: 300;">打工人</div>'
+            }
+        },
+        created : function () {
+            this.timer = setInterval(()=>{
+                if(this.choose == 1) {
+                    this.view ='v-b';
+                    this.choose++;
+                    return
+                }
+                if(this.choose == 2) {
+                    this.view ='v-a';
+                    this.choose--;
+                    return
+                }
+            },6000)
+        }
+    })
+</script>
+</body>
+</html>
