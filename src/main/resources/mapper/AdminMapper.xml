@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bishe.mapper.AdminMapper">
+
+
+    <resultMap id="adminResultMap" type="com.bishe.bean.Admin">
+        <result column="admin_id" jdbcType="INTEGER" property="id" />
+        <result column="admin_name" jdbcType="VARCHAR" property="name" />
+        <result column="admin_password" jdbcType="VARCHAR" property="password" />
+        <result column="admin_face" jdbcType="VARCHAR" property="face" />
+    </resultMap>
+
+    <select id="getAdminByName" resultMap="adminResultMap">
+        select * from admin where admin_name = #{adminName}
+    </select>
+
+
+</mapper>

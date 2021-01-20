@@ -1,15 +1,55 @@
 drop table if exists user;
 CREATE table user(
-    id int primary key,
-    account varchar(50),
-    emailaccount varchar(50),
-    password varchar(100),
-    username varchar(50)
+    user_id int auto_increment primary key,
+    user_name varchar(50),
+    user_email varchar(50),
+    user_password varchar(100)
 );
+insert into user values (null,'小红','1163974490@qq.com','123');
+insert into user values (null,'小明','1163974491@qq.com','123');
+insert into user values (null,'小1','1163974480@qq.com','123');
+insert into user values (null,'小2','1163974481@qq.com','123');
+insert into user values (null,'小3','1163974482@qq.com','123');
+insert into user values (null,'小4','1163974483@qq.com','123');
+insert into user values (null,'小5','1163974484@qq.com','123');
+insert into user values (null,'小6','1163974485@qq.com','123');
+insert into user values (null,'小7','1163974486@qq.com','123');
+insert into user values (null,'小8','1163974487@qq.com','123');
+insert into user values (null,'小9','1163974486@qq.com','123');
+insert into user values (null,'小10','1163974487@qq.com','123');
+
+drop table if exists admin;
+CREATE table admin(
+    admin_id int auto_increment primary key,
+    admin_name varchar(50),
+    admin_password varchar(100),
+    admin_face varchar(100)
+);
+insert into admin values (1,'1','1','1');
+insert into admin values (2,'1','1','1');
+insert into admin values (3,'1','1','1');
+insert into admin values (4,'1','1','1');
+insert into admin values (5,'1','1','1');
 
 
-drop table if exists Test;
-CREATE table test(
-    name varchar(50),
-    age int
+
+
+drop table if exists role;
+CREATE table role(
+    id int primary key auto_increment,
+    role_super boolean,
+    role_common boolean,
+    role_query boolean
 );
+insert into role values (1,true,true,true);
+insert into role values (2,true,true,true);
+insert into role values (3,true,true,true);
+insert into role values (4,true,true,true);
+insert into role values (5,true,true,true);
+
+
+
+
+
+
+select * from role where role_common = -3

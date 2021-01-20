@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="../../ui/layui/css/layui.css">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.js"></script>
     <script src="../../ui/layui/layui.js"></script>
-
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <link rel="stylesheet" href="../../ui/layui/css/layui.css">
+    <link rel="stylesheet" href="../../css/radio.css">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 </head>
 <style>
     * {
@@ -36,13 +39,6 @@
         border-radius: 6px;
         border-width: 2px;
     }
-    #password input{
-        width: 340px;
-        height: 45px;
-        margin: 30px auto;
-        border-radius: 6px;
-        border-width: 2px;
-    }
     #login {
         background-color: white;
         width: 480px;
@@ -57,13 +53,16 @@
     #title {
         font-size: 27px;
         color: #333;
-        margin-bottom: 16px;
-        text-align: center;
+        margin: 0 auto;
+        width: 200px;
+        height: 40px;
     }
     #title2 {
-        margin: 20px auto;
+        position: absolute;
         text-align: center;
-        font-size: 22px;
+        right: 0;
+        top: 0;
+        font-size: 20px;
         font-weight: 300;
     }
 
@@ -91,7 +90,7 @@
     #password input{
         width: 340px;
         height: 45px;
-        margin: 35px auto;
+        margin: 35px auto 20px;
         border-radius: 6px;
         border-width: 2px;
     }
@@ -102,7 +101,10 @@
         border-radius: 6px;
         border-width: 2px;
     }
-
+    #selectionBox{
+        margin:0 0 0 155px;
+        width: 250px;
+    }
 
     #loginFoot{
         margin: 20px 0  0 210px;
@@ -115,12 +117,36 @@
         /* .component-fade-leave-active for below version 2.1.8 */ {
         opacity: 0;
     }
+    #applicationAdmin{
+        background-color: white;
+        width: 480px;
+        height: 490px;
+        /*margin: 180px 0 0 50%;*/
+        border-radius: 15px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+    }
+    #adminAccount {
+        width: 340px;
+        height: 45px;
+        margin: 40px auto 30px;
+        border-radius: 6px;
+        border-width: 2px;
+    }
+    #adminPassword{
+        width: 340px;
+        height: 45px;
+        margin: 25px auto 30px;
+        border-radius: 6px;
+        border-width: 2px;
+    }
 </style>
 <body>
-<div id="login" v-show="isShow">
+<div id="login" v-show="loginShow">
 
     <div id="title"  @click="fastLoginClick()">汉服圈后台登录</div>
-
 
     <div id="title2" style="height: 30px">
         <transition name="component-fade" mode="out-in">
@@ -128,8 +154,7 @@
         </transition>
     </div>
 
-
-    <form action="/login" method="post">
+    <form action="/login" method="post" class="layui-form" name="myForm">
         <div id="account">
             <label>
                 <input v-model="account" type="text" name="account" required lay-verify="required" placeholder="请输入您的账号" autocomplete="off"
@@ -142,48 +167,223 @@
                        class="layui-input">
             </label>
         </div>
-
+            <div class="layui-form-item" id="selectionBox">
+                <label class="layui-form-label"></label>
+                <div class="layui-input-block" >
+                    <select name="city" lay-verify="required" >
+                        <option value="">权限等级</option>
+                        <option value="0">超级管理员</option>
+                        <option value="1">普通管理员</option>
+                        <option value="2">查询管理员</option>
+                    </select>
+                </div>
+            </div>
         <div>
             <input id="submit" @click="submitClick" type="button"  value="登录" class="layui-btn layui-btn-lg" style="width: 340px;height: 40px;
             border-radius: 5px;margin: 0 auto 0;display:block">
         </div>
         <div id="loginFoot">
             <a href="html/forgetPassword.html">忘记密码?</a>&nbsp;&nbsp;|
-            <a href="html/newAccount.html">申请管理员账号</a>&nbsp;&nbsp;|
+            <a href="#" v-on:click="applicationAdminClick" v>申请管理员账号</a>&nbsp;&nbsp;|
             <a href="#">意见反馈</a>
         </div>
     </form>
 </div>
+
+<div v-show="applicationShow" id="applicationAdmin">
+    <div style="text-align: center"><h1>申请管理员账号</h1></div>
+    <input id="adminAccount" v-model="account" type="text" name="account" required lay-verify="required" placeholder="申请的管理员账号" autocomplete="off"
+           class="layui-input">
+    <input id="adminPassword" v-model="password" type="password" name="password" required lay-verify="required" placeholder="申请密码" autocomplete="off"
+           class="layui-input">
+    <div style="text-align: center;margin-bottom: 20px">
+    <el-radio-group v-model="radio1" @change="checkRadio1">
+        <el-radio-button label="超级管理员"></el-radio-button>
+        <el-radio-button label="普通管理员"></el-radio-button>
+        <el-radio-button label="查询管理员"></el-radio-button>
+    </el-radio-group>
+    </div>
+    <div style="text-align: center;margin-bottom: 20px">
+        <el-checkbox-group v-model="checkboxChoose">
+            <el-checkbox label="增加权限" :disabled="disabled"></el-checkbox>
+            <el-checkbox label="删除权限" :disabled="disabled"></el-checkbox>
+            <el-checkbox label="修改权限" :disabled="disabled"></el-checkbox>
+            <el-checkbox label="查询权限" :disabled="disabled"></el-checkbox>
+        </el-checkbox-group>
+    </div>
+    <div style="width: 340px;margin: 0 auto">
+        <el-input
+                type="textarea"
+                :rows="4"
+                placeholder="申请内容"
+                v-model="textarea">
+        </el-input>
+    </div>
+    <div style="text-align: center">
+    <el-button  v-on:click="apply" type="primary" style="width: 340px;margin-top: 30px">我要申请</el-button>
+    </div>
+</div>
 <script>
-    new Vue({
-        el: '#title2',
-        data: {
+
+    //Demo
+    layui.use('form', function(){
+        let form = layui.form;
+    });
+
+    const application = new Vue({
+        el:'#applicationAdmin',
+        data:{
+            textarea:'',
+            checkboxChoose: ['选中且禁用','复选框 A'],
+            disabled:false,
+            account:'',
+            password:'',
+            applicationShow:true,
+            // picked:'1',
+            radio1:'',
+        },
+        methods: {
+            apply(){
+                axios({
+                    method:'post',
+                    url:'/backstage/applyAdmin',
+                    data:{
+                        account:this.account,
+                        password:this.password,
+                        radio1:this.radio1,
+                        checkboxChoose:this.checkboxChoose,
+                        textarea:this.textarea
+                    }
+                }).then(res=> {
+
+                })
+            },
+
+            checkRadio1(){
+                if(this.radio1 === '超级管理员'){
+                    this.checkboxChoose = ['增加权限','删除权限','修改权限','查询权限']
+                    this.disabled = true;
+                }
+                if(this.radio1 === '普通管理员'){
+                    this.checkboxChoose = [];
+                    this.disabled = false;
+                }
+                if(this.radio1 === '查询管理员'){
+                    this.checkboxChoose = ['查询权限'];
+                    this.disabled = true;
+                }
+            }
+        }
+
+
+    })
+    const login = new Vue({
+        el:'#login',
+        data:{
+            loginShow: true,
+            account:'',
+            password:'',
+            category:'',
             view: 'v-a',
-            choose:1
+            choose:1,
+            select:''
         },
         components: {
             'v-a': {
-                template: '<div style="font-size: 25px;font-weight: 300;">&nbsp;&nbsp;&nbsp;加油吧！</div>'
+                template: '<div style="font-size: 20px;font-weight: 300;">&nbsp;&nbsp;&nbsp;加油吧！</div>'
             },
             'v-b': {
-                template: '<div style="font-size: 25px;font-weight: 300;">打工人</div>'
+                template: '<div style="font-size: 20px;font-weight: 300;">打工人&nbsp;&nbsp;&nbsp;</div>'
+            }
+        },
+
+
+        methods:{
+            applicationAdminClick(){
+                this.loginShow = false;
+                application.applicationShow = true;
+            },
+            fastLoginClick() {
+                fastLogin.isShow = true;
+                this.isShow = false;
+                // alert(fastLogin.isShow);
+                // alert('123');
+            },
+            submitClick() {
+                let select = document.myForm.city.value;
+                if(select === ''){
+                    alert("请选择权限等级！")
+                    return;
+                }
+                this.select = select;
+                let regEmail = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+                if (this.account === '' || this.password === '') {
+                    alert('账号不能为空');
+                    return;
+                }
+                if(regEmail.test(this.account)) {
+                    this.category = 'email'
+                }else {
+                    this.category = 'userName'
+                }
+                axios({
+                    method:'post',
+                    url:'/backstage/login',
+                    params:{
+                        category:this.category,
+                        account:this.account,
+                        password:this.password,
+                        select:this.select
+                    }
+                }).then(res=> {
+                    if (res.data === "账号或密码错误") {
+                        alert("账号或密码错误!")
+                    }else {
+                        sessionStorage.setItem("token", res.data);
+                        console.log(sessionStorage.getItem("token"))
+                        window.location=('backstageMain.html')
+                    }
+                })
             }
         },
         created : function () {
+            // console.log('create');
+            this.timer1 = setInterval(()=>{
+                console.log(this.timer1);
+                if(this.choose === 1) {
+                    this.view ='v-b';
+                    this.choose++;
+                    clearInterval(this.timer1);
+                    return
+                }
+                if(this.choose === 2) {
+                    this.view ='v-a';
+                    this.choose--;
+                    clearInterval(this.timer1);
+
+                }
+            },1000)
+            // console.log(this.timer1);
             this.timer = setInterval(()=>{
-                if(this.choose == 1) {
+                console.log(this.timer)
+                if(this.choose === 1) {
                     this.view ='v-b';
                     this.choose++;
                     return
                 }
-                if(this.choose == 2) {
+                if(this.choose === 2) {
                     this.view ='v-a';
                     this.choose--;
-                    return
+
                 }
             },6000)
         }
+
     })
+
+
+
+
 </script>
 </body>
 </html>

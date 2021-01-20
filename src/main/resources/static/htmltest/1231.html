@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../ui/layui/css/layui.css">
+    <script src="../ui/layui/layui.js"></script>
+</head>
+<body>
+<form class="layui-form" name="myForm">
+    <div class="layui-form-item">
+        <label class="layui-form-label">选择框</label>
+        <div class="layui-input-block">
+            <select name="city" lay-verify="required">
+                <option value=""></option>
+                <option value="0">北京</option>
+                <option value="1">上海</option>
+                <option value="2">广州</option>
+                <option value="3">深圳</option>
+                <option value="4">杭州</option>
+            </select>
+        </div>
+    </div>
+</form>
+<button onclick="getvalue()">获取下拉框的值</button>
+
+<script>
+    function getvalue(){
+        var value = document.myForm.city.value;
+        alert(value);
+    }
+
+    //Demo
+    layui.use('form', function(){
+        var form = layui.form;
+        form.on('select(required)', function (data) {        //对应lay-filter
+            sex= data.value;
+            console.log(sex)//获取value值
+            text= data.elem[data.elem.selectedIndex].text;;    //获取显示的值
+        });
+
+    });
+</script>
+</body>
+</html>
