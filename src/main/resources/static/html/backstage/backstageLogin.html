@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>汉服圈后台登录</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.js"></script>
     <script src="../../ui/layui/layui.js"></script>
@@ -23,7 +23,7 @@
         min-width: 1000px;
     }
     body {
-        background-image: url("../../pic/logn.jpg");
+        background-image: url("http://qzonestyle.gtimg.cn/qzone/qzactStatics/imgs/20171122191532_f2975b.jpg");
         background-position: 0 70%;
         height: 100%;
         width: 100%;
@@ -191,6 +191,7 @@
 </div>
 
 <div v-show="applicationShow" id="applicationAdmin">
+    <div style="position: absolute;left: 4px;top: 10px"><a href="#" v-on:click="backLogin">返回登录</a></div>
     <div style="text-align: center"><h1>申请管理员账号</h1></div>
     <input id="adminAccount" v-model="account" type="text" name="account" required lay-verify="required" placeholder="申请的管理员账号" autocomplete="off"
            class="layui-input">
@@ -238,11 +239,16 @@
             disabled:false,
             account:'',
             password:'',
-            applicationShow:true,
+            applicationShow:false,
             // picked:'1',
             radio1:'',
         },
         methods: {
+
+            backLogin(){
+              this.applicationShow = false;
+              login.loginShow = true;
+            },
             apply(){
                 axios({
                     method:'post',
@@ -255,10 +261,9 @@
                         textarea:this.textarea
                     }
                 }).then(res=> {
-
+                    alert(res.data);
                 })
             },
-
             checkRadio1(){
                 if(this.radio1 === '超级管理员'){
                     this.checkboxChoose = ['增加权限','删除权限','修改权限','查询权限']
@@ -336,12 +341,25 @@
                         select:this.select
                     }
                 }).then(res=> {
-                    if (res.data === "账号或密码错误") {
+                    console.log(res.data.address);
+                    console.log(res.data.token);
+                    if (res.data.address === "账号或密码错误") {
                         alert("账号或密码错误!")
                     }else {
-                        sessionStorage.setItem("token", res.data);
+                        sessionStorage.setItem("token", res.data.token);
                         console.log(sessionStorage.getItem("token"))
-                        window.location=('backstageMain.html')
+
+                        if(res.data.address === '0'){
+                            window.location=('backstageMain0.html')
+                        }
+
+                        if(res.data.address == '1'){
+                            window.location=('backstageMain1.html')
+                        }
+
+                        if(res.data.address == '2'){
+                            window.location=('backstageMain2.html')
+                        }
                     }
                 })
             }
@@ -374,16 +392,10 @@
                 if(this.choose === 2) {
                     this.view ='v-a';
                     this.choose--;
-
                 }
             },6000)
         }
-
     })
-
-
-
-
 </script>
 </body>
 </html>

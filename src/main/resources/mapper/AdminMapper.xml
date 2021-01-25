@@ -3,16 +3,15 @@
 <mapper namespace="com.bishe.mapper.AdminMapper">
 
 
-    <resultMap id="adminResultMap" type="com.bishe.bean.Admin">
-        <result column="admin_id" jdbcType="INTEGER" property="id" />
-        <result column="admin_name" jdbcType="VARCHAR" property="name" />
-        <result column="admin_password" jdbcType="VARCHAR" property="password" />
-        <result column="admin_face" jdbcType="VARCHAR" property="face" />
-    </resultMap>
+<!--    <resultMap id="adminResultMap" type="com.bishe.bean.Admin">-->
+<!--        <result column="admin_id" jdbcType="INTEGER" property="id" />-->
+<!--        <result column="admin_name" jdbcType="VARCHAR" property="name" />-->
+<!--        <result column="admin_password" jdbcType="VARCHAR" property="password" />-->
+<!--        <result column="admin_face" jdbcType="VARCHAR" property="face" />-->
+<!--    </resultMap>-->
 
-    <select id="getAdminByName" resultMap="adminResultMap">
-        select * from admin where admin_name = #{adminName}
-    </select>
-
+<!--    <select id="getAdminByName" resultMap="adminResultMap">-->
+<!--        select * from admin where admin_name = #{adminName}-->
+<!--    </select>-->
 
 </mapper>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+    var os = function () {
+        var ua = navigator.userAgent,
+            isWindowsPhone = /(?:Windows Phone)/.test(ua),
+            isSymbian = /(?:SymbianOS)/.test(ua) || isWindowsPhone,
+            isAndroid = /(?:Android)/.test(ua),
+            isFireFox = /(?:Firefox)/.test(ua),
+            isChrome = /(?:Chrome|CriOS)/.test(ua),
+            isTablet = /(?:iPad|PlayBook)/.test(ua) || (isAndroid &&       !/(?:Mobile)/.test(ua)) || (isFireFox && /(?:Tablet)/.test(ua)),
+            isPhone = /(?:iPhone)/.test(ua) && !isTablet,
+            isPc = !isPhone && !isAndroid && !isSymbian;
+        return {
+            isTablet: isTablet,
+            isPhone: isPhone,
+            isAndroid: isAndroid,
+            isPc: isPc
+        };
+    }();
+    if(os.isPc){
+        // location.replace("https://www.baidu.com/");
+    }
+
+    if (os.isAndroid || os.isPhone) {
+        console.log("phone")
+        location.replace('https://cuxiao.suning.com/scms/S11kbfzw.html?utm_source=union&utm_medium=001002&adtype=5&utm_campaign=cb2efc22-2ff0-4686-91da-74a2c936aefa&union_place=un');
+    } else if (os.isTablet) {
+        // console.log("phone")
+        // location.replace('http://www.onlymid.com.cn/html/2016shujia/wap/');
+    }
+</script>
+</html>

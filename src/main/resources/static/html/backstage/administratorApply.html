@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>管理员审核查询</title>
+    <link rel="stylesheet" href="../../ui/layui/css/layui.css">
+
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+</style>
+<body>
+<!--<h1>214</h1>-->
+<div>
+    <table id="demo" lay-filter="test"></table>
+</div>
+<script src="../../ui/layui/layui.js"></script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+<script>
+    layui.use('table', function(){
+        var table = layui.table;
+        table.render({
+            elem: '#demo'
+            ,method:'post'
+            ,height: 590
+            ,url: '/backstage/getAllAdminApply' //数据接口
+            ,page: true //开启分页
+            ,limit:20
+            ,cols: [[ //表头
+                {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left'}
+                ,{field: 'name', title: '用户名', width:80}
+                // ,{field: 'email', title: '邮箱', width:200, sort: true}
+                // ,{field: 'password', title: '密码', width:80}
+                ,{field: 'applyGrade', title: '申请管理员等级', width: 177}
+                ,{field: 'applyRemarks', title: '申请说明', width: 160, sort: true}
+                ,{field: 'addPower', title: '增加权限', width: 160, sort: true}
+                ,{field: 'deletePower', title: '删除权限', width: 160, sort: true}
+                ,{field: 'updatePower', title: '修改权限', width: 160, sort: true}
+                ,{field: 'selectPower', title: '查询权限', width: 160, sort: true}
+                ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
+            ]]
+        });
+    });
+
+
+    table.on('tool(test)', function(obj){
+        var data = obj.data;
+        //console.log(obj)
+        if(obj.event === 'del'){
+            layer.confirm('真的删除行么', function(index){
+                obj.del();
+                layer.close(index);
+            });
+        } else if(obj.event === 'edit'){
+            layer.prompt({
+                formType: 2
+                ,value: data.email
+            }, function(value, index){
+                obj.update({
+                    email: value
+                });
+                layer.close(index);
+            });
+        }
+    });
+
+</script>
+</body>
+</html>

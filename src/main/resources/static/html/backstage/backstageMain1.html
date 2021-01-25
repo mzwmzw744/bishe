@@ -7,8 +7,8 @@
     <title>layout 后台大布局 - Layui</title>
     <link rel="stylesheet" href="../../css/layui.css">
     <script src="../../ui/layui/layui.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-        <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.js"></script>
 
 </head>
 <body class="layui-layout-body">
@@ -52,9 +52,9 @@
                     <a class="" href="#">用户信息</a>
                     <dl class="layui-nav-child">
                         <dd><a href="#" v-on:click="userInformationQueryClick">用户信息查询</a></dd>
-                        <dd><a href="javascript:;">列表二</a></dd>
-                        <dd><a href="javascript:;">列表三</a></dd>
-                        <dd><a href="">超链接</a></dd>
+                        <dd><a href="javascript:;">用户信息新增</a></dd>
+                        <dd><a href="javascript:;">用户信息修改</a></dd>
+                        <dd><a href="">用户信息删除</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
@@ -85,10 +85,10 @@
     </div>
 </div>
 <script>
-   //JavaScript代码区域
-   layui.use('element', function(){
-       var element = layui.element;
-   });
+    //JavaScript代码区域
+    layui.use('element', function(){
+        var element = layui.element;
+    });
 
     const left = new Vue({
         el:'#all',
