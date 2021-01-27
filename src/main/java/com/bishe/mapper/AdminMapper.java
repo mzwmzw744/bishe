@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @Mapper
 public interface AdminMapper {
@@ -21,4 +23,5 @@ public interface AdminMapper {
     @Insert("Insert into admin values(#{id},#{name},#{password},#{face})")
     int adminInsert(Admin admin);
 
+    List<Admin>  adminInformationQuery();
 }

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <title>汉服圈</title>
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.js"></script>
+    <link rel="stylesheet" href="../css/theme/index.css">
+
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    body{
+    }
+    #header{
+        height: 40px;
+    }
+    #headerMain{
+        width: 1400px;
+        height: 100%;
+        margin: 0 auto;
+    }
+    #header2{
+        height: 120px;
+        background: #FFB800;
+    }
+    #headerMain2{
+        width: 1400px;
+        height: 100%;
+        background: #ff6700;
+        margin: 0 auto;
+    }
+    #header3{
+        height: 80px;
+        background-color: #00FF00;
+    }
+    #headerMain3{
+        width: 1400px;
+        height: 100%;
+        margin: 0 auto;
+        background-color: #1c8942;
+    }
+
+    #carouselMap{
+        height: 400px;
+        background-color: #9F9F9F;
+    }
+    #carouselMapMain{
+        width: 1400px;
+        height: 100%;
+        margin: 0 auto;
+        background-color: #e069e2;
+    }
+
+    #main{
+        height:1200px;
+        background-color: chocolate;
+    }
+    #mainMain{
+        width: 1400px;
+        height: 100%;
+        margin: 0 auto;
+        background-color: darkgray;
+    }
+</style>
+<body>
+<div id="header">
+    <div id="headerMain">
+        <div id="app">
+            <!--    <el-button  type="primary"  @click="visible = true">Button</el-button>-->
+            <!--    <el-dialog :visible.sync="visible" title="Hello world">-->
+            <!--        <p>Try Element</p>-->
+            <!--    </el-dialog>-->
+            <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    new Vue({
+        el:'#app'
+    })
+</script>
+</body>
+</html>

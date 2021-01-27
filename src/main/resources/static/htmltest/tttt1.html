@@ -5,30 +5,109 @@
     <meta charset="utf-8" />
     <title>无问题文档</title>
     <style>
-        .abc{ height:300px; border:1px solid #000; margin:0 auto}
-        @media screen and (min-width: 1201px) {
-            .abc {width: 1200px}
+        *{
+            margin: 0;
+            padding: 0;
         }
-        /* 设置装备摆设了阅读器宽度不小于1201px时 abc 展现1200px宽度 */
-
-        @media screen and (max-width: 1200px) {
-            .abc {width: 800px}
+        html{
+            width: 100%;
         }
-        /* 设置了涉猎器宽度不大于1200px时 abc 显示900px宽度 */
+        body{
+            width: 100%;
+        }
+        /*.abc{*/
+        /*    height:300px;*/
+        /*    border:1px solid #000;*/
+        /*    margin:0 auto;*/
+        /*    width: 800px;*/
+        /*    background-color: #FFB800;*/
+        /*    position: absolute;*/
+        /*    left: 400px;*/
+        /*    top: 400px;*/
+        /*    min-width: 800px;*/
+        /*}*/
 
+        @media screen and (max-width: 1920px) {
+            .abc {
+                background-color: #00FFFF;
+                left: 700px;
+                top: 500px;
+            }
+        }
+
+        /*@media screen and (max-width: 1920px) {*/
+        /*    .abc {*/
+        /*        background-color:red;*/
+        /*        left: 700px;*/
+        /*        top: 500px;*/
+        /*    }*/
+        /*}*/
+        /*!* 设置装备摆设了阅读器宽度大于1201px时 abc 展现1200px宽度 *!*/
+
+        /*!*@media screen and (max-width: 1536px) {*!*/
+        /*!*    .abc {width: 1200px;background-color: #ff6700;}*!*/
+        /*!*}*!*/
+        /*!* 设置了涉猎器宽度不大于1200px时 abc 显示900px宽度 *!*/
+
+        /*@media screen and (max-width: 900px) {*/
+        /*    .abc {width: 600px;}*/
+        /*}*/
+        /*!* 设置装备摆设了阅读器宽度小于900px时 abc 体现200px宽度 *!*/
+
+        /*@media screen and (max-width: 500px) {*/
+        /*    .abc {width: 200px;}*/
+        /*}*/
+        /*!* 设置装备摆设了阅读器宽度不大于500px时 abc 表示100px宽度 *!*/
+
+#tt{
+    background-color: #e069e2;
+    display: none;
+}
+        #tt1{
+            background-color: #e069e2;
+            display: none;
+        }
+        #tt2{
+            background-color: #e069e2;
+            display: none;
+        }
+        #tt3{
+            background-color: #e069e2;
+            display: none;
+        }
+
+
+        @media screen and (max-width: 1500px) {
+            #tt {
+                background-color: #9F9F9F;
+                display: block;
+            }
+        }
+        @media screen and (max-width: 1300px) {
+            #tt1 {
+                background-color: #9F9F9F;
+                display: block;
+            }
+        }
+        @media screen and (max-width: 1100px) {
+            #tt2 {
+                background-color: #9F9F9F;
+                display: block;
+            }
+        }
         @media screen and (max-width: 900px) {
-            .abc {width: 600px;}
+            #tt3 {
+                background-color: #9F9F9F;
+                display: block;
+            }
         }
-        /* 设置装备摆设了阅读器宽度不大于900px时 abc 体现200px宽度 */
-
-        @media screen and (max-width: 500px) {
-            .abc {width: 200px;}
-        }
-        /* 设置装备摆设了阅读器宽度不大于500px时 abc 表示100px宽度 */
-
     </style>
 </head>
 <body>
-<div class="abc">CSS5实例：我这个DIV宽度会随浏览器宽度变更哦，尝尝篡改阅读器宽度</div>
+<!--<div class="abc">CSS5实例：我这个DIV宽度会随浏览器宽度变更哦，尝尝篡改阅读器宽度11</div>-->
+<!--<h1 id="tt" style="text-align: center;">1</h1>-->
+<!--<h1 id="tt1" style="text-align: center;">2</h1>-->
+<!--<h1   id="tt2" style="text-align: center;">3</h1>-->
+<!--<h1  id="tt3" style="text-align: center;">4</h1>-->
 </body>
 </html>

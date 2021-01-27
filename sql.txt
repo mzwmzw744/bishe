@@ -5,6 +5,7 @@ CREATE table user(
     user_email varchar(50),
     user_password varchar(100)
 );
+insert into user values (null,'1','1163974490@qq.com','1');
 insert into user values (null,'小红','1163974490@qq.com','123');
 insert into user values (null,'小明','1163974491@qq.com','123');
 insert into user values (null,'小1','1163974480@qq.com','123');
@@ -26,30 +27,59 @@ CREATE table admin(
     admin_face varchar(100)
 );
 insert into admin values (1,'1','1','1');
-insert into admin values (2,'1','1','1');
-insert into admin values (3,'1','1','1');
-insert into admin values (4,'1','1','1');
-insert into admin values (5,'1','1','1');
-
-
+insert into admin values (2,'2','1','1');
+insert into admin values (3,'3','1','1');
+insert into admin values (4,'4','1','1');
+insert into admin values (5,'5','1','1');
 
 
 drop table if exists role;
 CREATE table role(
     id int primary key auto_increment,
+    admin_id int,
     role_super boolean,
     role_common boolean,
     role_query boolean
 );
-insert into role values (1,true,true,true);
-insert into role values (2,true,true,true);
-insert into role values (3,true,true,true);
-insert into role values (4,true,true,true);
-insert into role values (5,true,true,true);
+insert into role values (null,1,true,true,true);
+insert into role values (null,2,true,true,true);
+insert into role values (null,3,true,true,true);
+insert into role values (null,4,true,true,true);
+insert into role values (null,5,true,true,true);
+
+drop table if exists power;
+CREATE table power(
+    id int primary key auto_increment,
+    role_id int,
+    addPower varchar(10),
+    deletePower  varchar(10),
+    updatePower  varchar(10),
+    selectPower  varchar(10)
+);
+insert into power values (null,1,'true','true','true','true');
+insert into power values (null,2,'true','true','true','true');
+insert into power values (null,3,'true','true','true','true');
+insert into power values (null,4,'true','true','true','true');
+insert into power values (null,5,'true','true','true','true');
 
 
-
-
-
-
-select * from role where role_common = -3
+drop table if exists adminApply;
+CREATE  table adminApply(
+    id int primary key auto_increment,
+    name varchar(50),
+    password varchar(50),
+    applyGrade varchar(50),
+    applyRemarks varchar(50),
+    addPower varchar(10),
+    deletePower varchar(10),
+    updatePower varchar(10),
+    selectPower varchar(10)
+);
+insert into adminApply values (null,'小华','123','超级管理员','我是小华','true','true','true','true');
+insert into adminApply values (null,'小红','123','超级管理员','我是小华','true','true','true','true');
+insert into adminApply values (null,'小华1','123','超级管理员','我是小华1','true','true','true','true');
+insert into adminApply values (null,'小华2','123','超级管理员','我是小华2','true','true','true','true');
+insert into adminApply values (null,'小华3','123','超级管理员','我是小华3','true','true','true','true');
+insert into adminApply values (null,'小红4','123','超级管理员','我是小华4','true','true','true','true');
+insert into adminApply values (null,'小华5','123','超级管理员','我是小华5','true','true','true','true');
+insert into adminApply values (null,'小华6','123','超级管理员','我是小华6','true','true','true','true');

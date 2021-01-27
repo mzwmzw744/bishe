@@ -25,15 +25,15 @@
             elem: '#demo'
             ,method:'post'
             ,height: 590
-            ,url: '/backstage/getAllUserInformation' //数据接口
+            ,url: '/backstage/adminInformationQuery' //数据接口
             ,page: true //开启分页
             ,limit:20
             ,cols: [[ //表头
                 {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left'}
-                ,{field: 'userName', title: '用户名', width:80}
+                ,{field: 'name', title: '用户名', width:80}
                 ,{field: 'email', title: '邮箱', width:200, sort: true}
                 ,{field: 'password', title: '密码', width:80}
-                ,{field: 'sign', title: '签名', width: 177}
+                ,{field: 'face', title: '头像地址', width: 177}
                 ,{field: 'experience', title: '积分', width: 80, sort: true}
                 ,{field: 'score', title: '评分', width: 80, sort: true}
             ]]

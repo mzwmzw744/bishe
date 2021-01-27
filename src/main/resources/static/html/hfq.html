@@ -1,10 +1,168 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-cmn-Hans">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>汉服圈</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="../ui/layui/css/layui.css">
+    <link rel="stylesheet" href="../css/theme/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.js"></script>
+    <script src="../ui/layui/layui.js"></script>
+
 </head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    body{
+        min-width: 1400px;
+    }
+    #header{
+        height: 40px;
+        border-bottom: 1px solid #ddd;
+    }
+    #headerMain{
+        width: 1400px;
+        height: 100%;
+        margin: 0 auto;
+        overflow: hidden;
+    }
+    #header2{
+        height: 120px;
+        border-bottom: 1px solid #ddd;
+        /*border:1px red solid;*/
+    }
+    #headerMain2{
+        width: 1400px;
+        height: 100%;
+        margin: 0 auto;
+        overflow: hidden;
+    }
+    #header3{
+        height: 50px;
+        border-bottom: 1px solid #ddd;
+    }
+    #headerMain3{
+        width: 1400px;
+        height: 100%;
+        margin: 0 auto;
+
+    }
+
+    #carouselMap{
+        height: 400px;
+        border-bottom: 1px solid #ddd;
+    }
+    #carouselMapMain{
+        width: 1400px;
+        height: 100%;
+        margin: 0 auto;
+
+    }
+
+    #main{
+        height:1200px;
+        background-color: chocolate;
+    }
+    #mainMain{
+        width: 1400px;
+        height: 100%;
+        margin: 0 auto;
+        background-color: darkgray;
+    }
+</style>
 <body>
-<h1>欢迎来到汉服圈~</h1>
+<div id="header">
+    <div id="headerMain">
+        <div style="float: left;line-height: 40px;font-size: 21px;font-weight: 300;color: #c35673">欢迎来到汉服圈</div>
+        <div  id="headerMainRight" style="float: right;width: 200px">
+            <div style="float: left"><el-avatar  src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar></div>
+            <div style="float: left;line-height: 45px;color: #c35673">&nbsp;&nbsp;&nbsp;小白</div>
+            <a  style="float: right;line-height: 45px" href="html/forgetPassword.html">注销</a>
+        </div>
+    </div>
+</div>
+<div id="header2">
+    <div id="headerMain2">
+        <div style="width: 40%;height:100%;float: left">
+            <img  style="height: 80%;margin-top: 10px;float: left" src="../pic/hanFuLogo.png" alt="无法查看"/> <h1 style="float: left;line-height: 120px;margin-left: 30px;font-size: 40px;color: red">漢服</h1></div>
+        <div style="width: 60%;height:100%;float: left">
+            <div style="float: left;margin-left: 380px">
+                <img style="height: 50px;margin-top: 23px;" src="../pic/chuanCheng.png" alt="无法查看"/>
+                <div style="margin-top: 12px;color: red">&nbsp;&nbsp;&nbsp;传承中国文化</div>
+            </div>
+            <div style="float: left;margin-left: 70px">
+                <img style="height: 50px;margin-top: 24px;" src="../pic/pingZhi.png" alt="无法查看"/>
+                <div style="margin-top: 10px;color: red">追求卓越品质</div>
+            </div>
+            <div style="float: left;margin-left: 70px">
+                <img style="height: 53px;margin-top: 21px;" src="../pic/fuWu.png" alt="无法查看"/>
+                <div style="margin-top: 10px;color: red">服务每位客户</div>
+            </div>
+        </div>
+        <div>
+        </div>
+
+    </div>
+</div>
+<div id="header3">
+    <div id="headerMain3">
+        <div style="width: 40%;height: 100%;float: left">
+            <div style="float: left;line-height: 50px;"><a href="#">汉服分类</a></div>
+            <div style="float: left;margin-left: 30px;line-height: 50px"><a href="#">我的订单</a></div>
+            <div style="float: left;margin-left: 30px;line-height: 50px"><a href="#">交友天地</a></div>
+            <div style="float: left;margin-left: 30px;line-height: 50px"><a href="#">我要反馈</a></div>
+        </div>
+        <div style="width: 60%;height: 100%;float: left">
+            <div style="width: 200px;margin-left: 380px;margin-top: 5px;float: left"><el-input v-model="search" placeholder="搜索汉服或店铺"></el-input></div>
+            <div style="float: left;margin-top: 10px;margin-left: 120px"><i style="font-size: 30px" class="el-icon-shopping-cart-2"></i></div>
+            <div style="margin-left: 5px;float: left;margin-top: 15px">我的购物车</div>
+        </div>
+    </div>
+</div>
+<div id="carouselMap">
+    <div id="carouselMapMain">
+        <div class="layui-carousel"  id="test1" >
+            <div carousel-item>
+                <div><img width="100%" src="../pic/henFu2.png"/></div>
+                <div><img  width="100%" src="../pic/hanFu11.png"/></div>
+                <div><img width="100%" src="../pic/hanFu12.png"/></div>
+<!--                <div>条目4</div>-->
+<!--                <div>条目5</div>-->
+            </div>
+        </div>
+    </div>
+</div>
+<div id="main">
+    <div id="mainMain">
+    </div>
+</div>
+<script>
+    layui.use('carousel', function(){
+        let carousel = layui.carousel;
+        //建造实例
+        carousel.render({
+            elem: '#test1'
+            ,indicator:'none'
+            ,height:'100%'
+            ,width: '100%' //设置容器宽度
+            ,arrow: 'hover' //始终显示箭头
+            //,anim: 'updown' //切换动画方式
+        });
+    });
+    new Vue({
+        el:'#header'
+    })
+    new Vue({
+        el:'#header3',
+        data:{
+            search:''
+        }
+    })
+</script>
 </body>
 </html>

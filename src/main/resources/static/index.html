@@ -29,8 +29,13 @@
             height: 100%;
             width: 100%;
             /*overflow: hidden;*/
-            background-size: auto 1080px;
+            background-size: 1920px auto;
             /*margin: 0 auto;*/
+        }
+        @media screen and (max-width: 1536px) {
+            body {
+                background-size: 1550px auto;
+            }
         }
         #title2 a{
             color: #3481cf;
@@ -49,6 +54,8 @@
             border-radius: 6px;
             border-width: 2px;
         }
+
+
         #login {
             background-color: white;
             width: 480px;
@@ -59,6 +66,9 @@
             left: 45%;
             top: 20%;
         }
+
+        /* 设置了涉猎器宽度不大于1200px时 abc 显示900px宽度 */
+
         #fastLogin {
             background-color: white;
             width: 480px;

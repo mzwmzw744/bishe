@@ -23,7 +23,7 @@
 </script>
 
 <script type="text/html" id="barDemo">
-<!--    <a class="layui-btn layui-btn-xs"  lay-event="edit"></a>-->
+    <!--    <a class="layui-btn layui-btn-xs"  lay-event="edit"></a>-->
     <a class="layui-btn layui-btn-xs" lay-event="del">审批通过</a>
 </script>
 
@@ -47,7 +47,7 @@
                 ,{field:'id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true}
                 ,{field:'name', title:'用户名', width:120, edit: 'text'}
                 ,{field:'applyGrade', title:'管理员等级', width:150, edit: 'text'
-                    }
+                }
                 ,{field:'applyRemarks', title:'申请说明', width:400, edit: 'text', sort: true}
                 ,{field:'addPower', title:'增加权限', width:100}
                 ,{field:'deletePower', title:'删除权限',width:100}
@@ -87,7 +87,9 @@
             if(obj.event === 'del'){
                 layer.confirm('确定将  '+obj.data.name+'  审核通过嘛', function(index){
                     obj.del();
-                    app.deleteClick(obj.data.ID);
+                    // console.log(obj.data);
+                    // console.log(obj.data.id);
+                    app.deleteClick(obj.data.id);
                     layer.close(index);
                 });
             } else if(obj.event === 'edit'){
@@ -106,9 +108,13 @@
     const app = new Vue({
         methods:{
             deleteClick(ID){
+                layer.open({
+                    title: '在线调试'
+                    ,content: '可以填写任意的layer代码'
+                });
                 axios({
                     method:'post',
-                    url:'/backstage/getAllUserInformation',
+                    url:'/backstage/adminApplyPass',
                     data:{
                         ID:ID,
                     }
@@ -118,7 +124,7 @@
                     }else {
                         sessionStorage.setItem("token", res.data);
                         console.log(sessionStorage.getItem("token"))
-                        window.location=('html/hfq.html')
+                        // window.location=('adminApply.html')
                     }
                 })
             }
