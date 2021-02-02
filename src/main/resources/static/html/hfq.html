@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="../css/theme/index.css">
     <!-- 引入组件库 -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.0/index.js"></script>
+<!--    <script src="https://unpkg.com/element-ui/lib/index.js"></script>-->
     <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.js"></script>
     <script src="../ui/layui/layui.js"></script>
 
@@ -17,6 +19,7 @@
     *{
         margin: 0;
         padding: 0;
+        box-sizing:border-box;
     }
     body{
         min-width: 1400px;
@@ -53,26 +56,61 @@
 
     }
 
+    #shoppingCart:hover{
+        background-color: #ff6354;
+    }
+    #shoppingCart{
+        cursor:pointer;
+        width: 120px;
+        float: left;
+        margin-left: 100px;
+        margin-top: 5px;
+        height: 40px;
+    }
     #carouselMap{
         height: 400px;
         border-bottom: 1px solid #ddd;
     }
     #carouselMapMain{
         width: 1400px;
-        height: 100%;
+        height: 400px;
         margin: 0 auto;
-
     }
-
     #main{
-        height:1200px;
-        background-color: chocolate;
+        height:2000px;
+        overflow: hidden;
     }
     #mainMain{
         width: 1400px;
         height: 100%;
         margin: 0 auto;
-        background-color: darkgray;
+    }
+    #todayRecommendation{
+        border: 1px solid #ddd;
+        height: 610px;
+        margin-top: 25px;
+    }
+    #newArrival{
+        border: 1px solid #ddd;
+        height: 610px;
+        margin-top: 25px;
+    }
+    #guessYouLikeIt{
+        border: 1px solid #ddd;
+        height: 610px;
+        margin-top: 25px;
+    }
+    #classificationHanFu:hover{
+        color: #ff4f3b;
+
+    }
+    #classificationHanFu{
+        float: left;
+        line-height: 50px;
+
+    }
+    .aHover:hover{
+        color: #ff4f3b;
     }
 </style>
 <body>
@@ -106,21 +144,23 @@
         </div>
         <div>
         </div>
-
     </div>
 </div>
 <div id="header3">
     <div id="headerMain3">
         <div style="width: 40%;height: 100%;float: left">
-            <div style="float: left;line-height: 50px;"><a href="#">汉服分类</a></div>
-            <div style="float: left;margin-left: 30px;line-height: 50px"><a href="#">我的订单</a></div>
-            <div style="float: left;margin-left: 30px;line-height: 50px"><a href="#">交友天地</a></div>
-            <div style="float: left;margin-left: 30px;line-height: 50px"><a href="#">我要反馈</a></div>
+            <div id="classificationHanFu"><a class="aHover" href="#">汉服分类</a></div>
+            <div style="float: left;margin-left: 30px;line-height: 50px" id="myOrder"><a class="aHover" id="classificationHanFuA" href="#">我的订单</a></div>
+            <div style="float: left;margin-left: 30px;line-height: 50px" id="makeFriends"><a class="aHover" href="#">交友天地</a></div>
+                <div style="float: left;margin-left: 30px;line-height: 50px" id="sell"><a class="aHover" href="#">我要出售</a></div>
+            <div style="float: left;margin-left: 30px;line-height: 50px" id="feedback"><a class="aHover" href="#">我要反馈</a></div>
         </div>
         <div style="width: 60%;height: 100%;float: left">
             <div style="width: 200px;margin-left: 380px;margin-top: 5px;float: left"><el-input v-model="search" placeholder="搜索汉服或店铺"></el-input></div>
-            <div style="float: left;margin-top: 10px;margin-left: 120px"><i style="font-size: 30px" class="el-icon-shopping-cart-2"></i></div>
-            <div style="margin-left: 5px;float: left;margin-top: 15px">我的购物车</div>
+            <div style="" id="shoppingCart">
+                <div style="float: left;margin-top: 5px"><i style="font-size: 30px" class="el-icon-shopping-cart-2"></i></div>
+                <div style="margin-left: 8px;margin-top: 10px;float: left;">我的购物车</div>
+            </div>
         </div>
     </div>
 </div>
@@ -129,18 +169,94 @@
         <div class="layui-carousel"  id="test1" >
             <div carousel-item>
                 <div><img width="100%" src="../pic/henFu2.png"/></div>
-                <div><img  width="100%" src="../pic/hanFu11.png"/></div>
-                <div><img width="100%" src="../pic/hanFu12.png"/></div>
-<!--                <div>条目4</div>-->
-<!--                <div>条目5</div>-->
+                <div><img  width="100%" src="../pic/hanFu15.png"/></div>
+                <div><img width="100%" src="../pic/hanFu6.jpg"/></div>
+                <!--                <div>条目4</div>-->
+                <!--                <div>条目5</div>-->
             </div>
         </div>
     </div>
 </div>
 <div id="main">
     <div id="mainMain">
+        <div id="newArrival" >
+            <div id="newArrivalHead" style="height: 50px;border-bottom: 1px solid #ddd;
+            line-height: 50px;color: #ff5046;font-size: 22px;padding-left: 25px">
+                今日推荐
+            </div>
+            <div style="height: 559px;">
+                <div style="height: 50%;border-bottom: 1px solid #ddd;overflow: hidden">
+                    <div style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left"></div>
+                    <div style="border-right: 1px solid #ddd;width:  280px;height:100%;float: left"></div>
+                    <div style="border-right: 1px solid #ddd;width:  280px;height:100%;float: left"></div>
+                    <div style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left;"></div>
+                    <div style="width: 278px;height:100%;float: left;"></div>
+                </div>
+                <div style="height: 50%;overflow: hidden">
+                    <div style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left"></div>
+                    <div style="border-right: 1px solid #ddd;width:  280px;height:100%;float: left"></div>
+                    <div style="border-right: 1px solid #ddd;width:  280px;height:100%;float: left"></div>
+                    <div style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left;"></div>
+                    <div style="width: 278px;height:100%;float: left;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="todayRecommendation" >
+            <div id="todayRecommendationHead" style="height: 50px;border-bottom: 1px solid #ddd;
+            line-height: 50px;color: #ff5046;font-size: 22px;padding-left: 25px">
+                最近上架
+            </div>
+            <div style="height: 559px;">
+                <div style="height: 50%;border-bottom: 1px solid #ddd;overflow: hidden">
+                    <div style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left"></div>
+                    <div style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left"></div>
+                    <div style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left"></div>
+                    <div style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left;"></div>
+                    <div style="width: 278px;height:100%;float: left;"></div>
+                </div>
+                <div style="height: 50%;overflow: hidden">
+                    <div style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left"></div>
+                    <div style="border-right: 1px solid #ddd;width:  280px;height:100%;float: left"></div>
+                    <div style="border-right: 1px solid #ddd;width:  280px;height:100%;float: left"></div>
+                    <div style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left;"></div>
+                    <div style="width: 278px;height:100%;float: left;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="guessYouLikeIt" >
+            <div id="guessYouLikeItHead" style="height: 50px;border-bottom: 1px solid #ddd;
+            line-height: 50px;color: #ff5046;font-size: 22px;padding-left: 25px">
+                最近上架
+            </div>
+            <div style="height: 559px;">
+                <div style="height: 50%;border-bottom: 1px solid #ddd;overflow: hidden">
+                    <div style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left"></div>
+                    <div style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left"></div>
+                    <div style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left"></div>
+                    <div style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left;"></div>
+                    <div style="width: 278px;height:100%;float: left;"></div>
+                </div>
+                <div style="height: 50%;overflow: hidden">
+                    <div style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left"></div>
+                    <div style="border-right: 1px solid #ddd;width:  280px;height:100%;float: left"></div>
+                    <div style="border-right: 1px solid #ddd;width:  280px;height:100%;float: left"></div>
+                    <div style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left;"></div>
+                    <div style="width: 278px;height:100%;float: left;"></div>
+                </div>
+            </div>
+        </div>
+
     </div>
+
 </div>
+<div id="foot" style="width: 100%;height: 400px;margin: 0 auto;">
+    <iframe src="hfqFoot.html" width="100%" height="400px"  frameborder="0" scrolling="no" >
+    </iframe>
+</div>
+
+
 <script>
     layui.use('carousel', function(){
         let carousel = layui.carousel;
@@ -149,6 +265,7 @@
             elem: '#test1'
             ,indicator:'none'
             ,height:'100%'
+            ,interval:'8000'
             ,width: '100%' //设置容器宽度
             ,arrow: 'hover' //始终显示箭头
             //,anim: 'updown' //切换动画方式
