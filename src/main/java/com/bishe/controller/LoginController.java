@@ -54,6 +54,17 @@ public class LoginController {
         return token;
     }
 
+
+    @ResponseBody
+    @RequestMapping("/token/getLoginUser")
+    public User getLoginUser(@RequestBody Map<String,String> map,@RequestHeader Map<String, String> headers){
+        String token = headers.get("token");
+        System.out.println(token);
+        User user = (User)redisUtil.get(token);
+        System.out.println(user);
+        return user;
+
+    }
     //  @RequestMapping(value = "/emailRegister", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @RequestMapping(value = "/emailRegister")
     @ResponseBody

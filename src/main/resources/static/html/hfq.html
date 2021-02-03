@@ -2,15 +2,14 @@
 <html lang="zh-cmn-Hans">
 <head>
     <meta charset="UTF-8">
-    <title>汉服圈</title>
+    <title>汉服圈1</title>
     <!-- 引入样式 -->
     <link rel="stylesheet" href="../ui/layui/css/layui.css">
     <link rel="stylesheet" href="../css/theme/index.css">
     <!-- 引入组件库 -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-
     <script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.0/index.js"></script>
-<!--    <script src="https://unpkg.com/element-ui/lib/index.js"></script>-->
+    <!--    <script src="https://unpkg.com/element-ui/lib/index.js"></script>-->
     <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.js"></script>
     <script src="../ui/layui/layui.js"></script>
 
@@ -53,9 +52,7 @@
         width: 1400px;
         height: 100%;
         margin: 0 auto;
-
     }
-
     #shoppingCart:hover{
         background-color: #ff6354;
     }
@@ -119,8 +116,9 @@
         <div style="float: left;line-height: 40px;font-size: 21px;font-weight: 300;color: #c35673">欢迎来到汉服圈</div>
         <div  id="headerMainRight" style="float: right;width: 200px">
             <div style="float: left"><el-avatar  src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar></div>
-            <div style="float: left;line-height: 45px;color: #c35673">&nbsp;&nbsp;&nbsp;小白</div>
-            <a  style="float: right;line-height: 45px" href="html/forgetPassword.html">注销</a>
+            <div id="userName" style="float: left;margin-left: 15px;line-height: 45px;color: #c35673"></div>
+            <a  style="float: right;margin-left:20px;line-height: 45px" href="html/forgetPassword.html">注销</a>
+            <a  style="float: right;line-height: 45px" href="html/forgetPassword.html">首页</a>
         </div>
     </div>
 </div>
@@ -152,7 +150,7 @@
             <div id="classificationHanFu"><a class="aHover" href="#">汉服分类</a></div>
             <div style="float: left;margin-left: 30px;line-height: 50px" id="myOrder"><a class="aHover" id="classificationHanFuA" href="#">我的订单</a></div>
             <div style="float: left;margin-left: 30px;line-height: 50px" id="makeFriends"><a class="aHover" href="#">交友天地</a></div>
-                <div style="float: left;margin-left: 30px;line-height: 50px" id="sell"><a class="aHover" href="#">我要出售</a></div>
+            <div style="float: left;margin-left: 30px;line-height: 50px" id="sell"><a class="aHover" href="#">我要出售</a></div>
             <div style="float: left;margin-left: 30px;line-height: 50px" id="feedback"><a class="aHover" href="#">我要反馈</a></div>
         </div>
         <div style="width: 60%;height: 100%;float: left">
@@ -168,9 +166,9 @@
     <div id="carouselMapMain">
         <div class="layui-carousel"  id="test1" >
             <div carousel-item>
-                <div><img width="100%" src="../pic/henFu2.png"/></div>
-                <div><img  width="100%" src="../pic/hanFu15.png"/></div>
-                <div><img width="100%" src="../pic/hanFu6.jpg"/></div>
+                <div><img width="100%" src="../pic/henFu2.png"  alt="error" /></div>
+                <div><img  width="100%" src="../pic/hanFu15.png"alt="error"/></div>
+                <div><img width="100%" src="../pic/hanFu6.jpg"  alt="error" /></div>
                 <!--                <div>条目4</div>-->
                 <!--                <div>条目5</div>-->
             </div>
@@ -247,17 +245,37 @@
                 </div>
             </div>
         </div>
-
     </div>
-
 </div>
-<div id="foot" style="width: 100%;height: 400px;margin: 0 auto;">
-    <iframe src="hfqFoot.html" width="100%" height="400px"  frameborder="0" scrolling="no" >
+<div id="foot" style="width: 100%;height: 450px;margin: 0 auto;border-top: 1px solid #ddd;">
+    <iframe src="hfqFoot.html" width="100%" height="450px"  frameborder="0" scrolling="no" >
     </iframe>
 </div>
 
 
 <script>
+    console.log(sessionStorage.getItem("token"))
+    if (sessionStorage.getItem("token") == null) {
+        window.location.replace("http://localhost/")
+    }else {
+        axios({
+            method:'post',
+            url:'/token/getLoginUser',
+            headers:{
+                'token' : sessionStorage.getItem("token")
+            },
+            data:{
+
+            }
+        }).then(res=> {
+            console.log(res.data);
+            sessionStorage.setItem("user",JSON.stringify(res.data));
+            let user = eval ("(" + sessionStorage.getItem("user") + ")");
+            document.getElementById("userName").innerHTML = user.userName;
+        })
+    }
+
+
     layui.use('carousel', function(){
         let carousel = layui.carousel;
         //建造实例
