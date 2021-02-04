@@ -81,9 +81,9 @@
         <div style="float: left;line-height: 40px;font-size: 21px;font-weight: 300;color: #c35673">欢迎来到汉服圈</div>
         <div  id="headerMainRight" style="float: right;width: 200px">
             <div style="float: left"><el-avatar  src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar></div>
-            <div style="float: left;line-height: 45px;color: #c35673">&nbsp;&nbsp;&nbsp;小白</div>
-            <a  style="float: right;margin-left:20px;line-height: 45px" href="html/forgetPassword.html">注销</a>
-            <a  style="float: right;line-height: 45px" href="html/forgetPassword.html">首页</a>
+            <div id="userName" style="float: left;margin-left: 15px;line-height: 45px;color: #c35673"></div>
+            <a  style="float: right;margin-left:20px;line-height: 45px" href="/html/forgetPassword.html">注销</a>
+            <a  style="float: right;line-height: 45px" href="/html/hfq.html" target="_parent">首页</a>
         </div>
     </div>
 </div>
@@ -114,8 +114,9 @@
         <div style="width: 40%;height: 100%;float: left">
             <div id="classificationHanFu"><a class="aHover" href="#">汉服分类</a></div>
             <div style="float: left;margin-left: 30px;line-height: 50px" id="myOrder"><a class="aHover" id="classificationHanFuA" href="#">我的订单</a></div>
-            <div style="float: left;margin-left: 30px;line-height: 50px" id="makeFriends"><a class="aHover" href="#">交友天地</a></div>
-            <div style="float: left;margin-left: 30px;line-height: 50px" id="sell"><a class="aHover" href="#">我要出售</a></div>
+            <div style="float: left;margin-left: 30px;line-height: 50px" id="makeFriends"><a class="aHover" href="#" target="_parent">交友天地</a></div>
+            <div style="float: left;margin-left: 30px;line-height: 50px" id="sell"><a class="aHover" href="/html/shopSellCreate.html" target="_parent">我要出售</a></div>
+            <div style="float: left;margin-left: 30px;line-height: 50px" id="mySell"><a class="aHover" href="/html/myShopSellCreate.html" target="_parent">我的出售</a></div>
             <div style="float: left;margin-left: 30px;line-height: 50px" id="feedback"><a class="aHover" href="#">我要反馈</a></div>
         </div>
         <div style="width: 60%;height: 100%;float: left">
@@ -128,6 +129,27 @@
     </div>
 </div>
 <script>
+    console.log(sessionStorage.getItem("token"))
+    if (sessionStorage.getItem("token") == null) {
+        window.location.replace("http://localhost/")
+    }else {
+        axios({
+            method:'post',
+            url:'/token/getLoginUser',
+            headers:{
+                'token' : sessionStorage.getItem("token")
+            },
+            data:{
+
+            }
+        }).then(res=> {
+            console.log(res.data);
+            sessionStorage.setItem("user",JSON.stringify(res.data));
+            let user = eval ("(" + sessionStorage.getItem("user") + ")");
+            document.getElementById("userName").innerHTML = user.userName;
+        })
+    }
+
     new Vue({
         el:'#header'
     })

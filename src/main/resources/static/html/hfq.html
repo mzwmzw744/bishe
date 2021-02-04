@@ -2,7 +2,7 @@
 <html lang="zh-cmn-Hans">
 <head>
     <meta charset="UTF-8">
-    <title>汉服圈1</title>
+    <title>汉服圈</title>
     <!-- 引入样式 -->
     <link rel="stylesheet" href="../ui/layui/css/layui.css">
     <link rel="stylesheet" href="../css/theme/index.css">
@@ -12,7 +12,6 @@
     <!--    <script src="https://unpkg.com/element-ui/lib/index.js"></script>-->
     <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.js"></script>
     <script src="../ui/layui/layui.js"></script>
-
 </head>
 <style>
     *{
@@ -21,7 +20,7 @@
         box-sizing:border-box;
     }
     body{
-        min-width: 1400px;
+        min-width: 1350px;
     }
     #header{
         height: 40px;
@@ -111,57 +110,68 @@
     }
 </style>
 <body>
-<div id="header">
-    <div id="headerMain">
-        <div style="float: left;line-height: 40px;font-size: 21px;font-weight: 300;color: #c35673">欢迎来到汉服圈</div>
-        <div  id="headerMainRight" style="float: right;width: 200px">
-            <div style="float: left"><el-avatar  src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar></div>
-            <div id="userName" style="float: left;margin-left: 15px;line-height: 45px;color: #c35673"></div>
-            <a  style="float: right;margin-left:20px;line-height: 45px" href="html/forgetPassword.html">注销</a>
-            <a  style="float: right;line-height: 45px" href="html/forgetPassword.html">首页</a>
-        </div>
-    </div>
+<div style="height: 210px;margin: 0 auto">
+<iframe src="hfqTop.html" width="100%" height="220px" scrolling="no" frameborder="0">
+</iframe>
 </div>
-<div id="header2">
-    <div id="headerMain2">
-        <div style="width: 40%;height:100%;float: left">
-            <img  style="height: 80%;margin-top: 10px;float: left" src="../pic/hanFuLogo.png" alt="无法查看"/> <h1 style="float: left;line-height: 120px;margin-left: 30px;font-size: 40px;color: red">漢服</h1></div>
-        <div style="width: 60%;height:100%;float: left">
-            <div style="float: left;margin-left: 380px">
-                <img style="height: 50px;margin-top: 23px;" src="../pic/chuanCheng.png" alt="无法查看"/>
-                <div style="margin-top: 12px;color: red">&nbsp;&nbsp;&nbsp;传承中国文化</div>
-            </div>
-            <div style="float: left;margin-left: 70px">
-                <img style="height: 50px;margin-top: 24px;" src="../pic/pingZhi.png" alt="无法查看"/>
-                <div style="margin-top: 10px;color: red">追求卓越品质</div>
-            </div>
-            <div style="float: left;margin-left: 70px">
-                <img style="height: 53px;margin-top: 21px;" src="../pic/fuWu.png" alt="无法查看"/>
-                <div style="margin-top: 10px;color: red">服务每位客户</div>
-            </div>
-        </div>
-        <div>
-        </div>
-    </div>
-</div>
-<div id="header3">
-    <div id="headerMain3">
-        <div style="width: 40%;height: 100%;float: left">
-            <div id="classificationHanFu"><a class="aHover" href="#">汉服分类</a></div>
-            <div style="float: left;margin-left: 30px;line-height: 50px" id="myOrder"><a class="aHover" id="classificationHanFuA" href="#">我的订单</a></div>
-            <div style="float: left;margin-left: 30px;line-height: 50px" id="makeFriends"><a class="aHover" href="#">交友天地</a></div>
-            <div style="float: left;margin-left: 30px;line-height: 50px" id="sell"><a class="aHover" href="#">我要出售</a></div>
-            <div style="float: left;margin-left: 30px;line-height: 50px" id="feedback"><a class="aHover" href="#">我要反馈</a></div>
-        </div>
-        <div style="width: 60%;height: 100%;float: left">
-            <div style="width: 200px;margin-left: 380px;margin-top: 5px;float: left"><el-input v-model="search" placeholder="搜索汉服或店铺"></el-input></div>
-            <div style="" id="shoppingCart">
-                <div style="float: left;margin-top: 5px"><i style="font-size: 30px" class="el-icon-shopping-cart-2"></i></div>
-                <div style="margin-left: 8px;margin-top: 10px;float: left;">我的购物车</div>
-            </div>
-        </div>
-    </div>
-</div>
+
+<!--<div id="header">-->
+<!--    <div id="headerMain">-->
+<!--        <div style="float: left;line-height: 40px;font-size: 21px;font-weight: 300;color: #c35673">欢迎来到汉服圈</div>-->
+<!--        <div  id="headerMainRight" style="float: right;width: 200px">-->
+<!--            <div style="float: left"><el-avatar  src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar></div>-->
+<!--            <div id="userName" style="float: left;margin-left: 15px;line-height: 45px;color: #c35673"></div>-->
+<!--            <a  style="float: right;margin-left:20px;line-height: 45px" href="html/forgetPassword.html">注销</a>-->
+<!--            <a  style="float: right;line-height: 45px" href="html/forgetPassword.html">首页</a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--<div id="header2">-->
+<!--    <div id="headerMain2">-->
+<!--        <div style="width: 40%;height:100%;float: left">-->
+<!--            <img  style="height: 80%;margin-top: 10px;float: left" src="../pic/hanFuLogo.png" alt="无法查看"/> <h1 style="float: left;line-height: 120px;margin-left: 30px;font-size: 40px;color: red">漢服</h1></div>-->
+<!--        <div style="width: 60%;height:100%;float: left">-->
+<!--            <div style="float: left;margin-left: 380px">-->
+<!--                <img style="height: 50px;margin-top: 23px;" src="../pic/chuanCheng.png" alt="无法查看"/>-->
+<!--                <div style="margin-top: 12px;color: red">&nbsp;&nbsp;&nbsp;传承中国文化</div>-->
+<!--            </div>-->
+<!--            <div style="float: left;margin-left: 70px">-->
+<!--                <img style="height: 50px;margin-top: 24px;" src="../pic/pingZhi.png" alt="无法查看"/>-->
+<!--                <div style="margin-top: 10px;color: red">追求卓越品质</div>-->
+<!--            </div>-->
+<!--            <div style="float: left;margin-left: 70px">-->
+<!--                <img style="height: 53px;margin-top: 21px;" src="../pic/fuWu.png" alt="无法查看"/>-->
+<!--                <div style="margin-top: 10px;color: red">服务每位客户</div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--<div id="header3">-->
+<!--    <div id="headerMain3">-->
+<!--        <div style="width: 40%;height: 100%;float: left">-->
+<!--            <div id="classificationHanFu"><a class="aHover" href="#">汉服分类</a></div>-->
+<!--            <div style="float: left;margin-left: 30px;line-height: 50px" id="myOrder"><a class="aHover" id="classificationHanFuA" href="#">我的订单</a></div>-->
+<!--            <div style="float: left;margin-left: 30px;line-height: 50px" id="makeFriends"><a class="aHover" href="/html/shopSellCreate.html">交友天地1</a></div>-->
+<!--            <div style="float: left;margin-left: 30px;line-height: 50px" id="sell"><a class="aHover" href="#">我要出售</a></div>-->
+<!--            <div style="float: left;margin-left: 30px;line-height: 50px" id="feedback"><a class="aHover" href="#">我要反馈</a></div>-->
+<!--        </div>-->
+<!--        <div style="width: 60%;height: 100%;float: left">-->
+<!--            <div style="width: 200px;margin-left: 380px;margin-top: 5px;float: left"><el-input v-model="search" placeholder="搜索汉服或店铺"></el-input></div>-->
+<!--            <div style="" id="shoppingCart">-->
+<!--                <div style="float: left;margin-top: 5px"><i style="font-size: 30px" class="el-icon-shopping-cart-2"></i></div>-->
+<!--                <div style="margin-left: 8px;margin-top: 10px;float: left;">我的购物车</div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+
+
+
+
+
 <div id="carouselMap">
     <div id="carouselMapMain">
         <div class="layui-carousel"  id="test1" >
@@ -268,7 +278,7 @@
 
             }
         }).then(res=> {
-            console.log(res.data);
+            // console.log(res.data);
             sessionStorage.setItem("user",JSON.stringify(res.data));
             let user = eval ("(" + sessionStorage.getItem("user") + ")");
             document.getElementById("userName").innerHTML = user.userName;

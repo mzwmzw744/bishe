@@ -4,6 +4,7 @@ import com.sun.mail.util.MailSSLSocketFactory;
 import org.springframework.stereotype.Component;
 
 import java.security.GeneralSecurityException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
@@ -85,4 +86,20 @@ public class Service {
         System.out.println("创建的验证码为："+random);
         return random;
     }
+
+
+    /**
+     * 获取北京时间
+     * @return 北京时间
+     */
+    public static String getBJTime(){
+        Calendar calendar = Calendar.getInstance(Locale.CHINA);
+        Date time = calendar.getTime();
+        SimpleDateFormat data = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String format = data.format(time);
+        System.out.println(format);
+        return format;
+
+    }
+
 }
