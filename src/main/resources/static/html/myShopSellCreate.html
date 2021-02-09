@@ -18,6 +18,15 @@
         margin: 0;
         padding: 0;
     }
+    .shopCss{
+        color: rgba(255,83,106,0.54);
+        border-bottom: 1px solid #ddd;
+        cursor: pointer;
+        height: 100px;
+    }
+    .shopCss:hover{
+        background-color: rgba(255,83,106,0.27);
+    }
 </style>
 <body>
 <div style="height: 250px;margin: 0 auto">
@@ -25,17 +34,22 @@
     </iframe>
 </div>
 
-<div style="width: 1400px;height: 400px;border: 1px solid #ddd;margin: 0 auto" id="main">
+<div style="width: 1400px;height: 600px;border: 1px solid #ddd;margin: 0 auto" id="main">
 
-    <div style="margin: 0 auto;width: 1200px;height: 300px;">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+    <div style="margin: 45px auto;height: 504px;width: 900px;border: 1px solid #ddd;">
+        <div v-for="shop of shops"  class="shopCss" >
+            <img height="100px" width="100px"  v-bind:src="shop.shopHeadPicture">
+            <span style="margin-left: 70px">{{shop.shopName}}</span>
+            <span style="margin-left: 50px">¥{{shop.shopPrice}}</span>
+            <span style="margin-left: 50px">{{shop.shopFamily}}</span>
+            <span style="margin-left: 50px">{{shop.shopIntroduction}}</span>
+            <span style="margin-left: 50px">{{shop.auditStatus}}</span>
+            <span style="margin-left: 50px">{{shop.createDate}}</span>
+            <span></span>
+        </div>
     </div>
 
-    <div class="block" style="margin: 0 auto;width: 300px;height: 20px">
+    <div class="block" style="margin: -30px auto;width: 350px;height: 20px">
         <span class="demonstration"></span>
         <el-pagination
                 @size-change="handleSizeChange"
@@ -55,6 +69,7 @@
         el:'#main',
         data:{
             total : 1,
+            shops:[]
         },
         methods:{
             handleSizeChange(val) {
@@ -75,7 +90,8 @@
                 }
             }).then(res=> {
                 console.log(res.data);
-                this.total = res.data;
+                this.total = res.data.account;
+                this.shops = res.data.shops;
             })
         }
     })

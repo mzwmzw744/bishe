@@ -3,7 +3,7 @@
 <mapper namespace="com.bishe.mapper.ShopMapper">
 
 
-    <resultMap id="adminResultMap" type="com.bishe.bean.Shop">
+    <resultMap id="shopResultMap" type="com.bishe.bean.Shop">
         <result column="id" jdbcType="INTEGER" property="id" />
         <result column="user_id" jdbcType="INTEGER" property="userID" />
         <result column="shop_name" jdbcType="VARCHAR" property="shopName" />
@@ -21,4 +21,7 @@
         select count(*) from shop where user_id = #{userId}
     </select>
 
+    <select id="getShopMessage" resultMap="shopResultMap">
+        select * from shop where user_id = #{userId} limit #{min},#{max}
+    </select>
 </mapper>

@@ -94,8 +94,9 @@ CREATE table shop(
     shop_introduction varchar(500),
     shop_head_picture varchar(100),
     auditStatus varchar(10),
-    createDate date
+    createDate datetime
 );
+insert into shop values (null,1,'汉服1','500','曲裾','超好看','/pic/shopTiShi.png','false',now());
 
 drop table if exists shop_main_picture;
 CREATE table shop_main_picture(
@@ -111,3 +112,5 @@ CREATE table shop_main_picture(
     pic_8 varchar(100),
     pic_9 varchar(100)
 );
+
+select count(*) from shop where user_id = 1
