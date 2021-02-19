@@ -17,4 +17,6 @@ public interface ShopMapper {
     int getShopAccount(int userId);
 
     List<Shop> getShopMessage(int userId,int min,int max);
+
+    Shop getShopById(int id);
 }

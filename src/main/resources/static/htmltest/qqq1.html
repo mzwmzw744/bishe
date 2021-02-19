@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.js"></script>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    body{
+        height: 100%;
+    }
+</style>
+<body>
+<a href="#" onclick="aClick()"  >测试点击</a>
+<div style="width: 100%;background: #ff6700">
+<!--<iframe id="iframeTest"  v-bind:style="{background: background}"  v-bind:src="src" ></iframe>-->
+</div>
+</body>
+<script>
+    function aClick() {
+        axios({
+            method:'post',
+            url:'/test1',
+            headers:{
+                'token' : sessionStorage.getItem("token")
+            },
+            params:{
+                kkk : 123
+            }
+        }).then(res=> {
+            console.log(res.data);
+        })
+        window.location.href="https://www.baidu.com/?tn=40020637_5_oem_dg";
+        // window.open('https://www.baidu.com/?tn=40020637_5_oem_dg')
+    }
+    new Vue({
+        el:'#iframeTest',
+        data:{
+            background : 'red',
+            src:'https://www.baidu.com/?tn=40020637_5_oem_dg'
+        }
+    })
+
+</script>
+</html>

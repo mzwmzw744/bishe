@@ -24,4 +24,8 @@
     <select id="getShopMessage" resultMap="shopResultMap">
         select * from shop where user_id = #{userId} limit #{min},#{max}
     </select>
+
+    <select id="getShopById" resultMap="shopResultMap">
+        select * from shop where id = #{id}
+    </select>
 </mapper>

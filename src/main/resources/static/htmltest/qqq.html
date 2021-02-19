@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a onclick="test()" href="#">123</a>
+<a id="test1" onclick="test2()" href="#">1234</a>
+</body>
+<script>
+    function test() {
+        var evt = document.createEvent("MouseEvents");
+        evt.initEvent("click", true, true);
+        document.getElementById("test1").dispatchEvent(evt);
+    }
+    function test2() {
+        alert(1234);
+    }
+</script>
+</html>

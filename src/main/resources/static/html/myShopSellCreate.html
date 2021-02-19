@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <title>汉服圈1</title>
+    <title>汉服圈</title>
     <!-- 引入样式 -->
     <link rel="stylesheet" href="../ui/layui/css/layui.css">
     <link rel="stylesheet" href="../css/theme/index.css">
@@ -37,9 +37,9 @@
 <div style="width: 1400px;height: 600px;border: 1px solid #ddd;margin: 0 auto" id="main">
 
     <div style="margin: 45px auto;height: 504px;width: 900px;border: 1px solid #ddd;">
-        <div v-for="shop of shops"  class="shopCss" >
+        <div v-for="shop of shops"  class="shopCss" v-on:click="shopsClick(shop)">
             <img height="100px" width="100px"  v-bind:src="shop.shopHeadPicture">
-            <span style="margin-left: 70px">{{shop.shopName}}</span>
+            <span  style="margin-left: 70px">{{shop.shopName}}</span>
             <span style="margin-left: 50px">¥{{shop.shopPrice}}</span>
             <span style="margin-left: 50px">{{shop.shopFamily}}</span>
             <span style="margin-left: 50px">{{shop.shopIntroduction}}</span>
@@ -72,11 +72,31 @@
             shops:[]
         },
         methods:{
+            shopsClick(shop) {
+                console.log(shop.id);
+                window.location.href="myShopDetails.html";
+            },
             handleSizeChange(val) {
                 console.log(`每页 ${val} 条`);
             },
             handleCurrentChange(val) {
                 console.log(`当前页: ${val}`);
+                let pageStr = `${val}`;
+                let page = parseInt(pageStr);
+                axios({
+                    method:'post',
+                    url:'/token/getShopAccount',
+                    headers:{
+                        'token' : sessionStorage.getItem("token")
+                    },
+                    data:{
+                        page:page
+                    }
+                }).then(res=> {
+                    console.log(res.data);
+                    this.total = res.data.account;
+                    this.shops = res.data.shops;
+                })
             }
         },
         beforeCreate: function () {
@@ -87,6 +107,7 @@
                     'token' : sessionStorage.getItem("token")
                 },
                 data:{
+                    page:'1'
                 }
             }).then(res=> {
                 console.log(res.data);

@@ -18,6 +18,15 @@ public class AdminController {
     @Autowired
     AdminMapper adminMapper;
 
+
+    @RequestMapping("/test1")
+    public String test1(){
+
+        return "成功";
+    }
+
+
+
     @RequestMapping("/backstage/adminApplyPass")
     public String adminApplyPass(@RequestBody Map<String,Object> map){
         int deleteID = (int) map.get("ID");

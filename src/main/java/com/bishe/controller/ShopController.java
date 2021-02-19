@@ -66,7 +66,7 @@ public class ShopController {
         System.out.println(user);
         UserShopMessage userShopMessage = new UserShopMessage();
         int count = shopMapper.getShopAccount(user.getId());
-        int curPage = 1;
+        int curPage = Integer.parseInt(map.get("page"));
         int pageSize = 5;
         int min = (curPage-1)*pageSize;
         int max = pageSize*curPage;
@@ -74,5 +74,18 @@ public class ShopController {
         userShopMessage.setShops(list);
         userShopMessage.setAccount(count);
         return userShopMessage;
+    }
+    /**
+     * 通过商品id查找商品
+     * 返回该商品的全部信息
+     */
+    @RequestMapping("/token/getShopById")
+    public Shop getShopById(@RequestBody Map<String,String> map,@RequestHeader Map<String, String> headers){
+        String token = headers.get("token");
+        System.out.println(token);
+        User user = (User)redisUtil.get(token);
+        System.out.println(user);
+        Shop shop = shopMapper.getShopById(Integer.parseInt(map.get("id")));
+        return shop;
     }
 }
