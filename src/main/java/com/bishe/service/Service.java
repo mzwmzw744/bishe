@@ -3,6 +3,8 @@ package com.bishe.service;
 import com.sun.mail.util.MailSSLSocketFactory;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
+import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -100,6 +102,23 @@ public class Service {
         System.out.println(format);
         return format;
 
+    }
+
+    public static void createDir(String strPath) throws IOException {
+
+        File file=new File(strPath);
+        boolean flag=false;
+        flag=file.mkdir();
+        System.out.println(flag);
+
+
+//        File file = new File(strPath);
+//        if(!file.getParentFile().exists()){//判断文件夹在不在
+//            file.getParentFile().mkdirs();//文件夹不在 创建文件夹
+//        }
+//        if(!file.exists()){  //判断文件是否存在 不存在创建一个文件
+//            file.createNewFile();
+//        }
     }
 
 }
