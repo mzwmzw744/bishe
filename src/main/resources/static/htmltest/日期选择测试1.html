@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+</head>
+<body>
+<div id="app">
+
+
+
+    <el-date-picker
+            v-model="startTime"
+            type="date"
+            placeholder="开始日期"
+            value-format="yyyy-MM-dd">
+    </el-date-picker>
+    <el-date-picker
+            v-model="endTime"
+            type="date"
+            placeholder="结束日期"
+            value-format="yyyy-MM-dd">
+    </el-date-picker>
+
+
+
+        <el-button v-on:click="ttt">确定</el-button>
+</div>
+</body>
+<!-- import Vue before Element -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- import JavaScript -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            startTime: null,
+            endTime:null
+        },
+        methods:{
+            dateRangeJudgment(startTime,endTime){
+                let bool = false;
+                if (startTime != null && endTime == null) {
+                    this.$message.warning('日期搜索不能只选择一方');
+                    return
+                }
+                if (startTime == null && endTime != null) {
+                    this.$message.warning('日期搜索不能只选择一方');
+                    return
+                }
+                if (startTime > endTime) {
+                    this.$message.warning('结束日期不能在开始日期之前');
+                    return
+                }
+                bool = true;
+            },
+            ttt(){
+                let bool = this.dateRangeJudgment(this.startTime,this.endTime)
+                if(bool == false) {
+                    return
+                }
+                console.log(this.startTime);
+                console.log(this.endTime);
+                // var oDate1 = new Date(this.startTime);
+                // var oDate2 = new Date(this.endTime);
+                //pageData.startTime=null;
+                //pageData.endTime=null;
+
+
+
+
+                let myArray=new Array(this.startTime,this.endTime);
+                console.log(myArray);
+                console.log(this.startTime);
+                console.log(this.endTime);
+            }
+        }
+    })
+</script>
+</html>

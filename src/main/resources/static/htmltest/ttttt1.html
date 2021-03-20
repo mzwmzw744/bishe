@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.js"></script>
+    <title>Title</title>
+
+</head>
+<body>
+<!--<iframe src="http://api.map.baidu.com/location/ip?ak=O3mlzIiDQ10IVx0OpofzUWWQuTN2WzWT&coor=bd09ll"></iframe>-->
+</body>
+<script>
+    axios({
+        method:'GET',
+        async: false,
+        url:'http://api.map.baidu.com/location/ip?ak=O3mlzIiDQ10IVx0OpofzUWWQuTN2WzWT&coor=bd09ll',
+        dataType:'JSONP',
+        jsonp: "callback",
+        jsonpCallback:"flightHandler",
+
+        success: function(json){
+            // alert('您查询到航班信息：票价： ' + json.price + ' 元，余票： ' + json.tickets + ' 张。');
+            console.log(json)
+        },
+        error: function(){
+            alert('fail');
+        }
+    })
+</script>
+</html>

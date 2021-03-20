@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+</head>
+<body>
+
+<div id="app">
+<span class="zhiTitle">最近发现时间</span>
+<span class="timeChange">
+      <span class="timeChangeSpan">
+        <el-date-picker
+                class="zhiTime"
+                type="date"
+                v-model="form.lastDiscoveryStartTime"
+                value-format="yyyy-MM-dd"
+                :picker-options="pickerOptionsStart"
+                @change="timeOptions"
+        ></el-date-picker>
+      </span>
+      <span class="zhiCenter">—</span>
+      <span class="timeChangeSpan">
+        <el-date-picker
+                class="zhiTime"
+                type="date"
+                v-model="form.lastDiscoveryEndTime"
+                picker-options="pickerOptionsEnd"
+                value-format="yyyy-MM-dd"
+                @focus="timeOptionsEnd"
+                ref="lastDiscoveryEndTime"
+        ></el-date-picker>
+      </span>
+    </span>
+</div>
+</body>
+<!-- import Vue before Element -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- import JavaScript -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: function() {
+            return {
+                form:{
+                    lastDiscoveryEndTime:'',
+                    lastDiscoveryStartTime:'',
+                },
+                pickerOptionsStart: {
+                    // disabledDate(time) {
+                    //     return time.getTime() > Date.now() - 8.64e7 || time.getTime() < Date.now() - 60 * 24 * 60 * 60 * 1000
+                    // }
+                },
+                pickerOptionsEnd: {
+                    disabledDate(time) {
+                        return time.getTime() > Date.now() - 8.64e7 || time.getTime() < Date.now() - 60 * 24 * 60 * 60 * 1000
+                    }
+                },
+
+            }
+        },
+        methods: {
+            // 当开始时间改变时 就让结束时间清空
+            timeOptions() {
+                this.form.lastDiscoveryEndTime = ''
+            },
+            timeOptionsEnd() {
+                // 若不填开始时间的值，先选择结束时间就提示用户填写开始时间
+                if (this.form.lastDiscoveryStartTime == '' || this.form.lastDiscoveryStartTime == null ) {
+                    // 不让弹出结束时间框
+                    this.$refs.lastDiscoveryEndTime.pickerVisible = false
+                    return this.$message.warning('请填写开始时间')
+                } else {
+                    // 若开始时间填写 结束时间的弹出选择时间框正常显示
+                    this.$refs.lastDiscoveryEndTime.pickerVisible = true
+                }
+                let that = this
+                // 结束时间是在开始时间的基础上去建立可选范围
+                this.pickerOptionsEnd = {
+                    disabledDate(time) {
+                        let dataLast = new Date(that.form.lastDiscoveryStartTime).getTime()
+                        return (
+                            // 不超过一个月且不能选当天且可以选和开始时间一样的日期
+                            time.getTime() > dataLast + 31 * 24 * 60 * 60 * 1000 || time.getTime() < dataLast - 8.64e7 || time.getTime() > Date.now() - 8.64e7
+                        )
+                    }
+                }
+            }
+        }
+    })
+</script>
+</html>

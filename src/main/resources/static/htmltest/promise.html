@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+</body>
+<script>
+
+
+    const Axios = {
+
+        createNew: function(){
+
+            let axios = {};
+
+            axios.method = "post";
+
+            axios.request = function(method,url){
+                const xhr = new XMLHttpRequest();
+                xhr.open(method,url,true);
+
+                new Promise(function (resolve,reject){
+                    xhr.onreadystatechange = function () {
+                        if(xhr.readyState == 4 && xhr.status == 200) {
+                            // console.log(xhr.responseText);
+                            // callback(xhr.responseText);
+                            resolve(xhr);
+                        }
+                    }
+                    xhr.send()
+                }).then((xhr) => {
+                    alert(xhr.responseText);
+                    console.log(xhr.responseText);
+                })
+            };
+
+            return axios;
+
+        }
+
+    };
+
+    var axios = Axios.createNew();
+
+    axios.request("request","http://timemeetyou.com:8889/api/private/v1/");
+
+</script>
+</html>
