@@ -47,3 +47,6 @@ logging:
     cn.com: trace
 
 
+file:
+  path: file/**    #文件访问路径
+  address:  E://upload/  #文件保存路径

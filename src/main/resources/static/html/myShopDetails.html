@@ -74,11 +74,13 @@
                 <el-upload
                         class="upload-demo"
                         action="/updateShopHeadPic"
-                        :data="token"
+                        :data="shoHeadPicUpload"
+                        :on-success="shopHeadPicSuccess"
                         v-show="false"
                         multiple
                         :limit="3"
-                        :file-list="fileList">
+                        :on-progress="uploadProcess"
+                        :file-list="shoHeadPicUpload">
                     <el-button id="shopHeadPic" size="small" type="primary">点击上传~~~~~~~~</el-button>
                     <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
                 </el-upload>
@@ -92,7 +94,7 @@
                         :on-remove="handleRemove"
                         :file-list="fileList"
                         :data="token"
-                        list-type="picture">
+                         list-type="picture">
                     <el-button size="small" type="primary" >点击上传</el-button>
                     <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
                 </el-upload>
@@ -120,6 +122,10 @@
             token: {
                 userToken: sessionStorage.getItem('token')
             },
+            shoHeadPicUpload: {
+                shoHeadPicUploadId:'',
+                shoHeadPicUploadToken: sessionStorage.getItem('token')
+            },
             shop:{
                 auditStatus:'',
                 id:'',
@@ -139,6 +145,16 @@
             }],
         },
         methods: {
+            uploadProcess(event, file, fileList) {
+                this.imgFlag = true;
+                console.log(event.percent);
+                this.percent = Math.floor(event.percent);
+            },
+            shopHeadPicSuccess(res){
+                console.log(res)
+                this.shop.shopHeadPicture = res;
+                this.$message.success('图片上传成功')
+            },
             modifyState(){
               if(this.shop.auditStatus == '未上架'){
                   this.shop.auditStatus = '上架'
@@ -206,6 +222,7 @@
                 this.shop.shopPrice = res.data.shopPrice;
                 this.shop.shopFamily = res.data.shopFamily;
                 this.shop.shopHeadPicture =res.data.shopHeadPicture;
+                this.shoHeadPicUpload.shoHeadPicUploadId =res.data.id;
             })
         }
     })

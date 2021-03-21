@@ -13,6 +13,9 @@
         <result column="auditStatus" jdbcType="VARCHAR" property="auditStatus" />
     </resultMap>
 
+    <update id="updateShopHeadPic">
+        update shop set shop_head_picture = #{shopHeadPic} where id = #{id}
+    </update>
 
     <insert id="shopMainPictureCreate" parameterType="com.bishe.bean.Shop" useGeneratedKeys="true" keyProperty="id">
         insert into shop_main_picture values (null,#{id},'','','','','','','','','');
