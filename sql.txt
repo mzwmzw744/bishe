@@ -96,15 +96,15 @@ CREATE table shop(
     auditStatus varchar(10),
     createDate datetime
 );
-insert into shop values (null,1,'汉服1','100','曲裾','超好看','/pic/shopTiShi.png','未审核',now());
-insert into shop values (null,1,'汉服2','200','曲裾','超好看','/pic/shopTiShi.png','未审核',now());
-insert into shop values (null,1,'汉服3','300','曲裾','超好看','/pic/shopTiShi.png','未审核',now());
-insert into shop values (null,1,'汉服4','400','曲裾','超好看','/pic/shopTiShi.png','未审核',now());
-insert into shop values (null,1,'汉服5','500','曲裾','超好看','/pic/shopTiShi.png','未审核',now());
-insert into shop values (null,1,'汉服6','600','曲裾','超好看','/pic/shopTiShi.png','未审核',now());
-insert into shop values (null,1,'汉服7','700','曲裾','超好看','/pic/shopTiShi.png','未审核',now());
-insert into shop values (null,1,'汉服8','800','曲裾','超好看','/pic/shopTiShi.png','未审核',now());
-insert into shop values (null,1,'汉服9','900','曲裾','超好看','/pic/shopTiShi.png','未审核',now());
+insert into shop values (null,1,'汉服1','100','曲裾','超好看','/pic/shopTiShi.png','未上架',now());
+insert into shop values (null,1,'汉服2','200','曲裾','超好看','/pic/shopTiShi.png','未上架',now());
+insert into shop values (null,1,'汉服3','300','曲裾','超好看','/pic/shopTiShi.png','未上架',now());
+insert into shop values (null,1,'汉服4','400','曲裾','超好看','/pic/shopTiShi.png','未上架',now());
+insert into shop values (null,1,'汉服5','500','曲裾','超好看','/pic/shopTiShi.png','未上架',now());
+insert into shop values (null,1,'汉服6','600','曲裾','超好看','/pic/shopTiShi.png','未上架',now());
+insert into shop values (null,1,'汉服7','700','曲裾','超好看','/pic/shopTiShi.png','未上架',now());
+insert into shop values (null,1,'汉服8','800','曲裾','超好看','/pic/shopTiShi.png','未上架',now());
+insert into shop values (null,1,'汉服9','900','曲裾','超好看','/pic/shopTiShi.png','未上架',now());
 drop table if exists shop_main_picture;
 CREATE table shop_main_picture(
     id int primary key auto_increment,

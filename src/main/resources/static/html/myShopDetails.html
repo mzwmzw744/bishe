@@ -41,39 +41,37 @@
             <div style="overflow: hidden">
                 <div style="float: left;margin-top: 5px">商品名:&nbsp;&nbsp;</div>
                 <div style="width: 150px;height: 100px;float: left">
-                    <el-input  v-model="shopName" size="small" placeholder="请输入内容" style="display: inline-block" ></el-input>
+                    <el-input  v-model="shop.shopName" size="small" placeholder="请输入内容" style="display: inline-block" ></el-input>
                 </div>
             </div>
             <div style="overflow: hidden">
                 <div style="float: left;margin-top: 5px">商品价格:&nbsp;&nbsp;</div>
                 <div style="width: 150px;height: 100px;float: left">
-                    <el-input  v-model="shopName" size="small" placeholder="请输入内容" style="display: inline-block" ></el-input>
+                    <el-input  v-model="shop.shopPrice" size="small" placeholder="请输入内容" style="display: inline-block" ></el-input>
                 </div>
             </div>
             <div style="overflow: hidden">
                 <div style="float: left;margin-top: 5px">商品类型:&nbsp;&nbsp;</div>
                 <div style="width: 150px;height: 100px;float: left">
-                    <el-input  v-model="shopName" size="small" placeholder="请输入内容" style="display: inline-block" ></el-input>
+                    <el-input  v-model="shop.shopFamily" size="small" placeholder="请输入内容" style="display: inline-block" ></el-input>
                 </div>
             </div>
             <div style="overflow: hidden">
                 <div style="float: left;margin-top: 5px">商品介绍:&nbsp;&nbsp;</div>
                 <div style="width: 150px;height: 100px;float: left">
-                    <el-input  v-model="shopName" size="small" placeholder="请输入内容" style="display: inline-block" ></el-input>
+                    <el-input  v-model="shop.shopIntroduction" size="small" placeholder="请输入内容" style="display: inline-block" ></el-input>
                 </div>
             </div>
         </div>
         <div id="rightMain" style="width: 50%;height: 100%;float: left;">
             <div style="cursor: pointer">
-                商品头像:<img src="../pic/shopTiShi.png" width="100px" height="100px;" v-on:click="open1()">
+                商品头像:<img :src="shop.shopHeadPicture" width="100px" height="100px;" v-on:click="open1()">
             </div>
-            <div>
-                商品状态: 未上架
-            </div>
+                 商品状态: {{shop.auditStatus}}
+                <el-button type="primary"  size="small" @click="modifyState">修改状态</el-button>
 
             <div>
                 <el-upload
-
                         class="upload-demo"
                         action="/updateShopHeadPic"
                         :data="token"
@@ -122,7 +120,16 @@
             token: {
                 userToken: sessionStorage.getItem('token')
             },
-            shopName: '123',
+            shop:{
+                auditStatus:'',
+                id:'',
+                shopName: '',
+                shopHeadPicture:'',
+                shopPrice:'',
+                shopFamily:'',
+                shopIntroduction:'',
+            },
+
             fileList: [{
                 name: 'food.jpeg',
                 url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
@@ -132,8 +139,15 @@
             }],
         },
         methods: {
+            modifyState(){
+              if(this.shop.auditStatus == '未上架'){
+                  this.shop.auditStatus = '上架'
+              }else {
+                  this.shop.auditStatus = '未上架'
+              }
+            },
             open1(){
-              document.getElementById("shopHeadPic").click();
+                document.getElementById("shopHeadPic").click();
             },
             open() {
                 this.$confirm('确认修改嘛?', '提示', {
@@ -141,9 +155,21 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
+                    axios({
+                        method:'post',
+                        url:'/token/updateShop',
+                        headers:{
+                            'token' : sessionStorage.getItem("token")
+                        },
+                        data:{
+                            shop: this.shop
+                        }
+                    }).then(res=> {
+                        console.log(res.data);
+                    })
                     this.$message({
                         type: 'success',
-                        message: '删除成功!'
+                        message: '修改成功!'
                     });
                 }).catch(() => {
                     this.$message({
@@ -169,12 +195,17 @@
                     'token' : sessionStorage.getItem("token")
                 },
                 data:{
-                    page:page
+                    id:sessionStorage.getItem("shopIdToShopDetail")
                 }
             }).then(res=> {
                 console.log(res.data);
-                this.total = res.data.account;
-                this.shops = res.data.shops;
+                this.shop.auditStatus = res.data.auditStatus;
+                this.shop.id = res.data.id;
+                this.shop.shopName = res.data.shopName;
+                this.shop.shopIntroduction = res.data.shopIntroduction;
+                this.shop.shopPrice = res.data.shopPrice;
+                this.shop.shopFamily = res.data.shopFamily;
+                this.shop.shopHeadPicture =res.data.shopHeadPicture;
             })
         }
     })

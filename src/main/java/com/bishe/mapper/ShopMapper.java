@@ -10,6 +10,8 @@ import java.util.List;
 @Mapper
 public interface ShopMapper {
 
+    int shopMainPictureCreate(Shop shop);
+
     int shopCreate(Shop shop);
 
     String shopDelete();
@@ -19,4 +21,6 @@ public interface ShopMapper {
     List<Shop> getShopMessage(int userId,int min,int max);
 
     Shop getShopById(int id);
+
+    int updateShop(Shop shop);
 }

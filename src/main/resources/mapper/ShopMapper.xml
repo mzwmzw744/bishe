@@ -13,7 +13,12 @@
         <result column="auditStatus" jdbcType="VARCHAR" property="auditStatus" />
     </resultMap>
 
-    <insert id="shopCreate">
+
+    <insert id="shopMainPictureCreate" parameterType="com.bishe.bean.Shop" useGeneratedKeys="true" keyProperty="id">
+        insert into shop_main_picture values (null,#{id},'','','','','','','','','');
+    </insert>
+
+    <insert id="shopCreate" parameterType="com.bishe.bean.Shop" useGeneratedKeys="true" keyProperty="id">
         insert into shop values (null,#{userID},#{shopName},#{shopPrice},#{shopFamily},#{shopIntroduction},#{shopHeadPicture},#{auditStatus},now());
     </insert>
 
@@ -28,4 +33,9 @@
     <select id="getShopById" resultMap="shopResultMap">
         select * from shop where id = #{id}
     </select>
+
+    <update id="updateShop" parameterType="com.bishe.bean.Shop">
+        update shop set shop_name = #{shopName},shop_price=#{shopPrice},shop_family=#{shopFamily},shop_introduction=#{shopIntroduction},
+                        auditStatus=#{auditStatus} where id = #{id};
+    </update>
 </mapper>
