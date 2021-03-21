@@ -1,5 +1,7 @@
 package com.bishe.filter;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
@@ -7,10 +9,15 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+
 //
 @Component
 @WebFilter(filterName = "CharsetFilter",urlPatterns = "/*")
 public class MyFilter implements Filter {
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         System.out.println("过滤器初始化");
@@ -31,11 +38,12 @@ public class MyFilter implements Filter {
                 httpServletResponse.sendRedirect("/");
             }else {
                 System.out.println("有token用户");
+                redisTemplate.expire(token,30L, TimeUnit.MINUTES);
                 filterChain.doFilter(servletRequest, servletResponse);
             }
             return;
         }
-        filterChain.    doFilter(servletRequest, servletResponse);
+        filterChain.doFilter(servletRequest, servletResponse);
     }
     @Override
     public void destroy() {

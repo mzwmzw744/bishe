@@ -74,6 +74,7 @@
         methods:{
             shopsClick(shop) {
                 console.log(shop.id);
+                sessionStorage.setItem("shopIdToShopDetail",shop.id);
                 // window.location.href="myShopDetails.html";
             },
             handleSizeChange(val) {

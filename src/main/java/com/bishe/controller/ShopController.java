@@ -55,7 +55,7 @@ public class ShopController {
     }
 
     /**
-     *获取用户商品信息
+     * 获取用户商品信息
      * 返回商品数量，商品信息
      */
     @RequestMapping("/token/getShopAccount")

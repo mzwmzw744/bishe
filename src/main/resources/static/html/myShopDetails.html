@@ -160,6 +160,22 @@
             handlePreview(file) {
                 console.log(file);
             }
+        },
+        created: function () {
+            axios({
+                method:'post',
+                url:'/token/getShopById',
+                headers:{
+                    'token' : sessionStorage.getItem("token")
+                },
+                data:{
+                    page:page
+                }
+            }).then(res=> {
+                console.log(res.data);
+                this.total = res.data.account;
+                this.shops = res.data.shops;
+            })
         }
     })
 
