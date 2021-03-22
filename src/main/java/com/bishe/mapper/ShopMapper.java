@@ -1,6 +1,7 @@
 package com.bishe.mapper;
 
 import com.bishe.bean.Shop;
+import com.bishe.bean.ShopMainPicture;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -25,4 +26,6 @@ public interface ShopMapper {
     Shop getShopById(int id);
 
     int updateShop(Shop shop);
+
+    ShopMainPicture getShopMainPicByShopID(@Param("id") int id);
 }

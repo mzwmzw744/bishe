@@ -1,16 +1,14 @@
 package com.bishe.controller;
 
 import com.bishe.bean.Shop;
+import com.bishe.bean.ShopMainPicture;
 import com.bishe.bean.User;
 import com.bishe.bean.UserShopMessage;
 import com.bishe.mapper.ShopMapper;
 import com.bishe.util.RedisUtil;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -117,6 +115,16 @@ public class ShopController {
             return "成功";
         }
         return "失败";
+    }
+
+    @RequestMapping("/token/getShopMainPic")
+    public ShopMainPicture getShopMainPic(@RequestBody Map<String,String> map) {
+        int id = Integer.parseInt(map.get("id"));
+        System.out.println("id为"+id);
+        ShopMainPicture shopMainPicture = shopMapper.getShopMainPicByShopID(id);
+
+        System.out.println(shopMainPicture);
+        return shopMainPicture;
     }
 
 }

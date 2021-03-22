@@ -13,6 +13,26 @@
         <result column="auditStatus" jdbcType="VARCHAR" property="auditStatus" />
     </resultMap>
 
+    <resultMap id="shopHeadPicMap" type="com.bishe.bean.ShopMainPicture">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="shop_id" jdbcType="INTEGER" property="shop_id" />
+        <result column="pic_1" jdbcType="VARCHAR" property="pic_1" />
+        <result column="pic_2" jdbcType="VARCHAR" property="pic_2" />
+        <result column="pic_3" jdbcType="VARCHAR" property="pic_3" />
+        <result column="pic_4" jdbcType="VARCHAR" property="pic_4" />
+        <result column="pic_5" jdbcType="VARCHAR" property="pic_5" />
+        <result column="pic_6" jdbcType="VARCHAR" property="pic_6" />
+        <result column="pic_7" jdbcType="VARCHAR" property="pic_7" />
+        <result column="pic_8" jdbcType="VARCHAR" property="pic_8" />
+        <result column="pic_9" jdbcType="VARCHAR" property="pic_9" />
+        <result column="pic_10" jdbcType="VARCHAR" property="pic_10" />
+    </resultMap>
+
+
+    <select id="getShopMainPicByShopID" resultMap="shopHeadPicMap">
+        select * from shop_main_picture where shop_id = #{id}
+    </select>
+
     <update id="updateShopHeadPic">
         update shop set shop_head_picture = #{shopHeadPic} where id = #{id}
     </update>

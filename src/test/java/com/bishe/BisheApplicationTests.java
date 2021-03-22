@@ -1,6 +1,7 @@
 package com.bishe;
 
 import com.bishe.bean.Shop;
+import com.bishe.bean.ShopMainPicture;
 import com.bishe.mapper.BackstageMapper;
 import com.bishe.mapper.ShopMapper;
 import com.bishe.service.Service;
@@ -31,6 +32,8 @@ class BisheApplicationTests {
 //      System.out.println(list);
 //        int num = new Integer(1);
 //        Assert.assertEquals(1,2);
-        Service.createDir("E:\\毕业设计\\upload\\1");
+//        Service.createDir("E:\\毕业设计\\upload\\1");
+        ShopMainPicture shopMainPicture = shopMapper.getShopMainPicByShopID(2);
+        System.out.println(shopMainPicture);
     }
 }

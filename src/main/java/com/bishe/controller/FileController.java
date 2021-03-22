@@ -1,4 +1,5 @@
 package com.bishe.controller;
+import com.bishe.bean.ShopMainPicture;
 import com.bishe.bean.User;
 import com.bishe.mapper.ShopMapper;
 import com.bishe.service.Service;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -57,4 +59,8 @@ public class FileController {
         FileCopyUtils.copy(file, fileOutputStream);
         return sqlHeadPicPath;
     }
+
+
+
+
 }

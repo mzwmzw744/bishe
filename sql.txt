@@ -117,7 +117,8 @@ CREATE table shop_main_picture(
     pic_6 varchar(100),
     pic_7 varchar(100),
     pic_8 varchar(100),
-    pic_9 varchar(100)
+    pic_9 varchar(100),
+    pic_10 varchar(100)
 );
 
 select count(*) from shop where user_id = 1;

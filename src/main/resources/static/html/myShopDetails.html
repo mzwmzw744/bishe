@@ -79,7 +79,6 @@
                         v-show="false"
                         multiple
                         :limit="3"
-                        :on-progress="uploadProcess"
                         :file-list="shoHeadPicUpload">
                     <el-button id="shopHeadPic" size="small" type="primary">点击上传~~~~~~~~</el-button>
                     <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
@@ -136,20 +135,23 @@
                 shopIntroduction:'',
             },
 
-            fileList: [{
-                name: 'food.jpeg',
-                url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-            }, {
-                name: 'food2.jpeg',
-                url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-            }],
+            fileList: [
+            //     {
+            //     // name: 'food.jpeg',
+            //     url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
+            // },
+                //{
+            //     name: 'food2.jpeg',
+            //     url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
+            // }
+            ],
         },
         methods: {
-            uploadProcess(event, file, fileList) {
-                this.imgFlag = true;
-                console.log(event.percent);
-                this.percent = Math.floor(event.percent);
-            },
+            // uploadProcess(event, file, fileList) {
+            //     this.imgFlag = true;
+            //     console.log(event.percent);
+            //     this.percent = Math.floor(event.percent);
+            // },
             shopHeadPicSuccess(res){
                 console.log(res)
                 this.shop.shopHeadPicture = res;
@@ -194,14 +196,14 @@
                     });
                 });
             },
-            handleRemove(file, fileList) {
-                fileList.forEach(function (e) {
-                    console.log(e.response);
-                })
-            },
-            handlePreview(file) {
-                console.log(file);
-            }
+            // handleRemove(file, fileList) {
+            //     fileList.forEach(function (e) {
+            //         console.log(e.response);
+            //     })
+            // },
+            // handlePreview(file) {
+            //     console.log(file);
+            // }
         },
         created: function () {
             axios({
@@ -214,7 +216,7 @@
                     id:sessionStorage.getItem("shopIdToShopDetail")
                 }
             }).then(res=> {
-                console.log(res.data);
+                // console.log(res.data);
                 this.shop.auditStatus = res.data.auditStatus;
                 this.shop.id = res.data.id;
                 this.shop.shopName = res.data.shopName;
@@ -224,6 +226,24 @@
                 this.shop.shopHeadPicture =res.data.shopHeadPicture;
                 this.shoHeadPicUpload.shoHeadPicUploadId =res.data.id;
             })
+
+            axios({
+                method:'post',
+                url:'/token/getShopMainPic',
+                headers:{
+                    'token' : sessionStorage.getItem("token")
+                },
+                data:{
+                    id:sessionStorage.getItem("shopIdToShopDetail")
+                }
+            }).then(res=> {
+                console.log("~~~~~~"+res.data.shop_id);
+                console.log("~~~~~~"+res.data.pic_2);
+                console.log("~~~~~~"+res.data.id);
+                // this.fileList.push()
+
+            })
+
         }
     })
 
