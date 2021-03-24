@@ -24,19 +24,61 @@ public class FileController {
     ShopMapper shopMapper;
 
     @RequestMapping("/shopDetailPic")
-    public String upload(@RequestParam String userToken,@RequestPart("file") byte[] file) throws IOException {
-        User user = (User)redisUtil.get(userToken);
-        System.out.println(user);
+    public String upload(@RequestParam int number,@RequestParam int shoHeadPicUploadId, @RequestParam String shoHeadPicUploadToken,@RequestPart("file") byte[] file) throws IOException {
+        number = number+1;
+        System.out.println(number);
+        System.out.println(shoHeadPicUploadId);
+        System.out.println(shoHeadPicUploadToken);
+        User user = (User)redisUtil.get(shoHeadPicUploadToken);
+//      System.out.println(user);
         String only = UUID.randomUUID()+"";
-        System.out.println(only);
-        System.out.println("文件上传被执行");
+//      System.out.println(only);
+//      System.out.println("文件上传被执行");
         String path = System.getProperty("user.dir");
-        Service.createDir("E:\\毕业设计\\upload\\userId"+user.getId());
-        File dir=new File("D:/test");
-        String filePath = path + "\\upload\\"+"\\userId"+user.getId()+"\\"+only+".png";
+        Service.createDir("E:\\upload\\userId"+user.getId());
+//        File dir=new File("D:/test");
+        String xdPath="\\upload\\"+"\\userId"+user.getId()+"\\"+only+".png";
+        String filePath = "E:" + xdPath;
+        String sqlHeadPicPath = "/upload"+"/userId"+user.getId()+"/"+only+".png";
+        ShopMainPicture shopMainPicture = shopMapper.getAllShopPicByShopId(shoHeadPicUploadId);
+
+        if(number == 1){
+            shopMapper.updateShopMainPic_1(sqlHeadPicPath,shoHeadPicUploadId);
+        }
+        if(number == 2){
+            shopMapper.updateShopMainPic_2(sqlHeadPicPath,shoHeadPicUploadId);
+        }
+        if(number == 3){
+            shopMapper.updateShopMainPic_3(sqlHeadPicPath,shoHeadPicUploadId);
+        }
+        if(number == 4){
+            shopMapper.updateShopMainPic_4(sqlHeadPicPath,shoHeadPicUploadId);
+        }
+        if(number == 5){
+            shopMapper.updateShopMainPic_5(sqlHeadPicPath,shoHeadPicUploadId);
+        }
+        if(number == 6){
+            shopMapper.updateShopMainPic_6(sqlHeadPicPath,shoHeadPicUploadId);
+        }
+        if(number == 7){
+            shopMapper.updateShopMainPic_7(sqlHeadPicPath,shoHeadPicUploadId);
+        }
+        if(number == 8){
+            shopMapper.updateShopMainPic_8(sqlHeadPicPath,shoHeadPicUploadId);
+        }
+        if(number == 9){
+            shopMapper.updateShopMainPic_9(sqlHeadPicPath,shoHeadPicUploadId);
+        }
+        if(number == 10){
+            shopMapper.updateShopMainPic_10(sqlHeadPicPath,shoHeadPicUploadId);
+        }
+
+
+
+//      shopMapper.updateShopHeadPic(sqlHeadPicPath,shoHeadPicUploadId);
         FileOutputStream fileOutputStream = new FileOutputStream(filePath);
         FileCopyUtils.copy(file, fileOutputStream);
-        return filePath;
+        return sqlHeadPicPath;
     }
 
     @RequestMapping("/updateShopHeadPic")

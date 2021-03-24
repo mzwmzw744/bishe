@@ -34,7 +34,7 @@
     </iframe>
 </div>
 
-<div style="width: 1400px;height: 600px;border: 1px solid #ddd;margin: 0 auto;overflow: hidden;color: rgba(255,83,106,0.54);" id="main">
+<div style="width: 1400px;height: 1000px;border: 1px solid #ddd;margin: 0 auto;overflow: hidden;color: rgba(255,83,106,0.54);" id="main">
 
     <div style="width: 1000px;height: 500px;margin: 0px auto;overflow: hidden">
         <div id="leftMain" style="width: 50%;height: 100%;float: left;">
@@ -92,7 +92,7 @@
                         :on-preview="handlePreview"
                         :on-remove="handleRemove"
                         :file-list="fileList"
-                        :data="token"
+                        :data="shoHeadPicUpload"
                          list-type="picture">
                     <el-button size="small" type="primary" >点击上传</el-button>
                     <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
@@ -118,12 +118,25 @@
     new Vue({
         el: '#main',
         data: {
+            fileList: [
+                // {
+                //     // name: 'food.jpeg',
+                //     url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
+                // },
+                // {
+                //     // name: 'food2.jpeg',
+                //     url:'1'
+                //     // url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
+                // }
+            ],
             token: {
                 userToken: sessionStorage.getItem('token')
             },
             shoHeadPicUpload: {
+                number:'',
                 shoHeadPicUploadId:'',
-                shoHeadPicUploadToken: sessionStorage.getItem('token')
+                shoHeadPicUploadToken: sessionStorage.getItem('token'),
+
             },
             shop:{
                 auditStatus:'',
@@ -135,16 +148,6 @@
                 shopIntroduction:'',
             },
 
-            fileList: [
-            //     {
-            //     // name: 'food.jpeg',
-            //     url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-            // },
-                //{
-            //     name: 'food2.jpeg',
-            //     url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-            // }
-            ],
         },
         methods: {
             // uploadProcess(event, file, fileList) {
@@ -196,14 +199,14 @@
                     });
                 });
             },
-            // handleRemove(file, fileList) {
-            //     fileList.forEach(function (e) {
-            //         console.log(e.response);
-            //     })
-            // },
-            // handlePreview(file) {
-            //     console.log(file);
-            // }
+            handleRemove(file, fileList) {
+                fileList.forEach(function (e) {
+                    console.log(e.response);
+                })
+            },
+            handlePreview(file) {
+                console.log(file);
+            }
         },
         created: function () {
             axios({
@@ -237,9 +240,54 @@
                     id:sessionStorage.getItem("shopIdToShopDetail")
                 }
             }).then(res=> {
-                console.log("~~~~~~"+res.data.shop_id);
-                console.log("~~~~~~"+res.data.pic_2);
-                console.log("~~~~~~"+res.data.id);
+                if(res.data.pic_1 != '' && res.data.pic_1 !=null){
+                    this.fileList.push({url:res.data.pic_1})
+                }
+                if(res.data.pic_2 != '' && res.data.pic_2 !=null){
+                    this.fileList.push({url:res.data.pic_2})
+                }
+                if(res.data.pic_3 != '' && res.data.pic_3 !=null){
+                    this.fileList.push({url:res.data.pic_3})
+                }
+                if(res.data.pic_4 != '' && res.data.pic_4 !=null){
+                    this.fileList.push({url:res.data.pic_4})
+                }
+                if(res.data.pic_5 != '' && res.data.pic_5 !=null){
+                    this.fileList.push({url:res.data.pic_5})
+                }
+                if(res.data.pic_6 != '' && res.data.pic_6 !=null){
+                    this.fileList.push({url:res.data.pic_6})
+                }
+                if(res.data.pic_7 != '' && res.data.pic_7 !=null){
+                    this.fileList.push({url:res.data.pic_7})
+                }
+                if(res.data.pic_8 != '' && res.data.pic_8 !=null){
+                    this.fileList.push({url:res.data.pic_8})
+                }
+                if(res.data.pic_9 != '' && res.data.pic_9 !=null){
+                    this.fileList.push({url:res.data.pic_9})
+                }
+                if(res.data.pic_10 != '' && res.data.pic_10 !=null){
+                    this.fileList.push({url:res.data.pic_10})
+                }
+
+                this.shoHeadPicUpload.number = this.fileList.length
+                // this.fileList.push({url:res.data.pic_2})
+                // console.log(this.fileList);
+                // this.fileList.push(res.data.pic_1);
+                // console.log("~~~~~~"+res.data.shop_id);
+                // console.log("~~~~~~"+res.data.id);
+                // console.log("~~~~~~"+res.data.pic_1);
+                // console.log("~~~~~~"+res.data.pic_2);
+                // console.log("~~~~~~"+res.data.pic_3);
+                // console.log("~~~~~~"+res.data.pic_4);
+                // console.log("~~~~~~"+res.data.pic_5);
+                // console.log("~~~~~~"+res.data.pic_6);
+                // console.log("~~~~~~"+res.data.pic_7);
+                // console.log("~~~~~~"+res.data.pic_8);
+                // console.log("~~~~~~"+res.data.pic_9);
+                // console.log("~~~~~~"+res.data.pic_10);
+
                 // this.fileList.push()
 
             })

@@ -28,6 +28,49 @@
         <result column="pic_10" jdbcType="VARCHAR" property="pic_10" />
     </resultMap>
 
+    <update id="updateShopMainPic_1">
+    update from shop_main_picture set pic_1 = #{url}
+    </update>
+
+    <update id="updateShopMainPic_2">
+        update from shop_main_picture set pic_2 = #{url}
+    </update>
+
+    <update id="updateShopMainPic_3">
+        update from shop_main_picture set pic_3 = #{url}
+    </update>
+
+    <update id="updateShopMainPic_4">
+        update from shop_main_picture set pic_4 = #{url}
+    </update>
+
+    <update id="updateShopMainPic_5">
+        update from shop_main_picture set pic_5 = #{url}
+    </update>
+
+    <update id="updateShopMainPic_6">
+        update from shop_main_picture set pic_6 = #{url}
+    </update>
+
+    <update id="updateShopMainPic_7">
+        update from shop_main_picture set pic_7 = #{url}
+    </update>
+
+    <update id="updateShopMainPic_8">
+        update from shop_main_picture set pic_8 = #{url}
+    </update>
+
+    <update id="updateShopMainPic_9">
+        update from shop_main_picture set pic_9 = #{url}
+    </update>
+
+    <update id="updateShopMainPic_10">
+        update from shop_main_picture set pic_10 = #{url}
+    </update>
+
+    <select id="getAllShopPicByShopId" resultMap="shopHeadPicMap">
+        select * from shop_main_picture where shop_id = #{id}
+    </select>
 
     <select id="getShopMainPicByShopID" resultMap="shopHeadPicMap">
         select * from shop_main_picture where shop_id = #{id}
