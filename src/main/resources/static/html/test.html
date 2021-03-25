@@ -18,147 +18,98 @@
         margin: 0;
         padding: 0;
     }
-    #main{
-        margin: 0 auto;
-        height: 2000px;
-        width: 1000px;
-        border: 1px solid #ebebeb;
-        /*background-color: RGB(250,250,250);*/
-        background-color: #F2F6FC;
-    }
-    /*#main:hover{*/
-    /*    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)*/
-    /*}*/
     .shopCss{
         color: rgba(255,83,106,0.54);
         border-bottom: 1px solid #ddd;
         cursor: pointer;
         height: 100px;
     }
-    /*.shopCss:hover{*/
-    /*    background-color: rgba(255,83,106,0.27);*/
-    /*}*/
+    .shopCss:hover{
+        background-color: rgba(255,83,106,0.27);
+    }
 </style>
 <body>
 <div style="height: 250px;margin: 0 auto">
     <iframe src="hfqTop.html" width="100%" height="220px" scrolling="no" frameborder="0">
     </iframe>
 </div>
-<div id="main">
-    <el-row type="flex" justify="center" style="margin: 50px auto;">
-        <el-col :span="2" style="line-height: 32px;text-align:center">商品名:</el-col>
-<!--            <el-col :span="20"><div style="height: 300px;background-color: #1E9FFF"></div></el-col>-->
-        <el-col :span="6"  ><el-input v-model="shop.shopName" size="small" placeholder="请输入内容"  ></el-input></el-col>
-    </el-row>
-    <el-row type="flex" justify="center" style="margin: 50px auto;background-color: #1E9FFF">
-        <el-col :span="2" style="line-height: 32px;text-align:center">商品价格:</el-col>
-        <!--            <el-col :span="20"><div style="height: 300px;background-color: #1E9FFF"></div></el-col>-->
-        <el-col :span="6"  ><el-input v-model="shop.shopPrice" size="small" placeholder="请输入内容"  ></el-input></el-col>
-    </el-row>
-    <el-row type="flex" justify="center" style="margin: 50px auto;background-color: #1E9FFF">
-        <el-col :span="2" style="line-height: 32px;text-align:center">商品类型:</el-col>
-        <!--            <el-col :span="20"><div style="height: 300px;background-color: #1E9FFF"></div></el-col>-->
-        <el-col :span="6"  ><el-input v-model="shop.shopFamily" size="small" placeholder="请输入内容"  ></el-input></el-col>
-    </el-row>
-    <el-row type="flex" justify="center" style="margin: 50px auto;background-color: #1E9FFF">
-        <el-col :span="2" style="line-height: 32px;text-align:center">商品介绍:</el-col>
-        <!--            <el-col :span="20"><div style="height: 300px;background-color: #1E9FFF"></div></el-col>-->
-        <el-col :span="6"  ><el-input v-model="shop.shopIntroduction" size="small" placeholder="请输入内容"  ></el-input></el-col>
-    </el-row>
 
-    <el-row type="flex" justify="center" style="margin: 50px auto;background-color: #1E9FFF">
-        <el-col :span="2" style="line-height: 100px;text-align:center">商品头像:</el-col>
-        <!--            <el-col :span="20"><div style="height: 300px;background-color: #1E9FFF"></div></el-col>-->
-        <el-col :span="6" style="text-align: center"><img :src="shop.shopHeadPicture" width="100px" height="100px;" v-on:click="open1()"></el-input></el-col>
-    </el-row>
+<div style="width: 1400px;height: 1000px;border: 1px solid #ddd;margin: 0 auto;color: rgba(255,83,106,0.54);" id="main">
 
-    <el-row type="flex" justify="center" style="margin: 50px auto;background-color: #1E9FFF">
-        <el-col :span="2" style="line-height: 32px;text-align:center">商品状态:</el-col>
-        <el-col :span="2" style="line-height: 32px;text-align:center"><span style="margin-left: -20px">{{shop.auditStatus}}</span></el-col>
-        <!--            <el-col :span="20"><div style="height: 300px;background-color: #1E9FFF"></div></el-col>-->
-        <el-col :span="4"  ><el-button type="primary"  size="small" @click="modifyState">修改状态</el-button></el-input></el-col>
-    </el-row>
+    <div style="width: 1000px;height: 500px;margin: 0px auto;overflow: hidden">
+        <div id="leftMain" style="width: 50%;height: 100%;float: left;">
+            <div style="overflow: hidden">
+                <div style="float: left;margin-top: 5px">商品名:&nbsp;&nbsp;</div>
+                <div style="width: 150px;height: 100px;float: left">
+                    <el-input  v-model="shop.shopName" size="small" placeholder="请输入内容" style="display: inline-block" ></el-input>
+                </div>
+            </div>
+            <div style="overflow: hidden">
+                <div style="float: left;margin-top: 5px">商品价格:&nbsp;&nbsp;</div>
+                <div style="width: 150px;height: 100px;float: left">
+                    <el-input  v-model="shop.shopPrice" size="small" placeholder="请输入内容" style="display: inline-block" ></el-input>
+                </div>
+            </div>
+            <div style="overflow: hidden">
+                <div style="float: left;margin-top: 5px">商品类型:&nbsp;&nbsp;</div>
+                <div style="width: 150px;height: 100px;float: left">
+                    <el-input  v-model="shop.shopFamily" size="small" placeholder="请输入内容" style="display: inline-block" ></el-input>
+                </div>
+            </div>
+            <div style="overflow: hidden">
+                <div style="float: left;margin-top: 5px">商品介绍:&nbsp;&nbsp;</div>
+                <div style="width: 150px;height: 100px;float: left">
+                    <el-input  v-model="shop.shopIntroduction" size="small" placeholder="请输入内容" style="display: inline-block" ></el-input>
+                </div>
+            </div>
+        </div>
+        <div id="rightMain" style="width: 50%;height: 1000px;float: left;">
+            <div style="cursor: pointer">
+                商品头像:<img :src="shop.shopHeadPicture" width="100px" height="100px;" v-on:click="open1()">
+            </div>
+            商品状态: {{shop.auditStatus}}
+            <el-button type="primary"  size="small" @click="modifyState">修改状态</el-button>
+
+            <div>
+                <el-upload
+                        class="upload-demo"
+                        action="/updateShopHeadPic"
+                        :data="shoHeadPicUpload"
+                        :on-success="shopHeadPicSuccess"
+                        v-show="false"
+                        multiple
+                        :limit="10"
+                        :file-list="shoHeadPicUpload">
+                    <el-button id="shopHeadPic" size="small" type="primary">点击上传~~~~~~~~</el-button>
+                    <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb1111</div>
+                </el-upload>
+            </div>
+
+        </div>
+        <div>
+        </div>
+    </div>
+    <div>
+        <el-upload
+                class="upload-demo"
+                style="height: 1000px"
+                action="/shopDetailPic"
+                :on-preview="handlePreview"
+                :on-remove="handleRemove"
+                :file-list="fileList"
+                :limit="10"
+                :data="shoHeadPicUpload"
+                list-type="picture">
+            <el-button size="small" type="primary" >点击上传2</el-button>
+            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+        </el-upload>
+    </div>
+    <div style="margin: 200px auto 0;width: 310px">
+        <el-button type="primary"  style="float: left;width: 150px" @click="open">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;修改&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</el-button>
+        <el-button type="primary"  style="float: left;width: 150px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;返回首页&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</el-button>
+    </div>
 
 </div>
-
-
-
-<!--<div style="width: 1400px;height: 1000px;border: 1px solid #ddd;margin: 0 auto;color: rgba(255,83,106,0.54);" id="main">-->
-
-<!--    <div style="width: 1000px;height: 500px;margin: 0px auto;overflow: hidden">-->
-<!--        <div id="leftMain" style="width: 50%;height: 100%;float: left;">-->
-<!--            <div style="overflow: hidden">-->
-<!--                <div style="float: left;margin-top: 5px">商品名:&nbsp;&nbsp;</div>-->
-<!--                <div style="width: 150px;height: 100px;float: left">-->
-<!--                    <el-input  v-model="shop.shopName" size="small" placeholder="请输入内容" style="display: inline-block" ></el-input>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div style="overflow: hidden">-->
-<!--                <div style="float: left;margin-top: 5px">商品价格:&nbsp;&nbsp;</div>-->
-<!--                <div style="width: 150px;height: 100px;float: left">-->
-<!--                    <el-input  v-model="shop.shopPrice" size="small" placeholder="请输入内容" style="display: inline-block" ></el-input>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div style="overflow: hidden">-->
-<!--                <div style="float: left;margin-top: 5px">商品类型:&nbsp;&nbsp;</div>-->
-<!--                <div style="width: 150px;height: 100px;float: left">-->
-<!--                    <el-input  v-model="shop.shopFamily" size="small" placeholder="请输入内容" style="display: inline-block" ></el-input>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div style="overflow: hidden">-->
-<!--                <div style="float: left;margin-top: 5px">商品介绍:&nbsp;&nbsp;</div>-->
-<!--                <div style="width: 150px;height: 100px;float: left">-->
-<!--                    <el-input  v-model="shop.shopIntroduction" size="small" placeholder="请输入内容" style="display: inline-block" ></el-input>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div id="rightMain" style="width: 50%;height: 1000px;float: left;">-->
-<!--            <div style="cursor: pointer">-->
-<!--                商品头像:<img :src="shop.shopHeadPicture" width="100px" height="100px;" v-on:click="open1()">-->
-<!--            </div>-->
-<!--                 商品状态: {{shop.auditStatus}}-->
-<!--                <el-button type="primary"  size="small" @click="modifyState">修改状态</el-button>-->
-
-<!--            <div>-->
-<!--                <el-upload-->
-<!--                        class="upload-demo"-->
-<!--                        action="/updateShopHeadPic"-->
-<!--                        :data="shoHeadPicUpload"-->
-<!--                        :on-success="shopHeadPicSuccess"-->
-<!--                        v-show="false"-->
-<!--                        multiple-->
-<!--                        :limit="10"-->
-<!--                        :file-list="shoHeadPicUpload">-->
-<!--                    <el-button id="shopHeadPic" size="small" type="primary">点击上传~~~~~~~~</el-button>-->
-<!--                    <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb1111</div>-->
-<!--                </el-upload>-->
-<!--            </div>-->
-
-<!--        </div>-->
-<!--        <div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <div>-->
-<!--        <el-upload-->
-<!--                class="upload-demo"-->
-<!--                style="height: 1000px"-->
-<!--                action="/shopDetailPic"-->
-<!--                :on-preview="handlePreview"-->
-<!--                :on-remove="handleRemove"-->
-<!--                :file-list="fileList"-->
-<!--                :limit="10"-->
-<!--                :data="shoHeadPicUpload"-->
-<!--                list-type="picture">-->
-<!--            <el-button size="small" type="primary" >点击上传2</el-button>-->
-<!--            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>-->
-<!--        </el-upload>-->
-<!--    </div>-->
-<!--    <div style="margin: 200px auto 0;width: 310px">-->
-<!--        <el-button type="primary"  style="float: left;width: 150px" @click="open">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;修改&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</el-button>-->
-<!--        <el-button type="primary"  style="float: left;width: 150px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;返回首页&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</el-button>-->
-<!--    </div>-->
-
-<!--</div>-->
 
 
 
@@ -215,11 +166,11 @@
                 this.$message.success('图片上传成功')
             },
             modifyState(){
-              if(this.shop.auditStatus == '未上架'){
-                  this.shop.auditStatus = '上架'
-              }else {
-                  this.shop.auditStatus = '未上架'
-              }
+                if(this.shop.auditStatus == '未上架'){
+                    this.shop.auditStatus = '上架'
+                }else {
+                    this.shop.auditStatus = '未上架'
+                }
             },
             open1(){
                 document.getElementById("shopHeadPic").click();
