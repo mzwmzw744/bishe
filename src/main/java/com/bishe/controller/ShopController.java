@@ -36,7 +36,8 @@ public class ShopController {
         String shopName = map.get("shopName");
         double shopPrice =  Double.parseDouble(map.get("shopPrice"));
         String shopIntroduction = map.get("shopIntroduction");
-        String shopHeadPicture = map.get("shopHeadPicture");
+//      String shopHeadPicture = map.get("shopHeadPicture");
+        String shopHeadPicture="/pic/shopTiShi.png";
         String shopFamily = map.get("shopFamily");
         Shop shop = new Shop();
         shop.setUserID(userId);
@@ -45,7 +46,7 @@ public class ShopController {
         shop.setShopPrice(shopPrice);
         shop.setShopIntroduction(shopIntroduction);
         shop.setShopHeadPicture(shopHeadPicture);
-        shop.setAuditStatus("false");
+        shop.setAuditStatus("未上架");
         System.out.println(shop.getId());
         int isTrue = shopMapper.shopCreate(shop);
         System.out.println(shop.getId());
@@ -70,9 +71,9 @@ public class ShopController {
         int count = shopMapper.getShopAccount(user.getId());
         int curPage = Integer.parseInt(map.get("page"));
         int pageSize = 5;
-        int min = (curPage-1)*pageSize;
-        int max = pageSize*curPage;
-        List<Shop> list = shopMapper.getShopMessage(user.getId(),min,max);
+//        int min = (curPage-1)*pageSize;
+        int offset = pageSize*(curPage-1);
+        List<Shop> list = shopMapper.getShopMessage(user.getId(),pageSize,offset);
         userShopMessage.setShops(list);
         userShopMessage.setAccount(count);
         return userShopMessage;

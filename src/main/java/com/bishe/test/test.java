@@ -12,5 +12,11 @@ public class test {
                 "t.other_work_guests,t.other_work_num,t.other_cost_money,t.MONEY_STANDARD,t.MONEY_OTHER_STANDARD,t.other_work_guests_list,t.main_guests_list,t.is_otherwork,t.our_accompany_list,t.QT_STANDARD ," +
                 "t.is_ourpeople_standard,t.GZ_STANDARD,decode(t.OPEN_STATUS,0,'不公开',1,'外部公开',2,'内部公开',3,'暂存',4,'审核中',5,'已提交') OPEN_STATUS_CS," +
                 "o.fullname_ from GW_SOURCE_OFFICIAL_DINING_BUS t left join os_user o on t.CREATE_BY =o.user_id_  left join OS_GROUP g on t.GROUP_ID=g.group_id_ where  1=1";
+
+        if( 1 == '1' || 1 == 1){
+            System.out.println(123);
+        }
+
+
     }
 }

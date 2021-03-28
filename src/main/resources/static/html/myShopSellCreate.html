@@ -38,14 +38,24 @@
 
     <div style="margin: 45px auto;height: 504px;width: 900px;border: 1px solid #ddd;">
         <div v-for="shop of shops"  class="shopCss" v-on:click="shopsClick(shop)">
-            <img height="100px" width="100px"  v-bind:src="shop.shopHeadPicture">
-            <span  style="margin-left: 70px">{{shop.shopName}}</span>
-            <span style="margin-left: 50px">¥{{shop.shopPrice}}</span>
-            <span style="margin-left: 50px">{{shop.shopFamily}}</span>
-            <span style="margin-left: 50px">{{shop.shopIntroduction}}</span>
-            <span style="margin-left: 50px">{{shop.auditStatus}}</span>
-            <span style="margin-left: 50px">{{shop.createDate}}</span>
-            <span></span>
+            <el-row style="line-height: 99px">
+                <el-col :span="3"><img height="100px" width="100px"  v-bind:src="shop.shopHeadPicture"></el-col>
+                <el-col :span="3">{{shop.shopName}}</el-col>
+                <el-col :span="3">¥{{shop.shopPrice}}</el-col>
+                <el-col :span="3">{{shop.shopFamily}}</el-col>
+                <el-col :span="3">{{shop.shopIntroduction}}</el-col>
+                <el-col :span="3">{{shop.auditStatus}}</el-col>
+                <el-col :span="5">{{shop.createDate}}</el-col>
+            </el-row>
+
+<!--            <img height="100px" width="100px"  v-bind:src="shop.shopHeadPicture">-->
+<!--            <span  style="margin-left: 70px">{{shop.shopName}}</span>-->
+<!--            <span style="margin-left: 50px">¥{{shop.shopPrice}}</span>-->
+<!--            <span style="margin-left: 50px">{{shop.shopFamily}}</span>-->
+<!--            <span style="margin-left: 50px">{{shop.shopIntroduction}}</span>-->
+<!--            <span style="margin-left: 50px">{{shop.auditStatus}}</span>-->
+<!--            <span style="margin-left: 50px">{{shop.createDate}}</span>-->
+<!--            <span></span>-->
         </div>
     </div>
 

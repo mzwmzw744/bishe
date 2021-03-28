@@ -81,7 +81,7 @@
     </update>
 
     <insert id="shopMainPictureCreate" parameterType="com.bishe.bean.Shop" useGeneratedKeys="true" keyProperty="id">
-        insert into shop_main_picture values (null,#{id},'','','','','','','','','');
+        insert into shop_main_picture values (null,#{id},'','','','','','','','','','');
     </insert>
 
     <insert id="shopCreate" parameterType="com.bishe.bean.Shop" useGeneratedKeys="true" keyProperty="id">
@@ -93,7 +93,7 @@
     </select>
 
     <select id="getShopMessage" resultMap="shopResultMap">
-        select * from shop where user_id = #{userId} limit #{min},#{max}
+        select * from shop where user_id = #{userId} limit #{pageSize} offset #{offset}
     </select>
 
     <select id="getShopById" resultMap="shopResultMap">

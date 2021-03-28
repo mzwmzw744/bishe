@@ -5,9 +5,9 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://121.199.46.22:3306/bysj
+    url: jdbc:mysql://172.81.214.63:3306/bysj
     username: bysj
-    password: 123456
+    password: q13044621896
 
 
 #  profiles:
