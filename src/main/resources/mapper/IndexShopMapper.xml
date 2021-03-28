@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.bishe.mapper.ShopMapper">
+<mapper namespace="com.bishe.mapper.IndexShopMapper">
 
 
     <resultMap id="shopResultMap" type="com.bishe.bean.Shop">
@@ -27,8 +27,8 @@
         <result column="pic_9" jdbcType="VARCHAR" property="pic_9" />
         <result column="pic_10" jdbcType="VARCHAR" property="pic_10" />
     </resultMap>
-<select id="getShopNew">
-
+<select id="getShopNew" resultMap="shopResultMap">
+   select * from shop where auditStatus = '上架' limit 10
 </select>
 
 </mapper>

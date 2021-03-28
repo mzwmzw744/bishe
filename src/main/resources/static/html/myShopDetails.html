@@ -67,9 +67,9 @@
     </el-row>
 
     <el-row type="flex" justify="center" style="margin: 50px auto;background-color: #1E9FFF">
-        <el-col :span="2" style="line-height: 100px;text-align:center">商品头像:</el-col>
+        <el-col :span="2"   style="line-height: 100px;text-align:center" >商品头像:</el-col>
         <!--            <el-col :span="20"><div style="height: 300px;background-color: #1E9FFF"></div></el-col>-->
-        <el-col :span="6" style="text-align: center"><img :src="shop.shopHeadPicture" width="100px" height="100px;" v-on:click="open1()"></el-input></el-col>
+        <el-col :span="6" style="text-align: center;cursor: pointer"><img    v-on:click="open1()" :src="shop.shopHeadPicture" width="100px" height="100px;" v-on:click="open1()"></el-input></el-col>
     </el-row>
 
     <el-row type="flex" justify="center" style="margin: 50px auto;background-color: #1E9FFF">
@@ -79,6 +79,39 @@
         <el-col :span="4"  ><el-button type="primary"  size="small" @click="modifyState">修改状态</el-button></el-input></el-col>
     </el-row>
 
+    <div>
+        <el-upload
+                class="upload-demo"
+                action="/updateShopHeadPic"
+                :data="shoHeadPicUpload"
+                :on-success="shopHeadPicSuccess"
+                v-show="false"
+                multiple
+                :limit="10"
+                :file-list="shoHeadPicUpload">
+            <el-button id="shopHeadPic" size="small" type="primary">点击上传~~~~~~~~</el-button>
+            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb1111</div>
+        </el-upload>
+    </div>
+    <el-upload
+            class="upload-demo"
+            style=""
+            action="/shopDetailPic"
+            :on-preview="handlePreview"
+            :on-remove="handleRemove"
+            :on-success="shopMainPicSuccess"
+            :file-list="fileList"
+            :limit="10"
+            :data="shoHeadPicUpload"
+            list-type="picture">
+        <el-button size="small" style="margin-left: 450px" type="primary" >点击上传图片</el-button>
+        <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+    </el-upload>
+
+        <div style="margin: 200px auto 0;width: 310px">
+            <el-button type="primary"  style="float: left;width: 150px" @click="open">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;修改&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</el-button>
+            <el-button type="primary"  style="float: left;width: 150px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;返回首页&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</el-button>
+        </div>
 </div>
 
 
@@ -119,39 +152,14 @@
 <!--                 商品状态: {{shop.auditStatus}}-->
 <!--                <el-button type="primary"  size="small" @click="modifyState">修改状态</el-button>-->
 
-<!--            <div>-->
-<!--                <el-upload-->
-<!--                        class="upload-demo"-->
-<!--                        action="/updateShopHeadPic"-->
-<!--                        :data="shoHeadPicUpload"-->
-<!--                        :on-success="shopHeadPicSuccess"-->
-<!--                        v-show="false"-->
-<!--                        multiple-->
-<!--                        :limit="10"-->
-<!--                        :file-list="shoHeadPicUpload">-->
-<!--                    <el-button id="shopHeadPic" size="small" type="primary">点击上传~~~~~~~~</el-button>-->
-<!--                    <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb1111</div>-->
-<!--                </el-upload>-->
-<!--            </div>-->
+
 
 <!--        </div>-->
 <!--        <div>-->
 <!--        </div>-->
 <!--    </div>-->
 <!--    <div>-->
-<!--        <el-upload-->
-<!--                class="upload-demo"-->
-<!--                style="height: 1000px"-->
-<!--                action="/shopDetailPic"-->
-<!--                :on-preview="handlePreview"-->
-<!--                :on-remove="handleRemove"-->
-<!--                :file-list="fileList"-->
-<!--                :limit="10"-->
-<!--                :data="shoHeadPicUpload"-->
-<!--                list-type="picture">-->
-<!--            <el-button size="small" type="primary" >点击上传2</el-button>-->
-<!--            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>-->
-<!--        </el-upload>-->
+
 <!--    </div>-->
 <!--    <div style="margin: 200px auto 0;width: 310px">-->
 <!--        <el-button type="primary"  style="float: left;width: 150px" @click="open">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;修改&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</el-button>-->
@@ -177,6 +185,7 @@
                 //     // name: 'food.jpeg',
                 //     url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
                 // },
+
                 // {
                 //     // name: 'food2.jpeg',
                 //     url:'1'
@@ -209,6 +218,13 @@
             //     console.log(event.percent);
             //     this.percent = Math.floor(event.percent);
             // },
+            shopMainPicSuccess(res){
+                this.fileList.push({url:res})
+                // this.shop.shopHeadPicture = res;
+                // this.$message.success('图片上传成功')
+            },
+
+
             shopHeadPicSuccess(res){
                 console.log(res)
                 this.shop.shopHeadPicture = res;
@@ -237,7 +253,8 @@
                             'token' : sessionStorage.getItem("token")
                         },
                         data:{
-                            shop: this.shop
+                            shop: this.shop,
+                            mainPic:this.fileList
                         }
                     }).then(res=> {
                         console.log(res.data);
@@ -294,6 +311,8 @@
                     id:sessionStorage.getItem("shopIdToShopDetail")
                 }
             }).then(res=> {
+
+                console.log(res)
                 if(res.data.pic_1 != '' && res.data.pic_1 !=null){
                     this.fileList.push({url:res.data.pic_1})
                 }
@@ -324,7 +343,6 @@
                 if(res.data.pic_10 != '' && res.data.pic_10 !=null){
                     this.fileList.push({url:res.data.pic_10})
                 }
-
                 this.shoHeadPicUpload.number = this.fileList.length
                 // this.fileList.push({url:res.data.pic_2})
                 // console.log(this.fileList);
@@ -341,7 +359,6 @@
                 // console.log("~~~~~~"+res.data.pic_8);
                 // console.log("~~~~~~"+res.data.pic_9);
                 // console.log("~~~~~~"+res.data.pic_10);
-
                 // this.fileList.push()
 
             })

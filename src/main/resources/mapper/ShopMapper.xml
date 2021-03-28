@@ -93,7 +93,7 @@
     </select>
 
     <select id="getShopMessage" resultMap="shopResultMap">
-        select * from shop where user_id = #{userId} limit #{pageSize} offset #{offset}
+        select id,user_id,shop_name,shop_price,shop_family,shop_introduction,shop_head_picture,auditStatus,createDate  from shop where user_id = #{userId}  ORDER BY createDate desc limit #{pageSize}  offset #{offset}
     </select>
 
     <select id="getShopById" resultMap="shopResultMap">
@@ -102,6 +102,6 @@
 
     <update id="updateShop" parameterType="com.bishe.bean.Shop">
         update shop set shop_name = #{shopName},shop_price=#{shopPrice},shop_family=#{shopFamily},shop_introduction=#{shopIntroduction},
-                        auditStatus=#{auditStatus} where id = #{id};
+                        auditStatus=#{auditStatus},shop_head_picture=#{shopHeadPicture}  where id = #{id};
     </update>
 </mapper>

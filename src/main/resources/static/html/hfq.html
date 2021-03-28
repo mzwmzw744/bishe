@@ -212,26 +212,48 @@
         <div id="todayRecommendation" >
             <div id="todayRecommendationHead" style="height: 50px;border-bottom: 1px solid #ddd;
             line-height: 50px;color: #ff5046;font-size: 22px;padding-left: 25px">
-                最近上架
+                最新上架
+                <span style="float: right;margin-right: 20px;margin-top: -2px">
+                     <el-button  type="primary"  plain @click="newNextClick" >下一页</el-button>
+                </span>
             </div>
             <div style="height: 559px;">
                 <div style="height: 50%;border-bottom: 1px solid #ddd;overflow: hidden">
-                    <div style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left"></div>
-                    <div style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left"></div>
-                    <div style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left"></div>
-                    <div style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left;"></div>
-                    <div style="width: 278px;height:100%;float: left;"></div>
+                    <div  style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left">
+                        <img v-bind:src="newShopMessage[0].shopHeadPicture" width="100%"height="100%">
+                    </div>
+                    <div style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left">
+                        <img v-bind:src="newShopMessage[1].shopHeadPicture" width="100%"height="100%">
+                    </div>
+                    <div style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left">
+                        <img v-bind:src="newShopMessage[2].shopHeadPicture" width="100%"height="100%">
+                    </div>
+                    <div style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left;">
+                        <img v-bind:src="newShopMessage[3].shopHeadPicture" width="100%"height="100%">
+                    </div>
+                    <div style="width: 278px;height:100%;float: left;">
+                        <img v-bind:src="newShopMessage[4].shopHeadPicture" width="100%"height="100%">
+                    </div>
                 </div>
                 <div style="height: 50%;overflow: hidden">
-                    <div style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left"></div>
-                    <div style="border-right: 1px solid #ddd;width:  280px;height:100%;float: left"></div>
-                    <div style="border-right: 1px solid #ddd;width:  280px;height:100%;float: left"></div>
-                    <div style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left;"></div>
-                    <div style="width: 278px;height:100%;float: left;"></div>
+                    <div style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left">
+                        <img v-bind:src="newShopMessage[5].shopHeadPicture" width="100%"height="100%">
+                    </div>
+                    <div style="border-right: 1px solid #ddd;width:  280px;height:100%;float: left">
+                        <img v-bind:src="newShopMessage[6].shopHeadPicture" width="100%"height="100%">
+                    </div>
+                    <div style="border-right: 1px solid #ddd;width:  280px;height:100%;float: left">
+                        <img v-bind:src="newShopMessage[7].shopHeadPicture" width="100%"height="100%">
+                    </div>
+                    <div style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left;">
+                        <img v-bind:src="newShopMessage[8].shopHeadPicture" width="100%"height="100%">
+                    </div>
+                    <div style="width: 278px;height:100%;float: left;">
+                        <img v-bind:src="newShopMessage[9].shopHeadPicture" width="100%"height="100%">
+                    </div>
                 </div>
             </div>
         </div>
-
         <div id="guessYouLikeIt" >
             <div id="guessYouLikeItHead" style="height: 50px;border-bottom: 1px solid #ddd;
             line-height: 50px;color: #ff5046;font-size: 22px;padding-left: 25px">
@@ -263,7 +285,7 @@
 
 
 <script>
-    console.log(sessionStorage.getItem("token"))
+    // console.log(sessionStorage.getItem("token"))
     if (sessionStorage.getItem("token") == null) {
         window.location.replace("http://localhost/")
     }else {
@@ -280,7 +302,7 @@
             // console.log(res.data);
             sessionStorage.setItem("user",JSON.stringify(res.data));
             let user = eval ("(" + sessionStorage.getItem("user") + ")");
-            document.getElementById("userName").innerHTML = user.userName;
+            // document.getElementById("userName").innerHTML = user.userName;
         })
     }
 
@@ -298,15 +320,75 @@
             //,anim: 'updown' //切换动画方式
         });
     });
-    new Vue({
-        el:'#header'
-    })
-    new Vue({
-        el:'#header3',
+    // new Vue({
+    //     el:'#header'
+    // })
+    // new Vue({
+    //     el:'#header3',
+    //     data:{
+    //         search:''
+    //     }
+    // })
+    const main = new Vue({
+        el:'#main',
         data:{
-            search:''
+
+            newShopMessage:{},
+            newShopMessagePage:1,
+        },
+        methods:{
+            newNextClick(){
+                this.newShopMessagePage = this.newShopMessagePage + 1;
+
+            }
+        },
+
+        beforeCreate: function (){
+            axios({
+                method:'post',
+                url:'/token/getIndexNewShopMeaage',
+                headers:{
+                    'token' : sessionStorage.getItem("token")
+                },
+                data:{
+
+                }
+            }).then(res=> {
+                // console.log("哦哦哦11");
+                // console.log(res.data.data.data[0]);
+                this.newShopMessage = res.data.data.data;
+                // this.shops = res.data.data;
+                // console.log(this.data)
+            })
         }
+
+
+        //     axios({
+        //         method:'post',
+        //         url:'/token/getIndexNewShopMeaage',
+        //         headers:{
+        //             'token' : sessionStorage.getItem("token")
+        //         },
+        //         data:{
+        //             // id:sessionStorage.getItem("shopIdToShopDetail")
+        //         }
+        //     }).then(res=> {
+        //
+        //         console.log(res.data);
+        //         console.log(res.data.data);
+        //         console.log(res.data.data.id);
+        //         console.log(res.data.data[0]);
+        //         console.log(res.data.data);
+        //         this.newShopMessage = res.data.data;
+        //         console.log("-----------------");
+        //         console.log(this.newShopMessage);
+        //         console.log(this.newShopMessage.id);
+        //         console.log(this.newShopMessage[0]);
+        //         console.log(this.newShopMessage);
+        //     })
+        // },
     })
+    console.log(main.newShopMessage)
 </script>
 </body>
 </html>

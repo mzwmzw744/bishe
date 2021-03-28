@@ -100,8 +100,54 @@ public class ShopController {
     public String updateShopBy(@RequestBody String jsonStr,@RequestHeader Map<String, String> headers){
         String token = headers.get("token");
         User user = (User)redisUtil.get(token);
+
         JSONObject json = JSONObject.fromObject(jsonStr);
         Map map =  (Map) json.get("shop");
+        int shoHeadPicUploadId = (int)map.get("id");
+        List list = (List) json.get("mainPic");
+        ShopMainPicture shopMainPicture = new ShopMainPicture();
+        System.out.println(list.get(0));
+//        String url1 = (String) JSONObject.fromObject(list.get(0)).get("url");
+        if(list.size() >= 1) {
+            String url1 = (String) JSONObject.fromObject(list.get(0)).get("url");
+            shopMapper.updateShopMainPic_1(url1,shoHeadPicUploadId);
+        }
+        if(list.size() >= 2) {
+            String url2 = (String) JSONObject.fromObject(list.get(1)).get("url");
+            shopMapper.updateShopMainPic_2(url2,shoHeadPicUploadId);
+        }
+        if(list.size() >= 3) {
+            String url3 = (String) JSONObject.fromObject(list.get(2)).get("url");
+            shopMapper.updateShopMainPic_3(url3,shoHeadPicUploadId);
+        }
+        if(list.size() >= 4) {
+            String url4 = (String) JSONObject.fromObject(list.get(3)).get("url");
+            shopMapper.updateShopMainPic_4(url4,shoHeadPicUploadId);
+        }
+        if(list.size() >= 5) {
+            String url5 = (String) JSONObject.fromObject(list.get(4)).get("url");
+            shopMapper.updateShopMainPic_5(url5,shoHeadPicUploadId);
+        }
+        if(list.size() >= 6) {
+            String url6 = (String) JSONObject.fromObject(list.get(5)).get("url");
+            shopMapper.updateShopMainPic_6(url6,shoHeadPicUploadId);
+        }
+        if(list.size() >= 7) {
+            String url7 = (String) JSONObject.fromObject(list.get(6)).get("url");
+            shopMapper.updateShopMainPic_7(url7,shoHeadPicUploadId);
+        }
+        if(list.size() >= 8) {
+            String url8 = (String) JSONObject.fromObject(list.get(7)).get("url");
+            shopMapper.updateShopMainPic_8(url8,shoHeadPicUploadId);
+        }
+        if(list.size() >= 9) {
+            String url9 = (String) JSONObject.fromObject(list.get(8)).get("url");
+            shopMapper.updateShopMainPic_9(url9,shoHeadPicUploadId);
+        }
+        if(list.size() >= 10) {
+            String url10 = (String) JSONObject.fromObject(list.get(9)).get("url");
+            shopMapper.updateShopMainPic_10(url10,shoHeadPicUploadId);
+        }
         Shop shop = new Shop();
         shop.setId((int)map.get("id"));
         shop.setShopName((String)map.get("shopName"));
@@ -123,7 +169,6 @@ public class ShopController {
         int id = Integer.parseInt(map.get("id"));
         System.out.println("id为"+id);
         ShopMainPicture shopMainPicture = shopMapper.getShopMainPicByShopID(id);
-
         System.out.println(shopMainPicture);
         return shopMainPicture;
     }

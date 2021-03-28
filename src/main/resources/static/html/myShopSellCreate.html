@@ -59,7 +59,7 @@
         </div>
     </div>
 
-    <div class="block" style="margin: -30px auto;width: 350px;height: 20px">
+    <div class="block" style="margin: -30px auto;width: 500px;height: 20px">
         <span class="demonstration"></span>
         <el-pagination
                 @size-change="handleSizeChange"
@@ -107,6 +107,7 @@
                     console.log(res.data);
                     this.total = res.data.account;
                     this.shops = res.data.shops;
+
                 })
             }
         },
@@ -124,6 +125,8 @@
                 console.log(res.data);
                 this.total = res.data.account;
                 this.shops = res.data.shops;
+                console.log("wawawa");
+                console.log(this.shops)
             })
         }
     })

@@ -42,38 +42,36 @@ public class FileController {
         String sqlHeadPicPath = "/upload"+"/userId"+user.getId()+"/"+only+".png";
         ShopMainPicture shopMainPicture = shopMapper.getAllShopPicByShopId(shoHeadPicUploadId);
 
-        if(number == 1){
-            shopMapper.updateShopMainPic_1(sqlHeadPicPath,shoHeadPicUploadId);
-        }
-        if(number == 2){
-            shopMapper.updateShopMainPic_2(sqlHeadPicPath,shoHeadPicUploadId);
-        }
-        if(number == 3){
-            shopMapper.updateShopMainPic_3(sqlHeadPicPath,shoHeadPicUploadId);
-        }
-        if(number == 4){
-            shopMapper.updateShopMainPic_4(sqlHeadPicPath,shoHeadPicUploadId);
-        }
-        if(number == 5){
-            shopMapper.updateShopMainPic_5(sqlHeadPicPath,shoHeadPicUploadId);
-        }
-        if(number == 6){
-            shopMapper.updateShopMainPic_6(sqlHeadPicPath,shoHeadPicUploadId);
-        }
-        if(number == 7){
-            shopMapper.updateShopMainPic_7(sqlHeadPicPath,shoHeadPicUploadId);
-        }
-        if(number == 8){
-            shopMapper.updateShopMainPic_8(sqlHeadPicPath,shoHeadPicUploadId);
-        }
-        if(number == 9){
-            shopMapper.updateShopMainPic_9(sqlHeadPicPath,shoHeadPicUploadId);
-        }
-        if(number == 10){
-            shopMapper.updateShopMainPic_10(sqlHeadPicPath,shoHeadPicUploadId);
-        }
-
-
+//        if(number == 1){
+//            shopMapper.updateShopMainPic_1(sqlHeadPicPath,shoHeadPicUploadId);
+//        }
+//        if(number == 2){
+//            shopMapper.updateShopMainPic_2(sqlHeadPicPath,shoHeadPicUploadId);
+//        }
+//        if(number == 3){
+//            shopMapper.updateShopMainPic_3(sqlHeadPicPath,shoHeadPicUploadId);
+//        }
+//        if(number == 4){
+//            shopMapper.updateShopMainPic_4(sqlHeadPicPath,shoHeadPicUploadId);
+//        }
+//        if(number == 5){
+//            shopMapper.updateShopMainPic_5(sqlHeadPicPath,shoHeadPicUploadId);
+//        }
+//        if(number == 6){
+//            shopMapper.updateShopMainPic_6(sqlHeadPicPath,shoHeadPicUploadId);
+//        }
+//        if(number == 7){
+//            shopMapper.updateShopMainPic_7(sqlHeadPicPath,shoHeadPicUploadId);
+//        }
+//        if(number == 8){
+//            shopMapper.updateShopMainPic_8(sqlHeadPicPath,shoHeadPicUploadId);
+//        }
+//        if(number == 9){
+//            shopMapper.updateShopMainPic_9(sqlHeadPicPath,shoHeadPicUploadId);
+//        }
+//        if(number == 10){
+//            shopMapper.updateShopMainPic_10(sqlHeadPicPath,shoHeadPicUploadId);
+//        }
 
 //      shopMapper.updateShopHeadPic(sqlHeadPicPath,shoHeadPicUploadId);
         FileOutputStream fileOutputStream = new FileOutputStream(filePath);
@@ -96,7 +94,7 @@ public class FileController {
         String xdPath="\\upload\\"+"\\userId"+user.getId()+"\\"+only+".png";
         String filePath = "E:" + xdPath;
         String sqlHeadPicPath = "/upload"+"/userId"+user.getId()+"/"+only+".png";
-        shopMapper.updateShopHeadPic(sqlHeadPicPath,shoHeadPicUploadId);
+//        shopMapper.updateShopHeadPic(sqlHeadPicPath,shoHeadPicUploadId);
         FileOutputStream fileOutputStream = new FileOutputStream(filePath);
         FileCopyUtils.copy(file, fileOutputStream);
         return sqlHeadPicPath;
