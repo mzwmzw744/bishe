@@ -11,6 +11,8 @@ import java.util.List;
 @Repository
 @Mapper
 public interface ShopMapper {
+    int updateShopMainPic(String url,int id);
+
     int updateShopMainPic_1(String url,int id);
 
     int updateShopMainPic_2(String url,int id);

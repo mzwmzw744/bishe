@@ -27,6 +27,10 @@
         <result column="pic_9" jdbcType="VARCHAR" property="pic_9" />
         <result column="pic_10" jdbcType="VARCHAR" property="pic_10" />
     </resultMap>
+    <update id="updateShopMainPic">
+        update shop_main_picture set pic_1 = '', pic_2 ='', pic_3 ='', pic_4 ='', pic_5 ='', pic_6 ='', pic_7 ='', pic_8 ='', pic_9 ='', pic_10 =''
+        where shop_id = #{id}
+    </update>
 
     <update id="updateShopMainPic_1">
     update shop_main_picture set pic_1 = #{url} where shop_id = #{id}

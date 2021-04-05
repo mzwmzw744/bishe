@@ -107,6 +107,7 @@ public class ShopController {
         List list = (List) json.get("mainPic");
         ShopMainPicture shopMainPicture = new ShopMainPicture();
         System.out.println(list.get(0));
+        shopMapper.updateShopMainPic("",shoHeadPicUploadId);
 //        String url1 = (String) JSONObject.fromObject(list.get(0)).get("url");
         if(list.size() >= 1) {
             String url1 = (String) JSONObject.fromObject(list.get(0)).get("url");
