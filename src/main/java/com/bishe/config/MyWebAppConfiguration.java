@@ -11,7 +11,10 @@ public class MyWebAppConfiguration implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         //意思是：url中读取到/upload时，就会自动将/upload解析成D:/idea/java_workspace/image/upload
-        registry.addResourceHandler("/upload/**").addResourceLocations("file:E:/upload/");
+//        registry.addResourceHandler("/upload/**").addResourceLocations("file:E:/upload/");
+//        registry.addResourceHandler("/upload/**").addResourceLocations("file:E:/upload/");
+
+        registry.addResourceHandler("/upload/**").addResourceLocations("file:upload/");
         /**
          * Linux系统
          * registry.addResourceHandler("/upload/**").addResourceLocations("file:/home/image/upload/");

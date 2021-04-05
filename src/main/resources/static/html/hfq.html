@@ -107,68 +107,26 @@
     .aHover:hover{
         color: #ff4f3b;
     }
+    .shopCss{
+        /*border: #1E9FFF;*/
+        border-right: 1px solid #ddd;
+        cursor:pointer;
+        float: left;
+
+
+
+    }
+    .shopCss:hover{
+        /*box-shadow:0 2px 4px rgba(0,0,0,.12),0 0 6px rgba(0,0,0,.04)*/
+        border: 1px solid #c14f1f;
+    }
+
 </style>
 <body>
 <div style="height: 210px;margin: 0 auto">
 <iframe src="hfqTop.html" width="100%" height="220px" scrolling="no" frameborder="0">
 </iframe>
 </div>
-
-<!--<div id="header">-->
-<!--    <div id="headerMain">-->
-<!--        <div style="float: left;line-height: 40px;font-size: 21px;font-weight: 300;color: #c35673">欢迎来到汉服圈</div>-->
-<!--        <div  id="headerMainRight" style="float: right;width: 200px">-->
-<!--            <div style="float: left"><el-avatar  src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar></div>-->
-<!--            <div id="userName" style="float: left;margin-left: 15px;line-height: 45px;color: #c35673"></div>-->
-<!--            <a  style="float: right;margin-left:20px;line-height: 45px" href="html/forgetPassword.html">注销</a>-->
-<!--            <a  style="float: right;line-height: 45px" href="html/forgetPassword.html">首页</a>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-<!--<div id="header2">-->
-<!--    <div id="headerMain2">-->
-<!--        <div style="width: 40%;height:100%;float: left">-->
-<!--            <img  style="height: 80%;margin-top: 10px;float: left" src="../pic/hanFuLogo.png" alt="无法查看"/> <h1 style="float: left;line-height: 120px;margin-left: 30px;font-size: 40px;color: red">漢服</h1></div>-->
-<!--        <div style="width: 60%;height:100%;float: left">-->
-<!--            <div style="float: left;margin-left: 380px">-->
-<!--                <img style="height: 50px;margin-top: 23px;" src="../pic/chuanCheng.png" alt="无法查看"/>-->
-<!--                <div style="margin-top: 12px;color: red">&nbsp;&nbsp;&nbsp;传承中国文化</div>-->
-<!--            </div>-->
-<!--            <div style="float: left;margin-left: 70px">-->
-<!--                <img style="height: 50px;margin-top: 24px;" src="../pic/pingZhi.png" alt="无法查看"/>-->
-<!--                <div style="margin-top: 10px;color: red">追求卓越品质</div>-->
-<!--            </div>-->
-<!--            <div style="float: left;margin-left: 70px">-->
-<!--                <img style="height: 53px;margin-top: 21px;" src="../pic/fuWu.png" alt="无法查看"/>-->
-<!--                <div style="margin-top: 10px;color: red">服务每位客户</div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-<!--<div id="header3">-->
-<!--    <div id="headerMain3">-->
-<!--        <div style="width: 40%;height: 100%;float: left">-->
-<!--            <div id="classificationHanFu"><a class="aHover" href="#">汉服分类</a></div>-->
-<!--            <div style="float: left;margin-left: 30px;line-height: 50px" id="myOrder"><a class="aHover" id="classificationHanFuA" href="#">我的订单</a></div>-->
-<!--            <div style="float: left;margin-left: 30px;line-height: 50px" id="makeFriends"><a class="aHover" href="/html/shopSellCreate.html">交友天地1</a></div>-->
-<!--            <div style="float: left;margin-left: 30px;line-height: 50px" id="sell"><a class="aHover" href="#">我要出售</a></div>-->
-<!--            <div style="float: left;margin-left: 30px;line-height: 50px" id="feedback"><a class="aHover" href="#">我要反馈</a></div>-->
-<!--        </div>-->
-<!--        <div style="width: 60%;height: 100%;float: left">-->
-<!--            <div style="width: 200px;margin-left: 380px;margin-top: 5px;float: left"><el-input v-model="search" placeholder="搜索汉服或店铺"></el-input></div>-->
-<!--            <div style="" id="shoppingCart">-->
-<!--                <div style="float: left;margin-top: 5px"><i style="font-size: 30px" class="el-icon-shopping-cart-2"></i></div>-->
-<!--                <div style="margin-left: 8px;margin-top: 10px;float: left;">我的购物车</div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-
-
-
-
 
 
 <div id="carouselMap">
@@ -219,36 +177,36 @@
             </div>
             <div style="height: 559px;">
                 <div style="height: 50%;border-bottom: 1px solid #ddd;overflow: hidden">
-                    <div  style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left">
+                    <div  class="shopCss" v-on:click="shopClick"  style="width: 280px;height:100%;">
                         <img v-bind:src="newShopMessage[0].shopHeadPicture" width="100%"height="100%">
                     </div>
-                    <div style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left">
+                    <div  class="shopCss"  v-on:click="shopClick"  style="width: 280px;height:100%;">
                         <img v-bind:src="newShopMessage[1].shopHeadPicture" width="100%"height="100%">
                     </div>
-                    <div style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left">
+                    <div  class="shopCss" v-on:click="shopClick"  style="width: 280px;height:100%;">
                         <img v-bind:src="newShopMessage[2].shopHeadPicture" width="100%"height="100%">
                     </div>
-                    <div style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left;">
+                    <div class="shopCss"  v-on:click="shopClick"   style="width: 280px;height:100%;">
                         <img v-bind:src="newShopMessage[3].shopHeadPicture" width="100%"height="100%">
                     </div>
-                    <div style="width: 278px;height:100%;float: left;">
+                    <div class="shopCss"  v-on:click="shopClick"  style="width: 278px;height:100%;">
                         <img v-bind:src="newShopMessage[4].shopHeadPicture" width="100%"height="100%">
                     </div>
                 </div>
                 <div style="height: 50%;overflow: hidden">
-                    <div style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left">
+                    <div  class="shopCss" v-on:click="shopClick"   style="width: 280px;height:100%;">
                         <img v-bind:src="newShopMessage[5].shopHeadPicture" width="100%"height="100%">
                     </div>
-                    <div style="border-right: 1px solid #ddd;width:  280px;height:100%;float: left">
+                    <div  class="shopCss" v-on:click="shopClick"   style="width:  280px;height:100%;">
                         <img v-bind:src="newShopMessage[6].shopHeadPicture" width="100%"height="100%">
                     </div>
-                    <div style="border-right: 1px solid #ddd;width:  280px;height:100%;float: left">
+                    <div  class="shopCss" v-on:click="shopClick"   style="width:  280px;height:100%;">
                         <img v-bind:src="newShopMessage[7].shopHeadPicture" width="100%"height="100%">
                     </div>
-                    <div style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left;">
+                    <div   class="shopCss" v-on:click="shopClick"   style="width: 280px;height:100%;">
                         <img v-bind:src="newShopMessage[8].shopHeadPicture" width="100%"height="100%">
                     </div>
-                    <div style="width: 278px;height:100%;float: left;">
+                    <div  class="shopCss" v-on:click="shopClick"    style="width: 278px;height:100%;">
                         <img v-bind:src="newShopMessage[9].shopHeadPicture" width="100%"height="100%">
                     </div>
                 </div>
@@ -340,9 +298,11 @@
             newNextClick(){
                 this.newShopMessagePage = this.newShopMessagePage + 1;
 
+            },
+            shopClick(){
+                window.location.href ='shoppingDetails.html';
             }
         },
-
         beforeCreate: function (){
             axios({
                 method:'post',

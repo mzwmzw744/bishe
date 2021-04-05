@@ -35,10 +35,10 @@ public class FileController {
 //      System.out.println(only);
 //      System.out.println("文件上传被执行");
         String path = System.getProperty("user.dir");
-        Service.createDir("E:\\upload\\userId"+user.getId());
+        Service.createDir("upload\\userId"+user.getId());
 //        File dir=new File("D:/test");
-        String xdPath="\\upload\\"+"\\userId"+user.getId()+"\\"+only+".png";
-        String filePath = "E:" + xdPath;
+        String xdPath="upload\\"+"\\userId"+user.getId()+"\\"+only+".png";
+//        String filePath = "E:" + xdPath;
         String sqlHeadPicPath = "/upload"+"/userId"+user.getId()+"/"+only+".png";
         ShopMainPicture shopMainPicture = shopMapper.getAllShopPicByShopId(shoHeadPicUploadId);
 
@@ -74,7 +74,7 @@ public class FileController {
 //        }
 
 //      shopMapper.updateShopHeadPic(sqlHeadPicPath,shoHeadPicUploadId);
-        FileOutputStream fileOutputStream = new FileOutputStream(filePath);
+        FileOutputStream fileOutputStream = new FileOutputStream(xdPath);
         FileCopyUtils.copy(file, fileOutputStream);
         return sqlHeadPicPath;
     }
@@ -89,13 +89,13 @@ public class FileController {
 //      System.out.println(only);
 //      System.out.println("文件上传被执行");
         String path = System.getProperty("user.dir");
-        Service.createDir("E:\\upload\\userId"+user.getId());
+        Service.createDir("upload\\userId"+user.getId());
 //        File dir=new File("D:/test");
-        String xdPath="\\upload\\"+"\\userId"+user.getId()+"\\"+only+".png";
-        String filePath = "E:" + xdPath;
+        String xdPath="upload\\"+"\\userId"+user.getId()+"\\"+only+".png";
+//        String filePath = "E:" + xdPath;
         String sqlHeadPicPath = "/upload"+"/userId"+user.getId()+"/"+only+".png";
 //        shopMapper.updateShopHeadPic(sqlHeadPicPath,shoHeadPicUploadId);
-        FileOutputStream fileOutputStream = new FileOutputStream(filePath);
+        FileOutputStream fileOutputStream = new FileOutputStream(xdPath);
         FileCopyUtils.copy(file, fileOutputStream);
         return sqlHeadPicPath;
     }
