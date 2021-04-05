@@ -92,6 +92,24 @@
         el:'#main',
         data:{
             input:'',
+        },
+        created:function (){
+            let shop = JSON.parse(sessionStorage.getItem("shopBuyDetailShop"));
+
+            // console.log(shop[0].shopHeadPicture)
+            // axios({
+            //     method:'post',
+            //     url:'/token/updateShop',
+            //     headers:{
+            //         'token' : sessionStorage.getItem("token")
+            //     },
+            //     data:{
+            //         shop: this.shop,
+            //         mainPic:this.fileList
+            //     }
+            // }).then(res=> {
+            //     console.log(res.data);
+            // })
         }
     })
 
