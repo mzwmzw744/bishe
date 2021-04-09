@@ -48,6 +48,19 @@
     </iframe>
 </div>
 <div id="main">
+    <el-upload
+            v-show="false"
+            class="upload-demo"
+            action="/dynamicPic"
+            :data="PicUpload"
+            :before-remove="beforeRemove"
+            :on-success="shopHeadPicSuccess"
+            multiple
+            :limit="3"
+            :on-exceed="handleExceed"
+            >
+        <el-button    id="scPic" size="small" type="primary">点击上传</el-button>
+    </el-upload>
     <!--    <div style="width: 100%;background-color: #93D1FF">-->
     <el-row>
         <el-col :span="4">&nbsp;</el-col>
@@ -58,7 +71,7 @@
                 v-model="textarea">
         </el-input></el-col>
         <el-col :span="2">
-            <div class="photoPic">
+            <div v-on:click="photoPicClick"  class="photoPic">
                 <i style="margin-top:15px;margin-left:20px;font-size: 60px;color: #606266" class="el-icon-camera-solid"></i>
             </div>
         </el-col>
@@ -67,11 +80,23 @@
         <el-col :span="16">
             &nbsp;
         </el-col>
-        <el-col style="margin-bottom: 30px" :span="4">
-            &nbsp;&nbsp;&nbsp;<el-button>发表</el-button>
+        <el-col style="margin-bottom: 30px;margin-left: -5px" :span="4">
+            &nbsp;&nbsp;&nbsp;<el-button v-on:click="fbClick">发表</el-button>
         </el-col>
     </el-row>
-    <el-backtop></el-backtop>
+
+
+
+
+
+    <el-backtop >
+    </el-backtop>
+
+
+
+
+
+
 
     <el-row>
         <el-col :span="4">
@@ -80,14 +105,13 @@
 
         <el-col :span="16">
 
-            <el-card class="box-card" shadow="hover">
-
+            <el-card style="text-align: center" class="box-card" shadow="hover" v-if="fileList.length > 0">
+                <div v-if="fileList.length == 1">
+                    <img width="400px" height="400px" v-bind:src="fileList[0].url">
+                </div>
             </el-card>
         </el-col>
-
     </el-row>
-
-
 
 </div>
 </div>
@@ -100,26 +124,44 @@
     new Vue({
         el:'#main',
         data:{
-            input:'',
-            shop:'',
-            shopMainPic:'',
-            textarea:''
+            picShow:'',
+            textarea:'',
+            fileList:[],
+            PicUpload:{
+                number:'',
+                shoHeadPicUploadId:'',
+                shoHeadPicUploadToken: sessionStorage.getItem('token'),
+            }
+        },
+        methods:{
+          fbClick(){
+              axios({
+                  method:'post',
+                  url:'/token/Publishingnews',
+                  headers:{
+                      'token' : sessionStorage.getItem("token")
+                  },
+                  data:{
+                      textarea:this.textarea,
+
+                  }
+              }).then(res=> {
+                  this.shopMainPic = res.data;
+                  this.$message.success('发表成功')
+              })
+          },
+            photoPicClick(){
+                document.getElementById("scPic").click();
+            },
+            shopHeadPicSuccess(res){
+                this.fileList.push({url:res})
+                console.log(this.fileList[0])
+                this.$message.success('图片上传成功123')
+            },
         },
         created:function (){
             let shop = JSON.parse(sessionStorage.getItem("shopBuyDetailShop"));
             this.shop = shop;
-            axios({
-                method:'post',
-                url:'/token/getShopMainPic',
-                headers:{
-                    'token' : sessionStorage.getItem("token")
-                },
-                data:{
-                    id:this.shop.id,
-                }
-            }).then(res=> {
-                this.shopMainPic = res.data;
-            })
         }
     })
 </script>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bishe.mapper.DynamicMapper">
+
+
+    <resultMap id="shopResultMap" type="com.bishe.bean.Shop">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="user_id" jdbcType="INTEGER" property="userID" />
+        <result column="shop_name" jdbcType="VARCHAR" property="shopName" />
+        <result column="shop_price" jdbcType="VARCHAR" property="shopPrice" />
+        <result column="shop_introduction" jdbcType="VARCHAR" property="shopIntroduction" />
+        <result column="shop_head_picture" jdbcType="VARCHAR" property="shopHeadPicture" />
+        <result column="auditStatus" jdbcType="VARCHAR" property="auditStatus" />
+    </resultMap>
+
+    <resultMap id="shopHeadPicMap" type="com.bishe.bean.ShopMainPicture">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="shop_id" jdbcType="INTEGER" property="shop_id" />
+        <result column="pic_1" jdbcType="VARCHAR" property="pic_1" />
+        <result column="pic_2" jdbcType="VARCHAR" property="pic_2" />
+        <result column="pic_3" jdbcType="VARCHAR" property="pic_3" />
+        <result column="pic_4" jdbcType="VARCHAR" property="pic_4" />
+        <result column="pic_5" jdbcType="VARCHAR" property="pic_5" />
+        <result column="pic_6" jdbcType="VARCHAR" property="pic_6" />
+        <result column="pic_7" jdbcType="VARCHAR" property="pic_7" />
+        <result column="pic_8" jdbcType="VARCHAR" property="pic_8" />
+        <result column="pic_9" jdbcType="VARCHAR" property="pic_9" />
+        <result column="pic_10" jdbcType="VARCHAR" property="pic_10" />
+    </resultMap>
+    <update id="updateShopMainPic">
+        update shop_main_picture set pic_1 = '', pic_2 ='', pic_3 ='', pic_4 ='', pic_5 ='', pic_6 ='', pic_7 ='', pic_8 ='', pic_9 ='', pic_10 =''
+        where shop_id = #{id}
+    </update>
+
+    <update id="updateShopMainPic_1">
+    update shop_main_picture set pic_1 = #{url} where shop_id = #{id}
+    </update>
+
+    <update id="updateShopMainPic_2">
+        update  shop_main_picture set pic_2 = #{url} where shop_id = #{id}
+    </update>
+
+    <update id="updateShopMainPic_3">
+        update  shop_main_picture set pic_3 = #{url} where shop_id = #{id}
+    </update>
+
+    <update id="updateShopMainPic_4">
+        update  shop_main_picture set pic_4 = #{url} where shop_id = #{id}
+    </update>
+
+    <update id="updateShopMainPic_5">
+        update  shop_main_picture set pic_5 = #{url} where shop_id = #{id}
+    </update>
+
+    <update id="updateShopMainPic_6">
+        update  shop_main_picture set pic_6 = #{url} where shop_id = #{id}
+    </update>
+
+    <update id="updateShopMainPic_7">
+        update  shop_main_picture set pic_7 = #{url} where shop_id = #{id}
+    </update>
+
+    <update id="updateShopMainPic_8">
+        update  shop_main_picture set pic_8 = #{url} where shop_id = #{id}
+    </update>
+
+    <update id="updateShopMainPic_9">
+        update  shop_main_picture set pic_9 = #{url} where shop_id = #{id}
+    </update>
+
+    <update id="updateShopMainPic_10">
+        update  shop_main_picture set pic_10 = #{url} where shop_id = #{id}
+    </update>
+
+    <select id="getAllShopPicByShopId" resultMap="shopHeadPicMap">
+        select * from shop_main_picture where shop_id = #{id}
+    </select>
+
+    <select id="getShopMainPicByShopID" resultMap="shopHeadPicMap">
+        select * from shop_main_picture where shop_id = #{id}
+    </select>
+
+    <update id="updateShopHeadPic">
+        update shop set shop_head_picture = #{shopHeadPic} where id = #{id}
+    </update>
+
+    <insert id="shopMainPictureCreate" parameterType="com.bishe.bean.Shop" useGeneratedKeys="true" keyProperty="id">
+        insert into shop_main_picture values (null,#{id},'','','','','','','','','','');
+    </insert>
+
+    <insert id="shopCreate" parameterType="com.bishe.bean.Shop" useGeneratedKeys="true" keyProperty="id">
+        insert into shop values (null,#{userID},#{shopName},#{shopPrice},#{shopFamily},#{shopIntroduction},#{shopHeadPicture},#{auditStatus},now());
+    </insert>
+
+    <select id="getShopAccount" resultType="Integer">
+        select count(*) from shop where user_id = #{userId}
+    </select>
+
+    <select id="getShopMessage" resultMap="shopResultMap">
+        select id,user_id,shop_name,shop_price,shop_family,shop_introduction,shop_head_picture,auditStatus,createDate  from shop where user_id = #{userId}  ORDER BY createDate desc limit #{pageSize}  offset #{offset}
+    </select>
+
+    <select id="getShopById" resultMap="shopResultMap">
+        select * from shop where id = #{id}
+    </select>
+
+    <update id="updateShop" parameterType="com.bishe.bean.Shop">
+        update shop set shop_name = #{shopName},shop_price=#{shopPrice},shop_family=#{shopFamily},shop_introduction=#{shopIntroduction},
+                        auditStatus=#{auditStatus},shop_head_picture=#{shopHeadPicture}  where id = #{id};
+    </update>
+</mapper>

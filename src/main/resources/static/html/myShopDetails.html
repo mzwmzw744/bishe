@@ -181,16 +181,6 @@
         el: '#main',
         data: {
             fileList: [
-                // {
-                //     // name: 'food.jpeg',
-                //     url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-                // },
-
-                // {
-                //     // name: 'food2.jpeg',
-                //     url:'1'
-                //     // url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-                // }
             ],
             token: {
                 userToken: sessionStorage.getItem('token')
@@ -220,10 +210,8 @@
             // },
             shopMainPicSuccess(res){
                 this.fileList.push({url:res})
-                // this.shop.shopHeadPicture = res;
-                // this.$message.success('图片上传成功')
-            },
 
+            },
 
             shopHeadPicSuccess(res){
                 console.log(res)
