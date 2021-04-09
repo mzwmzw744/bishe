@@ -9,22 +9,9 @@ import java.util.UUID;
 
 public class test {
     public static void main(String[] args) {
-
-//      System.out.println(user);
-        String only = UUID.randomUUID()+"";
-//      System.out.println(only);
-//      System.out.println("文件上传被执行");
-        String path = System.getProperty("user.dir");
-        try {
-            Service.createDir("upload\\userId");
-        } catch (IOException e) {
-            e.printStackTrace();
+        Object a = null;
+        if("1".equals(a.toString())){
+            System.out.println(123);
         }
-//        File dir=new File("D:/test");
-//        String filePath = "E:" + xdPath;
-
-//        shopMapper.updateShopHeadPic(sqlHeadPicPath,shoHeadPicUploadId);
-
-
     }
 }

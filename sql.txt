@@ -139,6 +139,19 @@ CREATE table shop_main_picture(
     pic_10 varchar(100)
 );
 
-select count(*) from shop where user_id = 1;
-
-
+drop table if exists shop_main_picture;
+create table dynamic(
+                        id int auto_increment primary key,
+                        user_id int,
+                        words varchar(200),
+                        pic_1 varchar(100),
+                        pic_2 varchar(100),
+                        pic_3 varchar(100),
+                        pic_4 varchar(100),
+                        pic_5 varchar(100),
+                        pic_6 varchar(100),
+                        pic_7 varchar(100),
+                        pic_8 varchar(100),
+                        pic_9 varchar(100),
+                        createTime datetime
+)

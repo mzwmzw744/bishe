@@ -30,7 +30,7 @@ public class MyFilter implements Filter {
         httpServletRequest.setCharacterEncoding("UTF-8");
         httpServletResponse.setContentType("text/html;charset=UTF-8");
         String token = httpServletRequest.getHeader("token");
-        String ServletPath = httpServletRequest.getServletPath();
+        String ServletPath = httpServletRequest.getServletPath().substring(0,6);
         System.out.println("ServletPath为"+ServletPath);
         if (ServletPath.equals("/token") ) {
             if (token == null || token == "") {

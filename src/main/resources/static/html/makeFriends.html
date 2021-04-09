@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>汉服圈</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="../ui/layui/css/layui.css">
+    <link rel="stylesheet" href="../css/theme/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.0/index.js"></script>
+    <!--    <script src="https://unpkg.com/element-ui/lib/index.js"></script>-->
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.js"></script>
+    <script src="../ui/layui/layui.js"></script>
+</head>
+<style scoped>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    #main{
+        margin: 0 auto;
+        width: 1000px;
+        height: 2000px;
+        border: 1px solid #ebebeb;
+        /*background-color: RGB(250,250,250);*/
+        background-color: #F2F6FC;
+    }
+    .te input.el-input__inner{
+        width: 100px;
+        height: 50px;
+        color: red;
+        text-align:right
+    }
+    .photoPic{
+        background-color: rgba(255,79,82,0.21);
+        width: 100px;
+        height: 95px
+    }
+    .photoPic:hover{
+        background-color: rgba(255,79,82,0.49);
+    }
+
+</style>
+<body>
+<div style="height: 250px;margin: 0 auto">
+    <iframe src="hfqTop.html" width="100%" height="220px" scrolling="no" frameborder="0">
+    </iframe>
+</div>
+<div id="main">
+    <!--    <div style="width: 100%;background-color: #93D1FF">-->
+    <el-row>
+        <el-col :span="4">&nbsp;</el-col>
+        <el-col :span="14" style="margin-left: -8px">    <el-input
+                type="textarea"
+                :rows="4"
+                placeholder="发表我的动态~"
+                v-model="textarea">
+        </el-input></el-col>
+        <el-col :span="2">
+            <div class="photoPic">
+                <i style="margin-top:15px;margin-left:20px;font-size: 60px;color: #606266" class="el-icon-camera-solid"></i>
+            </div>
+        </el-col>
+    </el-row>
+    <el-row>
+        <el-col :span="16">
+            &nbsp;
+        </el-col>
+        <el-col style="margin-bottom: 30px" :span="4">
+            &nbsp;&nbsp;&nbsp;<el-button>发表</el-button>
+        </el-col>
+    </el-row>
+    <el-backtop></el-backtop>
+
+    <el-row>
+        <el-col :span="4">
+            &nbsp;
+        </el-col>
+
+        <el-col :span="16">
+
+            <el-card class="box-card" shadow="hover">
+
+            </el-card>
+        </el-col>
+
+    </el-row>
+
+
+
+</div>
+</div>
+</div>
+<div id="foot" style="width: 100%;height: 370px;margin: 50px auto;border-top: 1px solid #ddd;">
+    <iframe src="hfqFoot.html" width="100%" height="430px"  frameborder="0" scrolling="no" >
+    </iframe>
+</div>
+<script>
+    new Vue({
+        el:'#main',
+        data:{
+            input:'',
+            shop:'',
+            shopMainPic:'',
+            textarea:''
+        },
+        created:function (){
+            let shop = JSON.parse(sessionStorage.getItem("shopBuyDetailShop"));
+            this.shop = shop;
+            axios({
+                method:'post',
+                url:'/token/getShopMainPic',
+                headers:{
+                    'token' : sessionStorage.getItem("token")
+                },
+                data:{
+                    id:this.shop.id,
+                }
+            }).then(res=> {
+                this.shopMainPic = res.data;
+            })
+        }
+    })
+</script>
+</body>
+</html>
