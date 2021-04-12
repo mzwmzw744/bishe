@@ -27,5 +27,6 @@ public interface DynamicMapper {
 
     int createUserDynamic(Dynamic dynamic);
 
+    Dynamic getDynamicByTime(int pageSize,int offset);
 
 }

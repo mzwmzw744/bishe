@@ -40,7 +40,21 @@
     .photoPic:hover{
         background-color: rgba(255,79,82,0.49);
     }
-
+    .el-dropdown-link {
+        cursor: pointer;
+        color: #409EFF;
+    }
+    .el-icon-arrow-down {
+        font-size: 12px;
+    }
+    #refresh{
+        cursor: pointer;
+        font-size: 20px;
+        color: #01AAED
+    }
+    #refresh:hover{
+        color: #c35673;
+    }
 </style>
 <body>
 <div style="height: 250px;margin: 0 auto">
@@ -56,9 +70,9 @@
             :before-remove="beforeRemove"
             :on-success="shopHeadPicSuccess"
             multiple
-            :limit="3"
+            :limit="9"
             :on-exceed="handleExceed"
-            >
+    >
         <el-button    id="scPic" size="small" type="primary">点击上传</el-button>
     </el-upload>
     <!--    <div style="width: 100%;background-color: #93D1FF">-->
@@ -67,7 +81,7 @@
         <el-col :span="14" style="margin-left: -8px">    <el-input
                 type="textarea"
                 :rows="4"
-                placeholder="发表我的动态~"
+                placeholder="发表我的动态~~~~~"
                 v-model="textarea">
         </el-input></el-col>
         <el-col :span="2">
@@ -85,18 +99,8 @@
         </el-col>
     </el-row>
 
-
-
-
-
     <el-backtop >
     </el-backtop>
-
-
-
-
-
-
 
     <el-row>
         <el-col :span="4">
@@ -105,12 +109,114 @@
 
         <el-col :span="16">
 
-            <el-card style="text-align: center" class="box-card" shadow="hover" v-if="fileList.length > 0">
+            <el-card style="text-align: center;overflow: hidden" class="box-card" shadow="hover" v-if="fileList.length > 0">
                 <div v-if="fileList.length == 1">
                     <img width="400px" height="400px" v-bind:src="fileList[0].url">
                 </div>
+                <div v-if="fileList.length == 2">
+                    <img width="200px" height="200px" v-bind:src="fileList[0].url">
+                    <img width="200px" height="200px" v-bind:src="fileList[1].url">
+                </div>
+                <div v-if="fileList.length == 3">
+                    <img width="200px" height="200px" v-bind:src="fileList[0].url">
+                    <img width="200px" height="200px" v-bind:src="fileList[1].url">
+                    <img width="200px" height="200px" v-bind:src="fileList[2].url">
+                </div>
+                <div v-if="fileList.length == 4">
+                    <img width="200px" height="200px" v-bind:src="fileList[0].url">
+                    <img width="200px" height="200px" v-bind:src="fileList[1].url">
+                    <img width="200px" height="200px" v-bind:src="fileList[2].url">
+                    <br>
+
+                    <img width="200px" height="200px" style="float: left;margin-left: 9px;margin-top: 5px" v-bind:src="fileList[3].url">
+                </div>
+                <div v-if="fileList.length == 5">
+                    <img width="200px" height="200px" v-bind:src="fileList[0].url">
+                    <img width="200px" height="200px" v-bind:src="fileList[1].url">
+                    <img width="200px" height="200px" v-bind:src="fileList[2].url">
+                    <br>
+                    <img width="200px" height="200px" style="float: left;margin-left: 9px;margin-top: 5px" v-bind:src="fileList[3].url">
+                    <img width="200px" height="200px" style="float: left;margin-left: 3px;margin-top: 5px"  v-bind:src="fileList[4].url">
+                </div>
+
+                <div v-if="fileList.length == 6" >
+                    <img width="200px" height="200px" v-bind:src="fileList[0].url">
+                    <img width="200px" height="200px" v-bind:src="fileList[1].url">
+                    <img width="200px" height="200px" v-bind:src="fileList[2].url">
+                    <br>
+                    <img width="200px" height="200px" style="float: left;margin-left: 9px;margin-top: 5px"  v-bind:src="fileList[3].url">
+                    <img width="200px" height="200px" style="float: left;margin-left: 3px;margin-top: 5px"  v-bind:src="fileList[4].url">
+                    <img width="200px" height="200px" style="float: left;margin-left: 4px;margin-top: 5px"  v-bind:src="fileList[5].url">
+                </div>
+
+                <div v-if="fileList.length == 7">
+                    <img width="200px" height="200px" v-bind:src="fileList[0].url">
+                    <img width="200px" height="200px" v-bind:src="fileList[1].url">
+                    <img width="200px" height="200px" v-bind:src="fileList[2].url">
+                    <br>
+                    <div style="overflow: hidden">
+                        <img width="200px" height="200px" style="float: left;margin-left: 9px;margin-top: 5px"  v-bind:src="fileList[3].url">
+                        <img width="200px" height="200px" style="float: left;margin-left: 3px;margin-top: 5px"  v-bind:src="fileList[4].url">
+                        <img width="200px" height="200px" style="float: left;margin-left: 4px;margin-top: 5px"  v-bind:src="fileList[5].url">
+                    </div>
+                    <img width="200px" height="200px" style="float: left;margin-left: 9px;margin-top: 5px"  v-bind:src="fileList[6].url">
+                </div>
+
+                <div v-if="fileList.length == 8">
+                    <img width="200px" height="200px" v-bind:src="fileList[0].url">
+                    <img width="200px" height="200px" v-bind:src="fileList[1].url">
+                    <img width="200px" height="200px" v-bind:src="fileList[2].url">
+                    <br>
+                    <div style="overflow: hidden">
+                        <img width="200px" height="200px" style="float: left;margin-left: 9px;margin-top: 5px"  v-bind:src="fileList[3].url">
+                        <img width="200px" height="200px" style="float: left;margin-left: 3px;margin-top: 5px"  v-bind:src="fileList[4].url">
+                        <img width="200px" height="200px" style="float: left;margin-left: 4px;margin-top: 5px"  v-bind:src="fileList[5].url">
+                    </div>
+                    <img width="200px" height="200px" style="float: left;margin-left: 9px;margin-top: 5px"  v-bind:src="fileList[6].url">
+                    <img width="200px" height="200px" style="float: left;margin-left: 3px;margin-top: 5px"  v-bind:src="fileList[7].url">
+                </div>
+
+                <div v-if="fileList.length == 9">
+                    <img width="200px" height="200px" v-bind:src="fileList[0].url">
+                    <img width="200px" height="200px" v-bind:src="fileList[1].url">
+                    <img width="200px" height="200px" v-bind:src="fileList[2].url">
+                    <br>
+                    <div style="overflow: hidden">
+                        <img width="200px" height="200px" style="float: left;margin-left: 9px;margin-top: 5px"  v-bind:src="fileList[3].url">
+                        <img width="200px" height="200px" style="float: left;margin-left: 3px;margin-top: 5px"  v-bind:src="fileList[4].url">
+                        <img width="200px" height="200px" style="float: left;margin-left: 4px;margin-top: 5px"  v-bind:src="fileList[5].url">
+                    </div>
+                    <img width="200px" height="200px" style="float: left;margin-left: 9px;margin-top: 5px"  v-bind:src="fileList[6].url">
+                    <img width="200px" height="200px" style="float: left;margin-left: 3px;margin-top: 5px"  v-bind:src="fileList[7].url">
+                    <img width="200px" height="200px" style="float: left;margin-left: 4px;margin-top: 5px"  v-bind:src="fileList[8].url">
+                </div>
+
             </el-card>
+            <div style="background-color: white;height: 45px">
+                <span style="margin-left: 20px" >
+                    <el-dropdown>
+                        <div class="el-dropdown-link" style="line-height: 45px">
+                        全部动态<i class="el-icon-arrow-down el-icon--right"></i>
+                        </div>
+                        <el-dropdown-menu slot="dropdown">
+                        <el-dropdown-item>黄金糕</el-dropdown-item>
+                        <el-dropdown-item>狮子头</el-dropdown-item>
+                        <el-dropdown-item>螺蛳粉</el-dropdown-item>
+                        <el-dropdown-item disabled>双皮奶</el-dropdown-item>
+                        <el-dropdown-item divided>蚵仔煎</el-dropdown-item>
+                        </el-dropdown-menu>
+                    </el-dropdown>
+                </span>
+            </div>
+
+            <div id="dynamic">
+
+
+            </div>
         </el-col>
+
+
+
     </el-row>
 
 </div>
@@ -121,9 +227,19 @@
     </iframe>
 </div>
 <script>
+    window.onscroll = function(){
+        var t = document.documentElement.scrollTop || document.body.scrollTop;  //离上方的距离
+        var h =window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; //可见宽度
+        if( t > document.documentElement.scrollHeight - h -50) {
+            var html="<div style='height: 200px;background-color: #c35673'>xxxxxxxxxxxxxxxxxxxx</div>"
+            document.getElementById("dynamic").innerHTML += html
+        }
+    }
     new Vue({
         el:'#main',
         data:{
+            page:1,
+            user_Dynamic:{},
             picShow:'',
             textarea:'',
             fileList:[],
@@ -134,34 +250,46 @@
             }
         },
         methods:{
-          fbClick(){
-              axios({
-                  method:'post',
-                  url:'/token/Publishingnews',
-                  headers:{
-                      'token' : sessionStorage.getItem("token")
-                  },
-                  data:{
-                      textarea:this.textarea,
-                      pic:this.fileList,
-                  }
-              }).then(res=> {
-                  this.shopMainPic = res.data;
-                  this.$message.success('发表成功')
-              })
-          },
+            fbClick(){
+                axios({
+                    method:'post',
+                    url:'/token/Publishingnews',
+                    headers:{
+                        'token' : sessionStorage.getItem("token")
+                    },
+                    data:{
+                        textarea:this.textarea,
+                        pic:this.fileList,
+                    }
+                }).then(res=> {
+                    this.shopMainPic = res.data;
+                    this.$message.success('发表成功')
+                })
+            },
             photoPicClick(){
                 document.getElementById("scPic").click();
             },
             shopHeadPicSuccess(res){
                 this.fileList.push({url:res})
                 console.log(this.fileList[0])
-                this.$message.success('图片上传成功123')
+                this.$message.success('图片上传成功')
             },
         },
         created:function (){
             let shop = JSON.parse(sessionStorage.getItem("shopBuyDetailShop"));
             this.shop = shop;
+            axios({
+                method:'post',
+                url:'/token/getDynamicByTime',
+                headers:{
+                    'token' : sessionStorage.getItem("token")
+                },
+                data:{
+                    page:this.page
+                }
+            }).then(res=> {
+                console.log(res.data)
+            })
         }
     })
 </script>

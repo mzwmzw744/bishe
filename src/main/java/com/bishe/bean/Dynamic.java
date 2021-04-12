@@ -6,17 +6,17 @@ import java.util.Date;
 
 @Data
 public class Dynamic {
-    private int id;
-    private int user_Id;
-    private String word;
-    private String prc_1;
-    private String prc_2;
-    private String prc_3;
-    private String prc_4;
-    private String prc_5;
-    private String prc_6;
-    private String prc_7;
-    private String prc_8;
-    private String prc_9;
-    private Date createTime;
+     int id;
+     int user_id;
+     String words;
+     String pic_1;
+     String pic_2;
+     String pic_3;
+     String pic_4;
+     String pic_5;
+     String pic_6;
+     String pic_7;
+     String pic_8;
+     String pic_9;
+     Date createTime;
 }

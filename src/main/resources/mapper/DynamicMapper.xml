@@ -13,9 +13,10 @@
         <result column="auditStatus" jdbcType="VARCHAR" property="auditStatus" />
     </resultMap>
 
-    <resultMap id="shopHeadPicMap" type="com.bishe.bean.ShopMainPicture">
+    <resultMap id="dynamicResultMap" type="com.bishe.bean.Dynamic">
         <result column="id" jdbcType="INTEGER" property="id" />
-        <result column="shop_id" jdbcType="INTEGER" property="shop_id" />
+        <result column="user_id" jdbcType="INTEGER" property="user_id" />
+        <result column="words" jdbcType="VARCHAR" property="words" />
         <result column="pic_1" jdbcType="VARCHAR" property="pic_1" />
         <result column="pic_2" jdbcType="VARCHAR" property="pic_2" />
         <result column="pic_3" jdbcType="VARCHAR" property="pic_3" />
@@ -77,4 +78,7 @@
         delete user_Dynamic where id = #{id}
     </delete>
 
+    <select id="getDynamicByTime" resultMap="dynamicResultMap">
+        select * from user_Dynamic order by createTime desc limit #{pageSize} offset #{offset}
+    </select>
 </mapper>
