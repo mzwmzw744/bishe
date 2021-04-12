@@ -3,10 +3,8 @@ package com.bishe.controller;
 import com.bishe.bean.Dynamic;
 import com.bishe.bean.User;
 import com.bishe.mapper.DynamicMapper;
-import com.bishe.mapper.ShopMapper;
 import com.bishe.util.RedisUtil;
 import net.sf.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -23,12 +21,11 @@ public class DynamicController {
     RedisUtil redisUtil;
 
     @RequestMapping("/token/getDynamicByTime")
-    public Dynamic getDynamicByTime(@RequestBody Map<String,String> map){
+    public List<Dynamic> getDynamicByTime(@RequestBody Map<String,String> map){
           int curPage = Integer.parseInt(map.get("page"));
           int pageSize = 10;
           int offset = pageSize*(curPage - 1);
-          Dynamic dynamic =  dynamicMapper.getDynamicByTime(pageSize,offset);
-//
+          List<Dynamic> dynamic =  dynamicMapper.getDynamicByTime(pageSize,offset);
         return dynamic;
     }
 
@@ -39,6 +36,8 @@ public class DynamicController {
         JSONObject json = JSONObject.fromObject(jsonStr);
         List list = (List) json.get("pic");
         Dynamic dynamic = new Dynamic();
+        dynamic.setWords((String) json.get("textarea"));
+        dynamic.setUser_id(user.getId());
         int dynamicId  = dynamicMapper.createUserDynamic(dynamic);
         if(list.size() >= 1) {
             String url1 = (String) JSONObject.fromObject(list.get(0)).get("url");

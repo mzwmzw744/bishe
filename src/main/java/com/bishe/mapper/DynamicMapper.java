@@ -4,6 +4,8 @@ import com.bishe.bean.Dynamic;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @Mapper
 public interface DynamicMapper {
@@ -27,6 +29,6 @@ public interface DynamicMapper {
 
     int createUserDynamic(Dynamic dynamic);
 
-    Dynamic getDynamicByTime(int pageSize,int offset);
+    List<Dynamic> getDynamicByTime(int pageSize, int offset);
 
 }

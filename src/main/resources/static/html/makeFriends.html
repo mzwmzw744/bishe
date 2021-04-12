@@ -207,11 +207,21 @@
                         </el-dropdown-menu>
                     </el-dropdown>
                 </span>
+                <span style="float: right;line-height: 45px;margin-right: 20px;margin-top: 2px" >
+                    <i class="el-icon-refresh-right" id="refresh"></i>
+                </span>
             </div>
 
             <div id="dynamic">
 
-
+                <div v-for="t in dynamicData">
+                    <div v-for="z in t">
+                        <span>{{z.words}}</span>
+                        <span>{{z.user_id}}</span>
+                        <span>{{z.id}}</span>
+<!--                        <span>{{z.createTime}}</span>-->
+                    </div>
+                </div>
             </div>
         </el-col>
 
@@ -222,7 +232,7 @@
 </div>
 </div>
 </div>
-<div id="foot" style="width: 100%;height: 370px;margin: 50px auto;border-top: 1px solid #ddd;">
+<div id="foot"  style="width: 100%;height: 370px;margin: 50px auto;border-top: 1px solid #ddd;">
     <iframe src="hfqFoot.html" width="100%" height="430px"  frameborder="0" scrolling="no" >
     </iframe>
 </div>
@@ -231,14 +241,17 @@
         var t = document.documentElement.scrollTop || document.body.scrollTop;  //离上方的距离
         var h =window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; //可见宽度
         if( t > document.documentElement.scrollHeight - h -50) {
-            var html="<div style='height: 200px;background-color: #c35673'>xxxxxxxxxxxxxxxxxxxx</div>"
-            document.getElementById("dynamic").innerHTML += html
+            // var html="<div style='height: 200px;background-color: #c35673'>xxxxxxxxxxxxxxxxxxxx</div>"
+            // document.getElementById("dynamic").innerHTML += html
+            app.page += 1;
+            app.dBottom();
         }
     }
-    new Vue({
+    const app = new Vue({
         el:'#main',
         data:{
             page:1,
+            dynamicData:[],
             user_Dynamic:{},
             picShow:'',
             textarea:'',
@@ -274,6 +287,22 @@
                 console.log(this.fileList[0])
                 this.$message.success('图片上传成功')
             },
+            dBottom(){
+                axios({
+                    method:'post',
+                    url:'/token/getDynamicByTime',
+                    headers:{
+                        'token' : sessionStorage.getItem("token")
+                    },
+                    data:{
+                        page:this.page
+                    }
+                }).then(res=> {
+                    console.log(res.data)
+                    this.dynamicData.push(res.data)
+                    console.log(this.dynamicData)
+                })
+            }
         },
         created:function (){
             let shop = JSON.parse(sessionStorage.getItem("shopBuyDetailShop"));
@@ -289,6 +318,8 @@
                 }
             }).then(res=> {
                 console.log(res.data)
+                this.dynamicData.push(res.data)
+                console.log(this.dynamicData)
             })
         }
     })

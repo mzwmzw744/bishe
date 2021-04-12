@@ -71,7 +71,7 @@
     </update>
 
     <insert id="createUserDynamic" parameterType="com.bishe.bean.Dynamic" useGeneratedKeys="true" keyProperty="id">
-        insert user_Dynamic values (null,1,'','','','','','','','','','',now())
+        insert user_Dynamic values (null,#{user_id},#{words},'','','','','','','','','',now())
     </insert>
 
     <delete id="deleteUserDynamic">
