@@ -3,21 +3,22 @@ CREATE table user(
                      user_id int auto_increment primary key,
                      user_name varchar(50),
                      user_email varchar(50),
-                     user_password varchar(100)
+                     user_password varchar(100),
+                     user_headPic varchar(200)
 );
-insert into user values (null,'1','1163974490@qq.com','1');
-insert into user values (null,'小红','1163974490@qq.com','123');
-insert into user values (null,'小明','1163974491@qq.com','123');
-insert into user values (null,'小1','1163974480@qq.com','123');
-insert into user values (null,'小2','1163974481@qq.com','123');
-insert into user values (null,'小3','1163974482@qq.com','123');
-insert into user values (null,'小4','1163974483@qq.com','123');
-insert into user values (null,'小5','1163974484@qq.com','123');
-insert into user values (null,'小6','1163974485@qq.com','123');
-insert into user values (null,'小7','1163974486@qq.com','123');
-insert into user values (null,'小8','1163974487@qq.com','123');
-insert into user values (null,'小9','1163974486@qq.com','123');
-insert into user values (null,'小10','1163974487@qq.com','123');
+insert into user values (null,'1','1163974490@qq.com','1','');
+insert into user values (null,'小红','1163974490@qq.com','123','');
+insert into user values (null,'小明','1163974491@qq.com','123','');
+insert into user values (null,'小1','1163974480@qq.com','123','');
+insert into user values (null,'小2','1163974481@qq.com','123','');
+insert into user values (null,'小3','1163974482@qq.com','123','');
+insert into user values (null,'小4','1163974483@qq.com','123','');
+insert into user values (null,'小5','1163974484@qq.com','123','');
+insert into user values (null,'小6','1163974485@qq.com','123','');
+insert into user values (null,'小7','1163974486@qq.com','123','');
+insert into user values (null,'小8','1163974487@qq.com','123','');
+insert into user values (null,'小9','1163974486@qq.com','123','');
+insert into user values (null,'小10','1163974487@qq.com','123','');
 
 drop table if exists admin;
 CREATE table admin(

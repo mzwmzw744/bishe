@@ -74,14 +74,39 @@
     .aHover:hover{
         color: #ff4f3b;
     }
+    .el-dropdown-link {
+        cursor: pointer;
+        color: #409EFF;
+    }
+    .el-icon-arrow-down {
+        font-size: 12px;
+    }
 </style>
 <body>
 <div id="header">
     <div id="headerMain">
         <div style="float: left;line-height: 40px;font-size: 21px;font-weight: 300;color: #c35673">欢迎来到汉服圈</div>
-        <div  id="headerMainRight" style="float: right;width: 200px">
-            <div style="float: left"><el-avatar  src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar></div>
-            <div id="userName" style="float: left;margin-left: 15px;line-height: 45px;color: #c35673"></div>
+        <div  id="headerMainRight" style="float: right;width: 220px">
+            <div style="float: left;cursor: pointer;"  v-on:click="headPicClick"> <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar></div>
+
+            <div style="float: left;font-size: 27px">
+            <el-dropdown @command="handleCommand">
+                    <span class="el-dropdown-link">
+                     <i class="el-icon-arrow-down el-icon--right"></i>
+                    </span>
+                <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-item command="a">我的关注</el-dropdown-item>
+                    <el-dropdown-item command="b">我的粉丝</el-dropdown-item>
+                    <el-dropdown-item command="c">个人信息修改</el-dropdown-item>
+<!--                    <el-dropdown-item>螺蛳粉</el-dropdown-item>-->
+<!--                    <el-dropdown-item disabled>双皮奶</el-dropdown-item>-->
+<!--                    <el-dropdown-item divided>蚵仔煎</el-dropdown-item>-->
+                </el-dropdown-menu>
+            </el-dropdown>
+            </div>
+
+
+            <div id="userName" style="float: left;margin-left: 25px;line-height: 45px;color: #c35673"></div>
             <a  style="float: right;margin-left:20px;line-height: 45px" href="/html/forgetPassword.html">注销</a>
             <a  style="float: right;line-height: 45px" href="/html/hfq.html" target="_parent">首页</a>
         </div>
@@ -151,7 +176,18 @@
     }
 
     new Vue({
-        el:'#header'
+        el:'#header',
+        methods:{
+            headPicClick(){
+                alert(123)
+            },
+            handleCommand(command) {
+                if(command == "c"){
+                    top.location.href ='modifyPersonalInformation.html';
+                }
+                this.$message('click on item ' + command);
+            }
+        }
     })
     new Vue({
         el:'#header3',

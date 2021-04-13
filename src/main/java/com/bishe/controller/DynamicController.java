@@ -21,12 +21,13 @@ public class DynamicController {
     RedisUtil redisUtil;
 
     @RequestMapping("/token/getDynamicByTime")
-    public List<Dynamic> getDynamicByTime(@RequestBody Map<String,String> map){
+    public List getDynamicByTime(@RequestBody Map<String,String> map){
           int curPage = Integer.parseInt(map.get("page"));
           int pageSize = 10;
           int offset = pageSize*(curPage - 1);
-          List<Dynamic> dynamic =  dynamicMapper.getDynamicByTime(pageSize,offset);
-        return dynamic;
+          List dynamic =  dynamicMapper.getDynamicByTime(pageSize,offset);
+
+          return dynamic;
     }
 
     @RequestMapping("/token/Publishingnews")

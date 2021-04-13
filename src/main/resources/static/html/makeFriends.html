@@ -215,12 +215,13 @@
             <div id="dynamic">
 
                 <div v-for="t in dynamicData">
-                    <div v-for="z in t">
+                    <el-card  style="margin: 50px auto" v-for="z in t">
                         <span>{{z.words}}</span>
                         <span>{{z.user_id}}</span>
                         <span>{{z.id}}</span>
+                        <span></span>
 <!--                        <span>{{z.createTime}}</span>-->
-                    </div>
+                    </el-card>
                 </div>
             </div>
         </el-col>
