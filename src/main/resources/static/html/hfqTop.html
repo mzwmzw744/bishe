@@ -111,7 +111,10 @@
             <a  style="float: right;line-height: 45px" href="/html/hfq.html" target="_parent">首页</a>
         </div>
     </div>
+
 </div>
+
+
 <div id="header2">
     <div id="headerMain2">
         <div style="width: 40%;height:100%;float: left">
@@ -154,6 +157,11 @@
     </div>
 </div>
 <script>
+    function getParentFunction(){
+        var parent=window.parent;//获取父页面
+        parent.parentSay();//调用父页面的方法
+    }
+
     console.log(sessionStorage.getItem("token"))
     if (sessionStorage.getItem("token") == null) {
         window.location.replace("http://localhost/")
@@ -177,13 +185,17 @@
 
     new Vue({
         el:'#header',
+        data:{
+            dialogVisibleByModifyUserInf: false
+        },
         methods:{
             headPicClick(){
                 alert(123)
             },
             handleCommand(command) {
                 if(command == "c"){
-                    top.location.href ='modifyPersonalInformation.html';
+                    getParentFunction();
+                    // this.dialogVisibleByModifyUserInf = true;
                 }
                 this.$message('click on item ' + command);
             }

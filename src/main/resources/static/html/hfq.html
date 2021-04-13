@@ -2,7 +2,7 @@
 <html lang="zh-cmn-Hans">
 <head>
     <meta charset="UTF-8">
-    <title>汉服圈</title>
+    <title>汉服圈1</title>
     <!-- 引入样式 -->
     <link rel="stylesheet" href="../ui/layui/css/layui.css">
     <link rel="stylesheet" href="../css/theme/index.css">
@@ -124,7 +124,7 @@
 </style>
 <body>
 <div style="height: 210px;margin: 0 auto">
-<iframe src="hfqTop.html" width="100%" height="220px" scrolling="no" frameborder="0">
+<iframe src="hfqTop.html" width="100%" height="220px" scrolling="no" frameborder="0" target=_parent>
 </iframe>
 </div>
 
@@ -235,6 +235,30 @@
             </div>
         </div>
     </div>
+    <div>
+        <el-dialog
+                title="个人信息修改"
+                :visible.sync="dialogVisibleByModifyUserInf"
+                :modal-append-to-body="false"
+                width="30%"
+                :before-close="handleClose">
+            <span></span>
+
+
+
+
+
+
+
+
+
+
+            <span slot="footer" class="dialog-footer">
+    <el-button @click="dialogVisibleByModifyUserInf = false">取 消</el-button>
+    <el-button type="primary" @click="dialogVisibleByModifyUserInf = false">确 定</el-button>
+  </span>
+        </el-dialog>
+    </div>
 </div>
 <div id="foot" style="width: 100%;height: 450px;margin: 0 auto;border-top: 1px solid #ddd;">
     <iframe src="hfqFoot.html" width="100%" height="450px"  frameborder="0" scrolling="no" >
@@ -243,6 +267,10 @@
 
 
 <script>
+
+    function parentSay(){
+        main.dialogVisibleByModifyUserInf = true;
+    }
     // console.log(sessionStorage.getItem("token"))
     if (sessionStorage.getItem("token") == null) {
         window.location.replace("http://localhost/")
@@ -281,6 +309,7 @@
     const main = new Vue({
         el:'#main',
         data:{
+            dialogVisibleByModifyUserInf:false,
             newShopMessage:{},
             newShopMessagePage:1,
         },
