@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script>
+    window.onscroll = function(){
+        var t = document.documentElement.scrollTop || document.body.scrollTop;  //离上方的距离
+        var h =window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; //可见宽度
+        if( t > document.documentElement.scrollHeight - h -50) {
+            var html="<div style='height: 200px;background-color: #c35673'>xxxxxxxxxxxxxxxxxxxx</div>"
+            document.getElementById("tj").innerHTML+=html
+            bottom();
+        }
+    }
+    function bottom(){
+        alert(123)
+    }
+</script>
+<body id="body" style="">
+   <div id="main" style="height: 800px;background-color: #c2e7b0">
+       <div id="tj"></div>
+
+   </div>
+</body>
+</html>
