@@ -2,6 +2,7 @@ package com.bishe.controller;
 import com.bishe.bean.ShopMainPicture;
 import com.bishe.bean.User;
 import com.bishe.mapper.ShopMapper;
+import com.bishe.mapper.UserMapper;
 import com.bishe.service.Service;
 import com.bishe.util.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -24,12 +26,25 @@ public class FileController {
     RedisUtil redisUtil;
     @Autowired
     ShopMapper shopMapper;
+    @Resource
+    UserMapper userMapper;
 
     @RequestMapping("/dynamicPic")
     public String dynamicPic(@RequestParam String shoHeadPicUploadToken,@RequestPart("file") byte[] file) throws IOException {
         System.out.println(shoHeadPicUploadToken);
         User user = (User)redisUtil.get(shoHeadPicUploadToken);
         String only = UUID.randomUUID()+"";
+        return getString(file, user, only);
+    }
+
+    @RequestMapping("/userHeadPicUpload")
+    public String userHeadPicUpload(@RequestParam String token,@RequestPart("file") byte[] file) throws IOException {
+        System.out.println(token);
+        User user = (User)redisUtil.get(token);
+        String only = UUID.randomUUID()+"";
+        String url = getString(file, user, only);
+        user.setHeadPic(url);
+        userMapper.userHeadPicUpdate(user);
         return getString(file, user, only);
     }
 

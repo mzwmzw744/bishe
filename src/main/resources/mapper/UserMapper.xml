@@ -8,6 +8,7 @@
         <result column="user_name" jdbcType="VARCHAR" property="userName" />
         <result column="user_email" jdbcType="VARCHAR" property="email" />
         <result column="user_password" jdbcType="VARCHAR" property="password" />
+        <result column="user_headPic" jdbcType="VARCHAR" property="headPic" />
     </resultMap>
 
     <select id="getUserByEmail" resultMap="userResultMap">
@@ -29,6 +30,10 @@
     <select id="getUserIsRepeat" resultType="int">
       select count(*) from user where user_name =  #{userName}
     </select>
+
+    <update id="userHeadPicUpdate">
+        update  user set  user_headPic = #{headPic} where user_id = #{id}
+    </update>
 
 
 

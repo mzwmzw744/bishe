@@ -20,6 +20,7 @@ public interface UserMapper {
 
     int getUserIsRepeat(User user);
 
+    int userHeadPicUpdate(User user);
 
 }
 

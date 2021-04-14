@@ -87,7 +87,7 @@
     <div id="headerMain">
         <div style="float: left;line-height: 40px;font-size: 21px;font-weight: 300;color: #c35673">欢迎来到汉服圈</div>
         <div  id="headerMainRight" style="float: right;width: 220px">
-            <div style="float: left;cursor: pointer;"  v-on:click="headPicClick"> <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar></div>
+            <div style="float: left;cursor: pointer;"  v-on:click="headPicClick"> <el-avatar v-bind:src="userHeadPicture"></el-avatar></div>
 
             <div style="float: left;font-size: 27px">
             <el-dropdown @command="handleCommand">
@@ -105,11 +105,24 @@
             </el-dropdown>
             </div>
 
-
             <div id="userName" style="float: left;margin-left: 25px;line-height: 45px;color: #c35673"></div>
             <a  style="float: right;margin-left:20px;line-height: 45px" href="/html/forgetPassword.html">注销</a>
             <a  style="float: right;line-height: 45px" href="/html/hfq.html" target="_parent">首页</a>
         </div>
+    </div>
+    <div>
+        <el-upload
+                class="upload-demo"
+                action="/userHeadPicUpload"
+                :data="userHeadPicUpload"
+                :on-success="shopHeadPicSuccess"
+                v-show="false"
+                multiple
+                :limit="10"
+                >
+            <el-button id="userHeadPic" size="small" type="primary">隐藏上传按钮</el-button>
+            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+        </el-upload>
     </div>
 
 </div>
@@ -162,35 +175,17 @@
         parent.parentSay();//调用父页面的方法
     }
 
-    console.log(sessionStorage.getItem("token"))
-    if (sessionStorage.getItem("token") == null) {
-        window.location.replace("http://localhost/")
-    }else {
-        axios({
-            method:'post',
-            url:'/token/getLoginUser',
-            headers:{
-                'token' : sessionStorage.getItem("token")
-            },
-            data:{
-
-            }
-        }).then(res=> {
-            console.log(res.data);
-            sessionStorage.setItem("user",JSON.stringify(res.data));
-            let user = eval ("(" + sessionStorage.getItem("user") + ")");
-            document.getElementById("userName").innerHTML = user.userName;
-        })
-    }
-
     new Vue({
         el:'#header',
         data:{
-            dialogVisibleByModifyUserInf: false
+            userHeadPicUpload:{
+                token:sessionStorage.getItem("token"),
+            },
+            userHeadPicture:''
         },
         methods:{
             headPicClick(){
-                alert(123)
+                document.getElementById("userHeadPic").click();
             },
             handleCommand(command) {
                 if(command == "c"){
@@ -198,6 +193,34 @@
                     // this.dialogVisibleByModifyUserInf = true;
                 }
                 this.$message('click on item ' + command);
+            },
+            shopHeadPicSuccess(res){
+                console.log(res)
+                this.userHeadPicture = res;
+                this.$message.success('头像更换成功')
+            },
+        },
+        created:function (){
+            if (sessionStorage.getItem("token") == null) {
+                window.location.replace("http://localhost/")
+            }else {
+                axios({
+                    method:'post',
+                    url:'/token/getLoginUser',
+                    headers:{
+                        'token' : sessionStorage.getItem("token")
+                    },
+                    data:{
+
+                    }
+                }).then(res=> {
+                    sessionStorage.setItem("user",JSON.stringify(res.data));
+                    let user = eval ("(" + sessionStorage.getItem("user") + ")");
+                    document.getElementById("userName").innerHTML = user.userName;
+                    this.userHeadPicture = user.headPic;
+
+
+                })
             }
         }
     })

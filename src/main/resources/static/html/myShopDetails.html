@@ -93,6 +93,9 @@
             <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb1111</div>
         </el-upload>
     </div>
+
+
+
     <el-upload
             class="upload-demo"
             style=""
@@ -113,61 +116,6 @@
             <el-button type="primary"  style="float: left;width: 150px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;返回首页&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</el-button>
         </div>
 </div>
-
-
-
-<!--<div style="width: 1400px;height: 1000px;border: 1px solid #ddd;margin: 0 auto;color: rgba(255,83,106,0.54);" id="main">-->
-
-<!--    <div style="width: 1000px;height: 500px;margin: 0px auto;overflow: hidden">-->
-<!--        <div id="leftMain" style="width: 50%;height: 100%;float: left;">-->
-<!--            <div style="overflow: hidden">-->
-<!--                <div style="float: left;margin-top: 5px">商品名:&nbsp;&nbsp;</div>-->
-<!--                <div style="width: 150px;height: 100px;float: left">-->
-<!--                    <el-input  v-model="shop.shopName" size="small" placeholder="请输入内容" style="display: inline-block" ></el-input>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div style="overflow: hidden">-->
-<!--                <div style="float: left;margin-top: 5px">商品价格:&nbsp;&nbsp;</div>-->
-<!--                <div style="width: 150px;height: 100px;float: left">-->
-<!--                    <el-input  v-model="shop.shopPrice" size="small" placeholder="请输入内容" style="display: inline-block" ></el-input>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div style="overflow: hidden">-->
-<!--                <div style="float: left;margin-top: 5px">商品类型:&nbsp;&nbsp;</div>-->
-<!--                <div style="width: 150px;height: 100px;float: left">-->
-<!--                    <el-input  v-model="shop.shopFamily" size="small" placeholder="请输入内容" style="display: inline-block" ></el-input>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div style="overflow: hidden">-->
-<!--                <div style="float: left;margin-top: 5px">商品介绍:&nbsp;&nbsp;</div>-->
-<!--                <div style="width: 150px;height: 100px;float: left">-->
-<!--                    <el-input  v-model="shop.shopIntroduction" size="small" placeholder="请输入内容" style="display: inline-block" ></el-input>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div id="rightMain" style="width: 50%;height: 1000px;float: left;">-->
-<!--            <div style="cursor: pointer">-->
-<!--                商品头像:<img :src="shop.shopHeadPicture" width="100px" height="100px;" v-on:click="open1()">-->
-<!--            </div>-->
-<!--                 商品状态: {{shop.auditStatus}}-->
-<!--                <el-button type="primary"  size="small" @click="modifyState">修改状态</el-button>-->
-
-
-
-<!--        </div>-->
-<!--        <div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <div>-->
-
-<!--    </div>-->
-<!--    <div style="margin: 200px auto 0;width: 310px">-->
-<!--        <el-button type="primary"  style="float: left;width: 150px" @click="open">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;修改&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</el-button>-->
-<!--        <el-button type="primary"  style="float: left;width: 150px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;返回首页&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</el-button>-->
-<!--    </div>-->
-
-<!--</div>-->
-
 
 
 <div id="foot" style="width: 100%;height: 370px;margin: 50px auto;border-top: 1px solid #ddd;">
@@ -336,22 +284,6 @@
                     this.fileList.push({url:res.data.pic_10})
                 }
                 this.shoHeadPicUpload.number = this.fileList.length
-                // this.fileList.push({url:res.data.pic_2})
-                // console.log(this.fileList);
-                // this.fileList.push(res.data.pic_1);
-                // console.log("~~~~~~"+res.data.shop_id);
-                // console.log("~~~~~~"+res.data.id);
-                // console.log("~~~~~~"+res.data.pic_1);
-                // console.log("~~~~~~"+res.data.pic_2);
-                // console.log("~~~~~~"+res.data.pic_3);
-                // console.log("~~~~~~"+res.data.pic_4);
-                // console.log("~~~~~~"+res.data.pic_5);
-                // console.log("~~~~~~"+res.data.pic_6);
-                // console.log("~~~~~~"+res.data.pic_7);
-                // console.log("~~~~~~"+res.data.pic_8);
-                // console.log("~~~~~~"+res.data.pic_9);
-                // console.log("~~~~~~"+res.data.pic_10);
-                // this.fileList.push()
 
             })
 
