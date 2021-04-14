@@ -1,13 +1,16 @@
 package com.bishe.controller;
 
 import com.bishe.bean.Dynamic;
+import com.bishe.bean.DynamicResult;
 import com.bishe.bean.User;
 import com.bishe.mapper.DynamicMapper;
+import com.bishe.mapper.UserMapper;
 import com.bishe.util.RedisUtil;
 import net.sf.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -19,15 +22,72 @@ public class DynamicController {
     DynamicMapper dynamicMapper;
     @Resource
     RedisUtil redisUtil;
+    @Resource
+    UserMapper userMapper;
+
+
+    int judgePicLength(DynamicResult dynamicResult){
+
+        if(dynamicResult.getPic_1() == null || dynamicResult.getPic_1().equals("")){
+            return 0;
+        }
+        if(dynamicResult.getPic_2() == null || dynamicResult.getPic_2().equals("")){
+            return 1;
+        }
+        if(dynamicResult.getPic_3() == null || dynamicResult.getPic_3().equals("")){
+            return 2;
+        }
+        if(dynamicResult.getPic_4() == null || dynamicResult.getPic_4().equals("")){
+            return 3;
+        }
+        if(dynamicResult.getPic_5() == null || dynamicResult.getPic_5().equals("")){
+            return 4;
+        }
+        if(dynamicResult.getPic_6() == null || dynamicResult.getPic_6().equals("")){
+            return 5;
+        }
+        if(dynamicResult.getPic_7() == null || dynamicResult.getPic_7().equals("")){
+            return 6;
+        }
+        if(dynamicResult.getPic_8() == null || dynamicResult.getPic_8().equals("")){
+            return 7;
+        }
+        if(dynamicResult.getPic_9() == null || dynamicResult.getPic_9().equals("")){
+            return 8;
+        }
+        return 9;
+    }
 
     @RequestMapping("/token/getDynamicByTime")
     public List getDynamicByTime(@RequestBody Map<String,String> map){
           int curPage = Integer.parseInt(map.get("page"));
           int pageSize = 10;
           int offset = pageSize*(curPage - 1);
-          List dynamic =  dynamicMapper.getDynamicByTime(pageSize,offset);
+          List<Dynamic> dynamic =  dynamicMapper.getDynamicByTime(pageSize,offset);
+          List<DynamicResult> dynamicResultList = new ArrayList();
+          for(int i = 0 ; i <dynamic.size() ; i++){
+              DynamicResult dynamicResult = new DynamicResult();
+              dynamicResult.setId(dynamic.get(i).getId());
+              dynamicResult.setCreateTime(dynamic.get(i).getCreateTime());
+              dynamicResult.setPic_1(dynamic.get(i).getPic_1());
+              dynamicResult.setPic_2(dynamic.get(i).getPic_2());
+              dynamicResult.setPic_3(dynamic.get(i).getPic_3());
+              dynamicResult.setPic_4(dynamic.get(i).getPic_4());
+              dynamicResult.setPic_5(dynamic.get(i).getPic_5());
+              dynamicResult.setPic_6(dynamic.get(i).getPic_6());
+              dynamicResult.setPic_7(dynamic.get(i).getPic_7());
+              dynamicResult.setPic_8(dynamic.get(i).getPic_8());
+              dynamicResult.setPic_9(dynamic.get(i).getPic_9());
+              dynamicResult.setWords(dynamic.get(i).getWords());
+              User user = userMapper.getUserById(dynamic.get(i).getUser_id());
+              dynamicResult.setUserHeadPic(user.getHeadPic());
+              dynamicResult.setUserName(user.getUserName());
+              int PicLength = judgePicLength(dynamicResult);
+              dynamicResult.setPicLength(PicLength);
+              dynamicResultList.add(dynamicResult);
+          }
 
-          return dynamic;
+          return dynamicResultList;
     }
 
     @RequestMapping("/token/Publishingnews")
@@ -39,7 +99,8 @@ public class DynamicController {
         Dynamic dynamic = new Dynamic();
         dynamic.setWords((String) json.get("textarea"));
         dynamic.setUser_id(user.getId());
-        int dynamicId  = dynamicMapper.createUserDynamic(dynamic);
+        dynamicMapper.createUserDynamic(dynamic);
+        int dynamicId  = dynamic.getId();
         if(list.size() >= 1) {
             String url1 = (String) JSONObject.fromObject(list.get(0)).get("url");
             dynamicMapper.addMyDynamicPic_1(url1,dynamicId);

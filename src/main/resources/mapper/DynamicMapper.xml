@@ -35,39 +35,39 @@
     </update>
 
     <update id="addMyDynamicPic_1">
-        update user_Dynamic set pic_1 = #{url} where user_id = #{id}
+        update user_Dynamic set pic_1 = #{url} where id = #{id}
     </update>
 
     <update id="addMyDynamicPic_2">
-        update  user_Dynamic set pic_2 = #{url} where user_id = #{id}
+        update  user_Dynamic set pic_2 = #{url} where id = #{id}
     </update>
 
     <update id="addMyDynamicPic_3">
-        update  user_Dynamic set pic_3 = #{url} where user_id = #{id}
+        update  user_Dynamic set pic_3 = #{url} where id = #{id}
     </update>
 
     <update id="addMyDynamicPic_4">
-        update  user_Dynamic set pic_4 = #{url} where user_id = #{id}
+        update  user_Dynamic set pic_4 = #{url} where id = #{id}
     </update>
 
     <update id="addMyDynamicPic_5">
-        update  user_Dynamic set pic_5 = #{url} where user_id = #{id}
+        update  user_Dynamic set pic_5 = #{url} where id = #{id}
     </update>
 
     <update id="addMyDynamicPic_6">
-        update  user_Dynamic set pic_6 = #{url} where user_id = #{id}
+        update  user_Dynamic set pic_6 = #{url} where id = #{id}
     </update>
 
     <update id="addMyDynamicPic_7">
-        update  user_Dynamic set pic_7 = #{url} where user_id = #{id}
+        update  user_Dynamic set pic_7 = #{url} where id = #{id}
     </update>
 
     <update id="addMyDynamicPic_8">
-        update  user_Dynamic set pic_8 = #{url} where user_id = #{id}
+        update  user_Dynamic set pic_8 = #{url} where id = #{id}
     </update>
 
     <update id="addMyDynamicPic_9">
-        update  user_Dynamic set pic_9 = #{url} where user_id = #{id}
+        update  user_Dynamic set pic_9 = #{url} where id = #{id}
     </update>
 
     <insert id="createUserDynamic" parameterType="com.bishe.bean.Dynamic" useGeneratedKeys="true" keyProperty="id">

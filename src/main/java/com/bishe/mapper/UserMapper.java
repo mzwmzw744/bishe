@@ -22,5 +22,7 @@ public interface UserMapper {
 
     int userHeadPicUpdate(User user);
 
+    User getUserById(int userID);
+
 }
 
