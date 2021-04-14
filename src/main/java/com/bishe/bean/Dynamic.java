@@ -1,8 +1,11 @@
 package com.bishe.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
+import java.sql.Time;
+
 
 @Data
 public class Dynamic {
@@ -18,5 +21,5 @@ public class Dynamic {
      String pic_7;
      String pic_8;
      String pic_9;
-     Date createTime;
+     String createTime;
 }

@@ -217,11 +217,11 @@
                     <el-card  style="margin: 50px auto" v-for="z in t">
 
                         <div style="overflow: hidden">
-                        <div style="float: left"><el-avatar :src="z.userHeadPic"></el-avatar></div>
-<!--                        <span>{{z.userHeadPic}}</span>-->
-                        <div style="float: left;line-height: 25px;margin-left: 10px">{{z.userName}}</div>
+                            <div style="float: left"><el-avatar :src="z.userHeadPic"></el-avatar></div>
+                            <!--                        <span>{{z.userHeadPic}}</span>-->
+                            <div style="color: #c35673;float: left;line-height: 35px;margin-left: 30px">{{z.userName}}</div>
                         </div>
-                        <div style="margin-top: 20px">{{z.words}}</div>
+                        <div style="margin-top: 20px;margin-bottom: 40px;margin-left: 10px">{{z.words}}</div>
 
                         <div style="margin: 0 auto;text-align: center;overflow: hidden" shadow="hover" v-if="z.picLength > 0">
                             <div v-if="z.picLength == 1">
@@ -236,83 +236,86 @@
                                 <img width="200px" height="200px" v-bind:src="z.pic_2">
                                 <img width="200px" height="200px" v-bind:src="z.pic_3">
                             </div>
-<!--                            <div v-if="fileList.length == 4">-->
-<!--                                <img width="200px" height="200px" v-bind:src="pic_1">-->
-<!--                                <img width="200px" height="200px" v-bind:src="pic_1">-->
-<!--                                <img width="200px" height="200px" v-bind:src="pic_1">-->
-<!--                                <br>-->
+                            <div v-if="z.picLength == 4">
+                                <img width="200px" height="200px" v-bind:src="z.pic_1">
+                                <img width="200px" height="200px" v-bind:src="z.pic_2">
+                                <img width="200px" height="200px" v-bind:src="z.pic_3">
+                                <br>
+                                <img width="200px" height="200px" style="float: left;margin-left: 9px;margin-top: 5px" v-bind:src="z.pic_4">
+                            </div>
+                            <div v-if="z.picLength == 5">
+                                <img width="200px" height="200px" v-bind:src="z.pic_1">
+                                <img width="200px" height="200px" v-bind:src="z.pic_2">
+                                <img width="200px" height="200px" v-bind:src="z.pic_3">
+                                <br>
 
-<!--                                <img width="200px" height="200px" style="float: left;margin-left: 9px;margin-top: 5px" v-bind:src="fileList[3].url">-->
-<!--                            </div>-->
-<!--                            <div v-if="fileList.length == 5">-->
-<!--                                <img width="200px" height="200px" v-bind:src="pic_1">-->
-<!--                                <img width="200px" height="200px" v-bind:src="pic_1">-->
-<!--                                <img width="200px" height="200px" v-bind:src="pic_1">-->
-<!--                                <br>-->
-<!--                                <img width="200px" height="200px" style="float: left;margin-left: 9px;margin-top: 5px" v-bind:src="fileList[3].url">-->
-<!--                                <img width="200px" height="200px" style="float: left;margin-left: 3px;margin-top: 5px"  v-bind:src="fileList[4].url">-->
-<!--                            </div>-->
+                                <img width="200px" height="200px" style="float: left;margin-left: 9px;margin-top: 5px" v-bind:src="z.pic_4">
+                                <img width="200px" height="200px" style="float: left;margin-left: 3px;margin-top: 5px" v-bind:src="z.pic_5">
+                            </div>
 
-<!--                            <div v-if="fileList.length == 6" >-->
-<!--                                <img width="200px" height="200px" v-bind:src="fileList[0].url">-->
-<!--                                <img width="200px" height="200px" v-bind:src="fileList[1].url">-->
-<!--                                <img width="200px" height="200px" v-bind:src="fileList[2].url">-->
-<!--                                <br>-->
-<!--                                <img width="200px" height="200px" style="float: left;margin-left: 9px;margin-top: 5px"  v-bind:src="fileList[3].url">-->
-<!--                                <img width="200px" height="200px" style="float: left;margin-left: 3px;margin-top: 5px"  v-bind:src="fileList[4].url">-->
-<!--                                <img width="200px" height="200px" style="float: left;margin-left: 4px;margin-top: 5px"  v-bind:src="fileList[5].url">-->
-<!--                            </div>-->
+                            <div v-if="z.picLength == 6">
+                                <img width="200px" height="200px" v-bind:src="z.pic_1">
+                                <img width="200px" height="200px" v-bind:src="z.pic_2">
+                                <img width="200px" height="200px" v-bind:src="z.pic_3">
+                                <br>
 
-<!--                            <div v-if="fileList.length == 7">-->
-<!--                                <img width="200px" height="200px" v-bind:src="fileList[0].url">-->
-<!--                                <img width="200px" height="200px" v-bind:src="fileList[1].url">-->
-<!--                                <img width="200px" height="200px" v-bind:src="fileList[2].url">-->
-<!--                                <br>-->
-<!--                                <div style="overflow: hidden">-->
-<!--                                    <img width="200px" height="200px" style="float: left;margin-left: 9px;margin-top: 5px"  v-bind:src="fileList[3].url">-->
-<!--                                    <img width="200px" height="200px" style="float: left;margin-left: 3px;margin-top: 5px"  v-bind:src="fileList[4].url">-->
-<!--                                    <img width="200px" height="200px" style="float: left;margin-left: 4px;margin-top: 5px"  v-bind:src="fileList[5].url">-->
-<!--                                </div>-->
-<!--                                <img width="200px" height="200px" style="float: left;margin-left: 9px;margin-top: 5px"  v-bind:src="fileList[6].url">-->
-<!--                            </div>-->
+                                <img width="200px" height="200px" style="float: left;margin-left: 9px;margin-top: 5px" v-bind:src="z.pic_4">
+                                <img width="200px" height="200px" style="float: left;margin-left: 3px;margin-top: 5px" v-bind:src="z.pic_5">
+                                <img width="200px" height="200px" style="float: left;margin-left: 4px;margin-top: 5px" v-bind:src="z.pic_6">
+                            </div>
 
-<!--                            <div v-if="fileList.length == 8">-->
-<!--                                <img width="200px" height="200px" v-bind:src="fileList[0].url">-->
-<!--                                <img width="200px" height="200px" v-bind:src="fileList[1].url">-->
-<!--                                <img width="200px" height="200px" v-bind:src="fileList[2].url">-->
-<!--                                <br>-->
-<!--                                <div style="overflow: hidden">-->
-<!--                                    <img width="200px" height="200px" style="float: left;margin-left: 9px;margin-top: 5px"  v-bind:src="fileList[3].url">-->
-<!--                                    <img width="200px" height="200px" style="float: left;margin-left: 3px;margin-top: 5px"  v-bind:src="fileList[4].url">-->
-<!--                                    <img width="200px" height="200px" style="float: left;margin-left: 4px;margin-top: 5px"  v-bind:src="fileList[5].url">-->
-<!--                                </div>-->
-<!--                                <img width="200px" height="200px" style="float: left;margin-left: 9px;margin-top: 5px"  v-bind:src="fileList[6].url">-->
-<!--                                <img width="200px" height="200px" style="float: left;margin-left: 3px;margin-top: 5px"  v-bind:src="fileList[7].url">-->
-<!--                            </div>-->
+                            <div v-if="z.picLength == 7">
+                                <img width="200px" height="200px" v-bind:src="z.pic_1">
+                                <img width="200px" height="200px" v-bind:src="z.pic_2">
+                                <img width="200" height="200px" v-bind:src="z.pic_3">
+                                <br>
 
-<!--                            <div v-if="fileList.length == 9">-->
-<!--                                <img width="200px" height="200px" v-bind:src="fileList[0].url">-->
-<!--                                <img width="200px" height="200px" v-bind:src="fileList[1].url">-->
-<!--                                <img width="200px" height="200px" v-bind:src="fileList[2].url">-->
-<!--                                <br>-->
-<!--                                <div style="overflow: hidden">-->
-<!--                                    <img width="200px" height="200px" style="float: left;margin-left: 9px;margin-top: 5px"  v-bind:src="fileList[3].url">-->
-<!--                                    <img width="200px" height="200px" style="float: left;margin-left: 3px;margin-top: 5px"  v-bind:src="fileList[4].url">-->
-<!--                                    <img width="200px" height="200px" style="float: left;margin-left: 4px;margin-top: 5px"  v-bind:src="fileList[5].url">-->
-<!--                                </div>-->
-<!--                                <img width="200px" height="200px" style="float: left;margin-left: 9px;margin-top: 5px"  v-bind:src="fileList[6].url">-->
-<!--                                <img width="200px" height="200px" style="float: left;margin-left: 3px;margin-top: 5px"  v-bind:src="fileList[7].url">-->
-<!--                                <img width="200px" height="200px" style="float: left;margin-left: 4px;margin-top: 5px"  v-bind:src="fileList[8].url">-->
-<!--                            </div>-->
+                                <img width="200px" height="200px" style="float: left;margin-left: 9px;margin-top: 5px" v-bind:src="z.pic_4">
+                                <img width="200px" height="200px" style="float: left;margin-left: 3px;margin-top: 5px" v-bind:src="z.pic_5">
+                                <img width="195" height="200px" style="float: left;margin-left: 4px;margin-top: 5px" v-bind:src="z.pic_6">
+                                <br>
+                                <img width="200px" height="200px" style="float: left;margin-left: 9px;margin-top: 5px" v-bind:src="z.pic_7">
 
+                            </div>
+                            <div v-if="z.picLength == 8">
+                                <img width="200px" height="200px" v-bind:src="z.pic_1">
+                                <img width="200px" height="200px" v-bind:src="z.pic_2">
+                                <img width="200px" height="200px" v-bind:src="z.pic_3">
+                                <br>
+
+                                <img width="200px" height="200px" style="float: left;margin-left: 9px;margin-top: 5px" v-bind:src="z.pic_4">
+                                <img width="200px" height="200px" style="float: left;margin-left: 3px;margin-top: 5px" v-bind:src="z.pic_5">
+                                <img width="200px" height="200px" style="float: left;margin-left: 4px;margin-top: 5px" v-bind:src="z.pic_6">
+                                <br>
+                                <img width="200px" height="200px" style="float: left;margin-left: 9px;margin-top: 5px" v-bind:src="z.pic_7">
+                                <img width="200px" height="200px" style="float: left;margin-left: 3px;margin-top: 5px" v-bind:src="z.pic_8">
+                            </div>
+                            <div v-if="z.picLength == 9">
+                                <img width="200px" height="200px" v-bind:src="z.pic_1">
+                                <img width="200px" height="200px" v-bind:src="z.pic_2">
+                                <img width="200px" height="200px" v-bind:src="z.pic_3">
+                                <br>
+                                <img width="200px" height="200px" style="float: left;margin-left: 9px;margin-top: 5px" v-bind:src="z.pic_4">
+                                <img width="200px" height="200px" style="float: left;margin-left: 3px;margin-top: 5px" v-bind:src="z.pic_5">
+                                <img width="200px" height="200px" style="float: left;margin-left: 4px;margin-top: 5px" v-bind:src="z.pic_6">
+                                <br>
+                                <img width="200px" height="200px" style="float: left;margin-left: 9px;margin-top: 5px" v-bind:src="z.pic_7">
+                                <img width="200px" height="200px" style="float: left;margin-left: 3px;margin-top: 5px" v-bind:src="z.pic_8">
+                                <img width="200px" height="200px" style="float: left;margin-left: 4px;margin-top: 5px" v-bind:src="z.pic_9">
+                            </div>
+                            </div>
+
+                        <div style="margin-top: 20px;margin-right: 30px;overflow: hidden">
+                        <div style="float: right">{{z.createTime}}</div>
+                        </div>
+                        <div style="margin-top: 35px;overflow: hidden">
+                        <i class="el-icon-s-comment" style="float: right;font-size: 30px;color: red;margin-right: 70px;cursor: pointer"></i>
+                        <i class="layui-icon layui-icon-praise" style="font-size: 30px; color: red;float: right;margin-right: 60px;cursor: pointer"></i>
                         </div>
 
-
-<!--                        <span>{{z.user_id}}</span>-->
-<!--                        <span>{{z.id}}</span>-->
-<!--                        1234-->
-                        <span></span>
-<!--                        <span>{{z.createTime}}</span>-->
+                        <!--                        <span>{{z.user_id}}</span>-->
+                            <!--                        <span>{{z.id}}</span>-->
+                            <!--                        1234-->
                     </el-card>
                 </div>
             </div>
@@ -405,7 +408,7 @@
             this.shop = shop;
             axios({
                 method:'post',
-                    url:'/token/getDynamicByTime',
+                url:'/token/getDynamicByTime',
                 headers:{
                     'token' : sessionStorage.getItem("token")
                 },

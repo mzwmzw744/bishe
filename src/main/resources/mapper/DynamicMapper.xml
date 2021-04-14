@@ -27,6 +27,7 @@
         <result column="pic_8" jdbcType="VARCHAR" property="pic_8" />
         <result column="pic_9" jdbcType="VARCHAR" property="pic_9" />
         <result column="pic_10" jdbcType="VARCHAR" property="pic_10" />
+        <result column="createTime" property="createTime"/>
     </resultMap>
 
     <update id="updateShop" parameterType="com.bishe.bean.Shop">

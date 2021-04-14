@@ -19,7 +19,7 @@ public class DynamicResult {
     String pic_7;
     String pic_8;
     String pic_9;
-    Date createTime;
+    String createTime;
     String userHeadPic;
     String userName;
     int picLength;

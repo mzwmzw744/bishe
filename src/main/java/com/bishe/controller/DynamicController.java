@@ -6,11 +6,15 @@ import com.bishe.bean.User;
 import com.bishe.mapper.DynamicMapper;
 import com.bishe.mapper.UserMapper;
 import com.bishe.util.RedisUtil;
+import lombok.Data;
 import net.sf.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -68,7 +72,8 @@ public class DynamicController {
           for(int i = 0 ; i <dynamic.size() ; i++){
               DynamicResult dynamicResult = new DynamicResult();
               dynamicResult.setId(dynamic.get(i).getId());
-              dynamicResult.setCreateTime(dynamic.get(i).getCreateTime());
+              String createTime = dynamic.get(i).getCreateTime();
+              dynamicResult.setCreateTime(createTime);
               dynamicResult.setPic_1(dynamic.get(i).getPic_1());
               dynamicResult.setPic_2(dynamic.get(i).getPic_2());
               dynamicResult.setPic_3(dynamic.get(i).getPic_3());
