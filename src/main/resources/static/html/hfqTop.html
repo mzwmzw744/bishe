@@ -98,6 +98,7 @@
                     <el-dropdown-item command="a">我的关注</el-dropdown-item>
                     <el-dropdown-item command="b">我的粉丝</el-dropdown-item>
                     <el-dropdown-item command="c">个人信息修改</el-dropdown-item>
+                    <el-dropdown-item command="d">收货地址管理</el-dropdown-item>
 <!--                    <el-dropdown-item>螺蛳粉</el-dropdown-item>-->
 <!--                    <el-dropdown-item disabled>双皮奶</el-dropdown-item>-->
 <!--                    <el-dropdown-item divided>蚵仔煎</el-dropdown-item>-->
@@ -190,6 +191,10 @@
             handleCommand(command) {
                 if(command == "c"){
                     getParentFunction();
+                    // this.dialogVisibleByModifyUserInf = true;
+                }
+                if(command == "d"){
+                    window.location.href="shdzgl.html";
                     // this.dialogVisibleByModifyUserInf = true;
                 }
                 this.$message('click on item ' + command);
