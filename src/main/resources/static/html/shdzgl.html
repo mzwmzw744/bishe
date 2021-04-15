@@ -36,7 +36,7 @@
 </div>
 <div id="main">
   <div style="background-color: rgba(255,79,82,0.27);font-size: 20px;;color: RGB(64,158,255)">收货地址管理</div>
-    <iframe height="800px"   width="900px" src="http://localhost:8080/#/test" frameborder="0" scrolling="no"></iframe>
+    <iframe id="sonIframe" height="800px"   width="900px" src="http://localhost:8080/#/test" frameborder="0" scrolling="no"></iframe>
 </div>
 
 <div id="app"></div>
@@ -45,6 +45,13 @@
     </iframe>
 </div>
 <script>
+
+
+
+
+
+
+
     window.addEventListener('message', function(e){
         // alert(e.data.phone);
         if(e.data.sheng == null || e.data.sheng == ''){
@@ -81,12 +88,46 @@
           }
         }).then(res => {
           // console.log(res)
-
         })
     }, false);
     const  app = new Vue({
         el:'#app',
+        data:{
+            info:{
+                addressDetail:'',
+                phone:'',
+                name:'',
+                postCode:'',
+                sheng:'',
+                shi:'',
+                qu:''
+            }
+        },
+        methods:{
+            sendInfo(){
+                let sonIframe= document.getElementById("sonIframe");
+                sonIframe.contentWindow.postMessage(this.info, '*');
+            }
+        },
+        created :function () {
+            axios({
+                method:'post',
+                url:'/token/getUserAddress',
+                headers:{
+                    'token' : sessionStorage.getItem("token")
+                },
+                data:{
 
+                }
+            }).then(res => {
+                console.log(res)
+                this.info.shi = res.data.shi
+                this.info.sheng = res.data.sheng
+                this.info.qu = res.data.sheng
+                this.info.addressDetail = res.data.addressDetail
+                this.sendInfo()
+            })
+        }
     })
 
 </script>

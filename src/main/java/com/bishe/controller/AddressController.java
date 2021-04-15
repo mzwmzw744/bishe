@@ -19,7 +19,7 @@ public class AddressController {
     @Resource
     RedisUtil redisUtil;
     @RequestMapping("/token/addUserAddress")
-    public String adminApplyPass(@RequestBody Map<String,Object> map,@RequestHeader Map<String, String> headers){
+    public String addUserAddress(@RequestBody Map<String,Object> map,@RequestHeader Map<String, String> headers){
         String token = headers.get("token");
         System.out.println(token);
         User user = (User)redisUtil.get(token);
@@ -34,10 +34,24 @@ public class AddressController {
         address.setAddressDetail(addressDetail);
         address.setName(name);
         address.setPostCode(postCode);
-        address.setAddress(sheng+shi+qu);
+        address.setSheng(sheng);
+        address.setShi(shi);
+        address.setQu(qu);
         address.setPhone(phone);
         address.setUser_id(user.getId());
-         addressMapper.addUserAddress(address);
+//        Address addresss = addressMapper.getUserAddress(user.getId());
+//        if(addresss != null) {
+//            addressMapper.deleteUserAddress(user.getId());
+//        }
+        addressMapper.addUserAddress(address);
         return "成功";
+    }
+    @RequestMapping("/token/getUserAddress")
+    public Address getUserAddress(@RequestBody Map<String,Object> map,@RequestHeader Map<String, String> headers){
+        String token = headers.get("token");
+        System.out.println(token);
+        User user = (User)redisUtil.get(token);
+        Address address = addressMapper.getUserAddress(user.getId());
+        return address;
     }
 }

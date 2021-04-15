@@ -156,11 +156,13 @@ create table user_Dynamic(
                         pic_9 varchar(100),
                         createTime datetime
 );
-
+drop table if exists address;
 create table address(
                              id int auto_increment primary key,
                              user_id int,
-                             address varchar(100),
+                             sheng varchar(100),
+                             shi varchar(100),
+                             qu varchar(100),
                              addressDetail varchar(200),
                              postCode varchar(20),
                              name varchar(100),

@@ -3,19 +3,26 @@
 <mapper namespace="com.bishe.mapper.AddressMapper">
 
 
-    <resultMap id="adminResultMap" type="com.bishe.bean.Admin">
-        <result column="admin_id" jdbcType="INTEGER" property="id" />
-        <result column="admin_name" jdbcType="VARCHAR" property="name" />
-        <result column="admin_password" jdbcType="VARCHAR" property="password" />
-        <result column="admin_face" jdbcType="VARCHAR" property="face" />
+    <resultMap id="AddressResultMap" type="com.bishe.bean.Address">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="user_id" jdbcType="INTEGER" property="user_id" />
+        <result column="address" jdbcType="VARCHAR" property="address" />
+        <result column="addressDetail" jdbcType="VARCHAR" property="addressDetail" />
+        <result column="postCode" jdbcType="VARCHAR" property="postCode" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="phone" jdbcType="VARCHAR" property="phone" />
     </resultMap>
 
-    <select id="adminInformationQuery" resultMap="adminResultMap">
-        select * from admin
+    <select id="getUserAddress" resultMap="AddressResultMap">
+        select * from address where user_id = #{user_id}
     </select>
 
     <insert id="addUserAddress">
-        insert address values (null,#{user_id},#{address},#{addressDetail},#{postCode},#{name},#{phone})
+        insert address values (null,#{user_id},#{sheng},#{shi},#{qu},#{addressDetail},#{postCode},#{name},#{phone})
     </insert>
+
+    <delete id="deleteUserAddress">
+        delete  From address where user_id = #{user_id}
+    </delete>
 
 </mapper>

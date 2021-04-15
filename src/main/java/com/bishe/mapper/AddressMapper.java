@@ -12,4 +12,8 @@ import org.springframework.stereotype.Repository;
 public interface AddressMapper {
 
     int addUserAddress(Address address);
+
+    Address getUserAddress(int user_id);
+
+    int deleteUserAddress(int user_id);
 }

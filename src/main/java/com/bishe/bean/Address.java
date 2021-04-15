@@ -6,7 +6,9 @@ import lombok.Data;
 public class Address {
     int id;
     int user_id;
-    String address;
+    String sheng;
+    String shi;
+    String qu;
     String addressDetail;
     String postCode;
     String name;
