@@ -20,7 +20,7 @@
     }
     #main{
         margin: 0 auto;
-        height: 2000px;
+        height: 800px;
         width: 1000px;
         border: 1px solid #ebebeb;
         /*background-color: RGB(250,250,250);*/
@@ -36,9 +36,7 @@
 </div>
 <div id="main">
   <div style="background-color: rgba(255,79,82,0.27);font-size: 20px;;color: RGB(64,158,255)">收货地址管理</div>
-    <div style="margin-top: 50px">*地址信息3</div>
-
-
+    <iframe height="800px"   width="900px" src="http://localhost:8080/#/test" frameborder="0" scrolling="no"></iframe>
 </div>
 
 <div id="app"></div>
@@ -47,25 +45,48 @@
     </iframe>
 </div>
 <script>
-    import YmOrder from "test"
-    new Vue({
-        el:'#main',
-        data:{
-            options: regionData,
-            selectedOptions: []
-        },
-        methods: {
-            handleChange (value) {
-                console.log(value)
-            }
+    window.addEventListener('message', function(e){
+        // alert(e.data.phone);
+        if(e.data.sheng == null || e.data.sheng == ''){
+            app.$message.error('地址信息不能为空！')
+            return;
         }
-    })
+        if(e.data.addressDetail == null || e.data.addressDetail == ''){
+            app.$message.error('详情地址信息不能为空！')
+            return;
+        }
+        if(e.data.name == null || e.data.name == ''){
+            app.$message.error('收货人姓名不能为空！')
+            return;
+        }
+        if(e.data.phone == null || e.data.phone == ''){
+            app.$message.error('手机号码不能为空！')
+            return
+        }
+        app.$message.success('保存成功！')
+        axios({
+          method:'post',
+          url:'/token/addUserAddress',
+            headers:{
+                'token' : sessionStorage.getItem("token")
+            },
+          data:{
+            addressDetail:e.data.addressDetail,
+            phone:e.data.phone,
+            name:e.data.name,
+            postCode:e.data.postCode,
+              sheng:e.data.sheng,
+              shi:e.data.shi,
+              qu:e.data.qu,
+          }
+        }).then(res => {
+          // console.log(res)
 
-    new Vue({
+        })
+    }, false);
+    const  app = new Vue({
         el:'#app',
-        render:function (createElements){
-            return createElements(YmOrder)
-        },
+
     })
 
 </script>
