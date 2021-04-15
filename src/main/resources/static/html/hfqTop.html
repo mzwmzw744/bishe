@@ -175,7 +175,6 @@
         var parent=window.parent;//获取父页面
         parent.parentSay();//调用父页面的方法
     }
-
     new Vue({
         el:'#header',
         data:{
@@ -194,7 +193,8 @@
                     // this.dialogVisibleByModifyUserInf = true;
                 }
                 if(command == "d"){
-                    window.location.href="shdzgl.html";
+                    window.parent.dd();
+                    // window.location.href="shdzgl.html";
                     // this.dialogVisibleByModifyUserInf = true;
                 }
                 this.$message('click on item ' + command);
