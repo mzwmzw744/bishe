@@ -155,4 +155,14 @@ create table user_Dynamic(
                         pic_8 varchar(100),
                         pic_9 varchar(100),
                         createTime datetime
+);
+
+create table address(
+                             id int auto_increment primary key,
+                             user_id int,
+                             address varchar(100),
+                             addressDetail varchar(200),
+                             postCode varchar(20),
+                             name varchar(100),
+                             phone varchar(100)
 )
