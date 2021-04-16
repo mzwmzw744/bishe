@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -47,11 +48,11 @@ public class AddressController {
         return "成功";
     }
     @RequestMapping("/token/getUserAddress")
-    public Address getUserAddress(@RequestBody Map<String,Object> map,@RequestHeader Map<String, String> headers){
+    public List getUserAddress(@RequestBody Map<String,Object> map,@RequestHeader Map<String, String> headers){
         String token = headers.get("token");
         System.out.println(token);
         User user = (User)redisUtil.get(token);
-        Address address = addressMapper.getUserAddress(user.getId());
+        List<Address> address = addressMapper.getUserAddress(user.getId());
         return address;
     }
 }

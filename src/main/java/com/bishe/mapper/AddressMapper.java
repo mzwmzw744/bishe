@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 
 @Repository
 @Mapper
@@ -13,7 +15,7 @@ public interface AddressMapper {
 
     int addUserAddress(Address address);
 
-    Address getUserAddress(int user_id);
+    List<Address> getUserAddress(int user_id);
 
     int deleteUserAddress(int user_id);
 }

@@ -65,7 +65,7 @@
 
             <el-row style="margin: 90px auto">
                 <el-col :span="8">&nbsp;</el-col>
-                <el-col :span="8"><el-button type="primary">立即购买</el-button></el-col>
+                <el-col :span="8"><el-button v-on:click="buyNow"  type="primary">立即购买</el-button></el-col>
 
                 <el-col :span="6"><el-button type="primary">加入购物车</el-button></el-col>
             </el-row>
@@ -105,6 +105,11 @@
             input:'',
             shop:'',
             shopMainPic:'',
+        },
+        methods:{
+            buyNow(){
+                window.location.href="buyOrder.html";
+            }
         },
         created:function (){
             let shop = JSON.parse(sessionStorage.getItem("shopBuyDetailShop"));
