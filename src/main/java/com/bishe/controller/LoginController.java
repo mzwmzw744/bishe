@@ -61,8 +61,8 @@ public class LoginController {
         String token = headers.get("token");
         System.out.println(token);
         User user = (User)redisUtil.get(token);
-        System.out.println(user);
-        return user;
+        User newUser = userMapper.getUserById(user.getId());
+        return newUser;
 
     }
     //  @RequestMapping(value = "/emailRegister", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
@@ -111,4 +111,37 @@ public class LoginController {
             return "注册失败";
         }
     }
+
+    @RequestMapping("/token/changePassword")
+    @ResponseBody
+    public String changePassword(@RequestBody Map<String,String> map,@RequestHeader Map<String, String> headers){
+        String token = headers.get("token");
+        User user = (User)redisUtil.get(token);
+        String newPassWord = map.get("newPassWord");
+        userMapper.changePassword(newPassWord,user.getId());
+        return "ture";
+    }
+    @RequestMapping("/token/changeUserName")
+    @ResponseBody
+    public String changeUserName(@RequestBody Map<String,String> map,@RequestHeader Map<String, String> headers){
+        String token = headers.get("token");
+        User user = (User)redisUtil.get(token);
+        String newUserName = map.get("newUserName");
+        userMapper.changeUserName(newUserName,user.getId());
+        return "ture";
+    }
+    @RequestMapping("/token/czBalance")
+    @ResponseBody
+    public Double czBalance(@RequestBody Map<String,String> map,@RequestHeader Map<String, String> headers){
+        String token = headers.get("token");
+        User user = (User)redisUtil.get(token);
+        User newuser = userMapper.getUserById(user.getId());
+        double t =  Double.valueOf(newuser.getBalance());
+        double z =Double.valueOf(map.get("balance"));
+        Double num = t + z;
+        userMapper.czBalance(num.toString(),user.getId());
+        return num;
+    }
+
+
 }

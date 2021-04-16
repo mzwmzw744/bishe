@@ -99,6 +99,7 @@
                     <el-dropdown-item command="b">我的粉丝</el-dropdown-item>
                     <el-dropdown-item command="c">个人信息修改</el-dropdown-item>
                     <el-dropdown-item command="d">收货地址管理</el-dropdown-item>
+                    <el-dropdown-item command="e">充值</el-dropdown-item>
 <!--                    <el-dropdown-item>螺蛳粉</el-dropdown-item>-->
 <!--                    <el-dropdown-item disabled>双皮奶</el-dropdown-item>-->
 <!--                    <el-dropdown-item divided>蚵仔煎</el-dropdown-item>-->
@@ -197,7 +198,9 @@
                     // window.location.href="shdzgl.html";
                     // this.dialogVisibleByModifyUserInf = true;
                 }
-                this.$message('个人信息修改');
+                if(command == "e"){
+                    window.parent.cz();
+                }
             },
             shopHeadPicSuccess(res){
                 console.log(res)

@@ -24,5 +24,10 @@ public interface UserMapper {
 
     User getUserById(int userID);
 
+    int changePassword(String password,int id);
+
+    int changeUserName(String userName,int id);
+
+    int czBalance(String balance,int id);
 }
 

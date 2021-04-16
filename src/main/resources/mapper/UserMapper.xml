@@ -9,6 +9,7 @@
         <result column="user_email" jdbcType="VARCHAR" property="email" />
         <result column="user_password" jdbcType="VARCHAR" property="password" />
         <result column="user_headPic" jdbcType="VARCHAR" property="headPic" />
+        <result column="balance" jdbcType="VARCHAR" property="balance"/>
     </resultMap>
 
     <select id="getUserByEmail" resultMap="userResultMap">
@@ -39,6 +40,15 @@
         update  user set  user_headPic = #{headPic} where user_id = #{id}
     </update>
 
+    <update id="changePassword">
+        update  user set  user_password = #{password} where user_id = #{id}
+    </update>
 
+    <update id="changeUserName">
+        update  user set  user_name = #{userName} where user_id = #{id}
+    </update>
 
+    <update id="czBalance">
+        update  user set  balance = #{balance} where user_id = #{id}
+    </update>
 </mapper>

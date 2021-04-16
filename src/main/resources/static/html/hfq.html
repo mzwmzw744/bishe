@@ -234,13 +234,39 @@
                 </div>
             </div>
         </div>
-    </div>dialogVisibleByModifyUserInf
+    </div>
     <div>
+        <el-dialog
+                width="50%"
+                title="充值"
+                :visible.sync="czVisible"
+                append-to-body>
+            <div style="margin-bottom:10px">您的余额<span style="color: red;font-size: 20px;font-weight: bold;margin-left: 10px">{{user.balance}}</span></div>
+            <div style="width: 400px"><el-input v-model="balance" placeholder="请输入充值金额"></el-input></div>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="czVisible = false">取 消</el-button>
+                <el-button @click="czBalance">确认</el-button>
+            </div>
+        </el-dialog>
+
+
         <el-dialog title="个人信息修改" :visible.sync="dialogVisibleByModifyUserInf">
             <div><el-button type="primary" size="small" @click="innerVisible = true">修改密码</el-button></div>
 
-            <div style="margin-top: 20px"><el-button type="primary" size="small" @click="innerVisible = true">修改支付密码</el-button></div>
+            <div style="margin-top: 20px"><el-button type="primary" size="small" @click="userNameVisible = true">修改用户名</el-button></div>
+            <el-dialog
+                    width="50%"
+                    title="修改用户名"
+                    :visible.sync="userNameVisible"
+                    append-to-body>
 
+                <div style="margin-bottom:10px">请输入新用户名</div>
+                <div style="width: 400px"><el-input v-model="newUserName" placeholder="请输入内容"></el-input></div>
+                <div slot="footer" class="dialog-footer">
+                    <el-button @click="userNameVisible = false">取 消</el-button>
+                    <el-button @click="changeName">确认</el-button>
+                </div>
+            </el-dialog>
 
 
             <el-dialog
@@ -251,19 +277,19 @@
 
                 <div>
                     <div style="margin-bottom: 10px">请输入旧密码</div>
-                    <div style="width: 400px"><el-input show-password v-model="input" placeholder="请输入内容"></el-input></div>
+                    <div style="width: 400px"><el-input show-password v-model="oldPassWord" placeholder="请输入内容"></el-input></div>
                 </div>
                 <div style="margin-top: 50px">
                     <div style="margin-bottom: 10px">输入新密码</div>
-                    <div style="width: 400px"><el-input show-password v-model="input" placeholder="请输入内容"></el-input></div>
+                    <div style="width: 400px"><el-input show-password v-model="newPassWord" placeholder="请输入内容"></el-input></div>
                 </div>
                 <div style="margin-top: 50px">
                     <div style="margin-bottom: 10px">请确认新密码</div>
-                    <div style="width: 400px"><el-input show-password v-model="input" placeholder="请输入内容"></el-input></div>
+                    <div style="width: 400px"><el-input show-password v-model="confirmNewPassword" placeholder="请输入内容"></el-input></div>
                 </div>
                 <div slot="footer" class="dialog-footer">
                 <el-button @click="innerVisible = false">取 消</el-button>
-                <el-button @click="innerVisible = false">确认</el-button>
+                <el-button @click="changePassword">确认</el-button>
                 </div>
             </el-dialog>
             <div slot="footer" class="dialog-footer">
@@ -286,6 +312,9 @@ function dd(){
 }
     function parentSay(){
         main.dialogVisibleByModifyUserInf = true;
+    }
+    function cz(){
+        main.czVisible = true;
     }
     // console.log(sessionStorage.getItem("token"))
     if (sessionStorage.getItem("token") == null) {
@@ -329,8 +358,80 @@ function dd(){
             newShopMessage:{},
             newShopMessagePage:1,
             innerVisible:false,
+            oldPassWord:'',
+            newPassWord:'',
+            confirmNewPassword:'',
+            userNameVisible:false,
+            newUserName:'',
+            czVisible:false,
+            user:{},
+            balance:'',
         },
         methods:{
+            czBalance(){
+              alert("充值成功！")
+                axios({
+                    method:'post',
+                    url:'/token/czBalance',
+                    headers:{
+                        'token' : sessionStorage.getItem("token")
+                    },
+                    data:{
+                        balance:this.balance
+                    }
+                }).then(res=> {
+                    this.user.balance = res.data;
+                    this.$message.success('充值成功!');
+                    let user = eval ("(" + sessionStorage.getItem("user") + ")");
+                    user.balance = res.data;
+                    sessionStorage.setItem("user",JSON.stringify(user));
+                })
+            },
+            changeName(){
+                axios({
+                    method:'post',
+                    url:'/token/changeUserName',
+                    headers:{
+                        'token' : sessionStorage.getItem("token")
+                    },
+                    data:{
+                        newUserName:this.newUserName
+                    }
+                }).then(res=> {
+                    this.$message.success('修改用户名成功');
+                    let user = eval ("(" + sessionStorage.getItem("user") + ")");
+                    user.userName = this.newUserName;
+                    sessionStorage.setItem("user",JSON.stringify(user));
+                })
+            },
+            changePassword(){
+                let user = eval ("(" + sessionStorage.getItem("user") + ")");
+                if(this.oldPassWord != user.password){
+                    alert(this.oldPassWord)
+                    alert(user.password)
+                    this.$message.error('旧密码输入错误！');
+                    return;
+                }
+                if(this.newPassWord != this.confirmNewPassword){
+                    this.$message.error('两次密码输入不一致！');
+                    return
+                }
+                axios({
+                    method:'post',
+                    url:'/token/changePassword',
+                    headers:{
+                        'token' : sessionStorage.getItem("token")
+                    },
+                    data:{
+                        newPassWord:this.newPassWord
+                    }
+                }).then(res=> {
+                })
+                this.$message.success('修改密码成功！');
+                user = eval ("(" + sessionStorage.getItem("user") + ")");
+                user.password = this.newPassWord;
+                sessionStorage.setItem("user",JSON.stringify(user));
+            },
             newNextClick(){
                 this.newShopMessagePage = this.newShopMessagePage + 1;
             },
@@ -338,6 +439,10 @@ function dd(){
                 sessionStorage.setItem("shopBuyDetailShop",JSON.stringify(shop))
                 window.location.href ='shoppingDetails.html';
             }
+        },
+        created :function (){
+          this.user =   eval ("(" + sessionStorage.getItem("user") + ")");
+          console.log(this.user)
         },
         beforeCreate: function (){
             axios({
