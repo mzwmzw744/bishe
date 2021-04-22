@@ -51,4 +51,8 @@
     <update id="czBalance">
         update  user set  balance = #{balance} where user_id = #{id}
     </update>
+
+    <update id="xfBalance">
+        update  user set  balance = #{balance} where user_id = #{id}
+    </update>
 </mapper>

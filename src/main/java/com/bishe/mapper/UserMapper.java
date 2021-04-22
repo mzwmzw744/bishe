@@ -29,5 +29,7 @@ public interface UserMapper {
     int changeUserName(String userName,int id);
 
     int czBalance(String balance,int id);
+
+    int xfBalance(String balance,int id);
 }
 

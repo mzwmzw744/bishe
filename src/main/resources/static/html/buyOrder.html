@@ -124,9 +124,9 @@
             title="付款"
             :visible.sync="tjddVisible"
             append-to-body>
-        <div style="margin-bottom:10px;">您的余额<span style="color: red;font-size: 20px;font-weight: bold;margin-left: 10px"></span></div>
-        <div>付款金额</div>
-        <div>付款后余额</div>
+        <div style="margin-bottom:10px;margin-left: 18px">您的余额<span style="color: red;font-size: 20px;font-weight: bold;margin-left: 10px">{{user.balance}}</span></div>
+        <div style="margin-bottom: 10px;margin-left: 18px">付款金额<span style="color: red;font-size: 20px;font-weight: bold;margin-left: 10px;">{{shop.shopPrice}}</span></div>
+        <div>付款后余额<span style="color: red;font-size: 20px;font-weight: bold;margin-left: 10px;">{{user.balance-shop.shopPrice}}</span></div>
         <div slot="footer" class="dialog-footer">
             <el-button @click="tjddVisible = false">取 消</el-button>
             <el-button @click="czBalance">确认</el-button>
@@ -149,8 +149,35 @@
             tableData:{},
             shop:{},
             tjddVisible:false,
+            user:eval ("(" + sessionStorage.getItem("user") + ")")
         },
         methods:{
+
+
+            czBalance(){
+                if(this.user.balance-this.shop.shopPrice < 0){
+                    this.$message.error('余额不足！');
+                    return
+                }
+                if(this.radio == 1 || this.radio == '1'){
+                    this.$message.error('请选择收货地址');
+                    return
+                }
+                axios({
+                    method:'post',
+                    url:'/token/xfBalance',
+                    headers:{
+                        'token' : sessionStorage.getItem("token")
+                    },
+                    data:{
+                        balance:this.shop.shopPrice
+                    }
+                }).then(res => {
+                    this.$message.success('购买成功!');
+                    this.user.balance = res.data
+                    sessionStorage.setItem("user",JSON.stringify(this.user));
+                })
+            },
             tjdd(){
                 this.tjddVisible = true;
             }
