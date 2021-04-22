@@ -1,5 +1,6 @@
 package com.bishe.mapper;
 
+import com.bishe.bean.Comment;
 import com.bishe.bean.Dynamic;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -30,5 +31,7 @@ public interface DynamicMapper {
     int createUserDynamic(Dynamic dynamic);
 
     List<Dynamic> getDynamicByTime(int pageSize, int offset);
+
+    int tjpl(Comment comment);
 
 }

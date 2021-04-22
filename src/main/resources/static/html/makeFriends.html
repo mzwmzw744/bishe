@@ -303,19 +303,15 @@
                                 <img width="200px" height="200px" style="float: left;margin-left: 3px;margin-top: 5px" v-bind:src="z.pic_8">
                                 <img width="200px" height="200px" style="float: left;margin-left: 4px;margin-top: 5px" v-bind:src="z.pic_9">
                             </div>
-                            </div>
+                        </div>
 
                         <div style="margin-top: 20px;margin-right: 30px;overflow: hidden">
-                        <div style="float: right">{{z.createTime}}</div>
+                            <div style="float: right">{{z.createTime}}</div>
                         </div>
                         <div style="margin-top: 35px;overflow: hidden">
-                        <i class="el-icon-s-comment" style="float: right;font-size: 30px;color: red;margin-right: 70px;cursor: pointer"></i>
-                        <i class="layui-icon layui-icon-praise" style="font-size: 30px; color: red;float: right;margin-right: 60px;cursor: pointer"></i>
+                            <i class="el-icon-s-comment"  v-on:click="plClick(z.id)" style="float: right;font-size: 30px;color: red;margin-right: 70px;cursor: pointer"></i>
+                            <i class="layui-icon layui-icon-praise" v-on:click="dzClick"  style="font-size: 30px; color: red;float: right;margin-right: 60px;cursor: pointer"></i>
                         </div>
-
-                        <!--                        <span>{{z.user_id}}</span>-->
-                            <!--                        <span>{{z.id}}</span>-->
-                            <!--                        1234-->
                     </el-card>
                 </div>
             </div>
@@ -325,8 +321,28 @@
 
     </el-row>
 
-</div>
-</div>
+    <el-dialog
+            width="40%"
+            title="评论"
+            :visible.sync="plVisible"
+            append-to-body>
+        <div style="overflow: hidden">
+        <div style="width: 400px;margin-left: 50px;float: left">
+        <el-input
+                type="textarea"
+                :rows="2"
+                placeholder="发表你的评论吧"
+                v-model="fbpltextarea">
+        </el-input>
+        </div>
+        <div style="float: left;margin-left: 20px;margin-top: 5px"><el-button v-on:click="fbwdpl">发表</el-button></div>
+        </div>
+        <div slot="footer" class="dialog-footer">
+            <el-button @click="plVisible = false">取 消</el-button>
+            <el-button @click="plVisible = false">确认</el-button>
+        </div>
+    </el-dialog>
+
 </div>
 <div id="foot"  style="width: 100%;height: 370px;margin: 50px auto;border-top: 1px solid #ddd;">
     <iframe src="hfqFoot.html" width="100%" height="430px"  frameborder="0" scrolling="no" >
@@ -349,6 +365,7 @@
     const app = new Vue({
         el:'#main',
         data:{
+            fbpltextarea:'',
             page:1,
             dynamicData:[],
             user_Dynamic:{},
@@ -359,9 +376,34 @@
                 number:'',
                 shoHeadPicUploadId:'',
                 shoHeadPicUploadToken: sessionStorage.getItem('token'),
-            }
+            },
+            plVisible:false,
+            chooseDtId:'',
         },
         methods:{
+            fbwdpl(){
+                axios({
+                    method:'post',
+                    url:'/token/plfb',
+                    headers:{
+                        'token' : sessionStorage.getItem("token")
+                    },
+                    data:{
+                        pl:this.fbpltextarea,
+                        dynamicId:this.chooseDtId
+                    }
+                }).then(res=> {
+                    this.shopMainPic = res.data;
+                    this.$message.success('发表成功')
+                })
+            },
+            dzClick(){
+                this.$message.success('点赞');
+            },
+            plClick(id){
+                this.plVisible = true;
+                this.chooseDtId = id
+            },
             fbClick(){
                 axios({
                     method:'post',

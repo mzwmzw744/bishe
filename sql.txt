@@ -169,3 +169,11 @@ create table address(
                              name varchar(100),
                              phone varchar(100)
 )
+drop table if exists comment;
+create table comment(
+                             id int auto_increment primary key,
+                             user_id int,
+                             user_dynamic,
+                             pl varchar(200),
+                             dz varchar(10)
+)

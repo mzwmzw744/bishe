@@ -1,5 +1,6 @@
 package com.bishe.controller;
 
+import com.bishe.bean.Comment;
 import com.bishe.bean.Dynamic;
 import com.bishe.bean.DynamicResult;
 import com.bishe.bean.User;
@@ -142,5 +143,21 @@ public class DynamicController {
             String url9 = (String) JSONObject.fromObject(list.get(8)).get("url");
             dynamicMapper.addMyDynamicPic_9(url9,dynamicId);
         }
+    }
+
+    /**
+     * 评论发表
+     */
+    @RequestMapping("/token/plfb")
+    public void plfb(@RequestBody Map<String,String> map,@RequestHeader Map<String, String> headers){
+        String token = headers.get("token");
+        User user = (User)redisUtil.get(token);
+        String pl = map.get("pl");
+        int dynamicId =  Integer.parseInt(map.get("dynamicId"));
+        Comment comment = new Comment();
+        comment.setPl(pl);
+        comment.setUser_dynamicId(dynamicId);
+        comment.setUser_id(user.getId());
+        dynamicMapper.tjpl(comment);
     }
 }
