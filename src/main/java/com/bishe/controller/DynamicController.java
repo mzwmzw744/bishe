@@ -152,12 +152,15 @@ public class DynamicController {
     public void plfb(@RequestBody Map<String,String> map,@RequestHeader Map<String, String> headers){
         String token = headers.get("token");
         User user = (User)redisUtil.get(token);
+        User newUser = userMapper.getUserById(user.getId());
         String pl = map.get("pl");
         int dynamicId =  Integer.parseInt(map.get("dynamicId"));
         Comment comment = new Comment();
         comment.setPl(pl);
         comment.setUser_dynamicId(dynamicId);
-        comment.setUser_id(user.getId());
+        comment.setUser_id(newUser.getId());
+        comment.setUser_tx(newUser.getHeadPic());
+        comment.setUser_name(newUser.getUserName());
         dynamicMapper.tjpl(comment);
     }
     /**

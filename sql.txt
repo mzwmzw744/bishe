@@ -177,7 +177,6 @@ create table comment(
                         user_id int,
                         user_dynamic int,
                         pl varchar(200),
-                        dz varchar(10),
                         user_tx varchar(200),
                         user_name varchar(50)
 )

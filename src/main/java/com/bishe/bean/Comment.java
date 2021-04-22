@@ -9,4 +9,6 @@ public class Comment {
     int user_dynamicId;
     String pl;
     String dz;
+    String user_tx;
+    String user_name;
 }

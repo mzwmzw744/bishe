@@ -84,7 +84,7 @@
     </select>
 
     <insert id="tjpl" parameterType="com.bishe.bean.Comment">
-        insert comment values (null,#{user_id},#{user_dynamicId},#{pl},'0')
+        insert comment values (null,#{user_id},#{user_dynamicId},#{pl},#{user_tx},#{user_name})
     </insert>
 
     <select id="ckpl">
