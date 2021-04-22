@@ -323,7 +323,7 @@
                         </div>
                         <div style="margin-top: 35px;overflow: hidden">
                             <i  id="wypl" class="el-icon-s-comment" v-on:click="plClick(z.id)"></i>
-                            <i id="wydz"  class="layui-icon layui-icon-praise" v-on:click="dzClick"  style=""></i>
+                            <i id="wydz"  class="layui-icon layui-icon-praise" v-on:click="dzClick(z.id)"  style=""></i>
                         </div>
                     </el-card>
                 </div>
@@ -420,8 +420,25 @@
                     this.$message.success('发表成功')
                 })
             },
-            dzClick(){
-                this.$message.success('点赞');
+            dzClick(id){
+                this.chooseDtId = id
+                axios({
+                    method:'post',
+                    url:'/token/pldz',
+                    headers:{
+                        'token' : sessionStorage.getItem("token")
+                    },
+                    data:{
+                        dynamicId:this.chooseDtId
+                    }
+                }).then(res=> {
+                    if(res.data == "repeat"){
+                        this.$message.error('已经点过赞啦')
+                    }
+                    if(res.data == "true"){
+                        this.$message.success('点赞成功')
+                    }
+                })
             },
             plClick(id){
                 this.plVisible = true;

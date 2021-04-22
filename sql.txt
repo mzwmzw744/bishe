@@ -180,3 +180,10 @@ create table comment(
                         user_tx varchar(200),
                         user_name varchar(50)
 )
+
+drop table if exists giveUp;
+create table giveUp(
+                        id int auto_increment primary key,
+                        user_id int,
+                        dynamic_id int
+)

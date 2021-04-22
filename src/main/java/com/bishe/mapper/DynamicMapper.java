@@ -2,6 +2,7 @@ package com.bishe.mapper;
 
 import com.bishe.bean.Comment;
 import com.bishe.bean.Dynamic;
+import com.bishe.bean.GiveUp;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -35,4 +36,8 @@ public interface DynamicMapper {
     int tjpl(Comment comment);
 
     List<Comment> ckpl(int id);
+
+    int pldz(GiveUp giveUp);
+
+    int ckdzsfcf(GiveUp giveUp);
 }

@@ -1,13 +1,11 @@
 package com.bishe.controller;
 
-import com.bishe.bean.Comment;
-import com.bishe.bean.Dynamic;
-import com.bishe.bean.DynamicResult;
-import com.bishe.bean.User;
+import com.bishe.bean.*;
 import com.bishe.mapper.DynamicMapper;
 import com.bishe.mapper.UserMapper;
 import com.bishe.util.RedisUtil;
 import lombok.Data;
+import lombok.Value;
 import net.sf.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
@@ -170,5 +168,24 @@ public class DynamicController {
     public List ckpl(@RequestBody Map<String,String> map,@RequestHeader Map<String, String> headers){
      List<Comment> list = dynamicMapper.ckpl(Integer.parseInt(map.get("ckpldtid")));
      return list;
+    }
+
+
+    /**
+     * 评论点赞
+     */
+    @RequestMapping("/token/pldz")
+    public String pldz(@RequestBody Map<String,String> map, @RequestHeader Map<String, String> headers){
+        String token = headers.get("token");
+        User user = (User)redisUtil.get(token);
+        GiveUp giveUp = new GiveUp();
+        giveUp.setUser_id(user.getId());
+        giveUp.setDynamic_id(Integer.parseInt(map.get("dynamicId")));
+        int bool = dynamicMapper.ckdzsfcf(giveUp);
+        if(bool == 1){
+            return "repeat";
+        }
+        dynamicMapper.pldz(giveUp);
+        return "true";
     }
 }

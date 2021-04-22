@@ -103,4 +103,11 @@
         select * from comment where user_dynamic = #{id}
     </select>
 
+    <select id="ckdzsfcf" parameterType="com.bishe.bean.GiveUp" resultType="java.lang.Integer">
+        select count(1) from giveUp where dynamic_id = #{dynamic_id} and user_id=#{user_id}
+    </select>
+
+    <insert id="pldz" parameterType="com.bishe.bean.GiveUp">
+        insert giveUp values (null,#{user_id},#{dynamic_id});
+    </insert>
 </mapper>
