@@ -6,9 +6,8 @@ import lombok.Data;
 public class Comment {
     int id;
     int user_id;
-    int user_dynamicId;
+    int user_dynamic;
     String pl;
-    String dz;
     String user_tx;
     String user_name;
 }

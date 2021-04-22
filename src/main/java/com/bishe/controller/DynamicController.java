@@ -157,7 +157,7 @@ public class DynamicController {
         int dynamicId =  Integer.parseInt(map.get("dynamicId"));
         Comment comment = new Comment();
         comment.setPl(pl);
-        comment.setUser_dynamicId(dynamicId);
+        comment.setUser_dynamic(dynamicId);
         comment.setUser_id(newUser.getId());
         comment.setUser_tx(newUser.getHeadPic());
         comment.setUser_name(newUser.getUserName());

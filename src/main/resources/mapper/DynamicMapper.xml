@@ -13,6 +13,18 @@
         <result column="auditStatus" jdbcType="VARCHAR" property="auditStatus" />
     </resultMap>
 
+
+    <resultMap id="commentResultMap" type="com.bishe.bean.Comment">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="user_id" jdbcType="INTEGER" property="user_id" />
+        <result column="user_dynamic" jdbcType="INTEGER" property="user_dynamic" />
+        <result column="pl" jdbcType="VARCHAR" property="pl" />
+        <result column="user_tx" jdbcType="VARCHAR" property="user_tx" />
+        <result column="user_name" jdbcType="VARCHAR" property="user_name" />
+    </resultMap>
+
+
+
     <resultMap id="dynamicResultMap" type="com.bishe.bean.Dynamic">
         <result column="id" jdbcType="INTEGER" property="id" />
         <result column="user_id" jdbcType="INTEGER" property="user_id" />
@@ -84,11 +96,11 @@
     </select>
 
     <insert id="tjpl" parameterType="com.bishe.bean.Comment">
-        insert comment values (null,#{user_id},#{user_dynamicId},#{pl},#{user_tx},#{user_name})
+        insert comment values (null,#{user_id},#{user_dynamic},#{pl},#{user_tx},#{user_name})
     </insert>
 
-    <select id="ckpl">
-        select * from comment where user_dynamicId = #{id}
+    <select id="ckpl" resultMap="commentResultMap">
+        select * from comment where user_dynamic = #{id}
     </select>
 
 </mapper>

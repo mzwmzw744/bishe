@@ -54,6 +54,19 @@
     #refresh:hover{
         color: #c35673;
     }
+    #wypl:hover{
+        color: #93D1FF;
+    }
+    #wypl{
+        float: right;font-size: 30px;color: red;margin-right: 70px;cursor: pointer
+    }
+    #wydz{
+        font-size: 30px; color: red;float: right;margin-right: 60px;cursor: pointer
+    }
+    #wydz:hover{
+        color: #93D1FF;
+    }
+
 </style>
 <body>
 <div style="height: 250px;margin: 0 auto">
@@ -309,8 +322,8 @@
                             <div style="float: right">{{z.createTime}}</div>
                         </div>
                         <div style="margin-top: 35px;overflow: hidden">
-                            <i class="el-icon-s-comment"  v-on:click="plClick(z.id)" style="float: right;font-size: 30px;color: red;margin-right: 70px;cursor: pointer"></i>
-                            <i class="layui-icon layui-icon-praise" v-on:click="dzClick"  style="font-size: 30px; color: red;float: right;margin-right: 60px;cursor: pointer"></i>
+                            <i  id="wypl" class="el-icon-s-comment" v-on:click="plClick(z.id)"></i>
+                            <i id="wydz"  class="layui-icon layui-icon-praise" v-on:click="dzClick"  style=""></i>
                         </div>
                     </el-card>
                 </div>
@@ -327,15 +340,24 @@
             :visible.sync="plVisible"
             append-to-body>
         <div style="overflow: hidden">
-        <div style="width: 400px;margin-left: 50px;float: left">
-        <el-input
-                type="textarea"
-                :rows="2"
-                placeholder="发表你的评论吧"
-                v-model="fbpltextarea">
-        </el-input>
-        </div>
-        <div style="float: left;margin-left: 20px;margin-top: 5px"><el-button v-on:click="fbwdpl">发表</el-button></div>
+            <div style="width: 400px;margin-left: 50px;float: left">
+                <el-input
+                        type="textarea"
+                        :rows="2"
+                        placeholder="发表你的评论吧"
+                        v-model="fbpltextarea">
+                </el-input>
+                <div v-for="o in allPlMessage" :key="o" class="text item">
+                    <el-card class="box-card" style="margin-top: 10px">
+                        <div style="overflow: hidden">
+                            <div style="float: left"><el-avatar v-bind:src="o.user_tx"></el-avatar></div>
+                            <div style="float: left;margin-left: 7px;color: #c35673">{{o.user_name }}</div>
+                            <div style="float: left;margin-left: 20px;margin-top: 10px">{{o.pl }}</div>
+                        </div>
+                    </el-card>
+                </div>
+            </div>
+            <div style="float: left;margin-left: 20px;margin-top: 5px"><el-button v-on:click="fbwdpl">发表</el-button></div>
         </div>
         <div slot="footer" class="dialog-footer">
             <el-button @click="plVisible = false">取 消</el-button>
@@ -379,6 +401,7 @@
             },
             plVisible:false,
             chooseDtId:'',
+            allPlMessage:'',
         },
         methods:{
             fbwdpl(){
@@ -404,10 +427,20 @@
                 this.plVisible = true;
                 this.chooseDtId = id
 
-
-
-
-
+                axios({
+                    method:'post',
+                    url:'/token/ckpl',
+                    headers:{
+                        'token' : sessionStorage.getItem("token")
+                    },
+                    data:{
+                        ckpldtid:this.chooseDtId
+                    }
+                }).then(res=> {
+                    this.allPlMessage = res.data;
+                    debugger;
+                    this.$message.success('查看成功')
+                })
 
             },
             fbClick(){
