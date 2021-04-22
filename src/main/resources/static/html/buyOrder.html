@@ -119,6 +119,21 @@
     </el-card>
 
 
+    <el-dialog
+            width="30%"
+            title="付款"
+            :visible.sync="tjddVisible"
+            append-to-body>
+        <div style="margin-bottom:10px;">您的余额<span style="color: red;font-size: 20px;font-weight: bold;margin-left: 10px"></span></div>
+        <div>付款金额</div>
+        <div>付款后余额</div>
+        <div slot="footer" class="dialog-footer">
+            <el-button @click="tjddVisible = false">取 消</el-button>
+            <el-button @click="czBalance">确认</el-button>
+        </div>
+    </el-dialog>
+
+
 </div>
 
 
@@ -132,11 +147,12 @@
         data:{
             radio: '1',
             tableData:{},
-            shop:{}
+            shop:{},
+            tjddVisible:false,
         },
         methods:{
             tjdd(){
-                alert(123)
+                this.tjddVisible = true;
             }
         },
         created:function (){
