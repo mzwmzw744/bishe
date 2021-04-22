@@ -160,4 +160,12 @@ public class DynamicController {
         comment.setUser_id(user.getId());
         dynamicMapper.tjpl(comment);
     }
+    /**
+     * 评论查看
+     */
+    @RequestMapping("/token/ckpl")
+    public List ckpl(@RequestBody Map<String,String> map,@RequestHeader Map<String, String> headers){
+     List<Comment> list = dynamicMapper.ckpl(Integer.parseInt(map.get("ckpldtid")));
+     return list;
+    }
 }

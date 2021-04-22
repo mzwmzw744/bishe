@@ -5,21 +5,23 @@ CREATE table user(
                      user_email varchar(50),
                      user_password varchar(100),
                      user_headPic varchar(200),
-                     balance varchar(200)
+                     balance varchar(200),
+                     account varchar(200)
+
 );
-insert into user values (null,'1','1163974490@qq.com','1','','');
-insert into user values (null,'小红','1163974490@qq.com','123','','');
-insert into user values (null,'小明','1163974491@qq.com','123','','');
-insert into user values (null,'小1','1163974480@qq.com','123','','');
-insert into user values (null,'小2','1163974481@qq.com','123','','');
-insert into user values (null,'小3','1163974482@qq.com','123','','');
-insert into user values (null,'小4','1163974483@qq.com','123','','');
-insert into user values (null,'小5','1163974484@qq.com','123','','');
-insert into user values (null,'小6','1163974485@qq.com','123','','');
-insert into user values (null,'小7','1163974486@qq.com','123','','');
-insert into user values (null,'小8','1163974487@qq.com','123','','');
-insert into user values (null,'小9','1163974486@qq.com','123','','');
-insert into user values (null,'小10','1163974487@qq.com','123','','');
+insert into user values (null,'小白1','1163974490@qq.com','1','','0','1');
+insert into user values (null,'小白2','1163974490@qq.com','2','','0','2');
+insert into user values (null,'小白3','1163974491@qq.com','3','','0','3');
+insert into user values (null,'小白4','1163974480@qq.com','4','','0','4');
+insert into user values (null,'小白5','1163974481@qq.com','5','','0','5');
+insert into user values (null,'小白6','1163974482@qq.com','6','','0','6');
+insert into user values (null,'小白7','1163974483@qq.com','7','','0','7');
+insert into user values (null,'小白8','1163974484@qq.com','8','','0','8');
+insert into user values (null,'小白9','1163974485@qq.com','9','','0','9');
+insert into user values (null,'小白10','1163974486@qq.com','10','','0','10');
+insert into user values (null,'小白11','1163974487@qq.com','11','','0','11');
+insert into user values (null,'小白12','1163974486@qq.com','12','','0','12');
+insert into user values (null,'小白13','1163974487@qq.com','13','','0','13');
 
 drop table if exists admin;
 CREATE table admin(
@@ -171,9 +173,11 @@ create table address(
 )
 drop table if exists comment;
 create table comment(
-                             id int auto_increment primary key,
-                             user_id int,
-                             user_dynamic,
-                             pl varchar(200),
-                             dz varchar(10)
+                        id int auto_increment primary key,
+                        user_id int,
+                        user_dynamic int,
+                        pl varchar(200),
+                        dz varchar(10),
+                        user_tx varchar(200),
+                        user_name varchar(50)
 )

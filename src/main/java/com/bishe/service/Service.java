@@ -36,7 +36,7 @@ public class Service {
         Session session = Session.getDefaultInstance(prop, new Authenticator() {
             public PasswordAuthentication getPasswordAuthentication() {
                 //发件人邮件用户名、授权码
-                return new PasswordAuthentication("1163974499@qq.com", "vrfhgnctsrcebaah");
+                return new PasswordAuthentication("1163974499@qq.com", "swarajlwzzlwjcci");
             }
         });
         //开启Session的debug模式，这样就可以查看到程序发送Email的运行状态
@@ -46,7 +46,7 @@ public class Service {
         Transport ts = session.getTransport();
 
         //3、使用邮箱的用户名和授权码连上邮件服务器
-        ts.connect("smtp.qq.com", "1163974499@qq.com", "tggbflpppzjzhfgj");
+        ts.connect("smtp.qq.com", "1163974499@qq.com", "swarajlwzzlwjcci");
 
         //4、创建邮件
 

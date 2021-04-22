@@ -34,7 +34,7 @@ public class LoginController {
         User user;
         //if(category.equals("userName")) {
         if("userName".equals(category)) {
-            user = userMapper.getUserByUserName(account);
+            user = userMapper.getUserByAccount(account);
         }else {
             user = userMapper.getUserByEmail("account");
         }
@@ -90,13 +90,16 @@ public class LoginController {
     @RequestMapping("/register")
     @ResponseBody
     public String register(HttpServletRequest request){
-        String userName = request.getParameter("userName");
+
+
+        String account = request.getParameter("userName");
         String password = request.getParameter("password");
         String email = request.getParameter("email");
         User user = new User();
-        user.setUserName(userName);
+        user.setUserName("新用户");
         user.setPassword(password);
         user.setEmail(email);
+        user.setAccount(account);
         int isRepeat = userMapper.getUserIsRepeat(user);
         if(isRepeat >= 1) {
             System.out.println("账号或邮箱已被注册！");

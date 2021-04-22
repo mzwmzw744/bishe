@@ -34,4 +34,5 @@ public interface DynamicMapper {
 
     int tjpl(Comment comment);
 
+    List<Comment> ckpl(int id);
 }

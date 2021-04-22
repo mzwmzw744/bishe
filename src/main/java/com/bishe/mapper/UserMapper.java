@@ -12,7 +12,7 @@ public interface UserMapper {
 
     User getUserByEmail(String email);
 
-    User getUserByUserName(String Phone);
+    User getUserByAccount(String account);
 
     List<User> getAllUser();
 
