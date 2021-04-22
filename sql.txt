@@ -124,9 +124,6 @@ insert into shop values (null,1,'汉服10','900','曲裾','超好看','/pic/shop
 
 
 
-
-
-
 drop table if exists shop_main_picture;
 CREATE table shop_main_picture(
     id int primary key auto_increment,
@@ -157,7 +154,9 @@ create table user_Dynamic(
                         pic_7 varchar(100),
                         pic_8 varchar(100),
                         pic_9 varchar(100),
-                        createTime datetime
+                        createTime datetime,
+                        dzsl varchar(100),
+                        plsl varchar(100)
 );
 drop table if exists address;
 create table address(

@@ -61,7 +61,7 @@
         float: right;font-size: 30px;color: red;margin-right: 70px;cursor: pointer
     }
     #wydz{
-        font-size: 30px; color: red;float: right;margin-right: 60px;cursor: pointer
+        font-size: 30px; color: red;float: right;margin-right: 10px;cursor: pointer
     }
     #wydz:hover{
         color: #93D1FF;
@@ -323,7 +323,8 @@
                         </div>
                         <div style="margin-top: 35px;overflow: hidden">
                             <i  id="wypl" class="el-icon-s-comment" v-on:click="plClick(z.id)"></i>
-                            <i id="wydz"  class="layui-icon layui-icon-praise" v-on:click="dzClick(z.id)"  style=""></i>
+                            <div style="margin-top: 2px;float: right;color: red;font-weight: bold;font-size: 20px;margin-right: 30px">{{z.dzsl}}</div>
+                            <i id="wydz"  class="layui-icon layui-icon-praise" v-on:click="dzClick(z)"></i>
                         </div>
                     </el-card>
                 </div>
@@ -420,8 +421,10 @@
                     this.$message.success('发表成功')
                 })
             },
-            dzClick(id){
-                this.chooseDtId = id
+            dzClick(z){
+
+                debugger;
+                this.chooseDtId = z.id
                 axios({
                     method:'post',
                     url:'/token/pldz',
@@ -434,8 +437,7 @@
                 }).then(res=> {
                     if(res.data == "repeat"){
                         this.$message.error('已经点过赞啦')
-                    }
-                    if(res.data == "true"){
+                    }else {
                         this.$message.success('点赞成功')
                     }
                 })

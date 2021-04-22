@@ -83,6 +83,7 @@ public class DynamicController {
               dynamicResult.setPic_8(dynamic.get(i).getPic_8());
               dynamicResult.setPic_9(dynamic.get(i).getPic_9());
               dynamicResult.setWords(dynamic.get(i).getWords());
+              dynamicResult.setDzsl(dynamic.get(i).getDzsl());
               User user = userMapper.getUserById(dynamic.get(i).getUser_id());
               dynamicResult.setUserHeadPic(user.getHeadPic());
               dynamicResult.setUserName(user.getUserName());
@@ -185,6 +186,10 @@ public class DynamicController {
         if(bool == 1){
             return "repeat";
         }
+        String dzsls = dynamicMapper.getDzsl(Integer.parseInt(map.get("dynamicId")));
+        int dzsl = Integer.parseInt(dzsls);
+        dzsl+=1;
+        dynamicMapper.szdzsl(String.valueOf(dzsl),Integer.parseInt(map.get("dynamicId")));
         dynamicMapper.pldz(giveUp);
         return "true";
     }

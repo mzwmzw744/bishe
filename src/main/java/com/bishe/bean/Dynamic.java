@@ -22,4 +22,6 @@ public class Dynamic {
      String pic_8;
      String pic_9;
      String createTime;
+     String dzsl;
+     String plsl;
 }

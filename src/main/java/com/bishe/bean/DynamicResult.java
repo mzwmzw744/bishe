@@ -23,4 +23,5 @@ public class DynamicResult {
     String userHeadPic;
     String userName;
     int picLength;
+    String dzsl;
 }

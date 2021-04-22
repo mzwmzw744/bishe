@@ -84,7 +84,7 @@
     </update>
 
     <insert id="createUserDynamic" parameterType="com.bishe.bean.Dynamic" useGeneratedKeys="true" keyProperty="id">
-        insert user_Dynamic values (null,#{user_id},#{words},'','','','','','','','','',now())
+        insert user_Dynamic values (null,#{user_id},#{words},'','','','','','','','','',now(),'0','0')
     </insert>
 
     <delete id="deleteUserDynamic">
@@ -110,4 +110,12 @@
     <insert id="pldz" parameterType="com.bishe.bean.GiveUp">
         insert giveUp values (null,#{user_id},#{dynamic_id});
     </insert>
+
+    <update id="szdzsl">
+        update user_Dynamic set dzsl = #{dzsl} where id = #{id}
+    </update>
+
+    <select id="getDzsl" resultType="java.lang.String">
+        select dzsl from  user_Dynamic where id = #{id}
+    </select>
 </mapper>

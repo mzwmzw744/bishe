@@ -40,4 +40,8 @@ public interface DynamicMapper {
     int pldz(GiveUp giveUp);
 
     int ckdzsfcf(GiveUp giveUp);
+
+    int szdzsl(String dzsl,int id);
+
+    String getDzsl(int id);
 }
