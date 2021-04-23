@@ -60,5 +60,4 @@ public class OrderController {
         List<BuyOrder> list = orderMapper.getAllByOrder(buyOrder);
         return list;
     }
-
 }
