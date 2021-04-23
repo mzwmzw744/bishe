@@ -54,4 +54,8 @@ public interface ShopMapper {
     int updateShop(Shop shop);
 
     ShopMainPicture getShopMainPicByShopID(@Param("id") int id);
+
+    int updateShopState(Shop shop);
+
+
 }

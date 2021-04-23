@@ -108,4 +108,9 @@
         update shop set shop_name = #{shopName},shop_price=#{shopPrice},shop_family=#{shopFamily},shop_introduction=#{shopIntroduction},
                         auditStatus=#{auditStatus},shop_head_picture=#{shopHeadPicture}  where id = #{id};
     </update>
+    
+    <update id="updateShopState" parameterType="com.bishe.bean.Shop">
+        update shop set state = #{state} where id = #{id}
+    </update>
+    
 </mapper>

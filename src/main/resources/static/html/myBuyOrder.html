@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>汉服圈</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="../ui/layui/css/layui.css">
+    <link rel="stylesheet" href="../css/theme/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.0/index.js"></script>
+    <!--    <script src="https://unpkg.com/element-ui/lib/index.js"></script>-->
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.js"></script>
+    <script src="../ui/layui/layui.js"></script>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    #main{
+        margin: 0 auto;
+        height: 2000px;
+        width: 1000px;
+        border: 1px solid #ebebeb;
+        /*background-color: RGB(250,250,250);*/
+        background-color: #F2F6FC;
+    }
+    /*#main:hover{*/
+    /*    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)*/
+    /*}*/
+    .shopCss{
+        color: rgba(255,83,106,0.54);
+        border-bottom: 1px solid #ddd;
+        cursor: pointer;
+        height: 100px;
+    }
+    /*.shopCss:hover{*/
+    /*    background-color: rgba(255,83,106,0.27);*/
+    /*}*/
+</style>
+<body>
+<div style="height: 250px;margin: 0 auto">
+    <iframe src="hfqTop.html" width="100%" height="220px" scrolling="no" frameborder="0">
+    </iframe>
+</div>
+<div id="main">
+
+
+</div>
+<div id="foot" style="width: 100%;height: 370px;margin: 50px auto;border-top: 1px solid #ddd;">
+    <iframe src="hfqFoot.html" width="100%" height="430px"  frameborder="0" scrolling="no" >
+    </iframe>
+</div>
+<script>
+    new Vue({
+        el: '#main',
+        methods:{
+
+
+        },
+        created: function () {
+            axios({
+                method:'post',
+                url:'/token/getMyOrder',
+                headers:{
+                    'token' : sessionStorage.getItem("token")
+                },
+                data:{
+
+                }
+            }).then(res=> {
+
+            })
+        }
+    })
+
+</script>
+</body>
+</html>

@@ -152,21 +152,4 @@ public class LoginController {
         userMapper.czBalance(num.toString(),user.getId());
         return num;
     }
-    @RequestMapping("/token/xfBalance")
-    @ResponseBody
-    public Double xfBalance(@RequestBody Map<String,String> map,@RequestHeader Map<String, String> headers){
-        String token = headers.get("token");
-        User user = (User)redisUtil.get(token);
-        User newuser = userMapper.getUserById(user.getId());
-        double t =  Double.valueOf(newuser.getBalance());
-        double z =Double.valueOf(map.get("balance"));
-        Double num = t - z;
-        userMapper.xfBalance(num.toString(),user.getId());
-        BuyOrder buyOrder = new BuyOrder();
-        int shopId = Integer.parseInt(map.get("shopId"));
-        buyOrder.setShop_id(shopId);
-        buyOrder.setBuy_user_id(user.getId());
-        orderMapper.addOrder(buyOrder);
-        return num;
-    }
 }

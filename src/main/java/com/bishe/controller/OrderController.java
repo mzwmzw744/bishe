@@ -1,13 +1,15 @@
 package com.bishe.controller;
 
 import com.bishe.bean.Address;
+import com.bishe.bean.BuyOrder;
+import com.bishe.bean.Shop;
 import com.bishe.bean.User;
 import com.bishe.mapper.AddressMapper;
+import com.bishe.mapper.OrderMapper;
+import com.bishe.mapper.ShopMapper;
+import com.bishe.mapper.UserMapper;
 import com.bishe.util.RedisUtil;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -19,14 +21,44 @@ public class OrderController {
     AddressMapper addressMapper;
     @Resource
     RedisUtil redisUtil;
-    @RequestMapping("/token/addUserOder")
-    public String addUserAddress(@RequestBody Map<String,Object> map,@RequestHeader Map<String, String> headers){
+    @Resource
+    UserMapper userMapper;
+    @Resource
+    OrderMapper orderMapper;
+    @Resource
+    ShopMapper shopMapper;
 
-
-
-
-
-
-        return "成功";
+    @RequestMapping("/token/xfBalance")
+    @ResponseBody
+    public Double xfBalance(@RequestBody Map<String,String> map,@RequestHeader Map<String, String> headers){
+        String token = headers.get("token");
+        User user = (User)redisUtil.get(token);
+        User newuser = userMapper.getUserById(user.getId());
+        double t =  Double.valueOf(newuser.getBalance());
+        double z =Double.valueOf(map.get("balance"));
+        Double num = t - z;
+        userMapper.xfBalance(num.toString(),user.getId());
+        BuyOrder buyOrder = new BuyOrder();
+        int shopId = Integer.parseInt(map.get("shopId"));
+        Shop shop = new Shop();
+        shop.setId(shopId);
+        shop.setState("1");
+        shopMapper.updateShopState(shop);
+        buyOrder.setShop_id(shopId);
+        buyOrder.setBuy_user_id(user.getId());
+        orderMapper.addOrder(buyOrder);
+        return num;
     }
+    @RequestMapping("/token/getMyOrder")
+    @ResponseBody
+    public List<BuyOrder> getMyOrder(@RequestBody Map<String,String> map, @RequestHeader Map<String, String> headers){
+        String token = headers.get("token");
+        User user = (User)redisUtil.get(token);
+        User newuser = userMapper.getUserById(user.getId());;
+        BuyOrder buyOrder = new BuyOrder();
+        buyOrder.setBuy_user_id(user.getId());
+        List<BuyOrder> list = orderMapper.getAllByOrder(buyOrder);
+        return list;
+    }
+
 }

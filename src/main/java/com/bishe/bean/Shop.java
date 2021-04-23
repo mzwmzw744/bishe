@@ -13,4 +13,5 @@ public class Shop {
     private String shopHeadPicture;
     private String auditStatus;
     private String createDate;
+    private String state;
 }

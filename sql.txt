@@ -90,86 +90,87 @@ insert into adminApply values (null,'小华6','123','超级管理员','我是小
 
 drop table if exists shop;
 CREATE table shop(
-    id int primary key auto_increment,
-    user_id int,
-    shop_name varchar(50),
-    shop_price varchar(50),
-    shop_family varchar(50),
-    shop_introduction varchar(500),
-    shop_head_picture varchar(100),
-    auditStatus varchar(10),
-    createDate datetime
+                     id int primary key auto_increment,
+                     user_id int,
+                     shop_name varchar(50),
+                     shop_price varchar(50),
+                     shop_family varchar(50),
+                     shop_introduction varchar(500),
+                     shop_head_picture varchar(100),
+                     auditStatus varchar(10),
+                     createDate datetime,
+                     state varchar(20)
 );
-insert into shop values (null,1,'汉服1','100','曲裾','超好看','/pic/shopTiShi.png','未上架',now());
-insert into shop values (null,1,'汉服2','200','曲裾','超好看','/pic/shopTiShi.png','未上架',now());
-insert into shop values (null,1,'汉服3','300','曲裾','超好看','/pic/shopTiShi.png','未上架',now());
-insert into shop values (null,1,'汉服4','400','曲裾','超好看','/pic/shopTiShi.png','未上架',now());
-insert into shop values (null,1,'汉服5','500','曲裾','超好看','/pic/shopTiShi.png','未上架',now());
-insert into shop values (null,1,'汉服6','600','曲裾','超好看','/pic/shopTiShi.png','未上架',now());
-insert into shop values (null,1,'汉服7','700','曲裾','超好看','/pic/shopTiShi.png','未上架',now());
-insert into shop values (null,1,'汉服8','800','曲裾','超好看','/pic/shopTiShi.png','未上架',now());
-insert into shop values (null,1,'汉服9','900','曲裾','超好看','/pic/shopTiShi.png','未上架',now());
-insert into shop values (null,1,'汉服10','900','曲裾','超好看','/pic/shopTiShi.png','未上架',now());
+insert into shop values (null,1,'汉服1','100','曲裾','超好看','/pic/shopTiShi.png','未上架',now(),'0');
+insert into shop values (null,1,'汉服2','200','曲裾','超好看','/pic/shopTiShi.png','未上架',now(),'0');
+insert into shop values (null,1,'汉服3','300','曲裾','超好看','/pic/shopTiShi.png','未上架',now(),'0');
+insert into shop values (null,1,'汉服4','400','曲裾','超好看','/pic/shopTiShi.png','未上架',now(),'0');
+insert into shop values (null,1,'汉服5','500','曲裾','超好看','/pic/shopTiShi.png','未上架',now(),'0');
+insert into shop values (null,1,'汉服6','600','曲裾','超好看','/pic/shopTiShi.png','未上架',now(),'0');
+insert into shop values (null,1,'汉服7','700','曲裾','超好看','/pic/shopTiShi.png','未上架',now(),'0');
+insert into shop values (null,1,'汉服8','800','曲裾','超好看','/pic/shopTiShi.png','未上架',now(),'0');
+insert into shop values (null,1,'汉服9','900','曲裾','超好看','/pic/shopTiShi.png','未上架',now(),'0');
+insert into shop values (null,1,'汉服10','900','曲裾','超好看','/pic/shopTiShi.png','未上架',now(),'0');
 
-insert into shop values (null,1,'汉服1','100','曲裾','超好看','/pic/hanFuLogo.png','上架',now());
-insert into shop values (null,1,'汉服2','200','曲裾','超好看','/pic/hanFuLogo.png','上架',now());
-insert into shop values (null,1,'汉服3','300','曲裾','超好看','/pic/hanFuLogo.png','上架',now());
-insert into shop values (null,1,'汉服4','400','曲裾','超好看','/pic/hanFuLogo.png','上架',now());
-insert into shop values (null,1,'汉服5','500','曲裾','超好看','/pic/hanFuLogo.png','上架',now());
-insert into shop values (null,1,'汉服6','600','曲裾','超好看','/pic/hanFuLogo.png','上架',now());
-insert into shop values (null,1,'汉服7','700','曲裾','超好看','/pic/hanFuLogo.png','上架',now());
-insert into shop values (null,1,'汉服8','800','曲裾','超好看','/pic/hanFuLogo.png','上架',now());
-insert into shop values (null,1,'汉服9','900','曲裾','超好看','/pic/hanFuLogo.png','上架',now());
-insert into shop values (null,1,'汉服10','900','曲裾','超好看','/pic/shopTiShi.png','上架',now());
+insert into shop values (null,1,'汉服1','100','曲裾','超好看','/pic/hanFuLogo.png','上架',now(),'0');
+insert into shop values (null,1,'汉服2','200','曲裾','超好看','/pic/hanFuLogo.png','上架',now(),'0');
+insert into shop values (null,1,'汉服3','300','曲裾','超好看','/pic/hanFuLogo.png','上架',now(),'0');
+insert into shop values (null,1,'汉服4','400','曲裾','超好看','/pic/hanFuLogo.png','上架',now(),'0');
+insert into shop values (null,1,'汉服5','500','曲裾','超好看','/pic/hanFuLogo.png','上架',now(),'0');
+insert into shop values (null,1,'汉服6','600','曲裾','超好看','/pic/hanFuLogo.png','上架',now(),'0');
+insert into shop values (null,1,'汉服7','700','曲裾','超好看','/pic/hanFuLogo.png','上架',now(),'0');
+insert into shop values (null,1,'汉服8','800','曲裾','超好看','/pic/hanFuLogo.png','上架',now(),'0');
+insert into shop values (null,1,'汉服9','900','曲裾','超好看','/pic/hanFuLogo.png','上架',now(),'0');
+insert into shop values (null,1,'汉服10','900','曲裾','超好看','/pic/shopTiShi.png','上架',now(),'0');
 
 
 
 drop table if exists shop_main_picture;
 CREATE table shop_main_picture(
-    id int primary key auto_increment,
-    shop_id int,
-    pic_1 varchar(100),
-    pic_2 varchar(100),
-    pic_3 varchar(100),
-    pic_4 varchar(100),
-    pic_5 varchar(100),
-    pic_6 varchar(100),
-    pic_7 varchar(100),
-    pic_8 varchar(100),
-    pic_9 varchar(100),
-    pic_10 varchar(100)
+                                  id int primary key auto_increment,
+                                  shop_id int,
+                                  pic_1 varchar(100),
+                                  pic_2 varchar(100),
+                                  pic_3 varchar(100),
+                                  pic_4 varchar(100),
+                                  pic_5 varchar(100),
+                                  pic_6 varchar(100),
+                                  pic_7 varchar(100),
+                                  pic_8 varchar(100),
+                                  pic_9 varchar(100),
+                                  pic_10 varchar(100)
 );
 
 drop table if exists user_Dynamic;
 create table user_Dynamic(
-                        id int auto_increment primary key,
-                        user_id int,
-                        words varchar(200),
-                        pic_1 varchar(100),
-                        pic_2 varchar(100),
-                        pic_3 varchar(100),
-                        pic_4 varchar(100),
-                        pic_5 varchar(100),
-                        pic_6 varchar(100),
-                        pic_7 varchar(100),
-                        pic_8 varchar(100),
-                        pic_9 varchar(100),
-                        createTime datetime,
-                        dzsl varchar(100),
-                        plsl varchar(100)
+                             id int auto_increment primary key,
+                             user_id int,
+                             words varchar(200),
+                             pic_1 varchar(100),
+                             pic_2 varchar(100),
+                             pic_3 varchar(100),
+                             pic_4 varchar(100),
+                             pic_5 varchar(100),
+                             pic_6 varchar(100),
+                             pic_7 varchar(100),
+                             pic_8 varchar(100),
+                             pic_9 varchar(100),
+                             createTime datetime,
+                             dzsl varchar(100),
+                             plsl varchar(100)
 );
 drop table if exists address;
 create table address(
-                             id int auto_increment primary key,
-                             user_id int,
-                             sheng varchar(100),
-                             shi varchar(100),
-                             qu varchar(100),
-                             addressDetail varchar(200),
-                             postCode varchar(20),
-                             name varchar(100),
-                             phone varchar(100)
-)
+                        id int auto_increment primary key,
+                        user_id int,
+                        sheng varchar(100),
+                        shi varchar(100),
+                        qu varchar(100),
+                        addressDetail varchar(200),
+                        postCode varchar(20),
+                        name varchar(100),
+                        phone varchar(100)
+);
 drop table if exists comment;
 create table comment(
                         id int auto_increment primary key,
@@ -178,21 +179,21 @@ create table comment(
                         pl varchar(200),
                         user_tx varchar(200),
                         user_name varchar(50)
-)
+);
 
 drop table if exists giveUp;
 create table giveUp(
-                        id int auto_increment primary key,
-                        user_id int,
-                        dynamic_id int
-)
+                       id int auto_increment primary key,
+                       user_id int,
+                       dynamic_id int
+);
 
 drop table if exists giveUp;
 create table giveUp(
-                        id int auto_increment primary key,
-                        user_id int,
-                        dynamic_id int
-)
+                       id int auto_increment primary key,
+                       user_id int,
+                       dynamic_id int
+);
 
 
 drop table if exists  buy_order;
@@ -201,7 +202,7 @@ create table buy_order(
                           shop_id int,
                           by_user_id int,
                           createTime dateTime
-)
+);
 
 
 

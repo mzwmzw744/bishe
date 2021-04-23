@@ -13,4 +13,7 @@ import java.util.List;
 public interface OrderMapper {
 
 int addOrder(BuyOrder buyOrder);
+
+List<BuyOrder> getAllByOrder(BuyOrder buyOrder);
+
 }
