@@ -227,7 +227,7 @@
             <div id="dynamic">
 
                 <div v-for="t in dynamicData">
-                    <el-card  style="margin: 50px auto" v-for="z in t">
+                    <el-card  style="margin: 50px auto" v-for="(z,index) in t">
 
                         <div style="overflow: hidden">
                             <div style="float: left"><el-avatar :src="z.userHeadPic"></el-avatar></div>
@@ -324,7 +324,7 @@
                         <div style="margin-top: 35px;overflow: hidden">
                             <i  id="wypl" class="el-icon-s-comment" v-on:click="plClick(z.id)"></i>
                             <div style="margin-top: 2px;float: right;color: red;font-weight: bold;font-size: 20px;margin-right: 30px">{{z.dzsl}}</div>
-                            <i id="wydz"  class="layui-icon layui-icon-praise" v-on:click="dzClick(z)"></i>
+                            <i id="wydz"  class="layui-icon layui-icon-praise" v-on:click="dzClick(z,index)"></i>
                         </div>
                     </el-card>
                 </div>
@@ -421,9 +421,8 @@
                     this.$message.success('发表成功')
                 })
             },
-            dzClick(z){
+            dzClick(z,index){
 
-                debugger;
                 this.chooseDtId = z.id
                 axios({
                     method:'post',
@@ -438,6 +437,9 @@
                     if(res.data == "repeat"){
                         this.$message.error('已经点过赞啦')
                     }else {
+                        let t = parseInt(this.dynamicData[0][index].dzsl) + 1;
+                        let st = t.toString();
+                        this.dynamicData[0][index].dzsl = st;
                         this.$message.success('点赞成功')
                     }
                 })
