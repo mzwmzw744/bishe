@@ -39,6 +39,7 @@
     </iframe>
 </div>
 <div id="main">
+
     <div style="overflow: hidden">
         <div style="float: left"><img v-bind:src="shop.shopHeadPicture" width="400px" height="400px"></div>
         <div style="float: left;width: 50%">
@@ -71,28 +72,38 @@
             </el-row>
         </div>
     </div>
-    <div style="width: 100%;background-color: #93D1FF">
+
+
+
+    <el-card class="box-card">
+    <div style="width: 100%">
         <el-row style="margin: 0px auto">
             <el-col :span="1">&nbsp;</el-col>
-            <el-col :span="3">  <el-button>商品详情</el-button></el-col>
-            <el-col :span="12">  <el-button>商家动态</el-button></el-col>
+            <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
+                <el-tab-pane label="商品详情" name="first">
+                    <div>
+                        <div style="text-align: center;margin: 50px auto">
+                            <div><img style="margin: 25px auto" width="600px"     v-if="shopMainPic.pic_1 != null && shopMainPic.pic_1 != '' " v-bind:src="shopMainPic.pic_1"></div>
+                            <div><img style="margin: 25px auto" width="600px"   v-if="shopMainPic.pic_2 != null && shopMainPic.pic_2 != '' " v-bind:src="shopMainPic.pic_2"></div>
+                            <div><img style="margin: 25px auto" width="600px"  v-if="shopMainPic.pic_3 != null && shopMainPic.pic_3 != '' " v-bind:src="shopMainPic.pic_3"></div>
+                            <div><img style="margin: 25px auto" width="600px"   v-if="shopMainPic.pic_4 != null && shopMainPic.pic_4 != '' " v-bind:src="shopMainPic.pic_4"></div>
+                            <div><img style="margin: 25px auto" width="600px"    v-if="shopMainPic.pic_5 != null && shopMainPic.pic_5 != '' " v-bind:src="shopMainPic.pic_5"></div>
+                            <div><img style="margin: 25px auto" width="600px"   v-if="shopMainPic.pic_6 != null && shopMainPic.pic_6 != '' " v-bind:src="shopMainPic.pic_6"></div>
+                            <div><img style="margin: 25px auto" width="600px"   v-if="shopMainPic.pic_7 != null && shopMainPic.pic_7 != '' " v-bind:src="shopMainPic.pic_7"></div>
+                            <div><img style="margin: 25px auto" width="600px"  v-if="shopMainPic.pic_8 != null && shopMainPic.pic_8 != '' " v-bind:src="shopMainPic.pic_8"></div>
+                            <div><img style="margin: 25px auto" width="600px"   v-if="shopMainPic.pic_9 != null && shopMainPic.pic_9 != '' " v-bind:src="shopMainPic.pic_9"></div>
+                            <div><img style="margin: 25px auto" width="600px"   v-if="shopMainPic.pic_10 != null && shopMainPic.pic_10 != '' " v-bind:src="shopMainPic.pic_10"></div>
+                            </el-col>
+                        </div>
+                    </div>
+                </el-tab-pane>
+                <el-tab-pane label="商家动态" name="second">商家动态</el-tab-pane>
+            </el-tabs>
         </el-row>
     </div>
-    <div>
-        <div style="text-align: center;margin: 50px auto">
-                <div><img style="margin: 25px auto" width="600px"     v-if="shopMainPic.pic_1 != null && shopMainPic.pic_1 != '' " v-bind:src="shopMainPic.pic_1"></div>
-                <div><img style="margin: 25px auto" width="600px"   v-if="shopMainPic.pic_2 != null && shopMainPic.pic_2 != '' " v-bind:src="shopMainPic.pic_2"></div>
-                <div><img style="margin: 25px auto" width="600px"  v-if="shopMainPic.pic_3 != null && shopMainPic.pic_3 != '' " v-bind:src="shopMainPic.pic_3"></div>
-                <div><img style="margin: 25px auto" width="600px"   v-if="shopMainPic.pic_4 != null && shopMainPic.pic_4 != '' " v-bind:src="shopMainPic.pic_4"></div>
-                <div><img style="margin: 25px auto" width="600px"    v-if="shopMainPic.pic_5 != null && shopMainPic.pic_5 != '' " v-bind:src="shopMainPic.pic_5"></div>
-                <div><img style="margin: 25px auto" width="600px"   v-if="shopMainPic.pic_6 != null && shopMainPic.pic_6 != '' " v-bind:src="shopMainPic.pic_6"></div>
-                <div><img style="margin: 25px auto" width="600px"   v-if="shopMainPic.pic_7 != null && shopMainPic.pic_7 != '' " v-bind:src="shopMainPic.pic_7"></div>
-                <div><img style="margin: 25px auto" width="600px"  v-if="shopMainPic.pic_8 != null && shopMainPic.pic_8 != '' " v-bind:src="shopMainPic.pic_8"></div>
-                <div><img style="margin: 25px auto" width="600px"   v-if="shopMainPic.pic_9 != null && shopMainPic.pic_9 != '' " v-bind:src="shopMainPic.pic_9"></div>
-                <div><img style="margin: 25px auto" width="600px"   v-if="shopMainPic.pic_10 != null && shopMainPic.pic_10 != '' " v-bind:src="shopMainPic.pic_10"></div>
-                </el-col>
-        </div>
-    </div>
+    </el-card>
+
+
 </div>
 <div id="foot" style="width: 100%;height: 370px;margin: 50px auto;border-top: 1px solid #ddd;">
     <iframe src="hfqFoot.html" width="100%" height="430px"  frameborder="0" scrolling="no" >
@@ -103,8 +114,9 @@
         el:'#main',
         data:{
             input:'',
-            shop:'',
-            shopMainPic:'',
+                shop:'',
+                shopMainPic:'',
+            activeName: 'first',
         },
         methods:{
             buyNow(){
