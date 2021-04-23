@@ -241,7 +241,9 @@
                 title="充值"
                 :visible.sync="czVisible"
                 append-to-body>
+            <div v-if="user">
             <div style="margin-bottom:10px">您的余额<span style="color: red;font-size: 20px;font-weight: bold;margin-left: 10px">{{user.balance}}</span></div>
+            </div>
             <div style="width: 400px"><el-input v-model="balance" placeholder="请输入充值金额"></el-input></div>
             <div slot="footer" class="dialog-footer">
                 <el-button @click="czVisible = false">取 消</el-button>
