@@ -145,7 +145,7 @@
     new Vue({
         el:'#main',
         data:{
-            radio: '1',
+            radio: '',
             tableData:{},
             shop:{},
             tjddVisible:false,
@@ -179,6 +179,10 @@
                 })
             },
             tjdd(){
+                if(this.radio == '' || this.radio == null) {
+                    this.$message.error('请选择收货地址！');
+                    return
+                }
                 this.tjddVisible = true;
             }
         },
