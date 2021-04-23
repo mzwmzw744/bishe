@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bishe.mapper.OrderMapper">
+
+
+    <resultMap id="AddressResultMap" type="com.bishe.bean.Address">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="user_id" jdbcType="INTEGER" property="user_id" />
+        <result column="address" jdbcType="VARCHAR" property="address" />
+        <result column="addressDetail" jdbcType="VARCHAR" property="addressDetail" />
+        <result column="postCode" jdbcType="VARCHAR" property="postCode" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="phone" jdbcType="VARCHAR" property="phone" />
+    </resultMap>
+
+    <insert id="addOrder" parameterType="com.bishe.bean.BuyOrder">
+ insert buy_order values (null,#{shop_id},#{buy_user_id},now())
+    </insert>
+</mapper>

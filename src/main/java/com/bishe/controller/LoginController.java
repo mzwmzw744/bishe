@@ -1,10 +1,14 @@
 package com.bishe.controller;
+import com.bishe.bean.BuyOrder;
 import com.bishe.bean.User;
+import com.bishe.mapper.OrderMapper;
 import com.bishe.service.Service;
 import com.bishe.util.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import java.security.GeneralSecurityException;
@@ -20,6 +24,9 @@ public class LoginController {
 
     @Autowired
     private RedisUtil redisUtil;
+
+    @Resource
+    private OrderMapper orderMapper;
 
     @ResponseBody
     @RequestMapping("/login")
@@ -155,6 +162,11 @@ public class LoginController {
         double z =Double.valueOf(map.get("balance"));
         Double num = t - z;
         userMapper.xfBalance(num.toString(),user.getId());
+        BuyOrder buyOrder = new BuyOrder();
+        int shopId = Integer.parseInt(map.get("shopId"));
+        buyOrder.setShop_id(shopId);
+        buyOrder.setBuy_user_id(user.getId());
+        orderMapper.addOrder(buyOrder);
         return num;
     }
 }

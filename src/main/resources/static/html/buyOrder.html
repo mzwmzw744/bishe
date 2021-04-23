@@ -170,7 +170,8 @@
                         'token' : sessionStorage.getItem("token")
                     },
                     data:{
-                        balance:this.shop.shopPrice
+                        balance:this.shop.shopPrice,
+                        shopId:this.shop.id
                     }
                 }).then(res => {
                     this.$message.success('购买成功!');
