@@ -34,6 +34,7 @@ public class FileController {
         System.out.println(shoHeadPicUploadToken);
         User user = (User)redisUtil.get(shoHeadPicUploadToken);
         String only = UUID.randomUUID()+"";
+
         return getString(file, user, only);
     }
 
