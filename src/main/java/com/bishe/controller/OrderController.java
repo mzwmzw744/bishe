@@ -12,6 +12,7 @@ import com.bishe.util.RedisUtil;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -42,7 +43,7 @@ public class OrderController {
         int shopId = Integer.parseInt(map.get("shopId"));
         Shop shop = new Shop();
         shop.setId(shopId);
-        shop.setState("1");
+        shop.setAuditStatus("2");
         shopMapper.updateShopState(shop);
         buyOrder.setShop_id(shopId);
         buyOrder.setBuy_user_id(user.getId());
@@ -51,13 +52,21 @@ public class OrderController {
     }
     @RequestMapping("/token/getMyOrder")
     @ResponseBody
-    public List<BuyOrder> getMyOrder(@RequestBody Map<String,String> map, @RequestHeader Map<String, String> headers){
+    public List<Shop> getMyOrder(@RequestBody Map<String,String> map, @RequestHeader Map<String, String> headers){
         String token = headers.get("token");
         User user = (User)redisUtil.get(token);
         User newuser = userMapper.getUserById(user.getId());;
         BuyOrder buyOrder = new BuyOrder();
         buyOrder.setBuy_user_id(user.getId());
         List<BuyOrder> list = orderMapper.getAllByOrder(buyOrder);
-        return list;
+        List<Shop> shops = new ArrayList<>();
+        for(BuyOrder buyOrder1 : list){
+            Shop shop = shopMapper.getShopById(buyOrder1.getId());
+            shop.setCreateDate(buyOrder1.getCreateTime());
+            shops.add(shop);
+        }
+
+
+        return shops;
     }
 }

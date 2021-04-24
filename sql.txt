@@ -98,30 +98,29 @@ CREATE table shop(
                      shop_introduction varchar(500),
                      shop_head_picture varchar(100),
                      auditStatus varchar(10),
-                     createDate datetime,
-                     state varchar(20)
+                     createDate datetime
 );
-insert into shop values (null,1,'汉服1','100','曲裾','超好看','/pic/shopTiShi.png','未上架',now(),'0');
-insert into shop values (null,1,'汉服2','200','曲裾','超好看','/pic/shopTiShi.png','未上架',now(),'0');
-insert into shop values (null,1,'汉服3','300','曲裾','超好看','/pic/shopTiShi.png','未上架',now(),'0');
-insert into shop values (null,1,'汉服4','400','曲裾','超好看','/pic/shopTiShi.png','未上架',now(),'0');
-insert into shop values (null,1,'汉服5','500','曲裾','超好看','/pic/shopTiShi.png','未上架',now(),'0');
-insert into shop values (null,1,'汉服6','600','曲裾','超好看','/pic/shopTiShi.png','未上架',now(),'0');
-insert into shop values (null,1,'汉服7','700','曲裾','超好看','/pic/shopTiShi.png','未上架',now(),'0');
-insert into shop values (null,1,'汉服8','800','曲裾','超好看','/pic/shopTiShi.png','未上架',now(),'0');
-insert into shop values (null,1,'汉服9','900','曲裾','超好看','/pic/shopTiShi.png','未上架',now(),'0');
-insert into shop values (null,1,'汉服10','900','曲裾','超好看','/pic/shopTiShi.png','未上架',now(),'0');
+insert into shop values (null,1,'汉服1','100','曲裾','超好看','/pic/shopTiShi.png','0',now());
+insert into shop values (null,1,'汉服2','200','曲裾','超好看','/pic/shopTiShi.png','0',now());
+insert into shop values (null,1,'汉服3','300','曲裾','超好看','/pic/shopTiShi.png','0',now());
+insert into shop values (null,1,'汉服4','400','曲裾','超好看','/pic/shopTiShi.png','0',now());
+insert into shop values (null,1,'汉服5','500','曲裾','超好看','/pic/shopTiShi.png','0',now());
+insert into shop values (null,1,'汉服6','600','曲裾','超好看','/pic/shopTiShi.png','0',now());
+insert into shop values (null,1,'汉服7','700','曲裾','超好看','/pic/shopTiShi.png','0',now());
+insert into shop values (null,1,'汉服8','800','曲裾','超好看','/pic/shopTiShi.png','0',now());
+insert into shop values (null,1,'汉服9','900','曲裾','超好看','/pic/shopTiShi.png','0',now());
+insert into shop values (null,1,'汉服10','900','曲裾','超好看','/pic/shopTiShi.png','0',now());
 
-insert into shop values (null,1,'汉服1','100','曲裾','超好看','/pic/hanFuLogo.png','上架',now(),'0');
-insert into shop values (null,1,'汉服2','200','曲裾','超好看','/pic/hanFuLogo.png','上架',now(),'0');
-insert into shop values (null,1,'汉服3','300','曲裾','超好看','/pic/hanFuLogo.png','上架',now(),'0');
-insert into shop values (null,1,'汉服4','400','曲裾','超好看','/pic/hanFuLogo.png','上架',now(),'0');
-insert into shop values (null,1,'汉服5','500','曲裾','超好看','/pic/hanFuLogo.png','上架',now(),'0');
-insert into shop values (null,1,'汉服6','600','曲裾','超好看','/pic/hanFuLogo.png','上架',now(),'0');
-insert into shop values (null,1,'汉服7','700','曲裾','超好看','/pic/hanFuLogo.png','上架',now(),'0');
-insert into shop values (null,1,'汉服8','800','曲裾','超好看','/pic/hanFuLogo.png','上架',now(),'0');
-insert into shop values (null,1,'汉服9','900','曲裾','超好看','/pic/hanFuLogo.png','上架',now(),'0');
-insert into shop values (null,1,'汉服10','900','曲裾','超好看','/pic/shopTiShi.png','上架',now(),'0');
+insert into shop values (null,1,'汉服1','100','曲裾','超好看','/pic/hanFuLogo.png','1',now());
+insert into shop values (null,1,'汉服2','200','曲裾','超好看','/pic/hanFuLogo.png','1',now());
+insert into shop values (null,1,'汉服3','300','曲裾','超好看','/pic/hanFuLogo.png','1',now());
+insert into shop values (null,1,'汉服4','400','曲裾','超好看','/pic/hanFuLogo.png','1',now());
+insert into shop values (null,1,'汉服5','500','曲裾','超好看','/pic/hanFuLogo.png','1',now());
+insert into shop values (null,1,'汉服6','600','曲裾','超好看','/pic/hanFuLogo.png','1',now());
+insert into shop values (null,1,'汉服7','700','曲裾','超好看','/pic/hanFuLogo.png','1',now());
+insert into shop values (null,1,'汉服8','800','曲裾','超好看','/pic/hanFuLogo.png','1',now());
+insert into shop values (null,1,'汉服9','900','曲裾','超好看','/pic/hanFuLogo.png','1',now());
+insert into shop values (null,1,'汉服10','900','曲裾','超好看','/pic/shopTiShi.png','1',now());
 
 
 

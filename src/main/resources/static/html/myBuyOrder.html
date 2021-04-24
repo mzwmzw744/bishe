@@ -38,6 +38,13 @@
     /*.shopCss:hover{*/
     /*    background-color: rgba(255,83,106,0.27);*/
     /*}*/
+    #kuai{
+
+    }
+    #kuai:hover{
+        background-color: #ffb797 ;
+    }
+
 </style>
 <body>
 <div style="height: 250px;margin: 0 auto">
@@ -45,8 +52,21 @@
     </iframe>
 </div>
 <div id="main">
-
-
+    <el-card class="box-card">
+        <div slot="header" class="clearfix">
+            <span>我的订单</span>
+        </div>
+        <div v-for="o in shops" :key="o" class="text item" >
+            <div style="overflow: hidden" id="kuai">
+                <div id="whiteBac"  style="float: left"><img :src="o.shopHeadPicture" width="100px" height="100px"></div>
+                <div style="float: left;line-height: 100px;margin-left: 100px">{{o.shopName}}</div>
+                <div style="float: left;line-height: 100px;margin-left: 100px">¥{{o.shopPrice}}</div>
+                <div style="float: left;line-height: 100px;margin-left: 100px">{{o.shopFamily}}</div>
+                <div style="float: left;line-height: 100px;margin-left: 100px">{{o.shopIntroduction}}</div>
+                <div style="float: left;line-height: 100px;margin-left: 100px">{{o.createDate}}</div>
+            </div>
+        </div>
+    </el-card>
 </div>
 <div id="foot" style="width: 100%;height: 370px;margin: 50px auto;border-top: 1px solid #ddd;">
     <iframe src="hfqFoot.html" width="100%" height="430px"  frameborder="0" scrolling="no" >
@@ -55,6 +75,9 @@
 <script>
     new Vue({
         el: '#main',
+        data:{
+            shops:{},
+        },
         methods:{
 
 
@@ -70,7 +93,8 @@
 
                 }
             }).then(res=> {
-
+                this.shops = res.data
+                debugger;
             })
         }
     })

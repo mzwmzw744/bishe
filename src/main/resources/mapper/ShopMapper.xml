@@ -110,7 +110,7 @@
     </update>
     
     <update id="updateShopState" parameterType="com.bishe.bean.Shop">
-        update shop set state = #{state} where id = #{id}
+        update shop set auditStatus = #{auditStatus} where id = #{id}
     </update>
     
 </mapper>

@@ -124,7 +124,20 @@
             }).then(res=> {
                 console.log(res.data);
                 this.total = res.data.account;
-                this.shops = res.data.shops;
+                let shops = res.data.shops;
+                for(let i = 0 ; i < shops.length; i++){
+                    if(shops[i].auditStatus == '0' || shops[i].auditStatus == 0){
+                        shops[i].auditStatus = '未上架'
+                        alert(123)
+                    }
+                    if(shops[i].auditStatus == '1' || shops[i].auditStatus == 1){
+                        shops[i].auditStatus = '已上架'
+                    }
+                    if(shops[i].auditStatus == '2' || shops[i].auditStatus == 2){
+                        shops[i].auditStatus = '待发货'
+                    }
+                }
+                this.shops = shops;
                 console.log("wawawa");
                 console.log(this.shops)
             })

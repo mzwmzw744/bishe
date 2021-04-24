@@ -28,7 +28,7 @@
         <result column="pic_10" jdbcType="VARCHAR" property="pic_10" />
     </resultMap>
 <select id="getShopNew" resultMap="shopResultMap">
-   select * from shop where auditStatus = '上架' order by createDate desc limit 10
+   select * from shop where auditStatus = '1' order by createDate desc limit 10
 </select>
 
 </mapper>
