@@ -27,6 +27,21 @@
     .shopCss:hover{
         background-color: rgba(255,83,106,0.27);
     }
+    #main{
+        margin: 0 auto;
+        height: 840px;
+        width: 1000px;
+        border: 1px solid #ebebeb;
+        /*background-color: RGB(250,250,250);*/
+        background-color: #F2F6FC;
+    }
+    #kuai{
+
+    }
+    #kuai:hover{
+        background-color: #ffb797 ;
+        cursor: pointer;
+    }
 </style>
 <body>
 <div style="height: 250px;margin: 0 auto">
@@ -34,32 +49,56 @@
     </iframe>
 </div>
 
-<div style="width: 1400px;height: 600px;border: 1px solid #ddd;margin: 0 auto" id="main">
+<div id="main">
 
-    <div style="margin: 45px auto;height: 504px;width: 900px;border: 1px solid #ddd;">
-        <div v-for="shop of shops"  class="shopCss" v-on:click="shopsClick(shop)">
-            <el-row style="line-height: 99px">
-                <el-col :span="3"><img height="100px" width="100px"  v-bind:src="shop.shopHeadPicture"></el-col>
-                <el-col :span="3">{{shop.shopName}}</el-col>
-                <el-col :span="3">¥{{shop.shopPrice}}</el-col>
-                <el-col :span="3">{{shop.shopFamily}}</el-col>
-                <el-col :span="3">{{shop.shopIntroduction}}</el-col>
-                <el-col :span="3">{{shop.auditStatus}}</el-col>
-                <el-col :span="5">{{shop.createDate}}</el-col>
-            </el-row>
+    <div style="margin: 0px auto;height: 504px;width: 1000px;">
+<!--        <div v-for="shop of shops"  class="shopCss" v-on:click="shopsClick(shop)">-->
 
-<!--            <img height="100px" width="100px"  v-bind:src="shop.shopHeadPicture">-->
-<!--            <span  style="margin-left: 70px">{{shop.shopName}}</span>-->
-<!--            <span style="margin-left: 50px">¥{{shop.shopPrice}}</span>-->
-<!--            <span style="margin-left: 50px">{{shop.shopFamily}}</span>-->
-<!--            <span style="margin-left: 50px">{{shop.shopIntroduction}}</span>-->
-<!--            <span style="margin-left: 50px">{{shop.auditStatus}}</span>-->
-<!--            <span style="margin-left: 50px">{{shop.createDate}}</span>-->
-<!--            <span></span>-->
-        </div>
+
+<!--            <el-row style="line-height: 99px">-->
+<!--                <el-col :span="3"><img height="100px" width="100px"  v-bind:src="shop.shopHeadPicture"></el-col>-->
+<!--                <el-col :span="3">{{shop.shopName}}</el-col>-->
+<!--                <el-col :span="3">¥{{shop.shopPrice}}</el-col>-->
+<!--                <el-col :span="3">{{shop.shopFamily}}</el-col>-->
+<!--                <el-col :span="3">{{shop.shopIntroduction}}</el-col>-->
+<!--                <el-col :span="3">{{shop.auditStatus}}</el-col>-->
+<!--                <el-col :span="5">{{shop.createDate}}</el-col>-->
+<!--            </el-row>-->
+
+<!--        </div>-->
+        <el-card class="box-card">
+            <div slot="header" class="clearfix">
+                <span>我的出售</span>
+                <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
+            </div>
+            <div v-for="o in shops" :key="o" class="text item" v-on:click="shopsClick(o)" >
+                <div style="overflow: hidden" id="kuai"  >
+<!--                    <div id="whiteBac"  style="float: left"><img :src="o.shopHeadPicture" width="100px" height="100px"></div>-->
+
+                    <el-row style="line-height: 99px">
+                                    <el-col :span="3"><img height="100px" width="100px"  v-bind:src="o.shopHeadPicture"></el-col>
+                        <el-col :span="1">&nbsp;</el-col>
+                                    <el-col :span="3">{{o.shopName}}</el-col>
+                                    <el-col :span="3">¥{{o.shopPrice}}</el-col>
+                                    <el-col :span="3">{{o.shopFamily}}</el-col>
+                                    <el-col :span="3">{{o.shopIntroduction}}</el-col>
+                                    <el-col :span="3">{{o.auditStatus}}</el-col>
+                                    <el-col :span="5">{{o.createDate}}</el-col>
+                    </el-row>
+
+<!--                    <div style="float: left;line-height: 100px;margin-left: 40px">{{o.shopName}}</div>-->
+<!--                    <div style="float: left;line-height: 100px;margin-left: 90px">¥{{o.shopPrice}}</div>-->
+<!--                    <div style="float: left;line-height: 100px;margin-left: 90px">{{o.shopFamily}}</div>-->
+<!--                    <div style="float: left;line-height: 100px;margin-left: 90px">{{o.shopIntroduction}}</div>-->
+<!--                    <div style="float: left;line-height: 100px;margin-left: 90px">{{o.auditStatus}}</div>-->
+<!--                    <div style="float: left;line-height: 100px;margin-left: 90px">{{o.createDate}}</div>-->
+                </div>
+                <el-divider></el-divider>
+            </div>
+        </el-card>
     </div>
 
-    <div class="block" style="margin: -30px auto;width: 500px;height: 20px">
+    <div class="block" style="margin: 300px auto;width: 500px;height: 20px">
         <span class="demonstration"></span>
         <el-pagination
                 @size-change="handleSizeChange"
@@ -106,8 +145,19 @@
                 }).then(res=> {
                     console.log(res.data);
                     this.total = res.data.account;
-                    this.shops = res.data.shops;
-
+                    let shops = res.data.shops;
+                    for(let i = 0 ; i < shops.length; i++){
+                        if(shops[i].auditStatus == '0' || shops[i].auditStatus == 0){
+                            shops[i].auditStatus = '未上架'
+                        }
+                        if(shops[i].auditStatus == '1' || shops[i].auditStatus == 1){
+                            shops[i].auditStatus = '已上架'
+                        }
+                        if(shops[i].auditStatus == '2' || shops[i].auditStatus == 2){
+                            shops[i].auditStatus = '待发货'
+                        }
+                    }
+                    this.shops = shops;
                 })
             }
         },
@@ -128,7 +178,6 @@
                 for(let i = 0 ; i < shops.length; i++){
                     if(shops[i].auditStatus == '0' || shops[i].auditStatus == 0){
                         shops[i].auditStatus = '未上架'
-                        alert(123)
                     }
                     if(shops[i].auditStatus == '1' || shops[i].auditStatus == 1){
                         shops[i].auditStatus = '已上架'

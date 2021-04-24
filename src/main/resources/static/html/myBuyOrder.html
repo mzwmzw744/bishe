@@ -20,7 +20,6 @@
     }
     #main{
         margin: 0 auto;
-        height: 2000px;
         width: 1000px;
         border: 1px solid #ebebeb;
         /*background-color: RGB(250,250,250);*/
@@ -43,6 +42,7 @@
     }
     #kuai:hover{
         background-color: #ffb797 ;
+        cursor: pointer;
     }
 
 </style>
@@ -56,15 +56,22 @@
         <div slot="header" class="clearfix">
             <span>我的订单</span>
         </div>
-        <div v-for="o in shops" :key="o" class="text item" >
-            <div style="overflow: hidden" id="kuai">
-                <div id="whiteBac"  style="float: left"><img :src="o.shopHeadPicture" width="100px" height="100px"></div>
-                <div style="float: left;line-height: 100px;margin-left: 100px">{{o.shopName}}</div>
-                <div style="float: left;line-height: 100px;margin-left: 100px">¥{{o.shopPrice}}</div>
-                <div style="float: left;line-height: 100px;margin-left: 100px">{{o.shopFamily}}</div>
-                <div style="float: left;line-height: 100px;margin-left: 100px">{{o.shopIntroduction}}</div>
-                <div style="float: left;line-height: 100px;margin-left: 100px">{{o.createDate}}</div>
+        <div v-for="o in shops" :key="o" class="text item" v-on:click="shopsClick(o)" >
+            <div style="overflow: hidden" id="kuai"  >
+                <!--                    <div id="whiteBac"  style="float: left"><img :src="o.shopHeadPicture" width="100px" height="100px"></div>-->
+
+                <el-row style="line-height: 99px">
+                    <el-col :span="3"><img height="100px" width="100px"  v-bind:src="o.shopHeadPicture"></el-col>
+                    <el-col :span="1">&nbsp;</el-col>
+                    <el-col :span="3">{{o.shopName}}</el-col>
+                    <el-col :span="3">¥{{o.shopPrice}}</el-col>
+                    <el-col :span="3">{{o.shopFamily}}</el-col>
+                    <el-col :span="3">{{o.shopIntroduction}}</el-col>
+                    <el-col :span="3">{{o.auditStatus}}</el-col>
+                    <el-col :span="5">{{o.createDate}}</el-col>
+                </el-row>
             </div>
+            <el-divider></el-divider>
         </div>
     </el-card>
 </div>
@@ -93,7 +100,19 @@
 
                 }
             }).then(res=> {
-                this.shops = res.data
+                let shops = res.data;
+                for(let i = 0 ; i < shops.length; i++){
+                    if(shops[i].auditStatus == '0' || shops[i].auditStatus == 0){
+                        shops[i].auditStatus = '未上架'
+                    }
+                    if(shops[i].auditStatus == '1' || shops[i].auditStatus == 1){
+                        shops[i].auditStatus = '已上架'
+                    }
+                    if(shops[i].auditStatus == '2' || shops[i].auditStatus == 2){
+                        shops[i].auditStatus = '待发货'
+                    }
+                }
+                this.shops = shops;
                 debugger;
             })
         }

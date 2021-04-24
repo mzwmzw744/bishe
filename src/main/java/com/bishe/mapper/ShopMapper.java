@@ -49,6 +49,8 @@ public interface ShopMapper {
 
     List<Shop> getShopMessage(int userId,@Param("pageSize") int pageSize,@Param("offset") int offset);
 
+    List<Shop> getShopMessageByTime(int userId);
+
     Shop getShopById(int id);
 
     int updateShop(Shop shop);
