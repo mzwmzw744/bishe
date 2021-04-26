@@ -200,6 +200,7 @@ create table buy_order(
                           id int auto_increment primary key,
                           shop_id int,
                           by_user_id int,
+                          address_id int,
                           createTime dateTime
 );
 

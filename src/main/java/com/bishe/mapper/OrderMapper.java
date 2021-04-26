@@ -16,4 +16,7 @@ int addOrder(BuyOrder buyOrder);
 
 List<BuyOrder> getAllByOrder(BuyOrder buyOrder);
 
+BuyOrder getOrderByShopId(int shopId);
+
+Address getAddressById(int id);
 }

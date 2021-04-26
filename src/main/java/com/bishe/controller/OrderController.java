@@ -47,6 +47,7 @@ public class OrderController {
         shopMapper.updateShopState(shop);
         buyOrder.setShop_id(shopId);
         buyOrder.setBuy_user_id(user.getId());
+        buyOrder.setAddress_id(map.get("adressId"));
         orderMapper.addOrder(buyOrder);
         return num;
     }
@@ -65,8 +66,15 @@ public class OrderController {
             shop.setCreateDate(buyOrder1.getCreateTime());
             shops.add(shop);
         }
-
-
         return shops;
+    }
+    @RequestMapping("/token/getOrderByShopId")
+    @ResponseBody
+    public Address getOrderByShopId(@RequestBody Map<String,String> map, @RequestHeader Map<String, String> headers){
+        String token = headers.get("token");
+        User user = (User)redisUtil.get(token);
+        BuyOrder buyOrder = orderMapper.getOrderByShopId(Integer.parseInt(map.get("shopId")));
+        Address address = orderMapper.getAddressById(Integer.parseInt(buyOrder.getAddress_id()));
+        return address;
     }
 }

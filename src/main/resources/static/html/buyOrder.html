@@ -152,8 +152,6 @@
             user:eval ("(" + sessionStorage.getItem("user") + ")")
         },
         methods:{
-
-
             czBalance(){
                 if(this.user.balance-this.shop.shopPrice < 0){
                     this.$message.error('余额不足！');
@@ -170,6 +168,7 @@
                         'token' : sessionStorage.getItem("token")
                     },
                     data:{
+                        adressId:this.radio.id,
                         balance:this.shop.shopPrice,
                         shopId:this.shop.id
                     }

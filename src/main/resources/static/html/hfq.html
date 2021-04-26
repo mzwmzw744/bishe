@@ -178,7 +178,7 @@
             <div style="height: 560px;">
                 <div style="height: 559px;border-bottom: 1px solid #ddd;overflow: hidden">
                     <div  v-for="(o,index) in newShopMessage" :key="o">
-                    <img :src="o.shopHeadPicture" style="width: 279px;height: 279px;float: left" class="shopCss">
+                    <img :src="o.shopHeadPicture" v-on:click="shopClick(o)" style="width: 279px;height: 279px;float: left" class="shopCss">
                     </div>
                 </div>
                 <div style="height: 50%;overflow: hidden">

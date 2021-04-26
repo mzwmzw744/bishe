@@ -7,6 +7,7 @@
         <result column="id" jdbcType="INTEGER" property="id" />
         <result column="shop_id" jdbcType="INTEGER" property="shop_id" />
         <result column="buy_user_id" jdbcType="INTEGER" property="buy_user_id" />
+        <result column="address_id" property="address_id" />
         <result column="createTime" property="createTime" />
     </resultMap>
     <resultMap id="AddressResultMap" type="com.bishe.bean.Address">
@@ -20,11 +21,18 @@
     </resultMap>
 
     <insert id="addOrder" parameterType="com.bishe.bean.BuyOrder">
- insert buy_order values (null,#{shop_id},#{buy_user_id},now())
+ insert buy_order values (null,#{shop_id},#{buy_user_id},#{address_id},now())
     </insert>
 
     <select id="getAllByOrder" parameterType="com.bishe.bean.BuyOrder" resultMap="BuyOderResultMap">
         select * from buy_order where by_user_id = #{buy_user_id} order by createTime
     </select>
 
+    <select id="getOrderByShopId" resultMap="BuyOderResultMap">
+        select * from buy_order where shop_id = #{shopId}
+    </select>
+
+    <select id="getAddressById" resultType="com.bishe.bean.Address">
+        select * from address where id = #{id}
+    </select>
 </mapper>

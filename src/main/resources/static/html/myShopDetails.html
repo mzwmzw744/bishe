@@ -45,76 +45,99 @@
     </iframe>
 </div>
 <div id="main">
-    <el-row type="flex" justify="center" style="margin: 50px auto;">
-        <el-col :span="2" style="line-height: 32px;text-align:center">商品名:</el-col>
-<!--            <el-col :span="20"><div style="height: 300px;background-color: #1E9FFF"></div></el-col>-->
-        <el-col :span="6"  ><el-input v-model="shop.shopName" size="small" placeholder="请输入内容"  ></el-input></el-col>
-    </el-row>
-    <el-row type="flex" justify="center" style="margin: 50px auto;background-color: #1E9FFF">
-        <el-col :span="2" style="line-height: 32px;text-align:center">商品价格:</el-col>
-        <!--            <el-col :span="20"><div style="height: 300px;background-color: #1E9FFF"></div></el-col>-->
-        <el-col :span="6"  ><el-input v-model="shop.shopPrice" size="small" placeholder="请输入内容"  ></el-input></el-col>
-    </el-row>
-    <el-row type="flex" justify="center" style="margin: 50px auto;background-color: #1E9FFF">
-        <el-col :span="2" style="line-height: 32px;text-align:center">商品类型:</el-col>
-        <!--            <el-col :span="20"><div style="height: 300px;background-color: #1E9FFF"></div></el-col>-->
-        <el-col :span="6"  ><el-input v-model="shop.shopFamily" size="small" placeholder="请输入内容"  ></el-input></el-col>
-    </el-row>
-    <el-row type="flex" justify="center" style="margin: 50px auto;background-color: #1E9FFF">
-        <el-col :span="2" style="line-height: 32px;text-align:center">商品介绍:</el-col>
-        <!--            <el-col :span="20"><div style="height: 300px;background-color: #1E9FFF"></div></el-col>-->
-        <el-col :span="6"  ><el-input v-model="shop.shopIntroduction" size="small" placeholder="请输入内容"  ></el-input></el-col>
-    </el-row>
 
-    <el-row type="flex" justify="center" style="margin: 50px auto;background-color: #1E9FFF">
-        <el-col :span="2"   style="line-height: 100px;text-align:center" >商品头像:</el-col>
-        <!--            <el-col :span="20"><div style="height: 300px;background-color: #1E9FFF"></div></el-col>-->
-        <el-col :span="6" style="text-align: center;cursor: pointer"><img    v-on:click="open1()" :src="shop.shopHeadPicture" width="100px" height="100px;" v-on:click="open1()"></el-input></el-col>
-    </el-row>
 
-    <el-row type="flex" justify="center" style="margin: 50px auto;background-color: #1E9FFF">
-        <el-col :span="2" style="line-height: 32px;text-align:center">商品状态:</el-col>
-        <el-col :span="2" style="line-height: 32px;text-align:center"><span style="margin-left: -20px">{{shop.auditStatus}}</span></el-col>
-        <!--            <el-col :span="20"><div style="height: 300px;background-color: #1E9FFF"></div></el-col>-->
-        <el-col :span="4"  ><el-button type="primary"  size="small" @click="modifyState">修改状态</el-button></el-input></el-col>
-    </el-row>
+    <el-card class="box-card">
+        <div slot="header" class="clearfix">
+            <span>出售商品详情</span>
+        </div>
+        <el-row type="flex" justify="center" style="margin: 50px auto;">
+            <el-col :span="2" style="line-height: 32px;text-align:center">商品名:</el-col>
+            <!--            <el-col :span="20"><div style="height: 300px;background-color: #1E9FFF"></div></el-col>-->
+            <el-col :span="6"  ><el-input v-model="shop.shopName" size="small" placeholder="请输入内容"  ></el-input></el-col>
+        </el-row>
+        <el-row type="flex" justify="center" style="margin: 50px auto;">
+            <el-col :span="2" style="line-height: 32px;text-align:center">商品价格:</el-col>
+            <!--            <el-col :span="20"><div style="height: 300px;background-color: #1E9FFF"></div></el-col>-->
+            <el-col :span="6"  ><el-input v-model="shop.shopPrice" size="small" placeholder="请输入内容"  ></el-input></el-col>
+        </el-row>
+        <el-row type="flex" justify="center" style="margin: 50px auto;">
+            <el-col :span="2" style="line-height: 32px;text-align:center">商品类型:</el-col>
+            <!--            <el-col :span="20"><div style="height: 300px;background-color: #1E9FFF"></div></el-col>-->
+            <el-col :span="6"  ><el-input v-model="shop.shopFamily" size="small" placeholder="请输入内容"  ></el-input></el-col>
+        </el-row>
+        <el-row type="flex" justify="center" style="margin: 50px auto;">
+            <el-col :span="2" style="line-height: 32px;text-align:center">商品介绍:</el-col>
+            <!--            <el-col :span="20"><div style="height: 300px;background-color: #1E9FFF"></div></el-col>-->
+            <el-col :span="6"  ><el-input v-model="shop.shopIntroduction" size="small" placeholder="请输入内容"  ></el-input></el-col>
+        </el-row>
 
-    <div>
+        <el-row type="flex" justify="center" style="margin: 50px auto;">
+            <el-col :span="2"   style="line-height: 100px;text-align:center" >商品头像:</el-col>
+            <!--            <el-col :span="20"><div style="height: 300px;background-color: #1E9FFF"></div></el-col>-->
+            <el-col :span="6" style="text-align: center;cursor: pointer"><img    v-on:click="open1()" :src="shop.shopHeadPicture" width="100px" height="100px;" v-on:click="open1()"></el-input></el-col>
+        </el-row>
+
+        <el-row type="flex" justify="center" style="margin: 50px auto;">
+            <el-col :span="2" style="line-height: 32px;text-align:center">商品状态:</el-col>
+            <el-col :span="2" style="line-height: 32px;text-align:center"><span style="margin-left: -20px">{{shop.auditStatus}}</span></el-col>
+            <!--            <el-col :span="20"><div style="height: 300px;background-color: #1E9FFF"></div></el-col>-->
+            <el-col :span="4"     ><el-button type="primary"  size="small" @click="modifyState">修改状态</el-button></el-input></el-col>
+        </el-row>
+
+        <el-card class="box-card">
+            <div slot="header" class="clearfix">
+                <span>收货人详情</span>
+            </div>
+            <div style="overflow: hidden">
+            <div style="float: left;margin-left: 100px">{{address.sheng}}{{address.shi}}{{address.qu}}{{address.addressDetail}}</div>
+                <div style="float: left;margin-left: 100px">{{address.name}}</div>
+                <div style="float: left;margin-left: 100px">{{address.postCode}}</div>
+                <div style="float: left;margin-left: 100px">{{address.phone}}</div>
+            </div>
+
+        </el-card>
+
+
+
+
+        <div>
+            <el-upload
+                    class="upload-demo"
+                    action="/updateShopHeadPic"
+                    :data="shoHeadPicUpload"
+                    :on-success="shopHeadPicSuccess"
+                    v-show="false"
+                    multiple
+                    :limit="10"
+                    :file-list="shoHeadPicUpload">
+                <el-button id="shopHeadPic" size="small" type="primary">点击上传~~~~~~~~</el-button>
+                <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb1111</div>
+            </el-upload>
+        </div>
+
+
+
         <el-upload
                 class="upload-demo"
-                action="/updateShopHeadPic"
-                :data="shoHeadPicUpload"
-                :on-success="shopHeadPicSuccess"
-                v-show="false"
-                multiple
+                style=""
+                action="/shopDetailPic"
+                :on-preview="handlePreview"
+                :on-remove="handleRemove"
+                :on-success="shopMainPicSuccess"
+                :file-list="fileList"
                 :limit="10"
-                :file-list="shoHeadPicUpload">
-            <el-button id="shopHeadPic" size="small" type="primary">点击上传~~~~~~~~</el-button>
-            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb1111</div>
+                :data="shoHeadPicUpload"
+                list-type="picture">
+            <el-button size="small" style="margin-left: 420px;margin-top: 100px" type="primary" >上传商品详情图</el-button>
+            <div slot="tip" class="el-upload__tip"></div>
         </el-upload>
-    </div>
-
-
-
-    <el-upload
-            class="upload-demo"
-            style=""
-            action="/shopDetailPic"
-            :on-preview="handlePreview"
-            :on-remove="handleRemove"
-            :on-success="shopMainPicSuccess"
-            :file-list="fileList"
-            :limit="10"
-            :data="shoHeadPicUpload"
-            list-type="picture">
-        <el-button size="small" style="margin-left: 450px" type="primary" >点击上传图片</el-button>
-        <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-    </el-upload>
 
         <div style="margin: 200px auto 0;width: 310px">
             <el-button type="primary"  style="float: left;width: 150px" @click="open">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;修改&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</el-button>
             <el-button type="primary"  style="float: left;width: 150px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;返回首页&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</el-button>
         </div>
+    </el-card>
 </div>
 
 
@@ -148,14 +171,11 @@
                 shopFamily:'',
                 shopIntroduction:'',
             },
+            address:'',
+            shopss:{}
 
         },
         methods: {
-            // uploadProcess(event, file, fileList) {
-            //     this.imgFlag = true;
-            //     console.log(event.percent);
-            //     this.percent = Math.floor(event.percent);
-            // },
             shopMainPicSuccess(res){
                 this.fileList.push({url:res})
 
@@ -167,11 +187,22 @@
                 this.$message.success('图片上传成功')
             },
             modifyState(){
-              if(this.shop.auditStatus == '未上架'){
-                  this.shop.auditStatus = '上架'
-              }else {
-                  this.shop.auditStatus = '未上架'
-              }
+                if(this.shop.auditStatus == '未上架'){
+                    this.shop.auditStatus = '已上架'
+                    return
+                }
+                if(this.shop.auditStatus == '已上架'){
+                    this.shop.auditStatus = '未上架'
+                    return
+                }
+                if(this.shop.auditStatus == "待发货"){
+                    this.shop.auditStatus = '已发货'
+                    return
+                }
+                if(this.shop.auditStatus == '已发货'){
+                    this.shop.auditStatus = '待发货'
+
+                }
             },
             open1(){
                 document.getElementById("shopHeadPic").click();
@@ -202,15 +233,12 @@
                 }).catch(() => {
                     this.$message({
                         type: 'info',
-                        message: '已取消删除'
+
                     });
                 });
             },
             handleRemove(file, fileList) {
                 this.fileList = fileList;
-                // alert(this.fileList.length)
-                // alert(this.fileList)
-                // alert(fileList)
                 fileList.forEach(function (e) {
                     console.log(e.response);
                 })
@@ -220,6 +248,8 @@
             }
         },
         created: function () {
+
+
             axios({
                 method:'post',
                 url:'/token/getShopById',
@@ -231,16 +261,40 @@
                 }
             }).then(res=> {
                 // console.log(res.data);
-                this.shop.auditStatus = res.data.auditStatus;
-                this.shop.id = res.data.id;
-                this.shop.shopName = res.data.shopName;
-                this.shop.shopIntroduction = res.data.shopIntroduction;
-                this.shop.shopPrice = res.data.shopPrice;
-                this.shop.shopFamily = res.data.shopFamily;
-                this.shop.shopHeadPicture =res.data.shopHeadPicture;
-                this.shoHeadPicUpload.shoHeadPicUploadId =res.data.id;
-            })
+                let shops = res.data;
+                if(shops.auditStatus == '0' || shops.auditStatus == 0){
+                    shops.auditStatus = '未上架'
+                }
+                if(shops.auditStatus == '1' || shops.auditStatus == 1){
+                    shops.auditStatus = '已上架'
+                }
+                if(shops.auditStatus == '2' || shops.auditStatus == 2){
+                    shops.auditStatus = '待发货'
+                }
+                if(shops.auditStatus == '3' || shops.auditStatus == 3){
+                    shops.auditStatus = '已发货'
+                }
+                if(shops.auditStatus == '4' || shops.auditStatus == 3){
+                    shops.auditStatus = '已收货'
+                }
 
+                this.shop = shops;
+                this.shopss = res.data;;
+                if(shops.auditStatus == '待发货' || shops.auditStatus == '已发货' || shops.auditStatus == '已收货'){
+                    axios({
+                        method:'post',
+                        url:'/token/getOrderByShopId',
+                        headers:{
+                            'token' : sessionStorage.getItem("token")
+                        },
+                        data:{
+                            shopId:shops.id
+                        }
+                    }).then(res=> {
+                        this.address = res.data
+                    })
+                }
+            })
             axios({
                 method:'post',
                 url:'/token/getShopMainPic',

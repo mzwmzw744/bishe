@@ -46,7 +46,7 @@ public class ShopController {
         shop.setShopPrice(shopPrice);
         shop.setShopIntroduction(shopIntroduction);
         shop.setShopHeadPicture(shopHeadPicture);
-        shop.setAuditStatus("未上架");
+        shop.setAuditStatus("0");
         System.out.println(shop.getId());
         int isTrue = shopMapper.shopCreate(shop);
         System.out.println(shop.getId());
@@ -103,10 +103,26 @@ public class ShopController {
 
         JSONObject json = JSONObject.fromObject(jsonStr);
         Map map =  (Map) json.get("shop");
+        String auditStatus = (String) map.get("auditStatus");
+        if(auditStatus.equals("未上架")){
+            auditStatus = "0";
+        }
+        if(auditStatus.equals("已上架")){
+            auditStatus = "1";
+        }
+        if(auditStatus.equals("待发货")){
+            auditStatus = "2";
+        }
+        if(auditStatus.equals("已发货")){
+            auditStatus = "3";
+        }
+        if(auditStatus.equals("已收货")){
+            auditStatus = "4";
+        }
+
         int shoHeadPicUploadId = (int)map.get("id");
         List list = (List) json.get("mainPic");
         ShopMainPicture shopMainPicture = new ShopMainPicture();
-        System.out.println(list.get(0));
         shopMapper.updateShopMainPic("",shoHeadPicUploadId);
 //        String url1 = (String) JSONObject.fromObject(list.get(0)).get("url");
         if(list.size() >= 1) {
@@ -156,7 +172,7 @@ public class ShopController {
         String shopPrice = (String) map.get("shopPrice").toString();
         shop.setShopPrice(Double.valueOf(shopPrice));
         shop.setShopHeadPicture((String) map.get("shopHeadPicture"));
-        shop.setAuditStatus((String) map.get("auditStatus"));
+        shop.setAuditStatus(auditStatus);
         shop.setShopIntroduction((String) map.get("shopIntroduction"));
         int bool = shopMapper.updateShop(shop);
         if(bool > 0) {
