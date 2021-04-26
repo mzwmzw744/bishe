@@ -60,6 +60,37 @@ public class DynamicController {
         }
         return 9;
     }
+    @RequestMapping("/token/getDynamicByUserId")
+    public List getDynamicByUserId(@RequestBody Map<String,String> map){
+
+        List<Dynamic> dynamic =  dynamicMapper.getDynamicByUserId(Integer.parseInt(map.get("userId")));
+        List<DynamicResult> dynamicResultList = new ArrayList();
+        for(int i = 0 ; i <dynamic.size() ; i++){
+            DynamicResult dynamicResult = new DynamicResult();
+            dynamicResult.setId(dynamic.get(i).getId());
+            String createTime = dynamic.get(i).getCreateTime();
+            dynamicResult.setCreateTime(createTime);
+            dynamicResult.setPic_1(dynamic.get(i).getPic_1());
+            dynamicResult.setPic_2(dynamic.get(i).getPic_2());
+            dynamicResult.setPic_3(dynamic.get(i).getPic_3());
+            dynamicResult.setPic_4(dynamic.get(i).getPic_4());
+            dynamicResult.setPic_5(dynamic.get(i).getPic_5());
+            dynamicResult.setPic_6(dynamic.get(i).getPic_6());
+            dynamicResult.setPic_7(dynamic.get(i).getPic_7());
+            dynamicResult.setPic_8(dynamic.get(i).getPic_8());
+            dynamicResult.setPic_9(dynamic.get(i).getPic_9());
+            dynamicResult.setWords(dynamic.get(i).getWords());
+            dynamicResult.setDzsl(dynamic.get(i).getDzsl());
+            User user = userMapper.getUserById(dynamic.get(i).getUser_id());
+            dynamicResult.setUserHeadPic(user.getHeadPic());
+            dynamicResult.setUserName(user.getUserName());
+            int PicLength = judgePicLength(dynamicResult);
+            dynamicResult.setPicLength(PicLength);
+            dynamicResultList.add(dynamicResult);
+        }
+
+        return dynamicResultList;
+    }
 
     @RequestMapping("/token/getDynamicByTime")
     public List getDynamicByTime(@RequestBody Map<String,String> map){

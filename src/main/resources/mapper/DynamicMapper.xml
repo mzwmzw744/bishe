@@ -95,6 +95,12 @@
         select * from user_Dynamic order by createTime desc limit #{pageSize} offset #{offset}
     </select>
 
+    <select id="getDynamicByUserId" resultMap="dynamicResultMap">
+        select * from user_Dynamic
+        where user_id = #{userId}
+        order by createTime desc
+    </select>
+
     <insert id="tjpl" parameterType="com.bishe.bean.Comment">
         insert comment values (null,#{user_id},#{user_dynamic},#{pl},#{user_tx},#{user_name})
     </insert>

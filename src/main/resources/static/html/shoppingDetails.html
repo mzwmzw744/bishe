@@ -31,6 +31,42 @@
         color: red;
         text-align:right
     }
+    .photoPic{
+        background-color: rgba(255,79,82,0.21);
+        width: 100px;
+        height: 95px
+    }
+    .photoPic:hover{
+        background-color: rgba(255,79,82,0.49);
+    }
+    .el-dropdown-link {
+        cursor: pointer;
+        color: #409EFF;
+    }
+    .el-icon-arrow-down {
+        font-size: 12px;
+    }
+    #refresh{
+        cursor: pointer;
+        font-size: 20px;
+        color: #01AAED
+    }
+    #refresh:hover{
+        color: #c35673;
+    }
+    #wypl:hover{
+        color: #93D1FF;
+    }
+    #wypl{
+        float: right;font-size: 30px;color: red;margin-right: 70px;cursor: pointer
+    }
+    #wydz{
+        font-size: 30px; color: red;float: right;margin-right: 10px;cursor: pointer
+    }
+    #wydz:hover{
+        color: #93D1FF;
+    }
+
 
 </style>
 <body>
@@ -41,8 +77,10 @@
 <div id="main">
 
     <div style="overflow: hidden">
+        <el-card class="box-card">
         <div style="float: left"><img v-bind:src="shop.shopHeadPicture" width="400px" height="400px"></div>
         <div style="float: left;width: 50%">
+
             <el-row>
                 <el-col :span="12">&nbsp;</el-col>
                 <el-col :span="12">{{shop.shopName}}~~~~~{{shop.id}}</el-col>
@@ -71,36 +109,140 @@
                 <el-col :span="6"><el-button type="primary">加入购物车</el-button></el-col>
             </el-row>
         </div>
+        </el-card>
     </div>
 
 
 
     <el-card class="box-card">
-    <div style="width: 100%">
-        <el-row style="margin: 0px auto">
-            <el-col :span="1">&nbsp;</el-col>
-            <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
-                <el-tab-pane label="商品详情" name="first">
-                    <div>
-                        <div style="text-align: center;margin: 50px auto">
-                            <div><img style="margin: 25px auto" width="600px"     v-if="shopMainPic.pic_1 != null && shopMainPic.pic_1 != '' " v-bind:src="shopMainPic.pic_1"></div>
-                            <div><img style="margin: 25px auto" width="600px"   v-if="shopMainPic.pic_2 != null && shopMainPic.pic_2 != '' " v-bind:src="shopMainPic.pic_2"></div>
-                            <div><img style="margin: 25px auto" width="600px"  v-if="shopMainPic.pic_3 != null && shopMainPic.pic_3 != '' " v-bind:src="shopMainPic.pic_3"></div>
-                            <div><img style="margin: 25px auto" width="600px"   v-if="shopMainPic.pic_4 != null && shopMainPic.pic_4 != '' " v-bind:src="shopMainPic.pic_4"></div>
-                            <div><img style="margin: 25px auto" width="600px"    v-if="shopMainPic.pic_5 != null && shopMainPic.pic_5 != '' " v-bind:src="shopMainPic.pic_5"></div>
-                            <div><img style="margin: 25px auto" width="600px"   v-if="shopMainPic.pic_6 != null && shopMainPic.pic_6 != '' " v-bind:src="shopMainPic.pic_6"></div>
-                            <div><img style="margin: 25px auto" width="600px"   v-if="shopMainPic.pic_7 != null && shopMainPic.pic_7 != '' " v-bind:src="shopMainPic.pic_7"></div>
-                            <div><img style="margin: 25px auto" width="600px"  v-if="shopMainPic.pic_8 != null && shopMainPic.pic_8 != '' " v-bind:src="shopMainPic.pic_8"></div>
-                            <div><img style="margin: 25px auto" width="600px"   v-if="shopMainPic.pic_9 != null && shopMainPic.pic_9 != '' " v-bind:src="shopMainPic.pic_9"></div>
-                            <div><img style="margin: 25px auto" width="600px"   v-if="shopMainPic.pic_10 != null && shopMainPic.pic_10 != '' " v-bind:src="shopMainPic.pic_10"></div>
-                            </el-col>
+        <div style="width: 100%">
+            <el-row style="margin: 0px auto">
+                <el-col :span="1">&nbsp;</el-col>
+                <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
+                    <el-tab-pane label="商品详情" name="first">
+                        <div>
+                            <div style="text-align: center;margin: 50px auto">
+                                <div><img style="margin: 25px auto" width="600px"     v-if="shopMainPic.pic_1 != null && shopMainPic.pic_1 != '' " v-bind:src="shopMainPic.pic_1"></div>
+                                <div><img style="margin: 25px auto" width="600px"   v-if="shopMainPic.pic_2 != null && shopMainPic.pic_2 != '' " v-bind:src="shopMainPic.pic_2"></div>
+                                <div><img style="margin: 25px auto" width="600px"  v-if="shopMainPic.pic_3 != null && shopMainPic.pic_3 != '' " v-bind:src="shopMainPic.pic_3"></div>
+                                <div><img style="margin: 25px auto" width="600px"   v-if="shopMainPic.pic_4 != null && shopMainPic.pic_4 != '' " v-bind:src="shopMainPic.pic_4"></div>
+                                <div><img style="margin: 25px auto" width="600px"    v-if="shopMainPic.pic_5 != null && shopMainPic.pic_5 != '' " v-bind:src="shopMainPic.pic_5"></div>
+                                <div><img style="margin: 25px auto" width="600px"   v-if="shopMainPic.pic_6 != null && shopMainPic.pic_6 != '' " v-bind:src="shopMainPic.pic_6"></div>
+                                <div><img style="margin: 25px auto" width="600px"   v-if="shopMainPic.pic_7 != null && shopMainPic.pic_7 != '' " v-bind:src="shopMainPic.pic_7"></div>
+                                <div><img style="margin: 25px auto" width="600px"  v-if="shopMainPic.pic_8 != null && shopMainPic.pic_8 != '' " v-bind:src="shopMainPic.pic_8"></div>
+                                <div><img style="margin: 25px auto" width="600px"   v-if="shopMainPic.pic_9 != null && shopMainPic.pic_9 != '' " v-bind:src="shopMainPic.pic_9"></div>
+                                <div><img style="margin: 25px auto" width="600px"   v-if="shopMainPic.pic_10 != null && shopMainPic.pic_10 != '' " v-bind:src="shopMainPic.pic_10"></div>
+                                </el-col>
+                            </div>
                         </div>
-                    </div>
-                </el-tab-pane>
-                <el-tab-pane label="商家动态" name="second">商家动态</el-tab-pane>
-            </el-tabs>
-        </el-row>
-    </div>
+                    </el-tab-pane>
+                    <el-tab-pane label="商家动态" name="second">
+                        <div v-for="t in dynamic">
+                            <el-card  style="margin: 50px auto" v-for="(z,index) in t">
+
+                                <div style="overflow: hidden">
+                                    <div style="float: left"><el-avatar :src="z.userHeadPic"></el-avatar></div>
+                                    <!--                        <span>{{z.userHeadPic}}</span>-->
+                                    <div style="color: #c35673;float: left;line-height: 35px;margin-left: 30px">{{z.userName}}</div>
+                                </div>
+                                <div style="margin-top: 20px;margin-bottom: 40px;margin-left: 10px">{{z.words}}</div>
+
+                                <div style="margin: 0 auto;text-align: center;overflow: hidden" shadow="hover" v-if="z.picLength > 0">
+                                    <div v-if="z.picLength == 1">
+                                        <img width="400px" height="400px" v-bind:src="z.pic_1">
+                                    </div>
+                                    <div v-if="z.picLength == 2">
+                                        <img width="200px" height="200px" v-bind:src="z.pic_1">
+                                        <img width="200px" height="200px" v-bind:src="z.pic_2">
+                                    </div>
+                                    <div v-if="z.picLength == 3">
+                                        <img width="200px" height="200px" v-bind:src="z.pic_1">
+                                        <img width="200px" height="200px" v-bind:src="z.pic_2">
+                                        <img width="200px" height="200px" v-bind:src="z.pic_3">
+                                    </div>
+                                    <div v-if="z.picLength == 4">
+                                        <img width="200px" height="200px" v-bind:src="z.pic_1">
+                                        <img width="200px" height="200px" v-bind:src="z.pic_2">
+                                        <img width="200px" height="200px" v-bind:src="z.pic_3">
+                                        <br>
+                                        <img width="200px" height="200px" style="float: left;margin-left: 9px;margin-top: 5px" v-bind:src="z.pic_4">
+                                    </div>
+                                    <div v-if="z.picLength == 5">
+                                        <img width="200px" height="200px" v-bind:src="z.pic_1">
+                                        <img width="200px" height="200px" v-bind:src="z.pic_2">
+                                        <img width="200px" height="200px" v-bind:src="z.pic_3">
+                                        <br>
+
+                                        <img width="200px" height="200px" style="float: left;margin-left: 9px;margin-top: 5px" v-bind:src="z.pic_4">
+                                        <img width="200px" height="200px" style="float: left;margin-left: 3px;margin-top: 5px" v-bind:src="z.pic_5">
+                                    </div>
+
+                                    <div v-if="z.picLength == 6">
+                                        <img width="200px" height="200px" v-bind:src="z.pic_1">
+                                        <img width="200px" height="200px" v-bind:src="z.pic_2">
+                                        <img width="200px" height="200px" v-bind:src="z.pic_3">
+                                        <br>
+
+                                        <img width="200px" height="200px" style="float: left;margin-left: 9px;margin-top: 5px" v-bind:src="z.pic_4">
+                                        <img width="200px" height="200px" style="float: left;margin-left: 3px;margin-top: 5px" v-bind:src="z.pic_5">
+                                        <img width="200px" height="200px" style="float: left;margin-left: 4px;margin-top: 5px" v-bind:src="z.pic_6">
+                                    </div>
+
+                                    <div v-if="z.picLength == 7">
+                                        <img width="200px" height="200px" v-bind:src="z.pic_1">
+                                        <img width="200px" height="200px" v-bind:src="z.pic_2">
+                                        <img width="200" height="200px" v-bind:src="z.pic_3">
+                                        <br>
+
+                                        <img width="200px" height="200px" style="float: left;margin-left: 9px;margin-top: 5px" v-bind:src="z.pic_4">
+                                        <img width="200px" height="200px" style="float: left;margin-left: 3px;margin-top: 5px" v-bind:src="z.pic_5">
+                                        <img width="195" height="200px" style="float: left;margin-left: 4px;margin-top: 5px" v-bind:src="z.pic_6">
+                                        <br>
+                                        <img width="200px" height="200px" style="float: left;margin-left: 9px;margin-top: 5px" v-bind:src="z.pic_7">
+
+                                    </div>
+                                    <div v-if="z.picLength == 8">
+                                        <img width="200px" height="200px" v-bind:src="z.pic_1">
+                                        <img width="200px" height="200px" v-bind:src="z.pic_2">
+                                        <img width="200px" height="200px" v-bind:src="z.pic_3">
+                                        <br>
+
+                                        <img width="200px" height="200px" style="float: left;margin-left: 9px;margin-top: 5px" v-bind:src="z.pic_4">
+                                        <img width="200px" height="200px" style="float: left;margin-left: 3px;margin-top: 5px" v-bind:src="z.pic_5">
+                                        <img width="200px" height="200px" style="float: left;margin-left: 4px;margin-top: 5px" v-bind:src="z.pic_6">
+                                        <br>
+                                        <img width="200px" height="200px" style="float: left;margin-left: 9px;margin-top: 5px" v-bind:src="z.pic_7">
+                                        <img width="200px" height="200px" style="float: left;margin-left: 3px;margin-top: 5px" v-bind:src="z.pic_8">
+                                    </div>
+                                    <div v-if="z.picLength == 9">
+                                        <img width="200px" height="200px" v-bind:src="z.pic_1">
+                                        <img width="200px" height="200px" v-bind:src="z.pic_2">
+                                        <img width="200px" height="200px" v-bind:src="z.pic_3">
+                                        <br>
+                                        <img width="200px" height="200px" style="float: left;margin-left: 9px;margin-top: 5px" v-bind:src="z.pic_4">
+                                        <img width="200px" height="200px" style="float: left;margin-left: 3px;margin-top: 5px" v-bind:src="z.pic_5">
+                                        <img width="200px" height="200px" style="float: left;margin-left: 4px;margin-top: 5px" v-bind:src="z.pic_6">
+                                        <br>
+                                        <img width="200px" height="200px" style="float: left;margin-left: 9px;margin-top: 5px" v-bind:src="z.pic_7">
+                                        <img width="200px" height="200px" style="float: left;margin-left: 3px;margin-top: 5px" v-bind:src="z.pic_8">
+                                        <img width="200px" height="200px" style="float: left;margin-left: 4px;margin-top: 5px" v-bind:src="z.pic_9">
+                                    </div>
+                                </div>
+
+                                <div style="margin-top: 20px;margin-right: 30px;overflow: hidden">
+                                    <div style="float: right">{{z.createTime}}</div>
+                                </div>
+                                <div style="margin-top: 35px;overflow: hidden">
+                                    <i  id="wypl" class="el-icon-s-comment" v-on:click="plClick(z.id)"></i>
+                                    <div style="margin-top: 2px;float: right;color: red;font-weight: bold;font-size: 20px;margin-right: 30px">{{z.dzsl}}</div>
+                                    <i id="wydz"  class="layui-icon layui-icon-praise" v-on:click="dzClick(z,index)"></i>
+                                </div>
+                            </el-card>
+                        </div>
+                    </el-tab-pane>
+                </el-tabs>
+            </el-row>
+        </div>
     </el-card>
 
 
@@ -114,9 +256,10 @@
         el:'#main',
         data:{
             input:'',
-                shop:'',
-                shopMainPic:'',
+            shop:'',
+            shopMainPic:'',
             activeName: 'first',
+            dynamic:[]
         },
         methods:{
             buyNow(){
@@ -137,6 +280,19 @@
                 }
             }).then(res=> {
                 this.shopMainPic = res.data;
+            })
+            axios({
+                method:'post',
+                url:'/token/getDynamicByUserId',
+                headers:{
+                    'token' : sessionStorage.getItem("token")
+                },
+                data:{
+                    userId:this.shop.userID,
+                }
+            }).then(res=> {
+                this.dynamic.push(res.data)
+                debugger
             })
         }
     })

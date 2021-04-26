@@ -44,4 +44,6 @@ public interface DynamicMapper {
     int szdzsl(String dzsl,int id);
 
     String getDzsl(int id);
+
+    List<Dynamic> getDynamicByUserId(int userId);
 }
