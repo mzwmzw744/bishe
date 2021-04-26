@@ -148,6 +148,9 @@
             <div id="newArrivalHead" style="height: 50px;border-bottom: 1px solid #ddd;
             line-height: 50px;color: #ff5046;font-size: 22px;padding-left: 25px">
                 今日推荐
+                <span style="float: right;margin-right: 20px;margin-top: -2px">
+                     <el-button  type="primary"  plain @click="newNextClick" >下一页</el-button>
+                </span>
             </div>
             <div style="height: 559px;border-bottom: 1px solid #ddd;overflow: hidden">
                 <div  v-for="(o,index) in tjShop" :key="o">
@@ -272,7 +275,7 @@
 
 <script>
     var tjPage = 1
-
+    var newShopMessagePage = 1
 function dd(){
     window.location.href="shdzgl.html";
 }
@@ -322,7 +325,7 @@ function dd(){
         data:{
             dialogVisibleByModifyUserInf:false,
             newShopMessage:{},
-            newShopMessagePage:1,
+
             innerVisible:false,
             oldPassWord:'',
             newPassWord:'',
@@ -401,7 +404,37 @@ function dd(){
                 sessionStorage.setItem("user",JSON.stringify(user));
             },
             newNextClick(){
-                this.newShopMessagePage = this.newShopMessagePage + 1;
+                newShopMessagePage = newShopMessagePage + 1;
+                axios({
+                    method:'post',
+                    url:'/token/getIndexNewShopMeaage',
+                    headers:{
+                        'token' : sessionStorage.getItem("token")
+                    },
+                    data:{
+                        page:newShopMessagePage
+                    }
+                }).then(res=> {
+                    this.newShopMessage = res.data.data.data;
+                    if(res.data.message == '到底了') {
+                        newShopMessagePage = 1
+                        axios({
+                            method:'post',
+                            url:'/token/getIndexNewShopMeaage',
+                            headers:{
+                                'token' : sessionStorage.getItem("token")
+                            },
+                            data:{
+                                page:newShopMessagePage
+                            }
+                        }).then(res=> {
+                            this.newShopMessage = res.data.data.data;
+                            if(res.data.message == '到底了') {
+                                newShopMessagePage = 1
+                            }
+                        })
+                    }
+                })
             },
             shopClick(shop){
                 sessionStorage.setItem("shopBuyDetailShop",JSON.stringify(shop))
@@ -420,7 +453,7 @@ function dd(){
                     'token' : sessionStorage.getItem("token")
                 },
                 data:{
-
+                    page:newShopMessagePage
                 }
             }).then(res=> {
                 this.newShopMessage = res.data.data.data;

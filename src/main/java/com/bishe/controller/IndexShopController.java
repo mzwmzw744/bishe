@@ -28,11 +28,17 @@ public class IndexShopController {
     ShopMapper shopMapper;
 
     @RequestMapping("/token/getIndexNewShopMeaage")
-    public Result getIndexNewShopMeaage(){
+    public Result getIndexNewShopMeaage(@RequestBody Map<String,String> maps){
+        int offset = (Integer.parseInt(maps.get("page"))-1)*10;
         Result result = new Result();
         Map map = new HashMap<String,Object>();
-        List<Shop> list = indexShopMapper.getShopNew();
-        result.setMessage("成功");
+        List<Shop> list = indexShopMapper.getShopNew(10,offset);
+        if(list.size() == 0) {
+            result.setMessage("到底了");
+        }
+        if(list.size() > 0) {
+            result.setMessage("成功");
+        }
         map.put("data",list);
         result.setData(map);
         return result;

@@ -33,7 +33,6 @@ class BisheApplicationTests {
     IndexShopMapper indexShopMapper;
     @Test
     void contextLoads() throws IOException {
-        List<Shop> list =  indexShopMapper.getShopNew();
-        System.out.println(list);
+
     }
 }

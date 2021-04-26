@@ -12,5 +12,5 @@ public interface IndexShopMapper {
      * 首页最新
      * @return 首页最新上架商品
      */
-    List getShopNew();
+    List getShopNew(int page,int offset);
 }
