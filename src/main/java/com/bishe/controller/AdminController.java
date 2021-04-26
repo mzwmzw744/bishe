@@ -33,7 +33,6 @@ public class AdminController {
         AdminApply adminApply = adminMapper.adminApplySelectByID(deleteID);
         int i = adminMapper.adminApplyDeleteByID(deleteID);
         if(i > 0) {
-            System.out.println("管理员申请删除成功");
             Admin admin = new Admin();
             admin.setName(adminApply.getName());
             admin.setFace("null");

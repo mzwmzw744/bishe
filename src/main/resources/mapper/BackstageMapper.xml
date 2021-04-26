@@ -9,9 +9,30 @@
         <result column="admin_password" jdbcType="VARCHAR" property="password" />
         <result column="admin_face" jdbcType="VARCHAR" property="face" />
     </resultMap>
+    <resultMap id="shopResultMap" type="com.bishe.bean.Shop">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="user_id" jdbcType="INTEGER" property="userID" />
+        <result column="shop_name" jdbcType="VARCHAR" property="shopName" />
+        <result column="shop_price" jdbcType="VARCHAR" property="shopPrice" />
+        <result column="shop_introduction" jdbcType="VARCHAR" property="shopIntroduction" />
+        <result column="shop_head_picture" jdbcType="VARCHAR" property="shopHeadPicture" />
+        <result column="auditStatus" jdbcType="VARCHAR" property="auditStatus" />
+    </resultMap>
 
     <select id="getAdminByName" resultMap="adminResultMap">
         select * from admin where admin_name = #{adminName}
+    </select>
+
+    <update id="updateShopAuditStatusTj" >
+        update shop set auditStatus = '10' where id = #{id}
+    </update>
+
+    <update id="updateShopAuditStatusQxTj" >
+        update shop set auditStatus = '1' where id = #{id}
+    </update>
+
+    <select id="getAllShopByTime" resultMap="shopResultMap">
+        select * from shop  where (auditStatus = '1' or auditStatus = '10') ORDER BY createDate desc
     </select>
 
 </mapper>

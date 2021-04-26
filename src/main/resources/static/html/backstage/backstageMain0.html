@@ -54,6 +54,14 @@
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree"  lay-filter="test">
                 <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="#">首页今日推荐管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="#" v-on:click="addTodayTjGlClick">增加今日推荐</a></dd>
+                        <dd><a href="#" v-on:click="addTodayTjGlClick">去除今日推荐</a></dd>
+                    </dl>
+                </li>
+
+                <li class="layui-nav-item layui-nav-itemed">
                     <a class="" href="#">用户信息</a>
                     <dl class="layui-nav-child">
                         <dd><a href="#" v-on:click="userInformationQueryClick">用户信息查询</a></dd>
@@ -114,7 +122,8 @@
             htmlUrl : '/html/backstage/userInformationQuery.html',
             userInformationQuery:'/html/backstage/userInformationQuery.html',
             adminApplyQueryQuery:'/html/backstage/adminApply.html',
-            adminInformationQuery:'/html/backstage/adminInformationQuery.html'
+            adminInformationQuery:'/html/backstage/adminInformationQuery.html',
+            addTodayTjGl:'/html/backstage/addTodayTj.html'
         },
         methods:{
             adminInformationClick(){
@@ -125,6 +134,9 @@
             },
             userInformationQueryClick(){
                 this.htmlUrl = this.userInformationQuery;
+            },
+            addTodayTjGlClick(){
+                this.htmlUrl = this.addTodayTjGl;
             }
         }
     })

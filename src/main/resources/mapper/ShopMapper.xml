@@ -112,5 +112,9 @@
     <update id="updateShopState" parameterType="com.bishe.bean.Shop">
         update shop set auditStatus = #{auditStatus} where id = #{id}
     </update>
-    
+
+
+    <select id="getTjShop" resultMap="shopResultMap">
+        select *  from shop where auditStatus = '10' ORDER BY createDate desc limit #{pageSize}  offset #{offset}
+    </select>
 </mapper>

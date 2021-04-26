@@ -112,7 +112,7 @@
         border-right: 1px solid #ddd;
         cursor:pointer;
         float: left;
-
+        border-bottom: 1px solid #ddd;
 
 
     }
@@ -149,20 +149,9 @@
             line-height: 50px;color: #ff5046;font-size: 22px;padding-left: 25px">
                 今日推荐
             </div>
-            <div style="height: 559px;">
-                <div style="height: 50%;border-bottom: 1px solid #ddd;overflow: hidden">
-                    <div style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left"></div>
-                    <div style="border-right: 1px solid #ddd;width:  280px;height:100%;float: left"></div>
-                    <div style="border-right: 1px solid #ddd;width:  280px;height:100%;float: left"></div>
-                    <div style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left;"></div>
-                    <div style="width: 278px;height:100%;float: left;"></div>
-                </div>
-                <div style="height: 50%;overflow: hidden">
-                    <div style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left"></div>
-                    <div style="border-right: 1px solid #ddd;width:  280px;height:100%;float: left"></div>
-                    <div style="border-right: 1px solid #ddd;width:  280px;height:100%;float: left"></div>
-                    <div style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left;"></div>
-                    <div style="width: 278px;height:100%;float: left;"></div>
+            <div style="height: 559px;border-bottom: 1px solid #ddd;overflow: hidden">
+                <div  v-for="(o,index) in tjShop" :key="o">
+                    <img :src="o.shopHeadPicture" v-on:click="shopClick(o)" style="width: 279px;height: 279px;float: left" class="shopCss">
                 </div>
             </div>
         </div>
@@ -282,6 +271,8 @@
 
 
 <script>
+    var tjPage = 1
+
 function dd(){
     window.location.href="shdzgl.html";
 }
@@ -341,6 +332,8 @@ function dd(){
             czVisible:false,
             user:{},
             balance:'',
+            tjShop:''
+
         },
         methods:{
             czBalance(){
@@ -431,6 +424,20 @@ function dd(){
                 }
             }).then(res=> {
                 this.newShopMessage = res.data.data.data;
+            })
+
+            axios({
+                method:'post',
+                url:'/token/getTjShop',
+                headers:{
+                    'token' : sessionStorage.getItem("token")
+                },
+                data:{
+                    page:tjPage
+                }
+            }).then(res=> {
+                 this.tjShop = res.data;
+                 debugger
             })
         }
     })

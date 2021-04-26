@@ -46,6 +46,24 @@ public class BackstageController {
         return backstageFormat;
     }
 
+    @RequestMapping("/backstage/getAllShopTj")
+    public List<Shop> getAllShopTj(){
+        List<Shop> shops  = backstageMapper.getAllShopByTime();
+        return shops;
+    }
+
+    @RequestMapping("/backstage/updateShopTj")
+    public void updateShopTj(@RequestBody Map<String,String> map){
+        int id = Integer.parseInt(map.get("id"));
+        backstageMapper.updateShopAuditStatusTj(id);
+    }
+    @RequestMapping("/backstage/updateShopQxTj")
+    public void updateShopQxTj(@RequestBody Map<String,String> map){
+        int id = Integer.parseInt(map.get("id"));
+        backstageMapper.updateShopAuditStatusQxTj(id);
+    }
+
+
     @RequestMapping("/backstage/login")
     public AdminLoginReturn adminLogin(HttpServletRequest request){
         AdminLoginReturn adminLoginReturn= new AdminLoginReturn();
@@ -101,22 +119,17 @@ public class BackstageController {
         String radio1 = (String)map.get("radio1");
         checkboxChoose = (List) map.get("checkboxChoose");
         String textarea = (String)map.get("textarea");
-        System.out.println(checkboxChoose);
-        System.out.println(account);
-        System.out.println(radio1);
-        System.out.println(password);
-        System.out.println(checkboxChoose);
-        System.out.println(textarea);
         AdminApply administratorApply = new AdminApply();
         administratorApply.setName(account);
         administratorApply.setPassword(password);
         administratorApply.setApplyGrade(radio1);
         administratorApply.setApplyRemarks(textarea);
-        if("超级管理员".equals(radio1))
+        if("超级管理员".equals(radio1)) {
             administratorApply.setAddPower("true");
-        administratorApply.setDeletePower("true");
-        administratorApply.setUpdatePower("true");
-        administratorApply.setSelectPower("true");
+            administratorApply.setDeletePower("true");
+            administratorApply.setUpdatePower("true");
+            administratorApply.setSelectPower("true");
+        }
         if("普通管理员".equals(radio1)){
             administratorApply.setAddPower("false");
             administratorApply.setDeletePower("false");

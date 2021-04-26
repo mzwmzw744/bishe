@@ -2,6 +2,7 @@ package com.bishe.mapper;
 
 import com.bishe.bean.Admin;
 import com.bishe.bean.AdminApply;
+import com.bishe.bean.Shop;
 import com.bishe.bean.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -25,8 +26,10 @@ public interface BackstageMapper {
     @Insert("insert into adminApply values (null,#{name},#{password},#{applyGrade},#{applyRemarks},#{addPower},#{deletePower},#{updatePower},#{selectPower})")
     int addAdministratorApply(AdminApply administratorApply);
 
-//    insert into superAdministratorApply values (null,'小华6','123','超级管理员','我是小华6',true,true,true,true)
-// @Insert("insert into superAdministratorApply values (null,#{name},#{password},#{applyGrade},#{applyRemarks},true,true,true,true)")
+    List<Shop> getAllShopByTime();
 
+    int updateShopAuditStatusTj(int id);
+
+    int updateShopAuditStatusQxTj(int id);
 }
 

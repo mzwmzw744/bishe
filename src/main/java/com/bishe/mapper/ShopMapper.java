@@ -59,5 +59,6 @@ public interface ShopMapper {
 
     int updateShopState(Shop shop);
 
+    List<Shop> getTjShop(int pageSize,int offset);
 
 }

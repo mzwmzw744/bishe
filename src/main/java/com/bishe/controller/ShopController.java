@@ -189,5 +189,4 @@ public class ShopController {
         System.out.println(shopMainPicture);
         return shopMainPicture;
     }
-
 }
