@@ -15,16 +15,23 @@
 </head>
 <style>
     *{
-        margin: 0;
+        margin: 1px;
         padding: 0;
     }
     #main{
         margin: 0 auto;
-        height: 2000px;
         width: 1000px;
-        border: 1px solid #ebebeb;
         /*background-color: RGB(250,250,250);*/
-        background-color: #F2F6FC;
+
+
+    }
+    #shopHeadPic{
+        border: 1px solid #ddd;
+
+    }
+    #shopHeadPic:hover{
+        background-color: #c35673;
+        cursor: pointer;
     }
 </style>
 <body>
@@ -34,6 +41,57 @@
 </div>
 <div id="main">
 
+    <div style="overflow: hidden">
+        <el-card>
+            <div style="overflow: hidden">
+                <div style="float: left;line-height: 40px;margin-left: 10px">价格区间:</div>
+                <div style="float: left;margin-left: 10px"><el-input style="width: 150px" v-model="minPrice" placeholder="最低价格"></el-input></div>
+                <div style="float: left;margin-left: 10px"><el-input style="width: 150px"  v-model="maxPrice" placeholder="最高价格"></el-input></div>
+                <div style="float: left;line-height: 40px;margin-left: 20px">尺寸:</div>
+                <div style="float: left;margin-left: 10px">
+                    <el-checkbox-group v-model="Cc">
+                        <el-checkbox-button :label="1">曲裾</el-checkbox-button>
+                        <el-checkbox-button :label="2">直裾</el-checkbox-button>
+                        <el-checkbox-button :label="3">襦裙</el-checkbox-button>
+                        <el-checkbox-button :label="4">褙子</el-checkbox-button>
+                        <el-checkbox-button :label="5">玄端</el-checkbox-button>
+                    </el-checkbox-group>
+                </div>
+            </div>
+
+            <div style="overflow: hidden;margin-top: 10px">
+                <div style="float: left;line-height: 40px;margin-left: 10px">
+                    汉服种类:
+                </div>
+                <div style="float: left">
+                <el-checkbox-group v-model="shopFamily">
+                    <el-checkbox-button :label="1">曲裾</el-checkbox-button>
+                    <el-checkbox-button :label="2">直裾</el-checkbox-button>
+                    <el-checkbox-button :label="3">襦裙</el-checkbox-button>
+                    <el-checkbox-button :label="4">褙子</el-checkbox-button>
+                    <el-checkbox-button :label="5">玄端</el-checkbox-button>
+                    <el-checkbox-button :label="6">高腰襦裙</el-checkbox-button>
+                    <el-checkbox-button :label="7">圆领袍衫</el-checkbox-button>
+                    <el-checkbox-button :label="8">朱子深衣</el-checkbox-button>
+                </el-checkbox-group>
+                </div>
+            </div>
+
+        </el-card>
+
+    </div>
+
+    <div style="box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)">
+        <div style="overflow: hidden">
+        <div v-for="(o,index) in shops" :key="o" class="text item" style="float: left">
+            <div id="shopHeadPic">
+            <img  v-bind:src="o.shopHeadPicture" width="329.32999px" height="310px"  v-on:click="shopClick(o)">
+            </div>
+        </div>
+        </div>
+    </div>
+
+
 </div>
 <div id="foot" style="width: 100%;height: 370px;margin: 50px auto;border-top: 1px solid #ddd;">
     <iframe src="hfqFoot.html" width="100%" height="430px"  frameborder="0" scrolling="no" >
@@ -42,6 +100,22 @@
 <script>
 new Vue({
     el:'#main',
+    data:{
+        shops:{
+
+        },
+        shopFamily:[],
+        Cc:[],
+        minPrice:'',
+        maxPrice:'',
+
+    },
+    methods:{
+        shopClick(shop){
+            sessionStorage.setItem("shopBuyDetailShop",JSON.stringify(shop))
+            window.location.href ='shoppingDetails.html';
+        }
+    },
     created:function (){
         axios({
             method:'post',
@@ -50,10 +124,14 @@ new Vue({
                 'token' : sessionStorage.getItem("token")
             },
             data:{
-
+                shopFamily:this.shopFamily,
+                Cc:this.Cc,
+                minPrice:this.minPrice,
+                maxPrice:this.maxPrice,
             }
         }).then(res => {
-            res.data
+            this.shops = res.data
+            debugger
         })
     }
 })
