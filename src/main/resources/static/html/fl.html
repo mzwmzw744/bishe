@@ -40,7 +40,23 @@
     </iframe>
 </div>
 <script>
+new Vue({
+    el:'#main',
+    created:function (){
+        axios({
+            method:'post',
+            url:'/token/searchShopBycondition',
+            headers:{
+                'token' : sessionStorage.getItem("token")
+            },
+            data:{
 
+            }
+        }).then(res => {
+            res.data
+        })
+    }
+})
 </script>
 </body>
 </html>

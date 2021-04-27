@@ -1,5 +1,6 @@
 package com.bishe.mapper;
 
+import com.bishe.bean.SearchShopConditionBean;
 import com.bishe.bean.Shop;
 import com.bishe.bean.ShopMainPicture;
 import org.apache.ibatis.annotations.Mapper;
@@ -63,4 +64,5 @@ public interface ShopMapper {
 
     String getShopAuditStatus(int id);
 
+    List<Shop> searchShopBycondition(SearchShopConditionBean searchShopConditionBean);
 }

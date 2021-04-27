@@ -1,9 +1,6 @@
 package com.bishe.controller;
 
-import com.bishe.bean.Shop;
-import com.bishe.bean.ShopMainPicture;
-import com.bishe.bean.User;
-import com.bishe.bean.UserShopMessage;
+import com.bishe.bean.*;
 import com.bishe.mapper.ShopMapper;
 import com.bishe.util.RedisUtil;
 import net.sf.json.JSONObject;
@@ -191,5 +188,30 @@ public class ShopController {
         ShopMainPicture shopMainPicture = shopMapper.getShopMainPicByShopID(id);
         System.out.println(shopMainPicture);
         return shopMainPicture;
+    }
+
+    /**
+     *通过多种条件搜索商品
+     */
+    @RequestMapping("token/searchShopBycondition")
+    public List<Shop> searchShopBycondition(@RequestBody Map<String,String> map){
+//        double priceMin = Integer.parseInt(map.get("priceMin"));
+//        double priceMax = Integer.parseInt(map.get("priceMax"));
+        String quju = map.get("quju");
+        String zhiju = map.get("quju");
+        String ruqun = map.get("quju");
+        String beizi = map.get("quju");
+        String xuanduan = map.get("quju");
+        String gaoyao = map.get("quju");
+        String yuanlin = map.get("quju");
+        String zhuzi = map.get("quju");
+        SearchShopConditionBean searchShopConditionBean = new SearchShopConditionBean();
+        searchShopConditionBean.setPriceMin(100);
+        searchShopConditionBean.setPriceMax(2000);
+        searchShopConditionBean.setBeizi("1");
+        searchShopConditionBean.setL("1");
+        searchShopConditionBean.setXXL("1");
+        List<Shop> shops= shopMapper.searchShopBycondition(searchShopConditionBean);
+        return shops;
     }
 }

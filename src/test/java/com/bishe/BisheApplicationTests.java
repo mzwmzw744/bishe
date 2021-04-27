@@ -1,5 +1,6 @@
 package com.bishe;
 
+import com.bishe.bean.SearchShopConditionBean;
 import com.bishe.bean.Shop;
 import com.bishe.bean.ShopMainPicture;
 import com.bishe.mapper.BackstageMapper;

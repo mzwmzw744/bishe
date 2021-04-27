@@ -125,7 +125,64 @@
 
 
 
+    <select id="searchShopBycondition" resultMap="shopResultMap">
+    select * from shop where 1 = 1
+        <if test="priceMin != null and priceMin != '' " >
+            and  shop_price &gt;= #{priceMin}
+        </if>
+        <if test="priceMax != null and priceMax != '' " >
+            and  shop_price &lt;= #{priceMax}
+        </if>
+             and shop_family != null
+        <if test="quju != null and quju != '' " >
+            or  shop_family = '曲裾'
+        </if>
+        <if test="zhiju != null and zhiju != '' " >
+            or  shop_family = '直裾'
+        </if>
+        <if test="ruqun != null and ruqun != '' " >
+            or  shop_family = '襦裙'
+        </if>
+        <if test="beizi != null and beizi != '' " >
+            or  shop_family = '褙子'
+        </if>
+        <if test="xuanduan != null and xuanduan != '' " >
+            or  shop_family = '玄端'
+        </if>
+        <if test="gaoyao != null and gaoyao != '' " >
+            or  shop_family = '高腰襦裙'
+        </if>
+        <if test="yuanlin != null and yuanlin != '' " >
+            or  shop_family = '圆领袍衫'
+        </if>
+        <if test="zhuzi != null and zhuzi != '' " >
+            or  shop_family = '朱子深衣'
+        </if>
 
+        and shopCc != null
+
+        <if test="S != null and S != '' " >
+            or  shopCc = 'S'
+        </if>
+        <if test="M != null and M != '' " >
+            or  shopCc = 'M'
+        </if>
+        <if test="L != null and L != '' " >
+            or  shopCc = 'L'
+        </if>
+        <if test="XL != null and XL != '' " >
+        or  shopCc = 'XL'
+         </if>
+        <if test="XXL != null and XXL != '' " >
+        or  shopCc = 'XXL'
+        </if>
+        <if test="px != null and px != ''  " >
+            ORDER BY createDate
+        </if>
+        <if test="px == null or px == ''  " >
+            ORDER BY createDate desc
+        </if>
+    </select>
 
 
 </mapper>
