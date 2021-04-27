@@ -31,5 +31,9 @@ public interface BackstageMapper {
     int updateShopAuditStatusTj(int id);
 
     int updateShopAuditStatusQxTj(int id);
+
+    int setMessage(String message);
+
+    String getMessage();
 }
 

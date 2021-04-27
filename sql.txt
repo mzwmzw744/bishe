@@ -204,7 +204,11 @@ create table buy_order(
                           createTime dateTime
 );
 
-
+drop table if exists  notification;
+create table notification(
+                          id int auto_increment primary key,
+                          notification varchar(200)
+);
 
 
 

@@ -35,4 +35,11 @@
         select * from shop  where (auditStatus = '1' or auditStatus = '10') ORDER BY createDate desc
     </select>
 
+    <select id="getMessage" resultType="String">
+        select notification from notification where id = 1
+    </select>
+
+    <update id="setMessage">
+        update notification set notification = #{messgae}
+    </update>
 </mapper>

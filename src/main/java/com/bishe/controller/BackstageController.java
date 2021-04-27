@@ -162,4 +162,13 @@ public class BackstageController {
         }
         return "申请失败，请重新申请";
   }
+  @RequestMapping("/token/getNotification")
+  public String  getNotification(@RequestBody Map map){
+        return  backstageMapper.getMessage();
+  }
+    @RequestMapping("/token/setNotification")
+    public void  setNotification(@RequestBody Map map){
+
+        backstageMapper.setMessage((String) map.get("message"));
+    }
 }

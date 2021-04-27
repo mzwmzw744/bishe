@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>弹出消息设置</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="../../css/theme/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.0/index.js"></script>
+    <!--    <script src="https://unpkg.com/element-ui/lib/index.js"></script>-->
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.js"></script>
+</head>
+<body>
+<div id="main">
+    <div>
+        <el-card class="box-card" style="text-align: center">
+            <div slot="header" class="clearfix">
+                <span>弹出消息设置</span>
+            </div>
+            <div class="text item">
+                <el-input v-model="input" placeholder="请输入内容"></el-input>
+
+                <el-button style="width: 100px;margin-top: 30px" v-on:click="qr" >确认</el-button>
+            </div>
+        </el-card>
+    </div>
+</div>
+</body>
+<script>
+    const main = new Vue({
+        el:'#main',
+        data:{
+            input:'',
+        },
+        methods:{
+            qr(){
+                axios({
+                    method:'post',
+                        url:'/token/setNotification',
+                    headers:{
+                        'token' : sessionStorage.getItem("token")
+                    },
+                    data:{
+                        message:this.input
+                    }
+                }).then(res => {
+                    this.$message.success("设置成功")
+                })
+            }
+        },
+        created:function (){
+            axios({
+                method:'post',
+                url:'/token/getNotification',
+                headers:{
+                    'token' : sessionStorage.getItem("token")
+                },
+                data:{
+
+                }
+            }).then(res => {
+                main.input = res.data
+            })
+        }
+    })
+</script>
+
+</html>

@@ -335,8 +335,8 @@ function dd(){
             czVisible:false,
             user:{},
             balance:'',
-            tjShop:''
-
+            tjShop:'',
+            tanMessage:''
         },
         methods:{
             czBalance(){
@@ -472,6 +472,26 @@ function dd(){
                  this.tjShop = res.data;
                  debugger
             })
+
+
+            axios({
+                method:'post',
+                url:'/token/getNotification',
+                headers:{
+                    'token' : sessionStorage.getItem("token")
+                },
+                data:{
+
+                }
+            }).then(res => {
+                main.tanMessage = res.data
+                this.$notify({
+                    title: '提示',
+                    message: res.data,
+                    duration: 0
+                });
+            })
+
         }
     })
     console.log(main.newShopMessage)
