@@ -39,7 +39,10 @@ public class ShopController {
 //      String shopHeadPicture = map.get("shopHeadPicture");
         String shopHeadPicture="/pic/shopTiShi.png";
         String shopFamily = map.get("shopFamily");
+        String shopCc = map.get("shopCc");
+
         Shop shop = new Shop();
+        shop.setShopCc(shopCc);
         shop.setUserID(userId);
         shop.setShopName(shopName);
         shop.setShopFamily(shopFamily);

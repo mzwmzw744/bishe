@@ -11,6 +11,7 @@
         <result column="shop_introduction" jdbcType="VARCHAR" property="shopIntroduction" />
         <result column="shop_head_picture" jdbcType="VARCHAR" property="shopHeadPicture" />
         <result column="auditStatus" jdbcType="VARCHAR" property="auditStatus" />
+        <result column="shopCc" jdbcType="VARCHAR" property="shopCc" />
     </resultMap>
 
     <resultMap id="shopHeadPicMap" type="com.bishe.bean.ShopMainPicture">
@@ -89,7 +90,7 @@
     </insert>
 
     <insert id="shopCreate" parameterType="com.bishe.bean.Shop" useGeneratedKeys="true" keyProperty="id">
-        insert into shop values (null,#{userID},#{shopName},#{shopPrice},#{shopFamily},#{shopIntroduction},#{shopHeadPicture},#{auditStatus},now());
+        insert into shop values (null,#{userID},#{shopName},#{shopPrice},#{shopFamily},#{shopIntroduction},#{shopHeadPicture},#{auditStatus},now(),#{shopCc});
     </insert>
 
     <select id="getShopAccount" resultType="Integer">
@@ -121,6 +122,9 @@
     <select id="getShopAuditStatus" resultType="String">
         select auditStatus  from shop where id = #{id}
     </select>
+
+
+
 
 
 
