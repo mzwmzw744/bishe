@@ -117,4 +117,11 @@
     <select id="getTjShop" resultMap="shopResultMap">
         select *  from shop where auditStatus = '10' ORDER BY createDate desc limit #{pageSize}  offset #{offset}
     </select>
+
+    <select id="getShopAuditStatus" resultType="String">
+        select auditStatus  from shop where id = #{id}
+    </select>
+
+
+
 </mapper>

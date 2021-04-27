@@ -1,3 +1,15 @@
+
+0未上架
+1上架
+2待发货
+3已发货
+4待收货
+5已收获
+10推荐状态
+
+
+
+
 box-sizing:border-box；盒子模型
 text-decoration: none 取消
 display设置模式

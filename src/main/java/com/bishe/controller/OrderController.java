@@ -35,12 +35,24 @@ public class OrderController {
         String token = headers.get("token");
         User user = (User)redisUtil.get(token);
         User newuser = userMapper.getUserById(user.getId());
+        int shopId = Integer.parseInt(map.get("shopId"));
+
+        String isShopping = shopMapper.getShopAuditStatus(shopId);
+        int isShppings = Integer.parseInt(isShopping);
+
+        if(isShppings != 1  ){
+            if(isShppings == 0){
+                return -1.0;
+            }else {
+                return -2.0;
+            }
+        }
         double t =  Double.valueOf(newuser.getBalance());
         double z =Double.valueOf(map.get("balance"));
         Double num = t - z;
         userMapper.xfBalance(num.toString(),user.getId());
         BuyOrder buyOrder = new BuyOrder();
-        int shopId = Integer.parseInt(map.get("shopId"));
+
         Shop shop = new Shop();
         shop.setId(shopId);
         shop.setAuditStatus("2");

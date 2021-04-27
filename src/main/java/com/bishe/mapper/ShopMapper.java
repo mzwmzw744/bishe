@@ -61,4 +61,6 @@ public interface ShopMapper {
 
     List<Shop> getTjShop(int pageSize,int offset);
 
+    String getShopAuditStatus(int id);
+
 }

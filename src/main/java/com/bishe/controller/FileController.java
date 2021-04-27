@@ -70,5 +70,13 @@ public class FileController {
         FileOutputStream fileOutputStream = new FileOutputStream(xdPath);
         FileCopyUtils.copy(file, fileOutputStream);
         return sqlHeadPicPath;
+
+        //       Linux系统下的配置
+        //       Service.createDir("/home/image/upload/userId"+user.getId());
+        //        String xdPath="/home/image/upload/userId"+user.getId()+"/"+only+".png";
+        //        String sqlHeadPicPath = "/upload"+"/userId"+user.getId()+"/"+only+".png";
+        //        FileOutputStream fileOutputStream = new FileOutputStream(xdPath);
+        //        FileCopyUtils.copy(file, fileOutputStream);
+        //        return sqlHeadPicPath;
     }
 }

@@ -173,6 +173,14 @@
                         shopId:this.shop.id
                     }
                 }).then(res => {
+                    if(res.data == -2 || res.data == "-2"){
+                        this.$message.error('此商品已被购买！');
+                        return;
+                    }
+                    if(res.data == -1 || res.data == "-1"){
+                        this.$message.error('此商品已下架！');
+                        return;
+                    }
                     this.$message.success('购买成功!');
                     this.user.balance = res.data
                     sessionStorage.setItem("user",JSON.stringify(this.user));
