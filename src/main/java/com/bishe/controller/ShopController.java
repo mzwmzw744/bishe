@@ -7,6 +7,7 @@ import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -194,17 +195,34 @@ public class ShopController {
      *通过多种条件搜索商品
      */
     @RequestMapping("token/searchShopBycondition")
-    public List<Shop> searchShopBycondition(@RequestBody Map<String,String> map){
-//        double priceMin = Integer.parseInt(map.get("priceMin"));
-//        double priceMax = Integer.parseInt(map.get("priceMax"));
-        String quju = map.get("quju");
-        String zhiju = map.get("quju");
-        String ruqun = map.get("quju");
-        String beizi = map.get("quju");
-        String xuanduan = map.get("quju");
-        String gaoyao = map.get("quju");
-        String yuanlin = map.get("quju");
-        String zhuzi = map.get("quju");
+    public List<Shop> searchShopBycondition(@RequestBody Map map){
+        double priceMin = 0;
+        double priceMax = 10000;
+        List shopFamily = new ArrayList();
+        List Cc = new ArrayList();
+        if(map.get("priceMin")!=null && !map.get("priceMin").equals("")){
+            priceMin = (Double) map.get("priceMin");
+        }
+        Cc = (ArrayList)map.get("priceMax");
+//        if(map.get("priceMax")!=null && !map.get("priceMax").equals("")){
+//            priceMax = (Double) map.get("priceMax");
+//        }
+//        if(map.get("shopFamily")!=null && !map.get("shopFamily").equals("")){
+//            shopFamily = (String[]) map.get("shopFamily");
+//        }
+
+//
+//        if(map.get("Cc")!=null && !map.get("Cc").equals("")){
+//            Cc = (String[]) map.get("Cc");
+//        }
+//        String quju = map.get("quju");
+//        String zhiju = map.get("quju");
+//        String ruqun = map.get("quju");
+//        String beizi = map.get("quju");
+//        String xuanduan = map.get("quju");
+//        String gaoyao = map.get("quju");
+//        String yuanlin = map.get("quju");
+//        String zhuzi = map.get("quju");
         SearchShopConditionBean searchShopConditionBean = new SearchShopConditionBean();
         searchShopConditionBean.setPriceMin(100);
         searchShopConditionBean.setPriceMax(2000);
