@@ -50,11 +50,11 @@
                 <div style="float: left;line-height: 40px;margin-left: 20px">尺寸:</div>
                 <div style="float: left;margin-left: 10px">
                     <el-checkbox-group v-model="Cc">
-                        <el-checkbox-button :label="1">曲裾</el-checkbox-button>
-                        <el-checkbox-button :label="2">直裾</el-checkbox-button>
-                        <el-checkbox-button :label="3">襦裙</el-checkbox-button>
-                        <el-checkbox-button :label="4">褙子</el-checkbox-button>
-                        <el-checkbox-button :label="5">玄端</el-checkbox-button>
+                        <el-checkbox-button :label="1">S</el-checkbox-button>
+                        <el-checkbox-button :label="2">M</el-checkbox-button>
+                        <el-checkbox-button :label="3">L</el-checkbox-button>
+                        <el-checkbox-button :label="4">XL</el-checkbox-button>
+                        <el-checkbox-button :label="5">XXL</el-checkbox-button>
                     </el-checkbox-group>
                 </div>
             </div>
@@ -76,7 +76,21 @@
                 </el-checkbox-group>
                 </div>
             </div>
-
+            <div style="overflow: hidden;margin-top: 10px">
+                <div style="float: left">
+                    <el-select v-model="value" placeholder="排序方式">
+                        <el-option
+                                v-for="item in options"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                        </el-option>
+                    </el-select>
+                </div>
+                <div style="float: right">
+                    <el-button type="primary" v-on:click="search">搜索</el-button>
+                </div>
+            </div>
         </el-card>
 
     </div>
@@ -108,9 +122,43 @@ new Vue({
         Cc:[],
         minPrice:'',
         maxPrice:'',
-
+        options: [{
+            value: 1,
+            label: '不排序'
+        }, {
+            value: 2,
+            label: '时间最新'
+        }, {
+            value: 3,
+            label: '时间最早'
+        }, {
+            value: 4,
+            label: '价格从高到低'
+        }, {
+            value: 5,
+            label: '价格从低到高'
+        }],
+        value: ''
     },
     methods:{
+        search(){
+            axios({
+                method:'post',
+                url:'/token/searchShopBycondition',
+                headers:{
+                    'token' : sessionStorage.getItem("token")
+                },
+                data:{
+                    shopFamily:this.shopFamily,
+                    Cc:this.Cc,
+                    minPrice:this.minPrice,
+                    maxPrice:this.maxPrice,
+                    value:this.value,
+                }
+            }).then(res => {
+                this.shops = res.data
+            })
+        },
         shopClick(shop){
             sessionStorage.setItem("shopBuyDetailShop",JSON.stringify(shop))
             window.location.href ='shoppingDetails.html';

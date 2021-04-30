@@ -65,4 +65,7 @@ public interface ShopMapper {
     String getShopAuditStatus(int id);
 
     List<Shop> searchShopBycondition(SearchShopConditionBean searchShopConditionBean);
+    List<Shop> searchShopBycondition1(SearchShopConditionBean searchShopConditionBean);
+    List<Shop> searchShopBycondition2(SearchShopConditionBean searchShopConditionBean);
+    List<Shop> searchShopBycondition3(SearchShopConditionBean searchShopConditionBean);
 }

@@ -196,6 +196,8 @@ public class ShopController {
      */
     @RequestMapping("token/searchShopBycondition")
     public List<Shop> searchShopBycondition(@RequestBody Map map){
+        SearchShopConditionBean searchShopConditionBean = new SearchShopConditionBean();
+//        searchShopConditionBean.setPx((int)map.get("value"));
         double priceMin = 0;
         double priceMax = 10000;
         List shopFamily = new ArrayList();
@@ -203,33 +205,74 @@ public class ShopController {
         if(map.get("priceMin")!=null && !map.get("priceMin").equals("")){
             priceMin = (Double) map.get("priceMin");
         }
-        Cc = (ArrayList)map.get("priceMax");
-//        if(map.get("priceMax")!=null && !map.get("priceMax").equals("")){
-//            priceMax = (Double) map.get("priceMax");
-//        }
-//        if(map.get("shopFamily")!=null && !map.get("shopFamily").equals("")){
-//            shopFamily = (String[]) map.get("shopFamily");
-//        }
-
-//
-//        if(map.get("Cc")!=null && !map.get("Cc").equals("")){
-//            Cc = (String[]) map.get("Cc");
-//        }
-//        String quju = map.get("quju");
-//        String zhiju = map.get("quju");
-//        String ruqun = map.get("quju");
-//        String beizi = map.get("quju");
-//        String xuanduan = map.get("quju");
-//        String gaoyao = map.get("quju");
-//        String yuanlin = map.get("quju");
-//        String zhuzi = map.get("quju");
-        SearchShopConditionBean searchShopConditionBean = new SearchShopConditionBean();
-        searchShopConditionBean.setPriceMin(100);
-        searchShopConditionBean.setPriceMax(2000);
-        searchShopConditionBean.setBeizi("1");
-        searchShopConditionBean.setL("1");
-        searchShopConditionBean.setXXL("1");
-        List<Shop> shops= shopMapper.searchShopBycondition(searchShopConditionBean);
+        if(map.get("priceMax")!=null && !map.get("priceMax").equals("")){
+            priceMax = (Double) map.get("priceMax");
+        }
+        searchShopConditionBean.setPriceMax(priceMin);
+        searchShopConditionBean.setPriceMax(priceMax);
+        if(map.get("value") != null && !map.get("value").equals("")){
+            searchShopConditionBean.setPx((int)map.get("value"));
+        }else {
+            searchShopConditionBean.setPx(1);
+        }
+        Cc = (ArrayList)map.get("Cc");
+        shopFamily = (ArrayList)map.get("shopFamily");
+        for(int i = 0; i < Cc.size();i++){
+            if ((int)Cc.get(i) == 1){
+                searchShopConditionBean.setS("true");
+            }
+            if ((int)Cc.get(i) == 2){
+                searchShopConditionBean.setM("true");
+            }
+            if ((int)Cc.get(i) == 3){
+                searchShopConditionBean.setL("true");
+            }
+            if ((int)Cc.get(i) == 4){
+                searchShopConditionBean.setXL("true");
+            }
+            if ((int)Cc.get(i) == 5){
+                searchShopConditionBean.setXXL("true");
+            }
+        }
+        for(int i = 0; i < shopFamily.size();i++) {
+            if ((int)shopFamily.get(i) == 1){
+                searchShopConditionBean.setQuju("true");
+            }
+            if ((int)shopFamily.get(i) == 2){
+                searchShopConditionBean.setZhiju("true");
+            }
+            if ((int)shopFamily.get(i) == 3){
+                searchShopConditionBean.setRuqun("true");
+            }
+            if ((int)shopFamily.get(i) == 4){
+                searchShopConditionBean.setBeizi("true");
+            }
+            if ((int)shopFamily.get(i) == 5){
+                searchShopConditionBean.setXuanduan("true");
+            }
+            if ((int)shopFamily.get(i) == 1){
+                searchShopConditionBean.setGaoyao("true");
+            }
+            if ((int)shopFamily.get(i) == 1){
+                searchShopConditionBean.setYuanlin("true");
+            }
+            if ((int)shopFamily.get(i) == 1){
+                searchShopConditionBean.setZhuzi("true");
+            }
+        }
+        List<Shop> shops = new ArrayList<>();
+        if(shopFamily.size() == 0 && Cc.size() == 0) {
+            shops = shopMapper.searchShopBycondition3(searchShopConditionBean);
+        }
+        if(shopFamily.size() > 0 && Cc.size() == 0) {
+            shops = shopMapper.searchShopBycondition1(searchShopConditionBean);
+        }
+        if(shopFamily.size() == 0 && Cc.size() > 0) {
+            shops = shopMapper.searchShopBycondition2(searchShopConditionBean);
+        }
+        if(shopFamily.size() > 0 && Cc.size() > 0) {
+            shops = shopMapper.searchShopBycondition(searchShopConditionBean);
+        }
         return shops;
     }
 }

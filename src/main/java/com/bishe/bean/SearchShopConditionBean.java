@@ -19,5 +19,5 @@ public class SearchShopConditionBean {
     String L;
     String XL;
     String XXL;
-    String px;
+    int px;
 }

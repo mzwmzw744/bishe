@@ -123,6 +123,58 @@
         select auditStatus  from shop where id = #{id}
     </select>
 
+    <select id="searchShopBycondition1" resultMap="shopResultMap">
+        select * from shop where 1 = 1
+        <if test="priceMin != null and priceMin != '' " >
+            and  shop_price &gt;= #{priceMin}
+        </if>
+        <if test="priceMax != null and priceMax != '' " >
+            and  shop_price &lt;= #{priceMax}
+        </if>
+        and shop_family in('1'
+        <if test="quju != null and quju != '' ">
+                       ,'曲裾'
+        </if>
+        <if test="zhiju != null and zhiju != '' ">
+                        ,'直裾'
+        </if>
+        <if test="ruqun != null and ruqun != '' ">
+            , '襦裙'
+        </if>
+        <if test="beizi != null and beizi != '' ">
+            , '褙子'
+        </if>
+        <if test="xuanduan != null and xuanduan != '' ">
+            , '玄端'
+        </if>
+        <if test="gaoyao != null and gaoyao != '' ">
+            , '高腰襦裙'
+        </if>
+        <if test="yuanlin != null and yuanlin != '' ">
+            , '圆领袍衫'
+        </if>
+        <if test="zhuzi != null and zhuzi != '' ">
+            , '朱子深衣'
+        </if>
+        )
+        <if test="px != null and px != ''  " >
+            <if test="px == 2 " >
+                ORDER BY createDate desc
+            </if>
+            <if test="px == 3 " >
+                ORDER BY createDate
+            </if>
+            <if test="px == 4 " >
+                ORDER BY shop_price desc
+            </if>
+            <if test="px == 5 " >
+                ORDER BY createDate
+            </if>
+        </if>
+    </select>
+
+
+
 
 
     <select id="searchShopBycondition" resultMap="shopResultMap">
@@ -133,55 +185,130 @@
         <if test="priceMax != null and priceMax != '' " >
             and  shop_price &lt;= #{priceMax}
         </if>
-             and shop_family != null
-        <if test="quju != null and quju != '' " >
-            or  shop_family = '曲裾'
+        and shop_family in('1'
+        <if test="quju != null and quju != '' ">
+            ,'曲裾'
         </if>
-        <if test="zhiju != null and zhiju != '' " >
-            or  shop_family = '直裾'
+        <if test="zhiju != null and zhiju != '' ">
+            ,'直裾'
         </if>
-        <if test="ruqun != null and ruqun != '' " >
-            or  shop_family = '襦裙'
+        <if test="ruqun != null and ruqun != '' ">
+            , '襦裙'
         </if>
-        <if test="beizi != null and beizi != '' " >
-            or  shop_family = '褙子'
+        <if test="beizi != null and beizi != '' ">
+            , '褙子'
         </if>
-        <if test="xuanduan != null and xuanduan != '' " >
-            or  shop_family = '玄端'
+        <if test="xuanduan != null and xuanduan != '' ">
+            , '玄端'
         </if>
-        <if test="gaoyao != null and gaoyao != '' " >
-            or  shop_family = '高腰襦裙'
+        <if test="gaoyao != null and gaoyao != '' ">
+            , '高腰襦裙'
         </if>
-        <if test="yuanlin != null and yuanlin != '' " >
-            or  shop_family = '圆领袍衫'
+        <if test="yuanlin != null and yuanlin != '' ">
+            , '圆领袍衫'
         </if>
-        <if test="zhuzi != null and zhuzi != '' " >
-            or  shop_family = '朱子深衣'
+        <if test="zhuzi != null and zhuzi != '' ">
+            , '朱子深衣'
         </if>
-
-        and shopCc != null
-
-        <if test="S != null and S != '' " >
-            or  shopCc = 'S'
+        )
+       and shopCc in ('1'
+        <if test="S != null and S != '' ">
+            , 'S'
         </if>
-        <if test="M != null and M != '' " >
-            or  shopCc = 'M'
+        <if test="M != null and M != '' ">
+            , 'M'
         </if>
-        <if test="L != null and L != '' " >
-            or  shopCc = 'L'
+        <if test="L != null and L != '' ">
+            , 'L'
         </if>
-        <if test="XL != null and XL != '' " >
-        or  shopCc = 'XL'
-         </if>
+        <if test="XL != null and XL != '' ">
+          ,  'XL'
+        </if>
         <if test="XXL != null and XXL != '' " >
-        or  shopCc = 'XXL'
+            , 'XXL'
+        </if>
+        )
+        <if test="px != null and px != ''  " >
+            <if test="px == 2 " >
+                ORDER BY createDate desc
+            </if>
+            <if test="px == 3 " >
+                ORDER BY createDate
+            </if>
+            <if test="px == 4 " >
+                ORDER BY shop_price desc
+            </if>
+            <if test="px == 5 " >
+                ORDER BY createDate
+            </if>
+        </if>
+    </select>
+
+
+    <select id="searchShopBycondition2" resultMap="shopResultMap">
+        select * from shop where 1 = 1
+        <if test="priceMin != null and priceMin != '' " >
+            and  shop_price &gt;= #{priceMin}
+        </if>
+        <if test="priceMax != null and priceMax != '' " >
+            and  shop_price &lt;= #{priceMax}
+        </if>
+        and shopCc in ('1'
+        <if test="S != null and S != '' ">
+            , 'S'
+        </if>
+        <if test="M != null and M != '' ">
+            , 'M'
+        </if>
+        <if test="L != null and L != '' ">
+            , 'L'
+        </if>
+        <if test="XL != null and XL != '' ">
+            ,  'XL'
+        </if>
+        <if test="XXL != null and XXL != '' " >
+            , 'XXL'
+        </if>
+        )
+        <if test="px != null and px != ''  " >
+            <if test="px == 2 " >
+                ORDER BY createDate desc
+            </if>
+            <if test="px == 3 " >
+                ORDER BY createDate
+            </if>
+            <if test="px == 4 " >
+                ORDER BY shop_price desc
+            </if>
+            <if test="px == 5 " >
+                ORDER BY createDate
+            </if>
+        </if>
+    </select>
+
+    <select id="searchShopBycondition3" resultMap="shopResultMap">
+        select * from shop where 1 = 1
+        <if test="priceMin != null and priceMin != '' " >
+            and  shop_price &gt;= #{priceMin}
+        </if>
+        <if test="priceMax != null and priceMax != '' " >
+            and  shop_price &lt;= #{priceMax}
         </if>
         <if test="px != null and px != ''  " >
-            ORDER BY createDate
+            <if test="px == 2 " >
+                ORDER BY createDate desc
+            </if>
+            <if test="px == 3 " >
+                ORDER BY createDate
+            </if>
+            <if test="px == 4 " >
+                ORDER BY shop_price desc
+            </if>
+            <if test="px == 5 " >
+                ORDER BY shop_price
+            </if>
         </if>
-        <if test="px == null or px == ''  " >
-            ORDER BY createDate desc
-        </if>
+
     </select>
 
 
