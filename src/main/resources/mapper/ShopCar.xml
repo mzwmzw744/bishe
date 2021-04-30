@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bishe.mapper.ShopCarMapper">
+
+    <resultMap id="ShopCarResultMap" type="com.bishe.bean.ShopCarBean">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="userId" jdbcType="INTEGER" property="user_id" />
+        <result column="shopId" jdbcType="INTEGER" property="shop_id" />
+        <result column="createTime" property="createTime" />
+    </resultMap>
+<insert id="addShopCar" parameterType="com.bishe.bean.ShopCarBean">
+insert shopCar values (null,#{userId},#{shopId},now())
+</insert>
+
+    <select id="getShopCar" resultMap="ShopCarResultMap">
+select * from shopCar  where user_id = #{userId} order by createTime desc
+    </select>
+
+
+</mapper>

@@ -185,9 +185,7 @@
             userHeadPicture:''
         },
         methods:{
-            myGwc(){
 
-            },
             headPicClick(){
                 document.getElementById("userHeadPic").click();
             },
@@ -239,6 +237,11 @@
         el:'#header3',
         data:{
             search:''
+        },
+        methods: {
+            myGwc(){
+                parent.location.href= "shopCar.html"
+            },
         }
     })
 </script>

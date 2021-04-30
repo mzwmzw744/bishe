@@ -212,5 +212,11 @@ create table notification(
 );
 
 
-
+drop table if exists  shopCar;
+create table shopCar(
+                          id int auto_increment primary key,
+                          user_id int,
+                          shop_id int,
+                          createTime dateTime
+);
 

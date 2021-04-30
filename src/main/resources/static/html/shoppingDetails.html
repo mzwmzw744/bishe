@@ -106,7 +106,7 @@
                 <el-col :span="8">&nbsp;</el-col>
                 <el-col :span="8"><el-button v-on:click="buyNow"  type="primary">立即购买</el-button></el-col>
 
-                <el-col :span="6"><el-button type="primary">加入购物车</el-button></el-col>
+                <el-col :span="6"><el-button type="primary" v-on:click="jiaGou">加入购物车</el-button></el-col>
             </el-row>
         </div>
         </el-card>
@@ -262,6 +262,26 @@
             dynamic:[]
         },
         methods:{
+            jiaGou(){
+                axios({
+                    method:'post',
+                    url:'/token/addShopCar',
+                    headers:{
+                        'token' : sessionStorage.getItem("token")
+                    },
+                    data:{
+                        shopId:this.shop.id,
+                    }
+                }).then(res=> {
+                    debugger
+                    let t = res.data;
+                    if(t == "成功"){
+                        this.$message.success("成功加入购物车")
+                    }else {
+                        this.$message.error("加入购物车失败")
+                    }
+                })
+            },
             buyNow(){
                 window.location.href="buyOrder.html";
             }
@@ -292,7 +312,6 @@
                 }
             }).then(res=> {
                 this.dynamic.push(res.data)
-                debugger
             })
         }
     })
