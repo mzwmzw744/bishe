@@ -58,8 +58,6 @@
         </div>
         <div v-for="o in shops" :key="o" class="text item" v-on:click="shopsClick(o)" >
             <div style="overflow: hidden" id="kuai"  >
-                <!--                    <div id="whiteBac"  style="float: left"><img :src="o.shopHeadPicture" width="100px" height="100px"></div>-->
-
                 <el-row style="line-height: 99px">
                     <el-col :span="3"><img height="100px" width="100px"  v-bind:src="o.shopHeadPicture"></el-col>
                     <el-col :span="1">&nbsp;</el-col>
@@ -80,10 +78,15 @@
     </iframe>
 </div>
 <script>
+    const cityOptions = ['上海', '北京', '广州', '深圳'];
     new Vue({
         el: '#main',
         data:{
             shops:{},
+            checkAll: false,
+            checkedCities: ['上海', '北京'],
+            cities: cityOptions,
+            isIndeterminate: true
         },
         methods:{
 
