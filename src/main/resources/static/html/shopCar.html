@@ -191,6 +191,9 @@
                             this.$message.success("结算成功！")
                             this.user.balance = res.data
                             sessionStorage.setItem("user",JSON.stringify(this.user));
+                            setTimeout(function (){
+                                window.location.reload();
+                            }, 2000);
                         }
                     })
                 }).catch(() => {
