@@ -21,9 +21,9 @@
     #main{
         margin: 0 auto;
         width: 1000px;
-        border: 1px solid #ebebeb;
+        /*border: 1px solid #ebebeb;*/
         /*background-color: RGB(250,250,250);*/
-        background-color: #F2F6FC;
+        /*background-color: #F2F6FC;*/
     }
     /*#main:hover{*/
     /*    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)*/
@@ -41,7 +41,7 @@
 
     }
     #kuai:hover{
-        background-color: #ffb797 ;
+        /*background-color: #ffb797 ;*/
         cursor: pointer;
     }
 
@@ -56,43 +56,155 @@
         <div slot="header" class="clearfix">
             <span>我的购物车</span>
         </div>
-        <div v-for="o in shops" :key="o" class="text item" v-on:click="shopsClick(o)" >
+        <div slot="header" class="clearfix" style="margin-top: 15px">
+            <span><el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox></span>
+        </div>
+        <div v-for="(o,index) in shops" :key="o" class="text item" v-on:click="shopsClick(o)" >
             <div style="overflow: hidden" id="kuai"  >
                 <el-row style="line-height: 99px">
+
+                    <el-col :span="1">
+                        <el-checkbox-group v-model="checkList" @change="handleCheckedCitiesChange">
+                            <el-checkbox v-bind:label="index"><br></el-checkbox>
+                        </el-checkbox-group>
+                    </el-col>
                     <el-col :span="3"><img height="100px" width="100px"  v-bind:src="o.shopHeadPicture"></el-col>
-                    <el-col :span="1">&nbsp;</el-col>
-                    <el-col :span="3">{{o.shopName}}</el-col>
+                    <el-col :span="1">&nbsp</el-col>
+                    <el-col :span="3">{{o.shopName}}</el-col><x></x>
                     <el-col :span="3">¥{{o.shopPrice}}</el-col>
                     <el-col :span="3">{{o.shopFamily}}</el-col>
                     <el-col :span="3">{{o.shopIntroduction}}</el-col>
                     <el-col :span="3">{{o.auditStatus}}</el-col>
-                    <el-col :span="5">{{o.createDate}}</el-col>
+                    <el-col :span="4">{{o.createDate}}</el-col>
                 </el-row>
             </div>
             <el-divider></el-divider>
         </div>
     </el-card>
+    <el-card class="box-card" style="margin: 50px auto;width: 1000px">
+        <div slot="header" class="clearfix">
+            <span>确认收货地址</span>
+        </div>
+        <div v-for="t in tableData" class="text item">
+            <el-radio v-model="radio" v-bind:label="t">{{t.sheng}}{{t.shi}}{{t.qu}}{{t.addressDetail}}
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{{t.name}} &nbsp; &nbsp; &nbsp; &nbsp;{{t.phone}}
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{{t.postCode}}
+            </el-radio>
+        </div>
+    </el-card>
+    <div style="margin-top: 20px;box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)">
+        <div >
+            <div style="overflow: hidden">
+                <div style="float: left;margin-left: 500px;line-height: 50px" >已选</div>
+                <div style="float: left;font-size: 22px;color: red;font-weight: bold;line-height: 50px;margin-left: 5px;margin-right: 5px">{{checkList.length}}</div>
+                <div style="float: left;line-height: 50px">件商品</div>
+                <div style="float: left;margin-left: 100px;line-height: 50px">合计:</div>
+                <div style="float: left;font-size: 17px;color: red;font-weight: bold;line-height: 50px;margin-left: 5px">¥</div>
+                <div style="float: left; font-size: 22px;color: red;font-weight: bold;line-height: 50px;">{{AllPrice}}</div>
+                <div style="float: right;margin-left: 100px;width: 100px;height: 50px;background-color: #ff6e50;font-size: 25px;color: white;line-height: 50px;letter-spacing: 4px;;text-align: center;cursor: pointer;" v-on:click="jsClick">
+                    结算
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </div>
 <div id="foot" style="width: 100%;height: 370px;margin: 50px auto;border-top: 1px solid #ddd;">
     <iframe src="hfqFoot.html" width="100%" height="430px"  frameborder="0" scrolling="no" >
     </iframe>
 </div>
 <script>
-    const cityOptions = ['上海', '北京', '广州', '深圳'];
     new Vue({
         el: '#main',
         data:{
+            checkAll: false,
             shops:{},
             checkAll: false,
             checkedCities: ['上海', '北京'],
-            cities: cityOptions,
-            isIndeterminate: true
+            cities: [],
+            isIndeterminate: true,
+            checkList:[],
+            AllPrice:'',
+            AllChooseId:'',
+            user:'',
+            tableData:{},
+            radio:''
         },
         methods:{
+            handleCheckAllChange(val) {
+                this.checkList = val ? this.cities : [];
+                this.isIndeterminate = false;
+                let price = 0;
+                for(let i = 0 ; i < this.checkList.length;i++) {
+                    price += this.shops[this.checkList[i]].shopPrice
+                }
+                this.AllPrice = price;
 
+                let AllChooseId = []
+                for(let i = 0 ; i < this.checkList.length;i++) {
+                    AllChooseId.push(this.shops[this.checkList[i]].id)
+                }
+                this.AllChooseId = AllChooseId;
+            },
+            handleCheckedCitiesChange(value) {
+                let checkedCount = value.length;
+                this.checkAll = checkedCount === this.cities.length;
+                this.isIndeterminate = checkedCount > 0 && checkedCount < this.cities.length;
+                let price = 0;
+                for(let i = 0 ; i < this.checkList.length;i++) {
+                    price += this.shops[this.checkList[i]].shopPrice
+                }
+                this.AllPrice = price;
 
+                let AllChooseId = []
+                for(let i = 0 ; i < this.checkList.length;i++) {
+                    AllChooseId.push(this.shops[this.checkList[i]].id)
+                }
+                this.AllChooseId = AllChooseId;
+            },
+            jsClick(){
+                if(this.radio == null || this.radio == '') {
+                    this.$message.error("请选择收货地址");
+                    return
+                }
+                this.$confirm('是否结算?  您的余额:'+this.user.balance, '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    axios({
+                        method:'post',
+                        url:'/token/jsShopCar',
+                        headers:{
+                            'token' : sessionStorage.getItem("token")
+                        },
+                        data:{
+                            AllChooseId:this.AllChooseId,
+                            AllPrice:this.AllPrice,
+                            address:this.radio.id
+                        }
+                    }).then(res=> {
+                        if(res.data == -1){
+                            this.$message.error("余额不足")
+                        }else {
+                            this.$message.success("结算成功！")
+                            this.user.balance = res.data
+                            sessionStorage.setItem("user",JSON.stringify(this.user));
+                        }
+                    })
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消结算'
+                    });
+                });
+
+            }
         },
         created: function () {
+
+            this.user = eval ("(" + sessionStorage.getItem("user") + ")");
             axios({
                 method:'post',
                 url:'/token/getShopCar',
@@ -105,6 +217,8 @@
             }).then(res=> {
                 let shops = res.data;
                 for(let i = 0 ; i < shops.length; i++){
+                    this.cities.push(i)
+
                     if(shops[i].auditStatus == '0' || shops[i].auditStatus == 0){
                         shops[i].auditStatus = '未上架'
                     }
@@ -116,6 +230,19 @@
                     }
                 }
                 this.shops = shops;
+            })
+            axios({
+                method:'post',
+                url:'/token/getUserAddress',
+                headers:{
+                    'token' : sessionStorage.getItem("token")
+                },
+                data:{
+
+                }
+            }).then(res => {
+                console.log(res)
+                this.tableData = res.data
             })
         }
     })

@@ -74,7 +74,7 @@ public class OrderController {
         List<BuyOrder> list = orderMapper.getAllByOrder(buyOrder);
         List<Shop> shops = new ArrayList<>();
         for(BuyOrder buyOrder1 : list){
-            Shop shop = shopMapper.getShopById(buyOrder1.getId());
+            Shop shop = shopMapper.getShopById(buyOrder1.getShop_id());
             shop.setCreateDate(buyOrder1.getCreateTime());
             shops.add(shop);
         }

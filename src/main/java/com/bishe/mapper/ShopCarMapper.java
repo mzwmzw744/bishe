@@ -15,4 +15,6 @@ public interface ShopCarMapper {
 
     List<ShopCarBean> getShopCar(int userId);
 
+    int deleteShopCar(int shop_id,int user_id);
+
 }

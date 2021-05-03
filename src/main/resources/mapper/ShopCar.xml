@@ -16,5 +16,9 @@ insert shopCar values (null,#{userId},#{shopId},now())
 select * from shopCar  where user_id = #{userId} order by createTime desc
     </select>
 
+    <delete id="deleteShopCar">
+        delete  from shopCar where shop_id = #{shop_id} and user_id = #{user_id}
+    </delete>
+
 
 </mapper>
