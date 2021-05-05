@@ -163,7 +163,7 @@
             <div style="float: left;margin-left: 30px;line-height: 50px" id="feedback"><a class="aHover" href="#">我要反馈</a></div>
         </div>
         <div style="width: 60%;height: 100%;float: left">
-            <div style="width: 200px;margin-left: 380px;margin-top: 5px;float: left"><el-input v-model="search" placeholder="搜索汉服或店铺"></el-input></div>
+            <div style="width: 200px;margin-left: 380px;margin-top: 5px;float: left"><el-input v-model="search" placeholder="搜索汉服或店铺" @keyup.enter.native="submit()"></el-input></div>
             <div style="" id="shoppingCart">
                 <div style="float: left;margin-top: 5px"><i style="font-size: 30px" class="el-icon-shopping-cart-2"></i></div>
                 <div style="margin-left: 8px;margin-top: 10px;float: left;" v-on:click="myGwc">我的购物车</div>
@@ -176,13 +176,13 @@
         var parent=window.parent;//获取父页面
         parent.parentSay();//调用父页面的方法
     }
-    new Vue({
+    const  main = new Vue({
         el:'#header',
         data:{
             userHeadPicUpload:{
                 token:sessionStorage.getItem("token"),
             },
-            userHeadPicture:''
+            userHeadPicture:'',
         },
         methods:{
 
@@ -241,6 +241,10 @@
         methods: {
             myGwc(){
                 parent.location.href= "shopCar.html"
+            },
+            submit(){
+                sessionStorage.setItem("search",this.search)
+                parent.location.href= "searchShop.html"
             },
         }
     })

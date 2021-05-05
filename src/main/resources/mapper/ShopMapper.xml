@@ -312,4 +312,8 @@
     </select>
 
 
+    <select id="searchShopByKey" resultMap="shopResultMap">
+        select * from shop where shop_name like concat('%',#{key},'%')
+    </select>
+
 </mapper>

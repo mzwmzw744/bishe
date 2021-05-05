@@ -275,4 +275,15 @@ public class ShopController {
         }
         return shops;
     }
+
+    /**
+     * 模糊查询商品
+     */
+    @RequestMapping("token/searchShopByKey")
+    public List<Shop> searchShopByKey(@RequestBody Map map) {
+        String key = (String) map.get("key");
+        List<Shop> shops = shopMapper.searchShopByKey(key);
+        return shops;
+    }
+
 }

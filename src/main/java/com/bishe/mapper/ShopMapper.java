@@ -68,4 +68,6 @@ public interface ShopMapper {
     List<Shop> searchShopBycondition1(SearchShopConditionBean searchShopConditionBean);
     List<Shop> searchShopBycondition2(SearchShopConditionBean searchShopConditionBean);
     List<Shop> searchShopBycondition3(SearchShopConditionBean searchShopConditionBean);
+
+    List<Shop> searchShopByKey(String key);
 }
