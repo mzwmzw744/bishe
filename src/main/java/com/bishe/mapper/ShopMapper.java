@@ -70,4 +70,6 @@ public interface ShopMapper {
     List<Shop> searchShopBycondition3(SearchShopConditionBean searchShopConditionBean);
 
     List<Shop> searchShopByKey(String key);
+
+    int updateAuditStatus(String auditStatus,int id);
 }

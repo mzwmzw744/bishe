@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>汉服圈</title>
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="../ui/layui/css/layui.css">
+  <link rel="stylesheet" href="../css/theme/index.css">
+  <!-- 引入组件库 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.0/index.js"></script>
+  <!--    <script src="https://unpkg.com/element-ui/lib/index.js"></script>-->
+  <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.js"></script>
+  <script src="../ui/layui/layui.js"></script>
+</head>
+<style>
+  *{
+    margin: 0;
+    padding: 0;
+  }
+  #main{
+    margin: 0 auto;
+    height: 2000px;
+    width: 1000px;
+    border: 1px solid #ebebeb;
+    /*background-color: RGB(250,250,250);*/
+    background-color: #F2F6FC;
+  }
+  /*#main:hover{*/
+  /*    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)*/
+  /*}*/
+  .shopCss{
+    color: rgba(255,83,106,0.54);
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    height: 100px;
+  }
+  /*.shopCss:hover{*/
+  /*    background-color: rgba(255,83,106,0.27);*/
+  /*}*/
+</style>
+<body>
+<div style="height: 250px;margin: 0 auto">
+  <iframe src="hfqTop.html" width="100%" height="220px" scrolling="no" frameborder="0">
+  </iframe>
+</div>
+<div id="main">
+
+
+  <el-card class="box-card">
+    <div slot="header" class="clearfix">
+      <span>出售商品详情</span>
+    </div>
+    <el-row type="flex" justify="center" style="margin: 50px auto;">
+      <el-col :span="2" style="line-height: 32px;text-align:center">商品名:</el-col>
+      <!--            <el-col :span="20"><div style="height: 300px;background-color: #1E9FFF"></div></el-col>-->
+      <el-col :span="6"  ><el-input v-model="shop.shopName" size="small" placeholder="请输入内容"  ></el-input></el-col>
+    </el-row>
+    <el-row type="flex" justify="center" style="margin: 50px auto;">
+      <el-col :span="2" style="line-height: 32px;text-align:center">商品价格:</el-col>
+      <!--            <el-col :span="20"><div style="height: 300px;background-color: #1E9FFF"></div></el-col>-->
+      <el-col :span="6"  ><el-input v-model="shop.shopPrice" size="small" placeholder="请输入内容"  ></el-input></el-col>
+    </el-row>
+    <el-row type="flex" justify="center" style="margin: 50px auto;">
+      <el-col :span="2" style="line-height: 32px;text-align:center">商品类型:</el-col>
+      <!--            <el-col :span="20"><div style="height: 300px;background-color: #1E9FFF"></div></el-col>-->
+      <el-col :span="6"  ><el-input v-model="shop.shopFamily" size="small" placeholder="请输入内容"  ></el-input></el-col>
+    </el-row>
+    <el-row type="flex" justify="center" style="margin: 50px auto;">
+      <el-col :span="2" style="line-height: 32px;text-align:center">商品介绍:</el-col>
+      <!--            <el-col :span="20"><div style="height: 300px;background-color: #1E9FFF"></div></el-col>-->
+      <el-col :span="6"  ><el-input v-model="shop.shopIntroduction" size="small" placeholder="请输入内容"  ></el-input></el-col>
+    </el-row>
+
+    <el-row type="flex" justify="center" style="margin: 50px auto;">
+      <el-col :span="2"   style="line-height: 100px;text-align:center" >商品头像:</el-col>
+      <!--            <el-col :span="20"><div style="height: 300px;background-color: #1E9FFF"></div></el-col>-->
+      <el-col :span="6" style="text-align: center"><img  :src="shop.shopHeadPicture" width="100px" height="100px;" ></el-input></el-col>
+    </el-row>
+
+    <el-row type="flex" justify="center" style="margin: 50px auto;">
+      <el-col :span="2" style="line-height: 32px;text-align:center">商品状态:</el-col>
+      <el-col :span="2" style="line-height: 32px;text-align:center"><span style="margin-left: -20px">{{shop.auditStatus}}</span></el-col>
+      <el-col :span="4">&nbsp;</el-col>
+    </el-row>
+
+    <el-card class="box-card">
+      <div slot="header" class="clearfix">
+        <span>收货人详情</span>
+      </div>
+      <div style="overflow: hidden">
+        <div style="float: left;margin-left: 100px">{{address.sheng}}{{address.shi}}{{address.qu}}{{address.addressDetail}}</div>
+        <div style="float: left;margin-left: 100px">{{address.name}}</div>
+        <div style="float: left;margin-left: 100px">{{address.postCode}}</div>
+        <div style="float: left;margin-left: 100px">{{address.phone}}</div>
+      </div>
+
+    </el-card>
+
+    <div style="margin: 200px auto 0;width: 310px">
+      <el-button type="primary"  style="float: left;width: 150px" @click="open">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;确认收货&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</el-button>
+      <el-button type="primary"  style="float: left;width: 150px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;返回首页&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</el-button>
+    </div>
+  </el-card>
+</div>
+
+
+<div id="foot" style="width: 100%;height: 370px;margin: 50px auto;border-top: 1px solid #ddd;">
+  <iframe src="hfqFoot.html" width="100%" height="430px"  frameborder="0" scrolling="no" >
+  </iframe>
+</div>
+<script>
+
+
+  new Vue({
+    el: '#main',
+    data: {
+      fileList: [
+      ],
+      token: {
+        userToken: sessionStorage.getItem('token')
+      },
+      shoHeadPicUpload: {
+        number:'',
+        shoHeadPicUploadId:'',
+        shoHeadPicUploadToken: sessionStorage.getItem('token'),
+
+      },
+      shop:{
+        auditStatus:'',
+        id:'',
+        shopName: '',
+        shopHeadPicture:'',
+        shopPrice:'',
+        shopFamily:'',
+        shopIntroduction:'',
+      },
+      address:'',
+      shopss:{}
+
+    },
+    methods: {
+      shopMainPicSuccess(res){
+        this.fileList.push({url:res})
+
+      },
+
+      shopHeadPicSuccess(res){
+        console.log(res)
+        this.shop.shopHeadPicture = res;
+        this.$message.success('图片上传成功')
+      },
+      modifyState(){
+        if(this.shop.auditStatus == '未上架'){
+          this.shop.auditStatus = '已上架'
+          return
+        }
+        if(this.shop.auditStatus == '已上架'){
+          this.shop.auditStatus = '未上架'
+          return
+        }
+        if(this.shop.auditStatus == "待发货"){
+          this.shop.auditStatus = '已发货'
+          return
+        }
+        if(this.shop.auditStatus == '已发货'){
+          this.shop.auditStatus = '待发货'
+
+        }
+      },
+      open1(){
+        document.getElementById("shopHeadPic").click();
+      },
+      open() {
+        this.$confirm('确认收货嘛?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          if(this.shop.auditStatus == '待发货'){
+            this.$message({
+              type: 'error',
+              message: '商品暂未发货,无法收货！'
+            });
+          }
+          if(this.shop.auditStatus == '待收货'){
+            axios({
+              method:'post',
+              url:'/token/updateAuditStatus',
+              headers:{
+                'token' : sessionStorage.getItem("token")
+              },
+              data:{
+                id:this.shop.id,
+                auditStatus:this.shop.auditStatus,
+              }
+            }).then(res=> {
+              this.$message.success("确认收货成功！")
+            })
+          }
+
+        }).catch(() => {
+
+        });
+      },
+      handleRemove(file, fileList) {
+        this.fileList = fileList;
+        fileList.forEach(function (e) {
+          console.log(e.response);
+        })
+      },
+      handlePreview(file) {
+        console.log(file);
+      }
+    },
+    created: function () {
+      let shops = JSON.parse(sessionStorage.getItem("myBuyOrderToDetail"));
+      shops.shopName;
+
+      this.shop = shops;
+        axios({
+          method:'post',
+          url:'/token/getOrderByShopId',
+          headers:{
+            'token' : sessionStorage.getItem("token")
+          },
+          data:{
+            shopId:shops.id
+          }
+        }).then(res=> {
+          this.address = res.data
+        })
+    }
+  })
+
+</script>
+</body>
+</html>

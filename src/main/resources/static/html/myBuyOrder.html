@@ -86,8 +86,11 @@
             shops:{},
         },
         methods:{
-
-
+            shopsClick(o){
+                let ostr  = JSON.stringify(o)
+                sessionStorage.setItem("myBuyOrderToDetail",ostr);
+                window.location.href="mybuyOrderDetail.html";
+            }
         },
         created: function () {
             axios({
@@ -111,9 +114,14 @@
                     if(shops[i].auditStatus == '2' || shops[i].auditStatus == 2){
                         shops[i].auditStatus = '待发货'
                     }
+                    if(shops[i].auditStatus == '3' || shops[i].auditStatus == 3){
+                        shops[i].auditStatus = '待收货'
+                    }
+                    if(shops[i].auditStatus == '4' || shops[i].auditStatus == 4){
+                        shops[i].auditStatus = '已收货'
+                    }
                 }
                 this.shops = shops;
-                debugger;
             })
         }
     })

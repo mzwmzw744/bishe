@@ -105,27 +105,12 @@ public class ShopController {
         JSONObject json = JSONObject.fromObject(jsonStr);
         Map map =  (Map) json.get("shop");
         String auditStatus = (String) map.get("auditStatus");
-        if(auditStatus.equals("未上架")){
-            auditStatus = "0";
-        }
-        if(auditStatus.equals("已上架")){
-            auditStatus = "1";
-        }
-        if(auditStatus.equals("待发货")){
-            auditStatus = "2";
-        }
-        if(auditStatus.equals("已发货")){
-            auditStatus = "3";
-        }
-        if(auditStatus.equals("已收货")){
-            auditStatus = "4";
-        }
+        auditStatus = getString(auditStatus);
 
         int shoHeadPicUploadId = (int)map.get("id");
         List list = (List) json.get("mainPic");
         ShopMainPicture shopMainPicture = new ShopMainPicture();
         shopMapper.updateShopMainPic("",shoHeadPicUploadId);
-//        String url1 = (String) JSONObject.fromObject(list.get(0)).get("url");
         if(list.size() >= 1) {
             String url1 = (String) JSONObject.fromObject(list.get(0)).get("url");
             shopMapper.updateShopMainPic_1(url1,shoHeadPicUploadId);
@@ -180,6 +165,25 @@ public class ShopController {
             return "成功";
         }
         return "失败";
+    }
+
+    private String getString(String auditStatus) {
+        if(auditStatus.equals("未上架")){
+            auditStatus = "0";
+        }
+        if(auditStatus.equals("已上架")){
+            auditStatus = "1";
+        }
+        if(auditStatus.equals("待发货")){
+            auditStatus = "2";
+        }
+        if(auditStatus.equals("待收货")){
+            auditStatus = "3";
+        }
+        if(auditStatus.equals("已收货")){
+            auditStatus = "4";
+        }
+        return auditStatus;
     }
 
     @RequestMapping("/token/getShopMainPic")
@@ -286,4 +290,15 @@ public class ShopController {
         return shops;
     }
 
+    /**
+     * 修改商品状态
+     */
+    @RequestMapping("token/updateAuditStatus")
+    public void updateAuditStatus(@RequestBody Map map) {
+        int id = (int) map.get("id");
+        String auditStatus = getString((String) map.get("auditStatus"));
+        int tt = Integer.valueOf(auditStatus)+1;
+        auditStatus = String.valueOf(tt);
+        int t  = shopMapper.updateAuditStatus(auditStatus,id);
+    }
 }
