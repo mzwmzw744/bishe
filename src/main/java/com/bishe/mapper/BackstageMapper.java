@@ -1,9 +1,6 @@
 package com.bishe.mapper;
 
-import com.bishe.bean.Admin;
-import com.bishe.bean.AdminApply;
-import com.bishe.bean.Shop;
-import com.bishe.bean.User;
+import com.bishe.bean.*;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -35,5 +32,7 @@ public interface BackstageMapper {
     int setMessage(String message);
 
     String getMessage();
+
+    List<ShopFamilyAccount> getAccountByShopFamily();
 }
 

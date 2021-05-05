@@ -8,12 +8,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 @RestController
 public class BackstageController {
-    
+
     @Autowired
     UserMapper userMapper;
 
@@ -161,14 +162,53 @@ public class BackstageController {
             return "申请成功,请等待审核";
         }
         return "申请失败，请重新申请";
-  }
-  @RequestMapping("/token/getNotification")
-  public String  getNotification(@RequestBody Map map){
+    }
+    @RequestMapping("/token/getNotification")
+    public String  getNotification(@RequestBody Map map){
         return  backstageMapper.getMessage();
-  }
+    }
     @RequestMapping("/token/setNotification")
     public void  setNotification(@RequestBody Map map){
-
         backstageMapper.setMessage((String) map.get("message"));
+    }
+
+    @RequestMapping("/token/getAccountByShopFamily")
+    public List getAccountByShopFamily(){
+        List<ShopFamilyAccount> shopFamilyAccounts = backstageMapper.getAccountByShopFamily();
+        List accounts = new ArrayList(){};
+        accounts.add(0);
+        accounts.add(0);
+        accounts.add(0);
+        accounts.add(0);
+        accounts.add(0);
+        accounts.add(0);
+        accounts.add(0);
+        accounts.add(0);
+        for(int i = 0; i < shopFamilyAccounts.size(); i++){
+            String shopFamily = shopFamilyAccounts.get(i).getShopFamily();
+            int account  = Integer.parseInt(shopFamilyAccounts.get(i).getAccount());
+            if(shopFamily.equals("曲裾")) {
+                accounts.set(0, account);
+            }
+            if(shopFamily.equals("直裾")){
+                accounts.set(1,account);
+            }
+            if(shopFamily.equals("襦裙")){
+                accounts.set(2,account);
+            }
+            if(shopFamily.equals("褙子")){
+                accounts.set(3,account);
+            }
+            if(shopFamily.equals("玄端")){
+                accounts.set(4,account);
+            }
+            if(shopFamily.equals("高腰襦裙")){
+                accounts.set(5,account);
+            }
+            if(shopFamily.equals("朱子深衣")){
+                accounts.set(6,account);
+            }
+        }
+        return accounts;
     }
 }

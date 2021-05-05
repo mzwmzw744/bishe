@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>ECharts</title>
+  <!-- 引入 echarts.js -->
+  <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.1.0/echarts.common.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.0/index.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.js"></script>
+</head>
+<body>
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<div id="main" style="width: 1450px;height:700px;"></div>
+<script type="text/javascript">
+  // 基于准备好的dom，初始化echarts实例
+  var myChart = echarts.init(document.getElementById('main'));
+
+  // 指定图表的配置项和数据
+  var option = {
+    title: {
+      text: '商品种类统计'
+    },
+    tooltip: {},
+    legend: {
+      data:['种类']
+    },
+    xAxis: {
+      data: ["曲裾","直裾","襦裙","褙子","玄端","高腰襦裙","圆领袍衫","朱子深衣"]
+    },
+    yAxis: {},
+    series: [{
+      name: '销量',
+      type: 'bar',
+      data: []
+    }]
+  };
+
+
+  // 使用刚指定的配置项和数据显示图表。
+
+  axios({
+    method:'post',
+    url:'/token/getAccountByShopFamily',
+    headers:{
+      'token' : sessionStorage.getItem("token")
+    },
+    data:{
+    }
+  }).then(res=> {
+    option.series[0].data = res.data
+    myChart.setOption(option);
+  })
+  //
+  // new Vue({
+  //   el:'#main',
+  //   created:function (){
+  //
+  //   }
+  // })
+
+</script>
+</body>
+</html>

@@ -19,6 +19,11 @@
         <result column="auditStatus" jdbcType="VARCHAR" property="auditStatus" />
     </resultMap>
 
+    <resultMap id="getAccountByShopFamilyResultMap" type="com.bishe.bean.ShopFamilyAccount">
+        <result column="shop_family" jdbcType="VARCHAR" property="shopFamily" />
+        <result column="sl" jdbcType="VARCHAR" property="account" />
+    </resultMap>
+
     <select id="getAdminByName" resultMap="adminResultMap">
         select * from admin where admin_name = #{adminName}
     </select>
@@ -42,4 +47,8 @@
     <update id="setMessage">
         update notification set notification = #{messgae}
     </update>
+
+    <select id="getAccountByShopFamily" resultMap="getAccountByShopFamilyResultMap">
+        select shop_family,count(1) sl from shop group by shop_family;
+    </select>
 </mapper>

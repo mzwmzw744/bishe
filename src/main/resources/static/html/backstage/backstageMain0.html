@@ -92,9 +92,9 @@
                     </dl>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="javascript:;">管理员权力</a>
+                    <a href="javascript:;">商品统计</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;" v-on:click="adminApplyQueryClick">管理员权力查询</a></dd>
+                        <dd><a href="javascript:;" v-on:click="spzltjClick">商品种类统计</a></dd>
                         <dd><a href="javascript:;">管理员权力变更</a></dd>
                     </dl>
                 </li>
@@ -129,7 +129,8 @@
             adminApplyQueryQuery:'/html/backstage/adminApply.html',
             adminInformationQuery:'/html/backstage/adminInformationQuery.html',
             addTodayTjGl:'/html/backstage/addTodayTj.html',
-            sytcxxsz:'/html/backstage/tanMessage.html'
+            sytcxxsz:'/html/backstage/tanMessage.html',
+            spzltj:'/html/backstage/spzltj.html'
         },
         methods:{
             adminInformationClick(){
@@ -146,6 +147,9 @@
             },
             sytcxxszClick(){
                 this.htmlUrl = this.sytcxxsz;
+            },
+            spzltjClick(){
+                this.htmlUrl = this.spzltj;
             }
         }
     })
