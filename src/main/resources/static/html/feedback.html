@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>汉服圈</title>
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="../ui/layui/css/layui.css">
+  <link rel="stylesheet" href="../css/theme/index.css">
+  <!-- 引入组件库 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.0/index.js"></script>
+  <!--    <script src="https://unpkg.com/element-ui/lib/index.js"></script>-->
+  <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.js"></script>
+  <script src="../ui/layui/layui.js"></script>
+</head>
+<style>
+  *{
+    margin: 0;
+    padding: 0;
+  }
+  #main{
+    margin: 0 auto;
+    width: 1000px;
+    text-align: center;
+  }
+</style>
+<body>
+<div style="height: 250px;margin: 0 auto">
+  <iframe src="hfqTop.html" width="100%" height="220px" scrolling="no" frameborder="0">
+  </iframe>
+</div>
+
+<div id="main">
+  <el-card class="box-card">
+    <el-input
+            type="textarea"
+            :rows="3"
+            placeholder="请输入反馈内容"
+            v-model="textarea">
+    </el-input>
+    <el-button style="margin-top: 20px" v-on:click="feedbackClick">反馈</el-button>
+  </el-card>
+
+</div>
+<div id="foot" style="width: 100%;height: 370px;margin: 50px auto;border-top: 1px solid #ddd;">
+  <iframe src="hfqFoot.html" width="100%" height="430px"  frameborder="0" scrolling="no" >
+  </iframe>
+</div>
+<script>
+new Vue({
+  el:'#main',
+  data:{
+    textarea:'',
+  },
+  methods: {
+    feedbackClick() {
+      axios({
+        method:'post',
+        url:'/feedback',
+        headers:{
+          'token' : sessionStorage.getItem("token")
+        },
+        data:{
+          word:this.textarea
+        }
+      }).then(res=> {
+        this.$message.success("反馈成功！")
+      })
+    }
+  }
+})
+</script>
+</body>
+</html>

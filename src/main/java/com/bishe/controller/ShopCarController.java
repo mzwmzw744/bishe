@@ -33,6 +33,13 @@ public class ShopCarController {
     @Resource
     OrderMapper orderMapper;
 
+
+    /**
+     * 添加购物车
+     * @param map
+     * @param headers
+     * @return
+     */
     @RequestMapping("/token/addShopCar")
     public String addShopCar(@RequestBody Map map,@RequestHeader Map<String, String> headers){
         String token = headers.get("token");

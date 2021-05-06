@@ -180,8 +180,8 @@
           if(this.shop.auditStatus == '待发货'){
             this.$message({
               type: 'error',
-              message: '商品暂未发货,无法收货！'
-            });
+                message: '商品暂未发货,无法收货！'
+              });
           }
           if(this.shop.auditStatus == '待收货'){
             axios({
@@ -197,6 +197,8 @@
             }).then(res=> {
               this.$message.success("确认收货成功！")
             })
+          }else {
+            this.$message.error("您已收货！")
           }
 
         }).catch(() => {
