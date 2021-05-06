@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>汉服圈</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="../../css/theme/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.0/index.js"></script>
+    <!--    <script src="https://unpkg.com/element-ui/lib/index.js"></script>-->
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.js"></script>
+</head>
+<body>
+<div id = "main">
+    <el-table
+            :data="data"
+            style="width: 100%">
+        <el-table-column
+                label="id"
+                prop="id">
+        </el-table-column>
+        <el-table-column
+                label="用户id"
+                prop="user_id">
+        </el-table-column>
+        <el-table-column
+                label="投诉内容"
+                prop="word">
+        </el-table-column>
+        <el-table-column
+                label="创造时间"
+                prop="createTime">
+        </el-table-column>
+    </el-table>
+</div>
+</body>
+<script>
+    new Vue({
+        el:'#main',
+        data:{
+            tableData: [],
+            data: ''
+        },
+        created:function (){
+            axios({
+                method:'post',
+                url:'/getFeedback',
+                headers:{
+                    'token' : sessionStorage.getItem("token")
+                },
+                data:{
+
+                }
+            }).then(res=> {
+                this.data =  res.data
+            })
+        },
+        methods: {
+        },
+    })
+
+</script>
+
+</html>
