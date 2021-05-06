@@ -27,6 +27,10 @@ public class IndexShopController {
     @Resource
     ShopMapper shopMapper;
 
+    /**
+     * 首页最新
+     * @return 首页最新上架商品
+     */
     @RequestMapping("/token/getIndexNewShopMeaage")
     public Result getIndexNewShopMeaage(@RequestBody Map<String,String> maps){
         int offset = (Integer.parseInt(maps.get("page"))-1)*10;
@@ -46,9 +50,40 @@ public class IndexShopController {
 
 
     @RequestMapping("/token/getTjShop")
-    public List<Shop> getTjShop(@RequestBody Map<String,String> map) {
-        int offset = (Integer.parseInt(map.get("page"))-1)*10;
+    public Result getTjShop(@RequestBody Map<String,String> maps) {
+        Result result = new Result();
+        int offset = (Integer.parseInt(maps.get("page"))-1)*10;
+        Map map = new HashMap<String,Object>();
         List<Shop> tjShops = shopMapper.getTjShop(10,offset);
-        return tjShops;
+
+        if(tjShops.size() == 0) {
+            result.setMessage("到底了");
+        }
+        if(tjShops.size() > 0) {
+            result.setMessage("成功");
+        }
+        result.setData(map);
+        return result;
+    }
+
+    /**
+     * 首页最新
+     * @return 首页猜你喜欢商品
+     */
+    @RequestMapping("/token/getLikeShopMeaage")
+    public Result getLikeShopMeaage(@RequestBody Map<String,String> maps){
+        int offset = (Integer.parseInt(maps.get("page"))-1)*10;
+        Result result = new Result();
+        Map map = new HashMap<String,Object>();
+        List<Shop> list = indexShopMapper.getShopNew(10,offset);
+        if(list.size() == 0) {
+            result.setMessage("到底了");
+        }
+        if(list.size() > 0) {
+            result.setMessage("成功");
+        }
+        map.put("data",list);
+        result.setData(map);
+        return result;
     }
 }

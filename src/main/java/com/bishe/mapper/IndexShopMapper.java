@@ -13,4 +13,6 @@ public interface IndexShopMapper {
      * @return 首页最新上架商品
      */
     List getShopNew(int page,int offset);
+
+    List getLikeShop(int page,int offset);
 }

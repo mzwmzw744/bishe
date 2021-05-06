@@ -31,4 +31,8 @@
    select * from shop where auditStatus = '1' order by createDate desc limit #{page} offset #{offset}
 </select>
 
+
+    <select id="getLikeShop" resultMap="shopResultMap">
+        select * from shop where auditStatus = '1' limit #{page} offset #{offset}
+    </select>
 </mapper>

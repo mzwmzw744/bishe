@@ -4,24 +4,36 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    #body{
+        background-image: url("https://zt.msstatic.com/zt/img/21/04/29/161968745505850075485.jpg");
+        height: 6500px;
+    }
+</style>
 <script>
-    window.onscroll = function(){
-        var t = document.documentElement.scrollTop || document.body.scrollTop;  //离上方的距离
-        var h =window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; //可见宽度
-        if( t > document.documentElement.scrollHeight - h -50) {
-            var html="<div style='height: 200px;background-color: #c35673'>xxxxxxxxxxxxxxxxxxxx</div>"
-            document.getElementById("tj").innerHTML+=html
-            bottom();
-        }
-    }
-    function bottom(){
-        alert(123)
-    }
+
 </script>
 <body id="body" style="">
-   <div id="main" style="height: 800px;background-color: #c2e7b0">
-       <div id="tj"></div>
+<div>
 
-   </div>
+
+<div style="overflow: hidden">
+    <div style="float: left;">
+<div style="position: relative;background-color: #f5dab1;width: 700px;height: 700px;margin-left: 100px;display: inline-block">
+<!--<img style="position: absolute;" src="https://huyaimg.msstatic.com/cdnimage/internationMatch/phplhBtJi1619768252.jpg">-->
+<img  style="position: absolute;left: 20px" src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3023578052,3365048551&fm=26&gp=0.jpg">
+
+</div>
+    <div style="background-color: #00FF00;width: 100px;height: 100px;float: right">
+    </div>
+</div>
+
+
+</div>
+</div>
 </body>
 </html>

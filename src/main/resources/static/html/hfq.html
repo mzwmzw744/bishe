@@ -180,21 +180,13 @@
             <div id="guessYouLikeItHead" style="height: 50px;border-bottom: 1px solid #ddd;
             line-height: 50px;color: #ff5046;font-size: 22px;padding-left: 25px">
                 猜你喜欢
+                <span style="float: right;margin-right: 20px;margin-top: -2px">
+                     <el-button  type="primary"  plain @click="likeNextClick" >下一页</el-button>
+                </span>
             </div>
-            <div style="height: 559px;">
-                <div style="height: 50%;border-bottom: 1px solid #ddd;overflow: hidden">
-                    <div style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left"></div>
-                    <div style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left"></div>
-                    <div style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left"></div>
-                    <div style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left;"></div>
-                    <div style="width: 278px;height:100%;float: left;"></div>
-                </div>
-                <div style="height: 50%;overflow: hidden">
-                    <div style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left"></div>
-                    <div style="border-right: 1px solid #ddd;width:  280px;height:100%;float: left"></div>
-                    <div style="border-right: 1px solid #ddd;width:  280px;height:100%;float: left"></div>
-                    <div style="border-right: 1px solid #ddd;width: 280px;height:100%;float: left;"></div>
-                    <div style="width: 278px;height:100%;float: left;"></div>
+            <div style="height: 559px;border-bottom: 1px solid #ddd;overflow: hidden">
+                <div  v-for="(o,index) in likeShopMessage" :key="o">
+                    <img :src="o.shopHeadPicture" v-on:click="shopClick(o)" style="width: 279px;height: 279px;float: left" class="shopCss">
                 </div>
             </div>
         </div>
@@ -275,6 +267,8 @@
 <script>
     var tjPage = 1
     var newShopMessagePage = 1
+
+    var likeShopMessagePage = 1
 function dd(){
     window.location.href="shdzgl.html";
 }
@@ -324,7 +318,7 @@ function dd(){
         data:{
             dialogVisibleByModifyUserInf:false,
             newShopMessage:{},
-
+            likeShopMessage:{},
             innerVisible:false,
             oldPassWord:'',
             newPassWord:'',
@@ -435,6 +429,75 @@ function dd(){
                     }
                 })
             },
+            tjNextClick(){
+                tjPage = tjPage + 1;
+                axios({
+                    method:'post',
+                    url:'/token/getIndexNewShopMeaage',
+                    headers:{
+                        'token' : sessionStorage.getItem("token")
+                    },
+                    data:{
+                        page:tjPage
+                    }
+                }).then(res=> {
+                    this.tjShop = res.data.data.data;
+                    if(res.data.message == '到底了') {
+                        tjPage = 1
+                        axios({
+                            method:'post',
+                            url:'/token/getIndexNewShopMeaage',
+                            headers:{
+                                'token' : sessionStorage.getItem("token")
+                            },
+                            data:{
+                                page:tjPage
+                            }
+                        }).then(res=> {
+                            this.tjShop = res.data.data.data;
+                            if(res.data.message == '到底了') {
+                                tjPage = 1
+                            }
+                        })
+                    }
+                })
+
+            },
+            likeNextClick(){
+                likeShopMessagePage = likeShopMessagePage + 1;
+                axios({
+                    method:'post',
+                    url:'/token/getIndexNewShopMeaage',
+                    headers:{
+                        'token' : sessionStorage.getItem("token")
+                    },
+                    data:{
+                        page:likeShopMessagePage
+                    }
+                }).then(res=> {
+                    this.likeShopMessage = res.data.data.data;
+                    if(res.data.message == '到底了') {
+                        likeShopMessagePage = 1
+                        axios({
+                            method:'post',
+                            url:'/token/getIndexNewShopMeaage',
+                            headers:{
+                                'token' : sessionStorage.getItem("token")
+                            },
+                            data:{
+                                page:likeShopMessagePage
+                            }
+                        }).then(res=> {
+                            this.likeShopMessage = res.data.data.data;
+                            if(res.data.message == '到底了') {
+                                likeShopMessagePage = 1
+                            }
+                        })
+                    }
+                })
+            },
+
+
             shopClick(shop){
                 sessionStorage.setItem("shopBuyDetailShop",JSON.stringify(shop))
                 window.location.href ='shoppingDetails.html';
@@ -458,6 +521,22 @@ function dd(){
                 this.newShopMessage = res.data.data.data;
             })
 
+
+            axios({
+                method:'post',
+                url:'/token/getLikeShopMeaage',
+                headers:{
+                    'token' : sessionStorage.getItem("token")
+                },
+                data:{
+                    page:likeShopMessagePage
+                }
+            }).then(res=> {
+                this.likeShopMessage = res.data.data.data;
+            })
+
+
+
             axios({
                 method:'post',
                 url:'/token/getTjShop',
@@ -468,7 +547,7 @@ function dd(){
                     page:tjPage
                 }
             }).then(res=> {
-                 this.tjShop = res.data;
+                 this.tjShop = res.data.data.data;
             })
             axios({
                 method:'post',
