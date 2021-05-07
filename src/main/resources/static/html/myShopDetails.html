@@ -277,7 +277,9 @@
                 if(shops.auditStatus == '4' || shops.auditStatus == 3){
                     shops.auditStatus = '已收货'
                 }
-
+                if(shops.auditStatus == '10' || shops.auditStatus == 10){
+                    shops.auditStatus = '推荐中'
+                }
                 this.shop = shops;
                 this.shopss = res.data;;
                 if(shops.auditStatus == '待发货' || shops.auditStatus == '已发货' || shops.auditStatus == '已收货'){

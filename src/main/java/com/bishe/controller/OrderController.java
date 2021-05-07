@@ -40,6 +40,9 @@ public class OrderController {
         String isShopping = shopMapper.getShopAuditStatus(shopId);
         int isShppings = Integer.parseInt(isShopping);
 
+        if(isShppings == 10){
+            isShppings = 1;
+        }
         if(isShppings != 1  ){
             if(isShppings == 0){
                 return -1.0;

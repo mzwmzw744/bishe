@@ -137,6 +137,9 @@
                         if(shops[i].auditStatus == '2' || shops[i].auditStatus == 2){
                             shops[i].auditStatus = '待发货'
                         }
+                        if(shops[i].auditStatus == '10' || shops[i].auditStatus == 10){
+                            shops[i].auditStatus = '推荐中'
+                        }
                     }
                     this.shops = shops;
                 })
@@ -165,6 +168,9 @@
                     }
                     if(shops[i].auditStatus == '2' || shops[i].auditStatus == 2){
                         shops[i].auditStatus = '待发货'
+                    }
+                    if(shops[i].auditStatus == '10' || shops[i].auditStatus == 10){
+                        shops[i].auditStatus = '推荐中'
                     }
                 }
                 this.shops = shops;

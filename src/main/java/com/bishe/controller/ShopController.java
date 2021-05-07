@@ -2,11 +2,13 @@ package com.bishe.controller;
 
 import com.bishe.bean.*;
 import com.bishe.mapper.ShopMapper;
+import com.bishe.mapper.UserMapper;
 import com.bishe.util.RedisUtil;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +20,8 @@ public class ShopController {
     ShopMapper shopMapper;
     @Autowired
     RedisUtil redisUtil;
+    @Resource
+    UserMapper userMapper;
 
     /**
      * 商品创建
@@ -300,5 +304,23 @@ public class ShopController {
         int tt = Integer.valueOf(auditStatus)+1;
         auditStatus = String.valueOf(tt);
         int t  = shopMapper.updateAuditStatus(auditStatus,id);
+    }
+    /**
+     * 确认收货
+     */
+    @RequestMapping("token/qrsh")
+    public void qrsh(@RequestBody Map map) {
+        int id = (int) map.get("id");
+        String auditStatus = getString((String) map.get("auditStatus"));
+        int tt = Integer.valueOf(auditStatus)+1;
+        auditStatus = String.valueOf(tt);
+        int t  = shopMapper.updateAuditStatus(auditStatus,id);
+        Shop shop =  shopMapper.getShopById(id);
+        double price = shop.getShopPrice();
+        int czUserID = shop.getUserID();
+        User user = userMapper.getUserById(czUserID);
+        double allPrice = Double.valueOf(user.getBalance()) + price;
+        userMapper.czBalance(String.valueOf(allPrice),czUserID);
+
     }
 }

@@ -182,23 +182,25 @@
               type: 'error',
                 message: '商品暂未发货,无法收货！'
               });
+            return;
           }
-          if(this.shop.auditStatus == '待收货'){
+          if(this.shop.auditStatus == '已发货'){
             axios({
               method:'post',
-              url:'/token/updateAuditStatus',
+              url:'/token/qrsh',
               headers:{
                 'token' : sessionStorage.getItem("token")
               },
               data:{
                 id:this.shop.id,
-                auditStatus:this.shop.auditStatus,
+                auditStatus:'3',
               }
             }).then(res=> {
               this.$message.success("确认收货成功！")
             })
           }else {
             this.$message.error("您已收货！")
+            this.shop.auditStatus = '已收货'
           }
 
         }).catch(() => {
