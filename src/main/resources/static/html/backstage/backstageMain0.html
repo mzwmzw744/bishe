@@ -108,7 +108,8 @@
                     <a href="javascript:;">商品统计</a>
                     <dl class="layui-nav-child">
                         <dd><a href="javascript:;" v-on:click="spzltjClick">商品种类统计</a></dd>
-                        <dd><a href="javascript:;">管理员权力变更</a></dd>
+                        <dd><a href="javascript:;" v-on:click="addressShengTjClick" >收货地址来源统计</a></dd>
+                        <dd><a href="javascript:;" v-on:click="xlAndZlTjClick" >七日销量统计</a></dd>
                     </dl>
                 </li>
                 </li>
@@ -145,7 +146,9 @@
             sytcxxsz:'/html/backstage/tanMessage.html',
             spzltj:'/html/backstage/spzltj.html',
             allFeedback:'/html/backstage/getAllFeedback.html',
-            shopMessage:'/html/backstage/getAllShopMessage.html'
+            shopMessage:'/html/backstage/getAllShopMessage.html',
+            addressShengTj:'/html/backstage/addressShengTj.html',
+            xlAndZlTj:'/html/backstage/xlAndZlTj.html',
         },
         methods:{
             adminInformationClick(){
@@ -171,7 +174,17 @@
             },
             shopMessageClick(){
                 this.htmlUrl = this.shopMessage;
+            },
+            addressShengTjClick(){
+                this.htmlUrl = this.addressShengTj;
+            },
+            xlAndZlTjClick(){
+                this.htmlUrl = this.xlAndZlTj;
             }
+
+
+
+
         }
     })
 </script>

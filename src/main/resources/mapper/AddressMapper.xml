@@ -13,6 +13,11 @@
         <result column="phone" jdbcType="VARCHAR" property="phone" />
     </resultMap>
 
+    <resultMap id="getAddressShengTjResultMap" type="com.bishe.bean.AddressShengTj">
+        <result column="sl" jdbcType="INTEGER" property="value" />
+        <result column="sheng" jdbcType="VARCHAR" property="name" />
+    </resultMap>
+
     <select id="getUserAddress" resultMap="AddressResultMap">
         select * from address where user_id = #{user_id}
     </select>
@@ -25,4 +30,7 @@
         delete  From address where user_id = #{user_id}
     </delete>
 
+    <select id="getAddressShengTj" resultMap="getAddressShengTjResultMap">
+        select count(*) sl,sheng from address group by sheng
+    </select>
 </mapper>

@@ -1,9 +1,6 @@
 package com.bishe.controller;
 
-import com.bishe.bean.Address;
-import com.bishe.bean.Admin;
-import com.bishe.bean.AdminApply;
-import com.bishe.bean.User;
+import com.bishe.bean.*;
 import com.bishe.mapper.AddressMapper;
 import com.bishe.util.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,5 +51,10 @@ public class AddressController {
         User user = (User)redisUtil.get(token);
         List<Address> address = addressMapper.getUserAddress(user.getId());
         return address;
+    }
+    @RequestMapping("/token/getAddressShengTj")
+    public List<AddressShengTj> getAddressShengTj(@RequestBody Map<String,Object> map,@RequestHeader Map<String, String> headers){
+        List<AddressShengTj> list = addressMapper.getAddressShengTj();
+        return list;
     }
 }

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>ECharts</title>
+  <!-- 引入 echarts.js -->
+  <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.1.0/echarts.common.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.0/index.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.js"></script>
+</head>
+<body>
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<div id="main" style="width: 1450px;height:700px;"></div>
+<script type="text/javascript">
+  // 基于准备好的dom，初始化echarts实例
+  var chartDom = document.getElementById('main');
+  var myChart = echarts.init(chartDom);
+  var option;
+
+  // 指定图表的配置项和数据
+  option = {
+    title: {
+      text: '七日销量统计'
+    },
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {
+        type: 'cross',
+        label: {
+          backgroundColor: '#6a7985'
+        }
+      }
+    },
+    legend: {
+      data: ['曲裾', '直裾', '襦裙', '褙子', '玄端','高腰襦裙','圆领袍衫','朱子深衣']
+    },
+    toolbox: {
+      feature: {
+        saveAsImage: {}
+      }
+    },
+    grid: {
+      left: '3%',
+      right: '4%',
+      bottom: '3%',
+      containLabel: true
+    },
+    xAxis: [
+      {
+        type: 'category',
+        boundaryGap: false,
+        data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+      }
+    ],
+    yAxis: [
+      {
+        type: 'value'
+      }
+    ],
+    series: [
+      {
+        name: '曲裾',
+        type: 'line',
+        stack: '总量',
+        areaStyle: {},
+        emphasis: {
+          focus: 'series  '
+        },
+        data: [120, 132, 101, 134, 90, 230, 210]
+      },
+      {
+        name: '直裾',
+        type: 'line',
+        stack: '总量',
+        areaStyle: {},
+        emphasis: {
+          focus: 'series'
+        },
+        data: [220, 182, 191, 234, 290, 330, 310]
+      },
+      {
+        name: '襦裙',
+        type: 'line',
+        stack: '总量',
+        areaStyle: {},
+        emphasis: {
+          focus: 'series'
+        },
+        data: [150, 232, 201, 154, 190, 330, 410]
+      },
+      {
+        name: '褙子',
+        type: 'line',
+        stack: '总量',
+        areaStyle: {},
+        emphasis: {
+          focus: 'series'
+        },
+        data: [320, 332, 301, 334, 390, 330, 320]
+      },
+
+      {
+        name: '高腰襦裙',
+        type: 'line',
+        stack: '总量',
+        areaStyle: {},
+        emphasis: {
+          focus: 'series'
+        },
+        data: [320, 332, 301, 334, 390, 330, 320]
+      },
+      {
+        name: '圆领袍衫',
+        type: 'line',
+        stack: '总量',
+        areaStyle: {},
+        emphasis: {
+          focus: 'series'
+        },
+        data: [320, 332, 301, 334, 390, 330, 320]
+      },
+
+      {
+        name: '朱子深衣',
+        type: 'line',
+        stack: '总量',
+        areaStyle: {},
+        emphasis: {
+          focus: 'series'
+        },
+        data: [320, 332, 301, 334, 390, 330, 320]
+      },
+
+
+
+      {
+        name: '玄端',
+        type: 'line',
+        stack: '总量',
+        label: {
+          show: true,
+          position: 'top'
+        },
+        areaStyle: {},
+        emphasis: {
+          focus: 'series'
+        },
+        data: [820, 932, 901, 934, 1290, 1330, 1320]
+      }
+    ]
+  };
+  option && myChart.setOption(option);
+
+  // 使用刚指定的配置项和数据显示图表。
+
+  // axios({
+  //   method:'post',
+  //   url:'/token/getAddressShengTj',
+  //   headers:{
+  //     'token' : sessionStorage.getItem("token")
+  //   },
+  //   data:{
+  //   }
+  // }).then(res=> {
+  //   option.series[0].data = res.data
+  //   option && myChart.setOption(option);
+  // })
+
+
+</script>
+</body>
+</html>
