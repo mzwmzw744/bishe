@@ -48,7 +48,11 @@ public class IndexShopController {
         return result;
     }
 
-
+    /**
+     * 首页显示今日推荐
+     * @param maps
+     * @return
+     */
     @RequestMapping("/token/getTjShop")
     public Result getTjShop(@RequestBody Map<String,String> maps) {
         Result result = new Result();
@@ -62,6 +66,7 @@ public class IndexShopController {
         if(tjShops.size() > 0) {
             result.setMessage("成功");
         }
+        map.put("data",tjShops);
         result.setData(map);
         return result;
     }

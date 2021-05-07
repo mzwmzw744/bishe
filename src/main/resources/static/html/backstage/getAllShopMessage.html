@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>汉服圈</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="../../css/theme/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.0/index.js"></script>
+    <!--    <script src="https://unpkg.com/element-ui/lib/index.js"></script>-->
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.js"></script>
+</head>
+<body>
+<div id = "main">
+<el-table
+        :data="data"
+        style="width: 100%">
+    <el-table-column
+            label="id"
+            prop="id">
+    </el-table-column>
+    <el-table-column
+            label="userID"
+            prop="userID">
+    </el-table-column>
+    <el-table-column
+            label="shopName"
+            prop="shopName">
+    </el-table-column>
+    <el-table-column
+            label="shopPrice"
+            prop="shopPrice">
+    </el-table-column>
+    <el-table-column
+            label="商品种类"
+            prop="shopFamily">
+    </el-table-column>
+    <el-table-column
+            label="商品介绍"
+            prop="shopIntroduction">
+    </el-table-column>
+    <el-table-column
+            label="商品展示图"
+             >
+        <template scope="scope">
+            <img :src="scope.row.shopHeadPicture" width="50" height="50" class="head_pic"/>
+        </template>
+    </el-table-column>
+    <el-table-column
+            label="商品状态"
+            prop="auditStatus"
+            :formatter="dateFormatter">
+    </el-table-column>
+    <el-table-column
+            label="创造时间"
+            prop="createDate">
+    </el-table-column>
+    <el-table-column
+            align="right">
+        <div slot="header" slot-scope="scope">
+            <el-input
+                    v-model="search"
+                    size="mini"
+                    placeholder="输入关键字搜索"/>
+        </div>
+    </el-table-column>
+</el-table>
+</div>
+</body>
+<script>
+    new Vue({
+        el:'#main',
+        data:{
+            tableData: [{
+                date: '2016-05-02',
+                name: '王小虎',
+                address: '上海市普陀区金沙江路 1518 弄'
+            }, {
+                date: '2016-05-04',
+                name: '王小虎',
+                address: '上海市普陀区金沙江路 1517 弄'
+            }, {
+                date: '2016-05-01',
+                name: '王小虎',
+                address: '上海市普陀区金沙江路 1519 弄'
+            }, {
+                date: '2016-05-03',
+                name: '王小虎',
+                address: '上海市普陀区金沙江路 1516 弄'
+            }],
+            data: ''
+        },
+        created:function (){
+            axios({
+                method:'post',
+                url:'/backstage/getAllShopTj',
+                headers:{
+                    'token' : sessionStorage.getItem("token")
+                },
+                data:{
+
+                }
+            }).then(res=> {
+                this.data =  res.data
+            })
+        },
+        methods: {
+            dateFormatter(row, column) {
+                if(row.auditStatus == '10' || row.auditStatus == 10){
+                    return '今日推荐'
+                }
+                if(row.auditStatus == '1' || row.auditStatus == 1){
+                    return '上架状态'
+                }
+            },
+            handleEdit(index, row) {
+
+                axios({
+                    method:'post',
+                    url:'/backstage/updateShopTj',
+                    headers:{
+                        'token' : sessionStorage.getItem("token")
+                    },
+                    data:{
+                        id:row.id
+                    }
+                }).then(res=> {
+                    this.$message.success('设为推荐成功！');
+                    row.auditStatus = '10'
+                })
+
+            },
+            handleDelete(index, row) {
+                axios({
+                    method:'post',
+                    url:'/backstage/updateShopQxTj',
+                    headers:{
+                        'token' : sessionStorage.getItem("token")
+                    },
+                    data:{
+                        id:row.id
+                    }
+                }).then(res=> {
+                    this.$message.success('取消推荐成功！');
+                    row.auditStatus = '1'
+                })
+            }
+        },
+    })
+
+</script>
+
+</html>

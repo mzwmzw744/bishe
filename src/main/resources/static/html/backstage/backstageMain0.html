@@ -94,7 +94,7 @@
                 <li class="layui-nav-item">
                     <a href="javascript:;">商品信息管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;" v-on:click="adminApplyQueryClick">商品信息查询</a></dd>
+                        <dd><a href="javascript:;" v-on:click="shopMessageClick">商品信息查询</a></dd>
                         <dd><a href="javascript:;">管理员申请审批</a></dd>
                     </dl>
                 </li>
@@ -144,7 +144,8 @@
             addTodayTjGl:'/html/backstage/addTodayTj.html',
             sytcxxsz:'/html/backstage/tanMessage.html',
             spzltj:'/html/backstage/spzltj.html',
-            allFeedback:'/html/backstage/getAllFeedback.html'
+            allFeedback:'/html/backstage/getAllFeedback.html',
+            shopMessage:'/html/backstage/getAllShopMessage.html'
         },
         methods:{
             adminInformationClick(){
@@ -167,6 +168,9 @@
             },
             getAllFeedbackClick(){
                 this.htmlUrl = this.allFeedback;
+            },
+            shopMessageClick(){
+                this.htmlUrl = this.shopMessage;
             }
         }
     })
