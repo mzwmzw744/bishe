@@ -32,7 +32,6 @@ public class FileController {
 
     @RequestMapping("/dynamicPic")
     public String dynamicPic(@RequestParam String shoHeadPicUploadToken,@RequestPart("file") byte[] file,@RequestPart("file") MultipartFile files) throws IOException {
-        System.out.println(shoHeadPicUploadToken);
         String name = files.getOriginalFilename();
         int length = name.length();
         String hz = name.substring(length-4, length);
@@ -43,7 +42,7 @@ public class FileController {
 
     @RequestMapping("/userHeadPicUpload")
     public String userHeadPicUpload(@RequestParam String token,@RequestPart("file") byte[] file,@RequestPart("file") MultipartFile files) throws IOException {
-        String name = files.getName();
+        String name = files.getOriginalFilename();
         int length = name.length();
         String hz = name.substring(length-4, length);
         System.out.println(token);
@@ -57,7 +56,7 @@ public class FileController {
 
     @RequestMapping("/shopDetailPic")
     public String upload(@RequestParam String shoHeadPicUploadToken,@RequestPart("file") byte[] file,@RequestPart("file") MultipartFile files) throws IOException {
-        String name = files.getName();
+        String name = files.getOriginalFilename();
         int length = name.length();
         String hz = name.substring(length-4, length);
         User user = (User)redisUtil.get(shoHeadPicUploadToken);
@@ -67,7 +66,7 @@ public class FileController {
 
     @RequestMapping("/updateShopHeadPic")
     public String shopHeadPic(@RequestParam String shoHeadPicUploadToken,@RequestPart("file") byte[] file,@RequestPart("file") MultipartFile files) throws IOException {
-        String name = files.getName();
+        String name = files.getOriginalFilename();
         int length = name.length();
         String hz = name.substring(length-4, length);
         User user = (User)redisUtil.get(shoHeadPicUploadToken);
