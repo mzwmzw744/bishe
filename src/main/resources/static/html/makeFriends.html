@@ -78,6 +78,7 @@
             v-show="false"
             class="upload-demo"
             action="/dynamicPic"
+            :accept="'image/*,video/*'"
             :data="PicUpload"
             :before-remove="beforeRemove"
             :on-success="shopHeadPicSuccess"
@@ -123,7 +124,16 @@
 
             <el-card style="text-align: center;overflow: hidden" class="box-card" shadow="hover" v-if="fileList.length > 0">
                 <div v-if="fileList.length == 1">
+
+                    <div v-if="hqhz(fileList[0].url) != 'mp4'">
                     <img width="400px" height="400px" v-bind:src="fileList[0].url">
+
+                    </div>
+                    <div v-if="hqhz(fileList[0].url) == 'mp4'">
+                        <video  width="400px" height="400px" controls>
+                            <source v-bind:src="fileList[0].url" type="video/mp4">
+                        </video>
+                    </div>
                 </div>
                 <div v-if="fileList.length == 2">
                     <img width="200px" height="200px" v-bind:src="fileList[0].url">
@@ -238,7 +248,17 @@
 
                         <div style="margin: 0 auto;text-align: center;overflow: hidden" shadow="hover" v-if="z.picLength > 0">
                             <div v-if="z.picLength == 1">
+
+                                <div v-if="hqhz(z.pic_1) != 'mp4'">
                                 <img width="400px" height="400px" v-bind:src="z.pic_1">
+                                </div>
+
+
+                                <div v-if="hqhz(z.pic_1) == 'mp4'">
+                                    <video  width="400px" height="400px"  controls >
+                                        <source v-bind:src="z.pic_1" type="video/mp4">
+                                    </video>
+                                </div>
                             </div>
                             <div v-if="z.picLength == 2">
                                 <img width="200px" height="200px" v-bind:src="z.pic_1">
@@ -440,6 +460,12 @@
                     }
                 })
             },
+            hqhz(fileName){
+                let index= fileName.lastIndexOf(".");
+                let ext = fileName.substr(index+1);
+                return ext
+            },
+
             plClick(id){
                 this.plVisible = true;
                 this.chooseDtId = id
