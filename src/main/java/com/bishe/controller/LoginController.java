@@ -43,7 +43,7 @@ public class LoginController {
         if("userName".equals(category)) {
             user = userMapper.getUserByAccount(account);
         }else {
-            user = userMapper.getUserByEmail("account");
+            user = userMapper.getUserByEmail(account);
         }
         System.out.println(user);
         if(user == null){
@@ -58,6 +58,19 @@ public class LoginController {
             System.out.println("账号或密码错误");
             return "账号或密码错误";
         }
+        return token;
+    }
+
+    /**
+     * 通过邮箱获取用户
+     */
+    @RequestMapping(value = "/getUserByEamil")
+    @ResponseBody
+    public String getUserByEamil(@RequestBody Map<String,String> map)  {
+        String token;
+        User user = userMapper.getUserByEmail( map.get("email"));
+        token = UUID.randomUUID()+"";
+        redisUtil.set(token,user,1800);
         return token;
     }
 
@@ -131,6 +144,8 @@ public class LoginController {
         userMapper.changePassword(newPassWord,user.getId());
         return "ture";
     }
+
+
     @RequestMapping("/token/changeUserName")
     @ResponseBody
     public String changeUserName(@RequestBody Map<String,String> map,@RequestHeader Map<String, String> headers){

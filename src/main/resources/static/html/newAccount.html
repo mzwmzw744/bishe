@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="../ui/layui/css/layui.css" media="all">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.js"></script>
+    <link rel="stylesheet" href="../css/theme/index.css">
+    <script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.0/index.js"></script>
+    <script src="../ui/layui/layui.js"></script>
 </head>
 <style>
     *{
@@ -49,8 +52,6 @@
             <div><img src="https://cdn-go.cn/qq-web/zc.qq.com/latest/v3/img/01-4.jpg" alt="加载错误" height="100%"></div>
             <div><img src="https://cdn-go.cn/qq-web/zc.qq.com/latest/v3/img/01-3.jpg" alt="加载错误" height="100%"></div>
             <div><img src="https://cdn-go.cn/qq-web/zc.qq.com/latest/v3/img/01-1.jpg" alt="加载错误" height="100%"></div>
-            <!--        <div><img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2863765042,781770501&fm=26&gp=0.jpg" alt="加载错误" height="100%"></div>-->
-            <!--        <div><img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=105606074,771602418&fm=26&gp=0.jpg" alt="加载错误" height="100%"> </div>-->
         </div>
     </div>
 </div>
@@ -86,12 +87,12 @@
                                        class="layui-input" style="float: left;margin: 0 0 0 0;position: absolute;box-sizing:border-box" >
                             </label>
                             <label>
-                                <input type="button" v-on:click="sendEmail" value="发送邮箱验证码" class="layui-btn layui-btn-lg" style="width: 260px;height: 50px;
+                                <input type="button" v-on:click="sendEmail"  v-bind:value="testTime" v-bind:disabled="disabled"  class="layui-btn layui-btn-lg" style="width: 260px;height: 50px;
             border-radius: 5px;display:block;margin: 0 0 35px 45%;box-sizing:border-box">
                             </label>
                         </div>
                     </div>
-                    <input type="button" v-on:click="submitClick" value="立即注册" class="layui-btn layui-btn-lg" style="width: 470px;height: 45px;
+                    <input type="button" v-on:click="submitClick" value="立即注册"   class="layui-btn layui-btn-lg" style="width: 470px;height: 45px;
             border-radius: 5px;margin: 0 auto 0;display:block">
                 </div>
             </div>
@@ -103,14 +104,9 @@
     const right = new Vue({
         el:'#test1',
         data: {
-            maxHeight: '1000px'
+            maxHeight: '1000px',
         }
-
     })
-
-
-
-
     const email = new Vue({
         el:'#account',
         data:{
@@ -118,9 +114,17 @@
             password:'',
             verificationCode:'',
             isShow:false,
+            disabled:false,
             email:'',
+            testTime:'获取邮箱验证码',
+        },
+        computed:{
+
         },
         methods:{
+            timeReduce(){
+
+            },
             showClick(){
                 this.isShow = !this.isShow;
             },
@@ -130,6 +134,7 @@
                     alert('邮箱格式不正确');
                     return ;
                 }
+                debugger
                 axios({
                     method:'post',
                     url:'/sendEmail',
@@ -141,7 +146,18 @@
                         alert("发送失败");
                         return;
                     }
-                    console.log(res.data);
+                    this.$message.success("发送邮箱验证码成功！")
+                    email.disabled = true
+                    email.testTime = 60
+                    setInterval(function (){
+                        email.testTime--
+                        if(email.times == 0) {
+                            email.times = '获取邮箱验证码';
+                            email.disabled = false;
+                            clearInterval(email.timer)
+                        }
+                    },1000)
+
                     sessionStorage.setItem("registerCode", res.data);
                 })
             },
@@ -163,8 +179,10 @@
                     if(res.data == null) {
 
                     }
-                    alert(res.data);
-                    console.log(res.data);
+                    this.$message.success("注册成功！两秒后跳转..");
+                    setTimeout(function (){
+                        window.location.href='http://localhost/';
+                    },2000)
                 })
             }
         }
