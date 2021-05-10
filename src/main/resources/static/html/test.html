@@ -18,14 +18,28 @@
         margin: 0;
         padding: 0;
     }
-    .shopCss{
-        color: rgba(255,83,106,0.54);
-        border-bottom: 1px solid #ddd;
+    .avatar-uploader .el-upload {
+        border: 1px dashed #d9d9d9;
+        border-radius: 6px;
         cursor: pointer;
-        height: 100px;
+        position: relative;
+        overflow: hidden;
     }
-    .shopCss:hover{
-        background-color: rgba(255,83,106,0.27);
+    .avatar-uploader .el-upload:hover {
+        border-color: #409EFF;
+    }
+    .avatar-uploader-icon {
+        font-size: 28px;
+        color: #8c939d;
+        width: 178px;
+        height: 178px;
+        line-height: 178px;
+        text-align: center;
+    }
+    .avatar {
+        width: 178px;
+        height: 178px;
+        display: block;
     }
 </style>
 <body>
@@ -36,78 +50,15 @@
 
 <div style="width: 1400px;height: 1000px;border: 1px solid #ddd;margin: 0 auto;color: rgba(255,83,106,0.54);" id="main">
 
-    <div style="width: 1000px;height: 500px;margin: 0px auto;overflow: hidden">
-        <div id="leftMain" style="width: 50%;height: 100%;float: left;">
-            <div style="overflow: hidden">
-                <div style="float: left;margin-top: 5px">商品名:&nbsp;&nbsp;</div>
-                <div style="width: 150px;height: 100px;float: left">
-                    <el-input  v-model="shop.shopName" size="small" placeholder="请输入内容" style="display: inline-block" ></el-input>
-                </div>
-            </div>
-            <div style="overflow: hidden">
-                <div style="float: left;margin-top: 5px">商品价格:&nbsp;&nbsp;</div>
-                <div style="width: 150px;height: 100px;float: left">
-                    <el-input  v-model="shop.shopPrice" size="small" placeholder="请输入内容" style="display: inline-block" ></el-input>
-                </div>
-            </div>
-            <div style="overflow: hidden">
-                <div style="float: left;margin-top: 5px">商品类型:&nbsp;&nbsp;</div>
-                <div style="width: 150px;height: 100px;float: left">
-                    <el-input  v-model="shop.shopFamily" size="small" placeholder="请输入内容" style="display: inline-block" ></el-input>
-                </div>
-            </div>
-            <div style="overflow: hidden">
-                <div style="float: left;margin-top: 5px">商品介绍:&nbsp;&nbsp;</div>
-                <div style="width: 150px;height: 100px;float: left">
-                    <el-input  v-model="shop.shopIntroduction" size="small" placeholder="请输入内容" style="display: inline-block" ></el-input>
-                </div>
-            </div>
-        </div>
-        <div id="rightMain" style="width: 50%;height: 1000px;float: left;">
-            <div style="cursor: pointer">
-                商品头像:<img :src="shop.shopHeadPicture" width="100px" height="100px;" v-on:click="open1()">
-            </div>
-            商品状态: {{shop.auditStatus}}
-            <el-button type="primary"  size="small" @click="modifyState">修改状态</el-button>
-
-            <div>
-                <el-upload
-                        class="upload-demo"
-                        action="/updateShopHeadPic"
-                        :data="shoHeadPicUpload"
-                        :on-success="shopHeadPicSuccess"
-                        v-show="false"
-                        multiple
-                        :limit="10"
-                        :file-list="shoHeadPicUpload">
-                    <el-button id="shopHeadPic" size="small" type="primary">点击上传~~~~~~~~</el-button>
-                    <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb1111</div>
-                </el-upload>
-            </div>
-
-        </div>
-        <div>
-        </div>
-    </div>
-    <div>
-        <el-upload
-                class="upload-demo"
-                style="height: 1000px"
-                action="/shopDetailPic"
-                :on-preview="handlePreview"
-                :on-remove="handleRemove"
-                :file-list="fileList"
-                :limit="10"
-                :data="shoHeadPicUpload"
-                list-type="picture">
-            <el-button size="small" type="primary" >点击上传2</el-button>
-            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-        </el-upload>
-    </div>
-    <div style="margin: 200px auto 0;width: 310px">
-        <el-button type="primary"  style="float: left;width: 150px" @click="open">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;修改&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</el-button>
-        <el-button type="primary"  style="float: left;width: 150px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;返回首页&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</el-button>
-    </div>
+    <el-upload
+            class="avatar-uploader"
+            action="https://jsonplaceholder.typicode.com/posts/"
+            :show-file-list="false"
+            :on-success="handleAvatarSuccess"
+            :before-upload="beforeAvatarUpload">
+        <img v-if="imageUrl" :src="imageUrl" class="avatar">
+        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+    </el-upload>
 
 </div>
 
@@ -120,185 +71,28 @@
 <script>
 
 
-    new Vue({
-        el: '#main',
-        data: {
-            fileList: [
-                // {
-                //     // name: 'food.jpeg',
-                //     url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-                // },
-                // {
-                //     // name: 'food2.jpeg',
-                //     url:'1'
-                //     // url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-                // }
-            ],
-            token: {
-                userToken: sessionStorage.getItem('token')
-            },
-            shoHeadPicUpload: {
-                number:'',
-                shoHeadPicUploadId:'',
-                shoHeadPicUploadToken: sessionStorage.getItem('token'),
-
-            },
-            shop:{
-                auditStatus:'',
-                id:'',
-                shopName: '',
-                shopHeadPicture:'',
-                shopPrice:'',
-                shopFamily:'',
-                shopIntroduction:'',
-            },
-
+new Vue({
+    el:'#main',
+    data:{
+        imageUrl: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAHkAeIDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD+/iiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAor8//ANrj/go1+wl+wXos+s/tY/tK/Db4S3C2zXNj4VvbmfW/ijr0C7SJNG+Gvhlde8XeIsiZNnkeHJRbeYgYqZuf55Piv/wehf8ABPXwtNfWHwb/AGdf2m/i7ex7Rp97ren+Bvhn4b1FskEJd3Hinxh4mhxtJYjwfLtyu7AbNAH9jdFfwk/8Rxvwm/6RyfED/wAST8Nf/Obr6U+Dn/B6N/wT58VXljpHxq/Zy/aS+D17dcX+qaIvw8+KPg/Tsbsb9TtPFfhDxFdK+PlMfg8A/PuIwu4A/shyMZyMeuRjuOuT6fz5yCStfnh+yL/wU7/YA/bxhtv+GUf2pfhr8VNcktxdTeAbbXI/DnxWs7P9+66hqPws8V/8I94y0+z2W05muJfDVskRRmcybWZv0P8A8/z/APrfmfTkAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAoor5f/aH/aT+CH7Jfwd8Z/Hr9of4i6B8Lvhh4F0ybVdf8TeJrsR285tZ7qOHQtCspY76bxB4i8SeTJF4S8HeGrQeMfF+ofZNN0jTvtTAgA7P4vfGj4S/s+/DbxP8Xvjd8QPDXwy+HHg+zF/4l8Y+LdXj07RtMt8TsYrm5vrkKq7IXeTSoSZAiFkkcBsf59f/AAVU/wCDtD46fErxb4q+En/BMO9h+EXwlt4NQ0C+/aT8R+GJb740/ECSRlgm1X4d6B4imltfg94XazVhpyXHhu/8flJG8Ywz+DNdSLSR+Lv/AAWe/wCCzfxv/wCC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ooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA//Z'
+    },
+    methods:{
+        handleAvatarSuccess(res, file) {
+            this.imageUrl = URL.createObjectURL(file.raw);
         },
-        methods: {
-            // uploadProcess(event, file, fileList) {
-            //     this.imgFlag = true;
-            //     console.log(event.percent);
-            //     this.percent = Math.floor(event.percent);
-            // },
-            shopHeadPicSuccess(res){
-                console.log(res)
-                this.shop.shopHeadPicture = res;
-                this.$message.success('图片上传成功')
-            },
-            modifyState(){
-                if(this.shop.auditStatus == '未上架'){
-                    this.shop.auditStatus = '上架'
-                }else {
-                    this.shop.auditStatus = '未上架'
-                }
-            },
-            open1(){
-                document.getElementById("shopHeadPic").click();
-            },
-            open() {
-                this.$confirm('确认修改嘛?', '提示', {
-                    confirmButtonText: '确定',
-                    cancelButtonText: '取消',
-                    type: 'warning'
-                }).then(() => {
-                    axios({
-                        method:'post',
-                        url:'/token/updateShop',
-                        headers:{
-                            'token' : sessionStorage.getItem("token")
-                        },
-                        data:{
-                            shop: this.shop
-                        }
-                    }).then(res=> {
-                        console.log(res.data);
-                    })
-                    this.$message({
-                        type: 'success',
-                        message: '修改成功!'
-                    });
-                }).catch(() => {
-                    this.$message({
-                        type: 'info',
-                        message: '已取消删除'
-                    });
-                });
-            },
-            handleRemove(file, fileList) {
-                fileList.forEach(function (e) {
-                    console.log(e.response);
-                })
-            },
-            handlePreview(file) {
-                console.log(file);
+        beforeAvatarUpload(file) {
+            const isJPG = file.type === 'image/jpeg';
+            const isLt2M = file.size / 1024 / 1024 < 2;
+            if (!isJPG) {
+                this.$message.error('上传头像图片只能是 JPG 格式!');
             }
-        },
-        created: function () {
-            axios({
-                method:'post',
-                url:'/token/getShopById',
-                headers:{
-                    'token' : sessionStorage.getItem("token")
-                },
-                data:{
-                    id:sessionStorage.getItem("shopIdToShopDetail")
-                }
-            }).then(res=> {
-                // console.log(res.data);
-                this.shop.auditStatus = res.data.auditStatus;
-                this.shop.id = res.data.id;
-                this.shop.shopName = res.data.shopName;
-                this.shop.shopIntroduction = res.data.shopIntroduction;
-                this.shop.shopPrice = res.data.shopPrice;
-                this.shop.shopFamily = res.data.shopFamily;
-                this.shop.shopHeadPicture =res.data.shopHeadPicture;
-                this.shoHeadPicUpload.shoHeadPicUploadId =res.data.id;
-            })
-
-            axios({
-                method:'post',
-                url:'/token/getShopMainPic',
-                headers:{
-                    'token' : sessionStorage.getItem("token")
-                },
-                data:{
-                    id:sessionStorage.getItem("shopIdToShopDetail")
-                }
-            }).then(res=> {
-                if(res.data.pic_1 != '' && res.data.pic_1 !=null){
-                    this.fileList.push({url:res.data.pic_1})
-                }
-                if(res.data.pic_2 != '' && res.data.pic_2 !=null){
-                    this.fileList.push({url:res.data.pic_2})
-                }
-                if(res.data.pic_3 != '' && res.data.pic_3 !=null){
-                    this.fileList.push({url:res.data.pic_3})
-                }
-                if(res.data.pic_4 != '' && res.data.pic_4 !=null){
-                    this.fileList.push({url:res.data.pic_4})
-                }
-                if(res.data.pic_5 != '' && res.data.pic_5 !=null){
-                    this.fileList.push({url:res.data.pic_5})
-                }
-                if(res.data.pic_6 != '' && res.data.pic_6 !=null){
-                    this.fileList.push({url:res.data.pic_6})
-                }
-                if(res.data.pic_7 != '' && res.data.pic_7 !=null){
-                    this.fileList.push({url:res.data.pic_7})
-                }
-                if(res.data.pic_8 != '' && res.data.pic_8 !=null){
-                    this.fileList.push({url:res.data.pic_8})
-                }
-                if(res.data.pic_9 != '' && res.data.pic_9 !=null){
-                    this.fileList.push({url:res.data.pic_9})
-                }
-                if(res.data.pic_10 != '' && res.data.pic_10 !=null){
-                    this.fileList.push({url:res.data.pic_10})
-                }
-
-                this.shoHeadPicUpload.number = this.fileList.length
-                // this.fileList.push({url:res.data.pic_2})
-                // console.log(this.fileList);
-                // this.fileList.push(res.data.pic_1);
-                // console.log("~~~~~~"+res.data.shop_id);
-                // console.log("~~~~~~"+res.data.id);
-                // console.log("~~~~~~"+res.data.pic_1);
-                // console.log("~~~~~~"+res.data.pic_2);
-                // console.log("~~~~~~"+res.data.pic_3);
-                // console.log("~~~~~~"+res.data.pic_4);
-                // console.log("~~~~~~"+res.data.pic_5);
-                // console.log("~~~~~~"+res.data.pic_6);
-                // console.log("~~~~~~"+res.data.pic_7);
-                // console.log("~~~~~~"+res.data.pic_8);
-                // console.log("~~~~~~"+res.data.pic_9);
-                // console.log("~~~~~~"+res.data.pic_10);
-
-                // this.fileList.push()
-
-            })
-
+            if (!isLt2M) {
+                this.$message.error('上传头像图片大小不能超过 2MB!');
+            }
+            return isJPG && isLt2M;
         }
-    })
+    }
+})
 
 </script>
 </body>

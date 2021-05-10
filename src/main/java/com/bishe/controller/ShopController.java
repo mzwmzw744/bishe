@@ -204,19 +204,21 @@ public class ShopController {
      */
     @RequestMapping("token/searchShopBycondition")
     public List<Shop> searchShopBycondition(@RequestBody Map map){
+
+//        double minPrice =  map.get("minPrice");
         SearchShopConditionBean searchShopConditionBean = new SearchShopConditionBean();
 //        searchShopConditionBean.setPx((int)map.get("value"));
         double priceMin = 0;
         double priceMax = 10000;
         List shopFamily = new ArrayList();
         List Cc = new ArrayList();
-        if(map.get("priceMin")!=null && !map.get("priceMin").equals("")){
-            priceMin = (Double) map.get("priceMin");
+        if(map.get("minPrice")!=null && !map.get("minPrice").equals("")){
+            priceMin = Double.valueOf((String) map.get("minPrice")) ;
         }
-        if(map.get("priceMax")!=null && !map.get("priceMax").equals("")){
-            priceMax = (Double) map.get("priceMax");
+        if(map.get("maxPrice")!=null && !map.get("maxPrice").equals("")){
+            priceMax = Double.valueOf((String) map.get("maxPrice")) ;
         }
-        searchShopConditionBean.setPriceMax(priceMin);
+        searchShopConditionBean.setPriceMin(priceMin);
         searchShopConditionBean.setPriceMax(priceMax);
         if(map.get("value") != null && !map.get("value").equals("")){
             searchShopConditionBean.setPx((int)map.get("value"));

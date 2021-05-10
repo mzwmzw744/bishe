@@ -418,7 +418,13 @@
             },
             plVisible:false,
             chooseDtId:'',
-            allPlMessage:'',
+            allPlMessage:[],
+            myPlMessage:{
+                user_tx:'',
+                user_name:'',
+                pl:'',
+            },
+            user:eval ("(" + sessionStorage.getItem("user") + ")")
         },
         methods:{
             fbwdpl(){
@@ -433,8 +439,13 @@
                         dynamicId:this.chooseDtId
                     }
                 }).then(res=> {
-                    this.shopMainPic = res.data;
                     this.$message.success('发表成功')
+
+                    this.myPlMessage.user_tx = this.user.headPic;
+                    this.myPlMessage.user_name = this.user.userName;
+                    this.myPlMessage.pl = this.fbpltextarea;
+                    this.allPlMessage.push(this.myPlMessage);
+
                 })
             },
             dzClick(z,index){
@@ -481,7 +492,6 @@
                     }
                 }).then(res=> {
                     this.allPlMessage = res.data;
-                    debugger;
                 })
 
             },
@@ -499,6 +509,9 @@
                 }).then(res=> {
                     this.shopMainPic = res.data;
                     this.$message.success('发表成功')
+                    setTimeout(function (){
+                        window.location.href='http://localhost/html/makeFriends.html';
+                    },2000)
                 })
             },
             photoPicClick(){

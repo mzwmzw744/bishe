@@ -80,7 +80,7 @@ public class IndexShopController {
         int offset = (Integer.parseInt(maps.get("page"))-1)*10;
         Result result = new Result();
         Map map = new HashMap<String,Object>();
-        List<Shop> list = indexShopMapper.getShopNew(10,offset);
+        List<Shop> list = indexShopMapper.getLikeShop(10,offset);
         if(list.size() == 0) {
             result.setMessage("到底了");
         }
