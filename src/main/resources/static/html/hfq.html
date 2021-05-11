@@ -371,8 +371,6 @@ function dd(){
             changePassword(){
                 let user = eval ("(" + sessionStorage.getItem("user") + ")");
                 if(this.oldPassWord != user.password){
-                    alert(this.oldPassWord)
-                    alert(user.password)
                     this.$message.error('旧密码输入错误！');
                     return;
                 }
