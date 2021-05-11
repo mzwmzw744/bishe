@@ -224,4 +224,31 @@ public class DynamicController {
         dynamicMapper.pldz(giveUp);
         return "true";
     }
+
+
+    /**
+     * 添加个人日志
+     */
+    @RequestMapping("/token/addgrrz")
+    public String addgrrz(@RequestBody Map<String,String> map, @RequestHeader Map<String, String> headers){
+        String token = headers.get("token");
+        User user = (User)redisUtil.get(token);
+        PersonalLog personalLog = new PersonalLog();
+        personalLog.setStr(map.get("str"));
+        personalLog.setUserId(user.getId());
+        dynamicMapper.addGrrz(personalLog);
+        return "true";
+    }
+
+    /**
+     * 查看个人日志
+     */
+    @RequestMapping("/token/getgrrz")
+    public List<PersonalLog> getgrrz(@RequestBody Map<String,String> map, @RequestHeader Map<String, String> headers){
+        String token = headers.get("token");
+        User user = (User)redisUtil.get(token);
+        List<PersonalLog> list  = dynamicMapper.getPersonalLog(user.getId());
+        return list;
+    }
+
 }

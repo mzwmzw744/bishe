@@ -12,7 +12,11 @@
         <result column="shop_head_picture" jdbcType="VARCHAR" property="shopHeadPicture" />
         <result column="auditStatus" jdbcType="VARCHAR" property="auditStatus" />
     </resultMap>
-
+    <resultMap id="personalLogResultMap" type="com.bishe.bean.PersonalLog">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="user_id" jdbcType="INTEGER" property="userId" />
+        <result column="str" jdbcType="VARCHAR" property="str" />
+    </resultMap>
 
     <resultMap id="commentResultMap" type="com.bishe.bean.Comment">
         <result column="id" jdbcType="INTEGER" property="id" />
@@ -124,4 +128,13 @@
     <select id="getDzsl" resultType="java.lang.String">
         select dzsl from  user_Dynamic where id = #{id}
     </select>
+
+    <insert id="addGrrz">
+        insert personal_log values (null,#{userId},#{str});
+    </insert>
+
+    <select id="getPersonalLog" resultMap="personalLogResultMap">
+        select * from personal_log where user_id = #{userId} order by id desc
+    </select>
+
 </mapper>

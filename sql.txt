@@ -227,3 +227,11 @@ create table feedback(
                           word varchar(200),
                           createTime dateTime
 );
+
+
+drop table if exists  personal_log;
+create table personal_log(
+                          id int auto_increment primary key,
+                          user_id int,
+                          str varchar(10000)
+) default charset utf8mb4;

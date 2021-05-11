@@ -3,6 +3,7 @@ package com.bishe.mapper;
 import com.bishe.bean.Comment;
 import com.bishe.bean.Dynamic;
 import com.bishe.bean.GiveUp;
+import com.bishe.bean.PersonalLog;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -46,4 +47,8 @@ public interface DynamicMapper {
     String getDzsl(int id);
 
     List<Dynamic> getDynamicByUserId(int userId);
+
+    int addGrrz(PersonalLog personalLog);
+
+    List<PersonalLog> getPersonalLog(int userId);
 }
