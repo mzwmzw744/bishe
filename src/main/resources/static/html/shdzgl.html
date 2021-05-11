@@ -125,6 +125,9 @@
             return
         }
         app.$message.success('保存成功！')
+        setTimeout(function (){
+            window.location.href='http://localhost/html/shdzgl.html';
+        },2000)
         axios({
           method:'post',
           url:'/token/addUserAddress',

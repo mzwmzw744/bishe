@@ -197,6 +197,12 @@
               }
             }).then(res=> {
               this.$message.success("确认收货成功！")
+
+              setTimeout(function (){
+                window.location.href='myBuyOrder.html';
+              },2000)
+
+
             })
           }else {
             this.$message.error("您已收货！")

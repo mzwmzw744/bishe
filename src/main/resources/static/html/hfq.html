@@ -148,7 +148,7 @@
             line-height: 50px;color: #ff5046;font-size: 22px;padding-left: 25px">
                 今日推荐
                 <span style="float: right;margin-right: 20px;margin-top: -2px">
-                     <el-button  type="primary"  plain @click="newNextClick" >下一页</el-button>
+                     <el-button  type="primary"  plain @click="tjNextClick" >下一页</el-button>
                 </span>
             </div>
             <div style="height: 559px;border-bottom: 1px solid #ddd;overflow: hidden">
@@ -433,7 +433,7 @@ function dd(){
                 tjPage = tjPage + 1;
                 axios({
                     method:'post',
-                    url:'/token/getIndexNewShopMeaage',
+                    url:'/token/getTjShop',
                     headers:{
                         'token' : sessionStorage.getItem("token")
                     },
@@ -446,7 +446,7 @@ function dd(){
                         tjPage = 1
                         axios({
                             method:'post',
-                            url:'/token/getIndexNewShopMeaage',
+                            url:'/token/getTjShop',
                             headers:{
                                 'token' : sessionStorage.getItem("token")
                             },
