@@ -22,18 +22,22 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 class BisheApplicationTests {
-    @Autowired
-    com.bishe.mapper.UserMapper UserMapper;
-    @Autowired
-    RedisUtil redisUtil;
-    @Autowired
-    BackstageMapper backstageMapper;
-    @Autowired
-    ShopMapper shopMapper;
-    @Resource
-    IndexShopMapper indexShopMapper;
+
     @Test
-    void contextLoads() throws IOException {
+    synchronized void contextLoads() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("Run of Runnable");
+            }
+        })
+        {
+            public void run() {
+                System.out.println("Run of Thread");
+            }
+        }.start();
+
 
     }
+
 }
